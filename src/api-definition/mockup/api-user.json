@@ -1,0 +1,444 @@
+{
+    "apiVersion": "1.0.0",
+    "swaggerVersion": "1.2",
+    "basePath": "/adms-pri-1.0-SNAPSHOT/resources",
+    "resourcePath": "/api",
+    "apis": [
+        {
+            "path": "/api/register",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "register the user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "registerAccount",
+                    "produces": [
+                        "application/json",
+                        "text/plain"
+                    ],
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "ManagedUserDTO",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/activate",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "activate the registered user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "activateAccount",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "key",
+                            "required": false,
+                            "type": "string",
+                            "paramType": "query"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal Server Error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/account",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "update the current user information",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "saveAccount",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "UserDTO",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal Server Error"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "get the current user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getAccount",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal Server Error"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/authenticate",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "check if the user is authenticated",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "isAuthenticated",
+                    "produces": [
+                        "text/plain"
+                    ],
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "path": "/api/users/{login}",
+            "operations": [
+                {
+                    "method": "DELETE",
+                    "summary": "remove the user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "deleteUser",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "login",
+                            "required": true,
+                            "type": "string",
+                            "paramType": "path"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "get the user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getUser",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "login",
+                            "required": true,
+                            "type": "string",
+                            "paramType": "path"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/users",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "get all the users",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getAllUsers",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "page",
+                            "required": false,
+                            "type": "integer",
+                            "format": "int32",
+                            "paramType": "query"
+                        },
+                        {
+                            "name": "size",
+                            "required": false,
+                            "type": "integer",
+                            "format": "int32",
+                            "paramType": "query"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        }
+                    ]
+                },
+                {
+                    "method": "PUT",
+                    "summary": "update user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "updateUser",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "ManagedUserDTO",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal Server Error"
+                        }
+                    ]
+                },
+                {
+                    "method": "POST",
+                    "summary": "create a new user",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "createUser",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "ManagedUserDTO",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/authenticate",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "authenticate the credential",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "login",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "consumes": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "LoginDTO",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 401,
+                            "message": "Unauthorized"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "UserDTO": {
+            "id": "UserDTO",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "langKey": {
+                    "type": "string"
+                },
+                "authorities": {
+                    "$ref": "Set",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "activated": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "KeyAndPasswordDTO": {
+            "id": "KeyAndPasswordDTO",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "ManagedUserDTO": {
+            "id": "ManagedUserDTO",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "createdDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "lastModifiedDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "lastModifiedBy": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "login": {
+                    "type": "string"
+                },
+                "langKey": {
+                    "type": "string"
+                },
+                "authorities": {
+                    "$ref": "Set",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "activated": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}

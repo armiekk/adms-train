@@ -1,0 +1,717 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "prit-information-service"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/PritInformations": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Create a new instance of the model and persist it into the data source.",
+                "operationId": "PritInformation.create",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Patch an existing model instance or insert a new one into the data source.",
+                "operationId": "PritInformation.upsert__put_PritInformations",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Patch an existing model instance or insert a new one into the data source.",
+                "operationId": "PritInformation.upsert__patch_PritInformations",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Find all instances of the model matched by filter from the data source.",
+                "operationId": "PritInformation.find",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields, where, include, order, offset, and limit",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PritInformation"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/replaceOrCreate": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Replace an existing model instance or insert a new one into the data source.",
+                "operationId": "PritInformation.replaceOrCreate",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/upsertWithWhere": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Update an existing model instance or insert a new one into the data source based on the where criteria.",
+                "operationId": "PritInformation.upsertWithWhere",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/{id}/exists": {
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Check whether a model instance exists in the data source.",
+                "operationId": "PritInformation.exists__get_PritInformations_{id}_exists",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exists": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/{id}": {
+            "head": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Check whether a model instance exists in the data source.",
+                "operationId": "PritInformation.exists__head_PritInformations_{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exists": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Find a model instance by {{id}} from the data source.",
+                "operationId": "PritInformation.findById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields and include",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Delete a model instance by {{id}} from the data source.",
+                "operationId": "PritInformation.deleteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Patch attributes for a model instance and persist it into the data source.",
+                "operationId": "PritInformation.prototype.updateAttributes__put_PritInformations_{id}",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "PersistedModel id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Patch attributes for a model instance and persist it into the data source.",
+                "operationId": "PritInformation.prototype.updateAttributes__patch_PritInformations_{id}",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "PersistedModel id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/{id}/replace": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Replace attributes for a model instance and persist it into the data source.",
+                "operationId": "PritInformation.replaceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/findOne": {
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Find first instance of the model matched by filter from the data source.",
+                "operationId": "PritInformation.findOne",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields, where, include, order, offset, and limit",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/update": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Update instances of the model matched by {{where}} from the data source.",
+                "operationId": "PritInformation.updateAll",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritInformation"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "description": "Information related to the outcome of the operation",
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "description": "The number of instances updated",
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/count": {
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Count instances of the model matched by where from the data source.",
+                "operationId": "PritInformation.count",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritInformations/change-stream": {
+            "post": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Create a change stream.",
+                "operationId": "PritInformation.createChangeStream__post_PritInformations_change-stream",
+                "parameters": [
+                    {
+                        "name": "options",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritInformation"
+                ],
+                "summary": "Create a change stream.",
+                "operationId": "PritInformation.createChangeStream__get_PritInformations_change-stream",
+                "parameters": [
+                    {
+                        "name": "options",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "PritInformation"
+        }
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "definitions": {
+        "x-any": {
+            "properties": {}
+        },
+        "AccessToken": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "ttl": {
+                    "default": 1209600,
+                    "description": "time to live in seconds (2 weeks by default)",
+                    "type": "number",
+                    "format": "double"
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "userId": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false
+        },
+        "PritInformation": {
+            "properties": {
+                "projName": {
+                    "maxLength": 1000,
+                    "type": "string"
+                },
+                "projType": {
+                    "maxLength": 1,
+                    "type": "string"
+                },
+                "projAbbrThai": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "projAbbrEng": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "projStartDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "projStopDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "projBudget": {
+                    "type": "string"
+                },
+                "projCurrency": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "projYear": {
+                    "maxLength": 4,
+                    "type": "string"
+                },
+                "projStatus": {
+                    "maxLength": 1,
+                    "type": "string"
+                },
+                "projOrgCode": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "projOrgName": {
+                    "maxLength": 250,
+                    "type": "string"
+                },
+                "projDuration": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "preSaleProjCode": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "createBy": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updateBy": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "projRef": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "projCode": {
+                    "maxLength": 10,
+                    "type": "string"
+                }
+            },
+            "required": [
+                "projCode"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

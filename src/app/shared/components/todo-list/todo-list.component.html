@@ -1,0 +1,21 @@
+<p-panel header="รายการที่ต้องทำ" [style]="style ? style : defaultStyle">
+	<p-accordion>
+		<p-accordionTab *ngFor="let data of listData; let i = index;" [selected]="i == 0">
+			<header>
+				{{data.system}}&nbsp;
+				
+				<span class="label label-danger" *ngIf="data.tasks.length != 0">
+					ใหม่
+				</span>
+			</header>
+			<div class="ui-g">
+				<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12" *ngFor="let task of data.tasks">
+					<a class="task-link" [routerLink]="task.url">{{task.title}}</a>&nbsp;
+					<span class="badge badge-danger">
+						{{task.count}}
+					</span>
+				</div>
+			</div>
+		</p-accordionTab>
+	</p-accordion>
+</p-panel>

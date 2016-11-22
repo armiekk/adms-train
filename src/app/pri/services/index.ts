@@ -1,0 +1,1 @@
+export * from './pri-state-resolver.service';

@@ -1,0 +1,75 @@
+{
+  "project": {
+    "version": "1.0.0-beta.19-3",
+    "name": "adms-new-dev"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "mobile": false,
+      "styles": [
+        "styles.css",
+        "assets/vendor/primeng/themes/omega/theme.css",
+        "assets/vendor/font-awesome/css/font-awesome.min.css",
+        "assets/vendor/fullcalendar/fullcalendar.min.css",
+        "assets/vendor/primeng/primeng.css",
+        "assets/vendor/retro/css/bootstrap.css",
+        "assets/vendor/retro/css/bootstrap-responsive.css",
+        "assets/vendor/sliderTabs/styles/jquery.sliderTabs.css"
+      ],
+      "scripts": [
+        "assets/vendor/jquery/jquery-3.1.1.min.js",
+        "assets/vendor/moment/moment.min.js",
+        "assets/vendor/sliderTabs/jquery.sliderTabs.js",
+        "assets/vendor/fullcalendar/fullcalendar.js",
+        "assets/vendor/fullcalendar/locale/th.js",
+        "assets/vendor/retro/js/jquery.smooth-scroll.min.js",
+        "assets/vendor/retro/js/bootstrap.min.js",
+        "assets/vendor/retro/js/retro.js"
+      ],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "addons": [],
+  "packages": [],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": true,
+      "directive": true,
+      "module": false,
+      "pipe": true,
+      "service": true
+    }
+  }
+}

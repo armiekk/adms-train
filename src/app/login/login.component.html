@@ -1,0 +1,27 @@
+<div class="app-login">
+	<div class="logo"></div>
+	<div class="login-block">
+		<h1>กรุณาใสชื่อผู้ใช้และรหัสผ่านด้านล่างนี้:</h1>
+
+		<form (ngSubmit)="login()" #loginForm="ngForm">
+
+			<div class="login-form-container">
+				<label class="sr-only" for="login">ชื่อผู้ใช้งาน</label>
+				<input type="text" name="username" pInputText [(ngModel)]="credentials.username" #username="ngModel" required id="username">
+				<div [hidden]="username.valid || username.pristine">
+					กรุณาระบุชื่อผู้ใช้งาน
+				</div>
+			</div>
+
+			<div class="login-form-container">
+				<label class="sr-only" for="password">รหัสผ่าน</label>
+				<input type="password" name="password" [(ngModel)]="credentials.password" style="width: 100%" #password="ngModel" required
+					id="password">
+				<div [hidden]="password.valid || password.pristine">
+					กรุณาระบุรหัสผ่าน
+				</div>
+			</div>
+			<button type="submit" pButton label="เข้าสู่ระบบ" [disabled]="!loginForm.form.valid" class="btnADMS"></button>
+		</form>
+	</div>
+</div>
