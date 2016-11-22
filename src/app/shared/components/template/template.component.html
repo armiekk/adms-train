@@ -1,0 +1,36 @@
+<nav class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" [routerLink]=" ['/'] ">CDG Systems LTD.</a>
+
+			<div class="nav-collapse collapse" id="main-menu">
+				<ul class="nav pull-right">
+					<li><a [routerLink]=" ['/home'] ">CALENDAR</a></li>
+					<li *ngFor="let link of navLink" ><a [routerLink]=" [link.uri] ">{{link.name}}</a></li>
+					<li><a href="/logout" (click)="logout($event)"><span>ออกจากระบบ&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<app-user-container></app-user-container>
+</nav>
+
+<main>
+	<div class="ui-g">
+		<div class="ui-g-1 ui-md-1 ui-lg-1 ui-lx-1"></div>
+		<div class="ui-g-10 ui-sm-12 ui-md-10 ui-lg-10 ui-lx-10">
+			<router-outlet></router-outlet>
+		</div>
+		<div class="ui-g-1 ui-md-1 ui-lg-1 ui-lx-1"></div>
+	</div>
+	<app-drawer></app-drawer>
+</main>
+
+<footer class="page-footer">
+	<span>บริษัท ซีดีจี ซิสเต็มส์ จำกัด เลขที่ 202อาคารซีดีจีเฮ้าส์ ถนนนางลิ้นจี่ แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120 </span>
+</footer>

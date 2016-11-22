@@ -1,0 +1,9 @@
+div.ui-g-2.ui-m-2.ui-sm-12 label.label-column {
+    padding-left: 40%;
+}
+
+.ui-inputtext:disabled {
+    background-color: lightgray;
+    color: black;
+}
+

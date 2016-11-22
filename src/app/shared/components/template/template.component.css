@@ -1,0 +1,56 @@
+main {
+    width: 100%;
+    min-height: 80%;
+    margin-bottom: 10px; 
+}
+
+@media screen and (min-width: 1400px) {
+    main {
+        min-height: 100%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    main {
+        min-height: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    main {
+        min-height: 70%;
+    }
+}
+
+ul li a {
+    font-size: 1.125em;
+}
+
+a.brand {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+
+main::after {
+    content: "";
+    display: block;
+}
+
+.page-footer, main::after {
+    min-height: 30px;
+}
+
+.page-footer {
+  display: block;
+  color: #a0a0da;
+  background-color: #323276;
+  text-align: center;
+  padding: 25px;
+}
+
+@media screen and (max-width: 767px){
+    .page-footer {
+        margin: 0 -20px;
+    }
+}

@@ -1,0 +1,245 @@
+<p-growl [value]="message.msgs"></p-growl>
+<!--<app-breadcrumb></app-breadcrumb>-->
+<div class="content-container">
+	<form #priForm="ngForm">
+		<p-fieldset legend="บันทึกข้อมูลรายละเอียดโครงการ">
+
+			<div class="ui-g">
+				<div class="ui-g-1"></div>
+				<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-6 ui-md-12 ui-lg-6 ui-xl-6 ui-sm-12">
+						<app-label [value]="'รหัสโครงการ'" [valid]="pritInformation.projCode" [required]="true"></app-label>
+					</div>
+					<div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-4">
+						<input type="text" id="projCode" style="width: 100%" pInputText [(ngModel)]="pritInformation.projCode" name="projCode" style="width: 100%"
+							[readonly]="state.getState() == 'EDIT'" #projCode="ngModel" pTooltip="ระบุรหัสโครงการ" placeholder="รหัสโครงการ" tooltipEvent="focus"
+							tooltipPosition="top" required />
+					</div>
+				</div>
+				<div class="ui-g-7 ui-md-12 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12">
+						<app-label [value]="'ชื่อโครงการ'" [valid]="pritInformation.projName" [required]="true"></app-label>
+					</div>
+					<div class="ui-g-9 ui-md-12 ui-lg-9 ui-xl-9 ui-sm-12">
+						<input type="text" id="projName" pInputText [(ngModel)]="pritInformation.projName" name="projName" [readonly]="state.getState() == 'EDIT'"
+							style="width: 100%" #projName="ngModel" pTooltip="ระบุชื่อโครงการ" placeholder="ชื่อโครงการ" tooltipEvent="focus" required
+						/>
+					</div>
+				</div>
+				<div class="ui-g-1"></div>
+			</div>
+
+		</p-fieldset>
+		<br>
+		<div class="ui-g">
+			<div class="ui-g-12 ui-g-nopad">
+				<div #sliderTabs>
+					<!--<div id="slider-tabs">-->
+					<ul>
+						<li>
+							<a href="#proj-info">รายละเอียดทั่วไป</a>
+						</li>
+						<li>
+							<a href="#proj-scope">ขอบเขต</a>
+						</li>
+						<li>
+							<a href="#proj-sde">SDE</a>
+						</li>
+						<li>
+							<a href="#proj-condition">เงื่อนไขโครงการ</a>
+						</li>
+						<li>
+							<a href="#proj-delivery">งวดการส่งมอบงาน</a>
+						</li>
+						<li>
+							<a href="#proj-limit">ข้อจำกัด</a>
+						</li>
+						<li>
+							<a href="#proj-monitor">Monitoring</a>
+						</li>
+						<li>
+							<a href="#proj-customer">ลูกค้า</a>
+						</li>
+						<li>
+							<a href="#proj-accessories">อุปกรณ์</a>
+						</li>
+						<li>
+							<a href="#proj-train">อบรม</a>
+						</li>
+						<li>
+							<a href="#proj-other">อื่นๆ</a>
+						</li>
+						<li>
+							<a href="#proj-systems">ระบบงาน</a>
+						</li>
+						<li>
+							<a href="#risk-analysis">Risk Analysis</a>
+						</li>
+						<!--<li *ngFor="let tab of constant.tabLabel">
+                <a [href]="tab.value" (click)="selectTab(tab.value)">{{tab.label}}</a>
+            </li>-->
+					</ul>
+					<div id="proj-info">
+						<div class="ui-g">
+							<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+								<h3>รายละเอียดทั่วไปของโครงการ</h3>
+								<hr>
+							</div>
+							<div class="ui-g-1"></div>
+							<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-6 ui-md-5 ui-lg-6 ui-xl-6 ui-sm-12">
+									<app-label [value]="'ปี'" [valid]="projYear.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-3 ui-md-2 ui-lg-3 ui-xl-3 ui-sm-2">
+									<input type="text" id="projYear" pInputText [(ngModel)]="pritInformation.projYear" style="width: 100%" maxlength="4" name="projYear"
+										#projYear="ngModel" pTooltip="ปี พ.ศ. ต้องเป็นตัวเลข 4 หลัก" placeholder="ปี พ.ศ." tooltipEvent="focus" tooltipPosition="top"
+										required />
+								</div>
+							</div>
+							<div class="ui-g-7 ui-md-12 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-4 ui-md-5 ui-lg-4 ui-xl-4 ui-sm-12">
+									<app-label [value]="'หน่วยงานเจ้าของโครงการ'" [valid]="projOwnerOrg.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-8 ui-md-7 ui-lg-8 ui-xl-8 ui-sm-12">
+									<input type="text" id="projOwnerOrg" pInputText [(ngModel)]="pritInformation.projOwnerOrg" name="projOwnerOrg" style="width: 100%"
+										#projOwnerOrg="ngModel" pTooltip="ระบุหน่วยงานเจ้าของโครงการ" placeholder="หน่วยงานเจ้าของโครงการ" tooltipEvent="focus"
+										required />
+								</div>
+							</div>
+							<div class="ui-g-1"></div>
+						</div>
+
+						<div class="ui-g">
+							<div class="ui-g-1"></div>
+							<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-6 ui-md-5 ui-lg-6 ui-xl-6 ui-sm-12">
+									<app-label [value]="'วันที่เริ่มสัญญา'" [valid]="projStartDate.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-12">
+									<p-calendar [(ngModel)]="pritInformation.projStartDate" name="projStartDate" [inputStyle]="{'width': '100%'}" [locale]="locale.th"
+										[monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStartDate="ngModel" pTooltip="ระบุวันที่เริ่มสัญญา"
+										placeholder="วันที่เริ่มสัญญา" tooltipPosition="top" readonlyInput="readonlyInput" dateFormat="dd/mm/yy" required>
+									</p-calendar>
+								</div>
+							</div>
+							<div class="ui-g-4 ui-md-12 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-7 ui-md-5 ui-lg-7 ui-xl-7 ui-sm-12">
+									<app-label [value]="'วันที่สัญญาสิ้นสุด'" [valid]="projStopDate.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
+									<p-calendar [(ngModel)]="pritInformation.projStopDate" name="projStopDate" [inputStyle]="{'width': '100%'}" [locale]="locale.th"
+										[monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStopDate="ngModel" pTooltip="ระบุวันที่สัญญาสิ้นสุด"
+										placeholder="วันที่สัญญาสิ้นสุด" readonlyInput="readonlyInput" dateFormat="dd/mm/yy" required>
+									</p-calendar>
+								</div>
+							</div>
+							<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-8 ui-md-5 ui-lg-8 ui-xl-8 ui-sm-12">
+									<app-label [value]="'ระยะเวลาดำเนินงาน'" [valid]="projDuration.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-3 ui-md-3 ui-lg-3 ui-xl-3 ui-sm-3">
+									<input type="text" id="projDuration" pInputText [(ngModel)]="pritInformation.projDuration" name="projDuration" style="width: 100%"
+										#projDuration="ngModel" pTooltip="ระบุระยะเวลาดำเนินงาน" placeholder="ระยะเวลาดำเนินงาน" tooltipEvent="focus" required
+									/>
+								</div>
+								<div class="ui-g-1 ui-md-1 ui-lg-1 ui-xl-1  ui-sm-1">
+									วัน
+								</div>
+							</div>
+							<div class="ui-g-1"></div>
+						</div>
+
+						<div class="ui-g">
+							<div class="ui-g-1"></div>
+							<div class="ui-g-3 ui-md-3 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-6 ui-md-6 ui-lg-6 ui-xl-6 ui-sm-12">
+									<app-label [value]="'มูลค่าโครงการ'" [valid]="projBudget.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-5">
+									<input type="text" id="projBudget" pInputText [(ngModel)]="pritInformation.projBudget" style="width: 100%" name="projBudget"
+										#projBudget="ngModel" pTooltip="ระบุมูลค่าโครงการ" placeholder="มูลค่าโครงการ" tooltipEvent="focus" tooltipPosition="top"
+										required />
+								</div>
+							</div>
+							<div class="ui-g-7 ui-md-7 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
+									<app-label [value]="'รหัสโครงการ Pre-Sale'" [valid]="preSaleProjCode.valid" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-8 ui-md-8 ui-lg-8 ui-xl-8 ui-sm-12">
+									<input type="text" id="preSaleProjCode" pInputText [(ngModel)]="pritInformation.preSaleProjCode" name="preSaleProjCode" required
+										#preSaleProjCode="ngModel" pTooltip="ระบุรหัสโครงการ Pre-Sale" placeholder="รหัสโครงการ Pre-Sale" tooltipEvent="focus"
+									/>
+								</div>
+							</div>
+							<div class="ui-g-1"></div>
+						</div>
+
+						<div class="ui-g">
+							<div class="ui-g-1"></div>
+							<div class="ui-g-9 ui-md-9 ui-lg-9 ui-xl-9 ui-sm-12 ui-g-nopad">
+								<div class="ui-g-2 ui-md-2 ui-lg-2 ui-xl-2 ui-sm-12">
+									<app-label [value]="'สถานะโครงการ'" [valid]="pritInformation.projStatus" [required]="true"></app-label>
+								</div>
+								<div class="ui-g-10 ui-g-nopad">
+									<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12" *ngFor="let status of constant.editProjectStatus">
+										<p-radioButton name="projStatus" [value]="status.value" [label]="status.label" [(ngModel)]="pritInformation.projStatus" required>
+										</p-radioButton>
+									</div>
+								</div>
+							</div>
+							<div class="ui-g-1"></div>
+						</div>
+						<div class="ui-g">
+							<div class="ui-g-4 ui-md-4"></div>
+							<div class="ui-g-4 ui-md-8 ui-sm-9 ui-g-nopad">
+								<div class="ui-g-2 ui-md-1 ui-lg-1"></div>
+								<div class="ui-g-10 ui-md-11 ui-lg-11 ui-sm-12">
+									<button pButton type="submit" label="บันทึก" *ngIf="state.getState() == 'ADD'" (click)="savePritInformation()" [disabled]="!priForm.form.valid"></button>
+									<button pButton type="submit" label="แก้ไข" *ngIf="state.getState() == 'EDIT'" (click)="editPritInformation()" [disabled]="!priForm.form.valid"></button>
+									<button pButton type="submit" label="ยกเลิก" (click)="cancelPritInformation()"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="proj-scope">
+						<app-pri1i020></app-pri1i020>
+						<!--<proj-scope></proj-scope>-->
+					</div>
+					<div id="proj-sde">
+						<!--<proj-sde></proj-sde>-->
+					</div>
+					<div id="proj-condition">
+						<!--<proj-condition></proj-condition>-->
+					</div>
+					<div id="proj-delivery">
+						<!--<proj-delivery></proj-delivery>-->
+					</div>
+					<div id="proj-limit">
+						<!--<proj-limit></proj-limit>-->
+					</div>
+					<div id="proj-monitor">
+						<!--<proj-monitor></proj-monitor>-->
+					</div>
+					<div id="proj-customer">
+						<!--<proj-customer></proj-customer>-->
+					</div>
+					<div id="proj-accessories">
+						<!--<proj-accessories></proj-accessories>-->
+					</div>
+					<div id="proj-train">
+						<!--<proj-train></proj-train>-->
+					</div>
+					<div id="proj-other">
+						<!--<proj-other></proj-other>-->
+					</div>
+					<div id="proj-systems">
+						<!--<proj-systems></proj-systems>-->
+					</div>
+					<div id="risk-analysis">
+						<!--<risk-analysis></risk-analysis>-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

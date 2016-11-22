@@ -1,0 +1,14 @@
+<div class="drawer-container" [@panelTrigger]="panelState">
+    <ul class="tab">
+        <li>
+            <a href="#" (click)="togglePanel($event, 'todolist')" [ngClass]="selectedPanel === 'todolist' ? 'actived' : ''">สิ่งที่ต้องทำ</a>
+        </li>
+        <li>
+            <a href="#" (click)="togglePanel($event, 'notification')" [ngClass]="selectedPanel === 'notification' ? 'actived' : ''">แจ้งเตือน</a>
+        </li>
+    </ul>
+    <div class="drawer-content">
+        <div class="header">{{selectedPanel === 'todolist' ? 'สิ่งที่ต้องทำ' : 'การแจ้งเตือน'}}</div>
+        <div class="body"></div>
+    </div>
+</div>
