@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AdmsMenuService } from '../../../shared/services/adms-menu/adms-menu.service';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-pri-dashboard-container',
@@ -12,15 +10,11 @@ export class PriDashboardContainerComponent implements OnInit {
   programList: Array<{}>;
   todoListData: Array<{}>;
 
-  constructor(
-    private admsMenuService: AdmsMenuService,
-    private localtion: Location
-    ) { }
+  constructor() { }
 
   ngOnInit() {
-    // this.programList = this.admsMenuService.getProgramList(this.localtion.path());
     this.programList = [
-      { name: 'บันทึกข้อมูลรายละเอียดโครงการ', id: 'Pri1i010', uri: '/pri/Pri1i010' },
+      { name: 'บันทึกข้อมูลรายละเอียดโครงการ', id: 'PRI1I010', url: '/pri/search' },
     ];
     this.todoListData = [
       {

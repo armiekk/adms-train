@@ -1,0 +1,243 @@
+<div class="content-container">
+	<div class="ui-g">
+		<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12"></div>
+		<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12 ui-g-nopad">
+			<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
+				<a [routerLink]="['/qad/QAD1Q010']"><button type="button" pButton label="QA Schedule and Plan" style="width: 100%;"></button></a>
+			</div>
+			<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
+				<a [routerLink]="['/qad/QAD1I030']"><button type="button" pButton label="Assign QA" style="width: 100%;"></button></a>
+			</div>
+		</div>
+	</div>
+	<div class="ui-g">
+		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+				<p-fieldset legend="รายละเอียดโครงการ">
+					<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12 ui-g-nopad">
+							<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-5 ui-sm-12"></div>
+							<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-7 ui-sm-12">
+								<label for="projSiteCode">Site Code:</label>
+							</div>
+						</div>
+						<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-3 ui-sm-12">
+							<input type="text" id="projSiteCode" pInputText style="width: 70px;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();"
+							/>
+							<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchSite(searchCondition.projSiteCode);"></button>
+						</div>
+						<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-5 ui-sm-12">
+							<input type="text" id="projSiteName" pInputText readonly="true" style="width: 80%;" [(ngModel)]="searchCondition.projSiteName"
+							/>
+						</div>
+						<div class="ui-g-1 ui-xl-1 ui-lg-1 ui-md-1 ui-sm-12 ui-g-nopad"></div>
+					</div>
+
+					<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12 ui-g-nopad">
+							<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-5 ui-sm-12"></div>
+							<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-7 ui-sm-12">
+								<label for="projCode">Project Code<span class="red-text">*</span>:</label>
+							</div>
+						</div>
+						<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-3 ui-sm-12">
+							<input type="text" id="projCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 60%"
+								[(ngModel)]="searchCondition.projCode" (change)="clearTextProjName();" />
+							<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProjCode(searchCondition.projCode);"></button>
+						</div>
+						<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-5 ui-sm-12">
+							<input type="text" id="projName" pInputText readonly="true" style="width: 80%;" [(ngModel)]="searchCondition.projName" />
+						</div>
+						<div class="ui-g-1 ui-xl-1 ui-lg-1 ui-md-1 ui-sm-12 ui-g-nopad"></div>
+					</div>
+
+					<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12 ui-g-nopad">
+							<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-5 ui-sm-12"></div>
+							<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-7 ui-sm-12">
+								<label for="projManager">Project Manager:</label>
+							</div>
+						</div>
+						<div class="ui-g-7 ui-xl-6 ui-lg-6 ui-md-7 ui-sm-12">
+							<input type="text" id="projManager" pInputText style="width: 85%;" [(ngModel)]="searchCondition.projManager" />
+						</div>
+						<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-2 ui-sm-12 ui-g-nopad"></div>
+					</div>
+
+					<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12 ui-g-nopad">
+							<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-5 ui-sm-12"></div>
+							<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-7 ui-sm-12">
+								<label for="projReceivePlanDate">วันที่ได้รับแผน:</label>
+							</div>
+						</div>
+						<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-3 ui-sm-12">
+							<p-calendar [showIcon]="true" name="searchCondition.projReceivePlanDate" [inputStyle]="{'width': '80px'}" [monthNavigator]="false"
+								[yearNavigator]="false"></p-calendar>
+						</div>
+						<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-6 ui-sm-12"></div>
+					</div>
+
+					<p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="290" [minHeight]="500" [appendTo]="body">
+						<div class="ui-g" style="padding-bottom: 0.5em;">
+							<span>
+                            <input type="text" id="searchProjCode" pInputText [(ngModel)]="searchProjCode.projCode" />
+                            <button type="button" pButton label="ค้นหา" (click)="searchByProjCode();"></button>
+                        </span>
+						</div>
+						<div class="ui-g">
+							<p-dataTable [value]="resultSearchProjects" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedProj"
+								(onRowSelect)="onRowSelectProj();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
+								<p-column field="projCode" header="Project Code" [style]="{'width': '100px'}"></p-column>
+								<p-column field="projName" header="Project Name"></p-column>
+							</p-dataTable>
+						</div>
+					</p-dialog>
+
+					<p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+						<div class="ui-g" style="padding-bottom: 0.5em;">
+							<span>
+                            <input type="text" id="searchEmp" pInputText [(ngModel)]="searchEmp" />
+                            <button type="button" pButton label="ค้นหา" (click)="searchByEmp();"></button>
+                        </span>
+						</div>
+						<div class="ui-g">
+							<p-dataTable [value]="resultSearchEmps" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedEmp"
+								(onRowSelect)="onRowSelectEmp();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
+								<p-column field="thainame" header="ชื่อ"></p-column>
+								<p-column field="engname" header="ชื่อ (อังกฤษ)"></p-column>
+							</p-dataTable>
+						</div>
+					</p-dialog>
+
+					<p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+						<div class="ui-g" style="padding-bottom: 0.5em;">
+							<span>
+                            <input type="text" id="searchSiteCode" pInputText [(ngModel)]="searchSiteCode" />
+                            <button type="button" pButton label="ค้นหา" (click)="searchBySite();"></button>
+                        </span>
+						</div>
+						<div class="ui-g">
+							<p-dataTable [value]="resultSearchSites" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedSite"
+								(onRowSelect)="onRowSelectSite();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
+								<p-column field="siteCode" header="รหัส"></p-column>
+								<p-column field="siteName" header="ชื่อ"></p-column>
+							</p-dataTable>
+						</div>
+					</p-dialog>
+				</p-fieldset>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="ui-g">
+		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<p-fieldset legend="บันทึก/แก้ไข QA ผู้ตรวจสอบโครงการ">
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+						<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-8 ui-sm-12">
+							<label for="projResponsibleQaName">QA ผู้รับผิดชอบ: </label>
+						</div>
+					</div>
+					<div class="ui-g-6 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
+						<input type="text" id="projResponsibleQaName" pInputText style="width: 80%" [(ngModel)]="projResponsibleQaName" />
+						<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(projResponsibleQaName, 5);"></button>
+					</div>
+					<div class="ui-g-2 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12"></div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+						<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-8 ui-sm-12">
+							<label for="projAssignQaDate">วันที่ Assign QA: </label>
+						</div>
+					</div>
+					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-3 ui-sm-12">
+						<p-calendar [showIcon]="true" name="projAssignQaDate" [inputStyle]="{'width': '80px'}" [monthNavigator]="false" [yearNavigator]="false"
+							[(ngModel)]="projAssignQaDate"></p-calendar>
+					</div>
+					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-5 ui-sm-12 ui-g-nopad"></div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+						<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-8 ui-sm-12">
+							<label for="projNotifyAssignQA">แจ้ง QA ผู้รับผิดชอบ: </label>
+						</div>
+					</div>
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12">
+						<p-checkbox *ngFor="let notify of notifys;" name="notify" value={{notify.value}} label={{notify.label}} [(ngModel)]="selectedNotifies"></p-checkbox>
+					</div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+						<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-8 ui-sm-12">
+							<label for="projAssignByQAMName">Assign โดย (QA Manager): </label>
+						</div>
+					</div>
+					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
+						<input type="text" id="projAssignByQAMName" pInputText style="width: 80%" [(ngModel)]="projAssignByQAMName" />
+						<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(projAssignByQAMName, 3);"></button>
+					</div>
+					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12 ui-g-nopad"></div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+						<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-8 ui-sm-12">
+							<label for="projRemark">หมายเหตุ: </label>
+						</div>
+					</div>
+					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
+						<textarea id="projRemark" pInputTextarea style="width: 80%;" [(ngModel)]="projRemark"></textarea>
+					</div>
+					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12 ui-g-nopad"></div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
+						<button type="button" pButton label="บันทึก" (click)="saveAssignQa();"></button>
+						<button type="button" pButton label="ยกเลิก" (click)="cancelAssignQa();"></button>
+					</div>
+				</div>
+			</p-fieldset>
+		</div>
+	</div>
+	<br />
+	<div class="ui-g">
+		<p-dataTable [value]="assignQas" emptyMessage="DATA_NOT_FOUND" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [responsive]="true" paginatorPosition="top">
+			<header>
+				ตาราง Assign QA
+			</header>
+			<p-column field="select" header="-" [style]="{'width': '50px', 'text-align': 'center'}">
+				<template let-assignQa="rowData" pTemplate type="body">
+					<p-checkbox [(ngModel)]="assignQa.select" [binary]="true" (onChange)="onChangeSelectAssignQa(assignQa);"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column field="orderSeq" header="ลำดับ" [style]="{'width': '70px', 'text-align': 'center'}"></p-column>
+			<p-column field="project" header="โครงการ">
+				<template let-assignQa="rowData" pTemplate type="body">
+					<div>{{assignQa.projCode}} - {{assignQa.projName}}</div>
+				</template>
+			</p-column>
+			<p-column field="showReceivePlanDate" header="วันที่ได้รับแผน" [style]="{'width': '110px', 'text-align': 'center'}"></p-column>
+			<p-column field="responsibleQaName" header="QA ผู้รับผิดชอบ" [style]="{'width': '140px', 'text-align': 'center'}"></p-column>
+			<p-column field="showAssignQaDate" header="วันที่ Assign" [style]="{'width': '110px', 'text-align': 'center'}">
+
+			</p-column>
+			<p-column field="status" header="สถานะ" [style]="{'width': '180px', 'text-align': 'center'}"></p-column>
+			<p-column header="-" [style]="{'width': '70px', 'text-align': 'center'}">
+				<template let-assignQa="rowData" pTemplate type="body">
+					<span class="fa fa-trash" alt="ลบ" style="cursor: pointer; font-size: 20px;" (click)="deleteRowAssignQa(assignQa);"></span>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</div>
+</div>

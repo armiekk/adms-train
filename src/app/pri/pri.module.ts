@@ -17,7 +17,6 @@ import { ColumnHoverDirective } from './directives/column-hover.directive';
 // components
 import * as components from './components';
 import { PriComponent } from './pri.component';
-// import {} from './';
 import { PriDashboardContainerComponent } from './components/pri-dashboard-container/pri-dashboard-container.component';
 import { Pri1i020Component } from './components/pri1i020/pri1i020.component';
 

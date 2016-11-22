@@ -77,7 +77,7 @@ export class Pri1i010SearchComponent implements OnInit {
 
   goToAddView() {
     this.state.setState('ADD');
-    this.router.navigate(['pri/Pri1i010/add']);
+    this.router.navigate(['/pri/add']);
   }
 
   setHeaders() {

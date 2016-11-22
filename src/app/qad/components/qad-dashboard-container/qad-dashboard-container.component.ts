@@ -25,11 +25,8 @@ export class QadDashboardContainerComponent implements OnInit {
       {
         moduleName: 'QA PLAN',
         subProgram: [
-          { name: 'QA Plan', id: 'QAD1I010', url: '/qad/QAD1I010' },
-          { name: 'QA Schedule', id: 'QAD1I020', url: 'QAD1I020' },
-          { name: 'Assign QA', id: 'QAD1I030', url: 'QAD1I030' },
-          { name: 'QA Plan History', id: 'QAD1Q010', url: '/qad/QAD1Q010' },
-          { name: 'QA Plan', id: 'QAD1I050', url: 'QAD1I050' },
+          { name: 'Assign QA', id: 'QAD1I030', url: '/qad/QAD1I030' },
+          { name: 'QA Schedule and Plan', id: 'QAD1Q010', url: '/qad/QAD1Q010' }
         ]
       },
       {

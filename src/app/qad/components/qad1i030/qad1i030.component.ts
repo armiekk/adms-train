@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 
-import { PritInformation } from '../../api/prit-information/model/PritInformation';
-import { EmptProjectManager } from '../../api/empt-project-manager/model/EmptProjectManager';
-
-import { PritInformationApi } from '../../api/prit-information/api/PritInformationApi';
-
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 
 interface SearchCondition {
@@ -14,11 +9,7 @@ interface SearchCondition {
     projSiteCode?: string;
     projSiteName?: string;
     projManager?: string;
-    projSeniorManager?: string;
-    projQAManager?: string;
-    projCreateByQA?: string;
-    projCreateDate?: Date;
-    projExternalQA?: string;
+    projReceivePlanDate?: Date;
 }
 
 interface SearchProjCode {
@@ -31,29 +22,39 @@ interface Emp {
     engname?: string;
 }
 
-const INDENT_MULTIPLIER: number = 0.7;
+interface Option {
+    label: string;
+    value: any;
+}
 
 @Component({
-    selector: 'app-qad1q010',
-    templateUrl: './qad1q010.component.html',
-    styleUrls: ['./qad1q010.component.css'],
-    providers: [ThaiCalendarService, PritInformationApi]
+    selector: 'app-qad1i030',
+    templateUrl: './qad1i030.component.html',
+    styleUrls: ['./qad1i030.component.css']
 })
-export class Qad1q010Component implements OnInit {
-    searchCondition: SearchCondition;
-    private historys: Array<any> = [];
-    private qaSchedulesAll: Array<any> = [];
-    private qaSchedules: Array<any> = [];
-    private qaPlansAll: Array<any> = [];
-    private qaPlans: Array<any> = [];
+export class Qad1i030Component implements OnInit {
+    private searchCondition: SearchCondition;
+    private assignQas: Array<any> = [];
+    private notifys: Option[] = [];
+
+    //for QA inspector project
+    private selectedIndexAssignQa: number;
+    private projResponsibleQaName: string;
+    private projAssignQaDate: Date;
+    private selectedNotifies: string[] = [];
+    private projAssignByQAMName: string;
+    private projRemark: string;
 
     constructor(private locale: ThaiCalendarService,
-        private pritInformationService: PritInformationApi,
         private http: Http) { }
 
     ngOnInit() {
         this.searchCondition = {};
         this.searchProjCode = {};
+        this.notifys = [
+            { label: "ADMS", value: "ADMS" },
+            { label: "Email", value: "Email" }
+        ];
     }
 
     private isSelectedSite: boolean = false;
@@ -84,6 +85,45 @@ export class Qad1q010Component implements OnInit {
                     }
                 });
         }
+
+        this.http.get('app/qad/resources/data/assignQasMockData.json')
+            .map(res => res.json().data)
+            .subscribe((assignQas: Array<any>) => {
+                console.log(assignQas);
+                console.log(this.searchCondition.projCode);
+                this.assignQas = assignQas.filter((assignQa) => {
+                    console.log('--' + this.searchCondition.projCode);
+                    assignQa.projCode === this.searchCondition.projCode
+                });
+                // && assignQa.receivePlanDate === +this.searchCondition.projReceivePlanDate
+                console.log(this.assignQas);
+                for (let i = 0; i < this.assignQas.length; i++) {
+                    this.assignQas[i].select = false;
+                    this.assignQas[i].orderSeq = i;
+                    if (this.assignQas[i].receivePlanDate == null) {
+                        this.assignQas[i].showReceivePlanDate = '';
+                    } else {
+                        let receivePlanDate = new Date(this.assignQas[i].receivePlanDate);
+                        if (receivePlanDate.toString() !== 'Invalid Date') {
+                            this.assignQas[i].showReceivePlanDate = receivePlanDate.getDate() + '/' + (receivePlanDate.getMonth() + 1) + '/' + receivePlanDate.getFullYear();
+                        } else {
+                            this.assignQas[i].showReceivePlanDate = '';
+                        }
+                    }
+
+                    if (this.assignQas[i].assignQaDate == null) {
+                        this.assignQas[i].showAssignQaDate = '';
+                    } else {
+                        let assignQaDate = new Date(this.assignQas[i].assignQaDate);
+                        if (assignQaDate.toString() !== 'Invalid Date') {
+                            this.assignQas[i].showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
+                        } else {
+                            this.assignQas[i].showAssignQaDate = '';
+                        }
+                    }
+
+                }
+            });
 
         this.selectedProj = undefined;
         this.displaySearchProjCode = false;
@@ -189,6 +229,10 @@ export class Qad1q010Component implements OnInit {
                 //Create By (QA)
                 this.findHeaderName = 'Create By (QA)';
                 break;
+            case 5:
+                //QA ผู้รับผิดชอบ
+                this.findHeaderName = 'QA ผู้รับผิดชอบ';
+                break;
             default:
                 inCaseDefault = true;
         }
@@ -202,18 +246,21 @@ export class Qad1q010Component implements OnInit {
                 //Project Manager
                 this.searchCondition.projManager = this.selectedEmp.thainame;
                 break;
-            case 2:
-                //Senior Manager
-                this.searchCondition.projSeniorManager = this.selectedEmp.thainame;
-                break;
+            // case 2:
+            //     //Senior Manager
+            //     this.searchCondition.projSeniorManager = this.selectedEmp.thainame;
+            //     break;
             case 3:
                 //QA Manager
-                this.searchCondition.projQAManager = this.selectedEmp.thainame;
+                this.projAssignByQAMName = this.selectedEmp.thainame;
                 break;
-            case 4:
-                //Create By (QA)
-                this.searchCondition.projCreateByQA = this.selectedEmp.thainame;
-                break;
+            // case 4:
+            //     //Create By (QA)
+            //     this.searchCondition.projCreateByQA = this.selectedEmp.thainame;
+            //     break;
+            case 5:
+                //QA ผู้รับผิดชอบ
+                this.projResponsibleQaName = this.selectedEmp.thainame;
             default:
         }
 
@@ -290,107 +337,126 @@ export class Qad1q010Component implements OnInit {
         }
     }
 
-    search() {
-        this.http.get('app/qad/resources/data/historysMockData.json')
-            .map(res => res.json().data)
-            .subscribe((historys: Array<any>) => {
-                this.historys = historys.filter((history) => history.projCode === this.searchCondition.projCode);
-                let lastVersion;
-                for (let i = 0; i < this.historys.length; i++) {
-                    let date = new Date(this.historys[i].date);
-                    this.historys[i].showDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    onChangeSelectAssignQa(assignQa: any) {
+        let index = -1;
+        index = this.assignQas.indexOf(assignQa);
 
-                    if (i === 0) {
-                        lastVersion = this.historys[i].version;
-                    } else {
-                        if (lastVersion < this.historys[i].version) {
-                            lastVersion = this.historys[i].version
-                        }
-                    }
-                }
-
-                if (this.historys.length > 0) {
-                    this.http.get('app/qad/resources/data/qaSchedulesMockData.json')
-                        .map(res => res.json().data)
-                        .subscribe((qaSchedules: Array<any>) => {
-                            this.qaSchedulesAll = qaSchedules.filter((qaSchedule) => qaSchedule.projCode === this.searchCondition.projCode);
-                            this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === lastVersion);
-                            for (let i = 0; i < this.qaSchedules.length; i++) {
-                                this.qaSchedules[i].orderSeq = i.toString();
-                                let indent = this.qaSchedules[i].activityLevel * INDENT_MULTIPLIER;
-                                this.qaSchedules[i].indent = indent + 'em';
-                                if (this.qaSchedules[i].activityLevel === 0) {
-                                    this.qaSchedules[i].hidden = true;
-                                }
-                            }
-                        });
-
-                    this.http.get('app/qad/resources/data/qaPlansMockData.json')
-                        .map(res => res.json().data)
-                        .subscribe((qaPlans: Array<any>) => {
-                            this.qaPlansAll = qaPlans.filter((qaPlan) => qaPlan.projCode === this.searchCondition.projCode);
-                            this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === lastVersion);
-                            if (this.qaPlans.length === 0) {
-                                this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
-                                    .map(res => res.json().data)
-                                    .subscribe((qaActivities: Array<any>) => {
-                                        for (let i = 0; i < qaActivities.length; i++) {
-                                            qaActivities[i].workCategory = "Audit";
-                                            qaActivities[i].workCategoryCode = 1;
-                                            qaActivities[i].planAction = 1;
-                                        }
-
-                                        this.qaPlansAll.push(qaActivities);
-                                        this.qaPlans = qaActivities;
-                                    });
-                            }
-                        });
-
-                } else {
-                    console.log('else historys');
-
-                }
-            });
-    }
-
-    private displaySaveAndSendToApprove = false;
-    showDialogSaveAndSendToApprove() {
-        this.displaySaveAndSendToApprove = true;
-    }
-
-    saveAndSendToApprove(choice: number) {
-        switch (choice) {
-            case 1:
-                //todo save to database
-                this.displaySaveAndSendToApprove = false;
-                break;
-            case 2:
-                //todo gen new version and save to database
-                this.displaySaveAndSendToApprove = false;
-                break;
-        }
-    }
-
-    save() {
-
-    }
-
-    print() {
-
-    }
-
-    private selectedHistory: any;
-    onRowSelectHistory() {
-        this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === this.selectedHistory.version);
-        for (let i = 0; i < this.qaSchedules.length; i++) {
-            this.qaSchedules[i].orderSeq = i.toString();
-            let indent = this.qaSchedules[i].activityLevel * INDENT_MULTIPLIER;
-            this.qaSchedules[i].indent = indent + 'em';
-            if (this.qaSchedules[i].activityLevel === 0) {
-                this.qaSchedules[i].hidden = true;
+        for (let i = 0; i < this.assignQas.length; i++) {
+            if (i !== index) {
+                this.assignQas[i].select = false;
             }
         }
 
-        this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === this.selectedHistory.version);
+        if (this.assignQas[index].select == true) {
+            this.selectedIndexAssignQa = index;
+            this.projResponsibleQaName = this.assignQas[index].responsibleQaName;
+            this.projAssignQaDate = this.assignQas[index].assignQaDate;
+            let noti: string[] = this.assignQas[index].selectedNotifies;
+            if (noti !== undefined) {
+                this.selectedNotifies = noti.slice();
+            } else {
+                this.selectedNotifies = [];
+            }
+
+            this.projAssignByQAMName = this.assignQas[index].assignByQAMName;
+            this.projRemark = this.assignQas[index].remark;
+        }
+    }
+
+    saveAssignQa() {
+        let alertMessage = '';
+        if (this.searchCondition.projCode == undefined || this.searchCondition.projCode.trim() == '') {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ค้นหา "Project"';
+        }
+
+        if (this.searchCondition.projSiteCode == undefined || this.searchCondition.projSiteCode.trim() == '') {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ค้นหา "Site"';
+        }
+
+        if (this.projResponsibleQaName == undefined || this.projResponsibleQaName.trim() == '') {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ระบุ "QA ผู้รับผิดชอบ"';
+        }
+
+        if (this.projAssignQaDate == null) {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ระบุ "วันที่ Assign QA"';
+        }
+
+        let noti = this.selectedNotifies;
+        if (noti.length == 0) {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ระบุ "แจ้ง QA ผู้รับผิดชอบ"';
+        }
+
+        if (this.projAssignByQAMName == undefined || this.projAssignByQAMName.trim() == '') {
+            alertMessage = alertMessage + ((alertMessage !== '') ? '\n' : '') + 'ไม่ได้ระบุ "Assign โดย (QA Manager)"';
+        }
+
+        if (alertMessage == '') {
+            if (this.selectedIndexAssignQa !== undefined && this.selectedIndexAssignQa !== null) {
+                this.assignQas[this.selectedIndexAssignQa].responsibleQaName = this.projResponsibleQaName;
+                this.assignQas[this.selectedIndexAssignQa].assignQaDate = this.projAssignQaDate;
+                let assignQaDate = new Date(this.assignQas[this.selectedIndexAssignQa].assignQaDate);
+                this.assignQas[this.selectedIndexAssignQa].showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
+
+                this.assignQas[this.selectedIndexAssignQa].selectedNotifies = noti.slice();
+                this.assignQas[this.selectedIndexAssignQa].assignByQAMName = this.projAssignByQAMName;
+                this.assignQas[this.selectedIndexAssignQa].remark = this.projRemark
+            } else {
+                //Add new
+                let newAssignQa: any = {};
+                let orderSeq = 1;
+                if (this.assignQas.length > 0) {
+                    orderSeq = +this.assignQas[this.assignQas.length - 1].orderSeq;
+                    orderSeq++;
+                }
+
+                newAssignQa.orderSeq = orderSeq.toString();
+                newAssignQa.projCode = this.searchCondition.projCode;
+                newAssignQa.projName = this.searchCondition.projName;
+                newAssignQa.responsibleQaName = this.projResponsibleQaName;
+                newAssignQa.assignQaDate = this.projAssignQaDate;
+                let assignQaDate = new Date(newAssignQa.assignQaDate);
+                newAssignQa.showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
+
+                newAssignQa.selectedNotifies = noti.slice();
+                newAssignQa.assignByQAMName = this.projAssignByQAMName;
+                newAssignQa.status = 'กำหนด QA ผู้รับผิดชอบแล้ว';
+                newAssignQa.remark = this.projRemark
+                
+                this.assignQas.push(newAssignQa);
+            }
+
+        } else {
+            alert(alertMessage);
+        }
+    }
+
+    cancelAssignQa() {
+        if (this.selectedIndexAssignQa !== undefined) {
+            this.assignQas[this.selectedIndexAssignQa].select = false;
+        }
+
+        this.projResponsibleQaName = '';
+        this.projAssignQaDate = null;
+        this.selectedNotifies = [];
+        this.projAssignByQAMName = '';
+        this.projRemark = '';
+    }
+
+    deleteRowAssignQa(assignQa: any) {
+        let index = -1;
+        index = this.assignQas.indexOf(assignQa);
+        if (this.assignQas[index].status == 'รับทราบและดำเนินการ') {
+            alert('ไม่สามารถลบได้');
+        } else {
+            let orderSeq = +this.assignQas[index].orderSeq;
+
+            this.assignQas.splice(index, 1); //Delete
+
+            //Reorder
+            for (let i = index; i < this.assignQas.length; i++) {
+                this.assignQas[i].orderSeq = orderSeq;
+                orderSeq++;
+            }
+        }
     }
 }

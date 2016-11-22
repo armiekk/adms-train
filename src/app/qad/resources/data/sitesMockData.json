@@ -1,0 +1,32 @@
+{
+    "data":[
+        { "siteCode": "10-SOFT", "siteName": "บริษัท เท็นซอฟท์ จำกัด" },
+        { "siteCode": "3COM", "siteName": "3COM (THAILAND) CO., LTD." },
+        { "siteCode": "3M THAILAND", "siteName": "3M THAILAND" },
+        { "siteCode": "AAPICO", "siteName": "AAPICO" },
+        { "siteCode": "ABB", "siteName": "บริษัท เอบีบี ทรานฟอร์มเมอริส จำกัด" },
+        { "siteCode": "ABSTRACT", "siteName": "ABSTRACT" },
+        { "siteCode": "ACCSOFT", "siteName": "Accsoft & Label (Thailand) Co.,Ltd." },
+        { "siteCode": "ACER", "siteName": "Acer Computer (Thailand) Co.,Ltd." },
+        { "siteCode": "ACFS", "siteName": "National Bureau of Agricultural Commodity and Food Standards" },
+        { "siteCode": "ACTAC", "siteName": "ACTAC" },
+        { "siteCode": "ACTEC", "siteName": "ACTEC LIMITED" },
+        { "siteCode": "ADB", "siteName": "ASIAN DEVELOPMENT BANK" },
+        { "siteCode": "ADD-IN-BUSINESS", "siteName": "ADD-IN-BUSINESS" },
+        { "siteCode": "ADVANCE-IMAGE", "siteName": "บริษัท แอดวานซ์ อิมเมจิ้ง เทคโนโลยี จำกัด" },
+        { "siteCode": "AEETC", "siteName": "Asia-Europe Environmental Technology Centre" },
+        { "siteCode": "AEROTHAI", "siteName": "AEROTHAI" },
+        { "siteCode": "AGERE-SYSTEMS", "siteName": "AGERE SYSTEMS MICROELECTRONICS(THAI) LTD." },
+        { "siteCode": "AGILITECH", "siteName": "AGILITECH COMPANY LIMITED" },
+        { "siteCode": "AIT", "siteName": "ADVANCED INFORMATION TECHNOLOGY PUBLIC COMPANY LIMITED" },
+        { "siteCode": "AIT-AC", "siteName": "ASIAN INSTITUTE OF TECHNOLOGY" },
+        { "siteCode": "ALEXANDER", "siteName": "Alexander & alexander Ltd." },
+        { "siteCode": "ALLA", "siteName": "Alla Co.,Ltd." },
+        { "siteCode": "ALPHA-SYSTEM", "siteName": "บริษัท อัลฟา ซิสเต็มส์ (ไทยแลนด์) จำกัด" },
+        { "siteCode": "ALRO", "siteName": "Agricultural Land Reform Office" },
+        { "siteCode": "S0111", "siteName": "Site 0111" },
+        { "siteCode": "S0222", "siteName": "Site 0222" },
+        { "siteCode": "S0333", "siteName": "Site 0333" },
+        { "siteCode": "S0444", "siteName": "Site 0444" }
+    ]
+}

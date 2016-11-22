@@ -11,7 +11,11 @@
 			<div class="nav-collapse collapse" id="main-menu">
 				<ul class="nav pull-right">
 					<li><a [routerLink]=" ['/home'] ">CALENDAR</a></li>
-					<li *ngFor="let link of navLink" ><a [routerLink]=" [link.uri] ">{{link.name}}</a></li>
+					<li><a [routerLink]=" ['/pri'] ">PROJECT INFORMATION</a></li>
+					<li><a [routerLink]=" ['/sre'] ">SERVICE REQUEST</a></li>
+					<li><a [routerLink]=" ['/asm'] ">ASSESMENT</a></li>
+					<li><a [routerLink]=" ['/qad'] ">QAD</a></li>
+					<li><a [routerLink]=" ['/sdm'] ">SDM</a></li>
 					<li><a href="/logout" (click)="logout($event)"><span>ออกจากระบบ&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
 				</ul>
 			</div>

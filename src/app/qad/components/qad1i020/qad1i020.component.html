@@ -1,0 +1,109 @@
+<div class="ui-g">
+	<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+		<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+			<p-radioButton name="actionPlanOption" value="sdm" [(ngModel)]="actionPlanOption" label="ใช้ Action Plan จากระบบงาน SDM" (click)="selectActionPlanOption()"></p-radioButton>
+		</div>
+		<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-12 ui-sm-12">
+			<p-radioButton name="actionPlanOption" value="file" [(ngModel)]="actionPlanOption" label="ใช้ Action Plan จาก" (click)="selectActionPlanOption()"></p-radioButton>
+		</div>
+		<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-12 ui-sm-12">
+			<p-fileUpload name="nameFileUpload" url="" accept=".xls,.xlsx" [disabled]="disableFileUpload" maxFileSize="1000000" (onUpload)="onUpload($event)">
+                    
+            </p-fileUpload>
+		</div>
+	</div>
+	
+	<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+		<p-dataTable [value]="qaSchedules" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="15" [paginator]="true" [responsive]="true" paginatorPosition="top" [rowsPerPageOptions]="[5,10,15,20,30]" [(selection)]="selectedQaSchedules">
+			<header>
+				QA Schedule
+				<div style="text-align: left">
+					<button type="button" pButton label="ยกเลิกการเลือก" (click)="deSelectAll();"></button>
+					<button type="button" pButton label="ซ้าย" (click)="upLevelSelected();"></button>
+					<button type="button" pButton label="ขวา" (click)="downLevelSelected();"></button>
+				</div>
+			</header>
+			<p-column [style]="{'width': '33px'}" selectionMode="multiple"></p-column>
+			<p-column field="orderSeq" header="ลำดับ" [style]="{'width': '50px', 'text-align': 'center'}"></p-column>
+			<p-column field="taskName" header="Task Name" [style]="{'width': '200px', 'overflow': 'visible'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div *ngIf="!qaSchedule.edit">
+						<span [style.padding-left]="qaSchedule.indent" [style.background-color]="qaSchedule.bgColor">{{qaSchedule.taskName}}</span>
+					</div>
+					<div *ngIf="qaSchedule.edit">
+						<p-dropdown [options]="qaActivitiesOption" [filter]="true" [style]="{'width': '80%'}" (onChange)="onChangeSelectQaActivities(i);" [(ngModel)]="qaSchedule.qaActivities"></p-dropdown>
+						<div *ngIf="qaSchedule.selectOther">
+							<input type="text" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" (change)="onChangeOtherQaActivities(i);" [(ngModel)]="qaSchedule.otherQaActivities" />
+						</div>
+					</div>
+				</template>
+			</p-column>
+			<p-column field="duration" header="Duration" [style]="{'width': '70px', 'text-align': 'center'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div *ngIf="!qaSchedule.edit">
+						{{qaSchedule.duration}}
+					</div>
+					<div *ngIf="qaSchedule.edit">
+						<input type="text" pInputText style="width: 100%; text-align: center; padding-left: 0px; padding-right: 0px;" (change)="onChangeDuration(i);" [(ngModel)]="qaSchedule.duration" />
+					</div>
+				</template>
+			</p-column>
+			<p-column field="startDate" header="Start" [style]="{'width': '115px', 'overflow': 'visible'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div *ngIf="!qaSchedule.edit" style="text-align: center;">
+						{{qaSchedule.showStartDate}}
+					</div>
+					<div *ngIf="qaSchedule.edit">
+						<p-calendar [showIcon]="true" [style]="{'width': '75%', 'text-align': 'center'}" [inputStyle]="{'width': '70px'}" dateFormat="dd/mm/yy" [monthNavigator]="false" [yearNavigator]="false" (onSelect)="onSelectStartDate(i);" [(ngModel)]="qaSchedule.startDate"></p-calendar>
+					</div>
+				</template>
+			</p-column>
+			<p-column field="finishDate" header="Finish" [style]="{'width': '115px', 'overflow': 'visible'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div *ngIf="!qaSchedule.edit" style="text-align: center;">
+						{{qaSchedule.showFinishDate}}
+					</div>
+					<div *ngIf="qaSchedule.edit">
+						<p-calendar [showIcon]="true" [style]="{'width': '75%', 'text-align': 'center'}" [inputStyle]="{'width': '70px'}" dateFormat="dd/mm/yy" [monthNavigator]="false" [yearNavigator]="false" (onSelect)="onSelectFinishDate(i);" [(ngModel)]="qaSchedule.finishDate"></p-calendar>
+					</div>
+				</template>
+			</p-column>
+			<p-column field="comment" header="Comment" [style]="{'width': '140px'}">
+				<template let-qaSchedule="rowData" pTemplate type="body">
+					<input *ngIf="!qaSchedule.hidden" type="text" pInputText style="width: 90%;" [(ngModel)]="qaSchedule.comment" />
+				</template>
+			</p-column>
+			<p-column [style]="{'width': '40px', 'text-align': 'center'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div *ngIf="!qaSchedule.hidden" class="fa fa-plus" style="cursor: pointer; font-size: 20px;" (click)="addRowQaSchedule(i);"></div>
+				</template>
+			</p-column>
+			<p-column [style]="{'width': '60px'}">
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<div>
+						<span *ngIf="qaSchedule.edit" class="fa fa-check" style="cursor: pointer; font-size: 20px;" (click)="saveRowQaSchedule(i);"></span>
+						<span *ngIf="qaSchedule.edit" class="fa fa-times" style="cursor: pointer; font-size: 20px;" (click)="cancelEditRowQaSchedule(i);"></span>
+						<span *ngIf="!qaSchedule.edit && !qaSchedule.hidden" class="fa fa-arrow-left" style="cursor: pointer; font-size: 20px;" (click)="upLevel(qaSchedule);"></span>
+						<span *ngIf="!qaSchedule.edit && !qaSchedule.hidden" class="fa fa-arrow-right" style="cursor: pointer; font-size: 20px;" (click)="downLevel(qaSchedule);"></span>
+					</div>
+				</template>
+			</p-column>
+			<p-column field="toDo" header="ToDo" [style]="{'width': '50px', 'text-align': 'center'}">
+				<template pTemplate type="header">
+					<span class="fa fa-sticky-note" style="font-size: 20px;"></span>
+				</template>
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<p-checkbox [(ngModel)]="qaSchedule.toDo" [disabled]="!qaSchedule.edit" [binary]="true"></p-checkbox>
+				</template>
+			</p-column>
+			<p-column field="notification" header="Noti" [style]="{'width': '50px', 'text-align': 'center'}">
+				<template pTemplate type="header">
+					<span class="fa fa-bell" style="font-size: 20px;"></span>
+				</template>
+				<template let-qaSchedule="rowData" let-i="rowIndex" pTemplate type="body">
+					<p-checkbox [(ngModel)]="qaSchedule.notification" [disabled]="!qaSchedule.edit" [binary]="true"></p-checkbox>
+				</template>
+			</p-column>
+		</p-dataTable>
+	</div>
+</div>
