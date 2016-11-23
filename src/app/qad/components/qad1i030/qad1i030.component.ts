@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 
@@ -10,6 +11,7 @@ interface SearchCondition {
     projSiteName?: string;
     projManager?: string;
     projReceivePlanDate?: Date;
+    projResponsibleQaName?: string;
 }
 
 interface SearchProjCode {
@@ -33,7 +35,10 @@ interface Option {
     styleUrls: ['./qad1i030.component.css']
 })
 export class Qad1i030Component implements OnInit {
-    private searchCondition: SearchCondition;
+    private menus: Option[];
+    private selectedMenu: string;
+    private searchCondition: SearchCondition = {};
+    private searchAdditionCondition: SearchCondition = {};
     private assignQas: Array<any> = [];
     private notifys: Option[] = [];
 
@@ -46,22 +51,35 @@ export class Qad1i030Component implements OnInit {
     private projRemark: string;
 
     constructor(private locale: ThaiCalendarService,
-        private http: Http) { }
+        private http: Http,
+        private router: Router) {
+            this.menus = [];
+            this.menus.push({label: 'Assign QA', value: '/qad/QAD1I030'});
+            this.menus.push({label: 'QA Schedule and Plan', value: '/qad/QAD1Q010'});
+        }
 
     ngOnInit() {
-        this.searchCondition = {};
         this.searchProjCode = {};
         this.notifys = [
             { label: "ADMS", value: "ADMS" },
             { label: "Email", value: "Email" }
         ];
+        this.selectedNotifies = ["Email"]; //default value when open page
+    }
+
+    nav() {
+        let menu = this.selectedMenu;
+        this.selectedMenu = undefined;
+        this.selectedMenu = null;
+        this.router.navigate([menu]);
     }
 
     private isSelectedSite: boolean = false;
+    private isSelectedProj: boolean = false;
     private searchProjCode: SearchProjCode;
     private selectedProj: any;
     private resultSearchProjects: Array<any> = [];
-    displaySearchProjCode: boolean = false;
+    private displaySearchProjCode: boolean = false;
     showDialogSearchProjCode(projCode: string) {
         this.selectedProj = null;
         this.searchProjCode.projCode = projCode;
@@ -72,6 +90,7 @@ export class Qad1i030Component implements OnInit {
     onRowSelectProj() {
         this.searchCondition.projCode = this.selectedProj.projCode;
         this.searchCondition.projName = this.selectedProj.projName;
+        this.isSelectedProj = true;
 
         if (!this.isSelectedSite) {
             let projSiteCode = this.selectedProj.projSiteCode;
@@ -86,45 +105,7 @@ export class Qad1i030Component implements OnInit {
                 });
         }
 
-        this.http.get('app/qad/resources/data/assignQasMockData.json')
-            .map(res => res.json().data)
-            .subscribe((assignQas: Array<any>) => {
-                console.log(assignQas);
-                console.log(this.searchCondition.projCode);
-                this.assignQas = assignQas.filter((assignQa) => {
-                    console.log('--' + this.searchCondition.projCode);
-                    assignQa.projCode === this.searchCondition.projCode
-                });
-                // && assignQa.receivePlanDate === +this.searchCondition.projReceivePlanDate
-                console.log(this.assignQas);
-                for (let i = 0; i < this.assignQas.length; i++) {
-                    this.assignQas[i].select = false;
-                    this.assignQas[i].orderSeq = i;
-                    if (this.assignQas[i].receivePlanDate == null) {
-                        this.assignQas[i].showReceivePlanDate = '';
-                    } else {
-                        let receivePlanDate = new Date(this.assignQas[i].receivePlanDate);
-                        if (receivePlanDate.toString() !== 'Invalid Date') {
-                            this.assignQas[i].showReceivePlanDate = receivePlanDate.getDate() + '/' + (receivePlanDate.getMonth() + 1) + '/' + receivePlanDate.getFullYear();
-                        } else {
-                            this.assignQas[i].showReceivePlanDate = '';
-                        }
-                    }
-
-                    if (this.assignQas[i].assignQaDate == null) {
-                        this.assignQas[i].showAssignQaDate = '';
-                    } else {
-                        let assignQaDate = new Date(this.assignQas[i].assignQaDate);
-                        if (assignQaDate.toString() !== 'Invalid Date') {
-                            this.assignQas[i].showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
-                        } else {
-                            this.assignQas[i].showAssignQaDate = '';
-                        }
-                    }
-
-                }
-            });
-
+        this.search();
         this.selectedProj = undefined;
         this.displaySearchProjCode = false;
     }
@@ -154,11 +135,11 @@ export class Qad1i030Component implements OnInit {
     }
 
     clearTextProjName() {
+        this.isSelectedProj = false;
         this.searchCondition.projName = ''
     }
 
     private searchSiteCode: string;
-    private searchSiteName: string;
     private selectedSite: any;
     private resultSearchSites: Array<any>;
     private displaySearchSite: boolean = false;
@@ -261,6 +242,7 @@ export class Qad1i030Component implements OnInit {
             case 5:
                 //QA ผู้รับผิดชอบ
                 this.projResponsibleQaName = this.selectedEmp.thainame;
+                break;
             default:
         }
 
@@ -333,7 +315,147 @@ export class Qad1i030Component implements OnInit {
                     { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
                 ];
                 break;
+            case 5:
+                //QA ผู้รับผิดชอบ
+                this.resultSearchEmps = [
+                    { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
+                    { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
+                ];
+                break;
             default:
+        }
+    }
+
+    search() {
+        if (this.isSelectedProj) {
+            this.http.get('app/qad/resources/data/assignQasMockData.json')
+                .map(res => res.json().data)
+                .subscribe((assignQas: Array<any>) => {
+                    let projCode = this.searchCondition.projCode;
+                    assignQas = assignQas.filter((assignQa) => assignQa.projCode === projCode);
+
+                    let projReceivePlanDate: number = 0;
+                    if (this.searchCondition.projReceivePlanDate !== undefined) {
+                        projReceivePlanDate = +this.searchCondition.projReceivePlanDate;
+                        assignQas = assignQas.filter((assignQa) => assignQa.receivePlanDate === projReceivePlanDate);
+                    }
+
+                    this.assignQas = assignQas;
+                    for (let i = 0; i < this.assignQas.length; i++) {
+                        this.assignQas[i].select = false;
+                        this.assignQas[i].orderSeq = i + 1;
+                        if (this.assignQas[i].receivePlanDate == null) {
+                            this.assignQas[i].showReceivePlanDate = '';
+                        } else {
+                            let receivePlanDate = new Date(this.assignQas[i].receivePlanDate);
+                            if (receivePlanDate.toString() !== 'Invalid Date') {
+                                this.assignQas[i].showReceivePlanDate = receivePlanDate.getDate() + '/' + (receivePlanDate.getMonth() + 1) + '/' + receivePlanDate.getFullYear();
+                            } else {
+                                this.assignQas[i].showReceivePlanDate = '';
+                            }
+                        }
+
+                        if (this.assignQas[i].assignQaDate == null) {
+                            this.assignQas[i].showAssignQaDate = '';
+                        } else {
+                            let assignQaDate = new Date(this.assignQas[i].assignQaDate);
+                            if (assignQaDate.toString() !== 'Invalid Date') {
+                                this.assignQas[i].showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
+                            } else {
+                                this.assignQas[i].showAssignQaDate = '';
+                            }
+                        }
+
+                    }
+                });
+        }
+    }
+
+
+    private searchAdditionSiteCode: string;
+    private selectedAdditionSite: any;
+    private resultSearchAdditionSites: Array<any>;
+    private displaySearchAdditionSite: boolean = false;
+    showDialogSearchAdditionSite(siteCode: string) {
+        this.selectedAdditionSite = null;
+        this.searchAdditionSiteCode = siteCode;
+        this.searchAdditionBySite();
+        this.displaySearchAdditionSite = true;
+    }
+
+    onRowSelectAdditionSite() {
+        this.searchAdditionCondition.projSiteCode = this.selectedAdditionSite.siteCode;
+        this.searchAdditionCondition.projSiteName = this.selectedAdditionSite.siteName;
+        this.isSelectedAdditionSite = true;
+        this.showDialogSearchAdditionProjCode('');
+        this.selectedAdditionSite = undefined;
+        this.displaySearchAdditionSite = false;
+    }
+
+    searchAdditionBySite() {
+        if (this.searchAdditionSiteCode !== undefined && this.searchAdditionSiteCode.trim() !== '') {
+            this.http.get('app/qad/resources/data/sitesMockData.json')
+                .map(res => res.json().data)
+                .subscribe((sites) => {
+                    this.resultSearchAdditionSites = sites.filter((site) => site.siteCode === this.searchAdditionSiteCode.trim());
+                });
+        } else {
+            this.http.get('app/qad/resources/data/sitesMockData.json')
+                .map(res => res.json().data)
+                .subscribe((sites) => {
+                    this.resultSearchAdditionSites = sites;
+                });
+        }
+    }
+
+    private isSelectedAdditionSite: boolean = false;
+    private isSelectedAdditionProj: boolean = false;
+    private searchAdditionProjCode: SearchProjCode = {};
+    private selectedAdditionProj: Array<any> = [];
+    private resultSearchAdditionProjects: Array<any> = [];
+    private displaySearchAdditionProjCode: boolean = false;
+    showDialogSearchAdditionProjCode(projCode: string) {
+        if(this.isSelectedAdditionSite) {
+            this.selectedAdditionProj = null;
+        }
+        //this.selectedAdditionProj = null;
+        this.searchAdditionByProjCode();
+        this.displaySearchAdditionProjCode = true;
+    }
+
+    private searchAdditionByProjCode() {
+        this.http.get('app/qad/resources/data/projectsMockData.json')
+            .map(res => res.json().data)
+            .subscribe((projs) => {
+                this.resultSearchAdditionProjects = projs;
+            });
+    }
+
+    okDialog() {
+        let allProjCode = '';
+        for (let i = 0; i < this.selectedAdditionProj.length; i++) {
+            if (i === 0) {
+                allProjCode = this.selectedAdditionProj[i].projCode;
+            } else {
+                allProjCode = allProjCode + ',' + this.selectedAdditionProj[i].projCode;
+            }
+        }
+
+        this.searchAdditionCondition.projCode = allProjCode;
+        this.displaySearchAdditionProjCode = false;
+    }
+
+    cancelDialog() {
+        this.displaySearchAdditionProjCode = false;
+    }
+
+    onChangesearchAdditionProjCode() {
+        this.isSelectedAdditionProj = false;
+    }
+
+    searchAddition() {
+        if (this.isSelectedAdditionProj) {
+
         }
     }
 
