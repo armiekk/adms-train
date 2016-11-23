@@ -1,53 +1,44 @@
 <div class="content-container">
     <div class="ui-g">
-        <div class="ui-g-6 ui-sm-12 ui-lg-6 ui-xl-6"></div>
-        <div class="ui-g-6 ui-sm-12 ui-md-12 ui-lg-6 ui-xl-6 ui-g-nopad">
-            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
+        <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12"></div>
+        <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12 ui-g-nopad">
+            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
+                <a [routerLink]="['/qad/QAD1Q010']"><button type="button" pButton label="QA Schedule and Plan" style="width: 100%;"></button></a>
+            </div>
+            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
                 <a [routerLink]="['/qad/QAD1I030']"><button type="button" pButton label="Assign QA" style="width: 100%;"></button></a>
-            </div>
-            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
-                <a [routerLink]="['/qad/QAD1Q010']"><button type="button" pButton label="History" style="width: 100%;"></button></a>
-            </div>
-            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
-                <a [routerLink]="['/qad/QAD1I010']"><button type="button" pButton label="QA Plan" style="width: 100%;"></button></a>
-            </div>
-            <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
-                <a [routerLink]="['/qad/QAD1I020']"><button type="button" pButton label="QA Schedule" style="width: 100%;"></button></a>
             </div>
         </div>
     </div>
-    <br>
+    <br />
     <div class="ui-g">
-        <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12 ui-g-nopad">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
             <p-fieldset legend="Project Name">
-                <div class="ui-g-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
                     <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12">
-                            <label for="projCode">Project Code:</label>
+                        <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12">
+                            <label for="searchProjCode">Project Code<span class="red-text">*</span>:</label>
                         </div>
-                        <div class="ui-g-6 ui-lg-6 ui-md-4 ui-sm-12 ui-g-nopad">
-                            <div class="ui-g-8 ui-lg-8 ui-xl-8 ui-md-9 ui-sm-10">
-                                <input type="text" id="projCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%"
+                        <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-4 ui-sm-12 ui-g-nopad">
+                            <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
+                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%"
                                     [(ngModel)]="searchCondition.projCode" (change)="clearTextProjName();" />
                             </div>
-                            <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-md-3 ui-sm-2">
+                            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
                                 <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProjCode(searchCondition.projCode);"></button>
                             </div>
                         </div>
                     </div>
-                    <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-8 ui-lg-11 ui-md-10 ui-sm-8">
-                            <input type="text" id="projName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName" />
-                        </div>
-                        <div class="ui-g-4 ui-lg-1 ui-md-2 ui-sm-4">
-                            <button type="button" pButton label="ค้นหา" (click)="search();"></button>
-                        </div>
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName"
+                        />
                     </div>
                 </div>
-                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500">
+                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500"
+                    [appendTo]="body">
                     <div class="ui-g" style="padding-bottom: 0.5em;">
                         <span>
-                            <input type="text" id="searchProjCode" pInputText [(ngModel)]="searchProjCode.projCode" />
+                            <input type="text" pInputText [(ngModel)]="searchProjCode.projCode" />
                             <button type="button" pButton label="ค้นหา" (click)="searchByProjCode();"></button>
                         </span>
                     </div>
@@ -62,110 +53,132 @@
             </p-fieldset>
         </div>
     </div>
-    <br>
+    <br />
     <div class="ui-g">
         <p-fieldset legend="Project Detail">
-            <div class="ui-g-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
                 <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                        <label for="projSiteCode">Site Code:</label>
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjSiteCode">Site Code:</label>
                     </div>
-                    <div class="ui-g-3 ui-lg-3 ui-md-4 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-8 ui-lg-8 ui-xl-8 ui-md-9 ui-sm-10">
-                            <input type="text" id="projSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" />
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
+                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();"
+                            />
 
                         </div>
-                        <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-md-3 ui-sm-2">
-                            <button type="button" pButton icon="fa fa-search"></button>
+                        <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
+                            <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchSite(searchCondition.projSiteCode);"></button>
                         </div>
                     </div>
-                    <div class="ui-g-5 ui-lg-5 ui-xl-5 ui-md-8 ui-sm-12">
-                        <input type="text" id="projSiteName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projSiteName"
+                    <div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-8 ui-sm-12">
+                        <input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projSiteName"
                         />
                     </div>
                 </div>
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                        <label for="projQAManager" class="red-text">QA Manager:</label>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjQAManager">QA Manager<span class="red-text">*</span>:</label>
                     </div>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-10 ui-lg-10 ui-xl-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="projQAManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projQAManager" />
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjQAManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projQAManager" />
                         </div>
-                        <div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2 ui-md-1">
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projQAManager, 3);"></button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                        <label for="projManager">Project Manager:</label>
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjManager">Project Manager:</label>
                     </div>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-10 ui-lg-10 ui-xl-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="projManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projManager" />
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projManager" />
                         </div>
-                        <div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2 ui-md-1">
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projManager, 1);"></button>
                         </div>
                     </div>
                 </div>
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                        <label for="projCreateByQA" class="red-text">Create By (QA):</label>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjCreateByQA">Create By (QA)<span class="red-text">*</span>:</label>
                     </div>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-10 ui-lg-10 ui-xl-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="projCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA" />
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA"
+                            />
                         </div>
-                        <div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2 ui-md-1">
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projCreateByQA, 4);"></button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-md-12 ui-sm-12">
-                        <label for="projSeniorManager">Senior Manager:</label>
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjSeniorManager">Senior Manager:</label>
                     </div>
-                    <div class="ui-g-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
-                        <div class="ui-g-10 ui-lg-10 ui-xl-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="projSeniorManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSeniorManager"
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjSeniorManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSeniorManager"
                             />
                         </div>
-                        <div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2 ui-md-1">
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projSeniorManager, 2);"></button>
                         </div>
                     </div>
                 </div>
-                <div class="ui-g-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12 ui-md-12">
-                        <label for="projCreateDate" class="red-text">Create Date:</label>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <label for="searchProjCreateDate">Create Date<span class="red-text">*</span>:</label>
                     </div>
-                    <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12 ui-md-12">
-                        <p-calendar [showIcon]="true" name="projCreateDate" [inputStyle]="{'width': '80px'}" [monthNavigator]="false" [yearNavigator]="false"></p-calendar>
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <p-calendar [showIcon]="true" name="searchProjCreateDate" [inputStyle]="{'width': '80px'}" [monthNavigator]="false" [yearNavigator]="false"></p-calendar>
                     </div>
-                    <div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-12 ui-md-12">
-                        <label for="projExternalQA" class="red-text">External QA:</label>
+                    <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-12 ui-md-12">
+                        <label for="searchProjExternalQA">External QA:</label>
                     </div>
-                    <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12 ui-md-12">
-                        <input type="text" id="projExternalQA" pInputText style="width: 100%;" />
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <input type="text" id="searchProjExternalQA" pInputText style="width: 100%;" />
                     </div>
                 </div>
             </div>
 
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad" style="text-align: center;">
+                <button type="button" pButton label="ค้นหา" (click)="search();"></button>
+            </div>
+
+            <p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600"
+                [appendTo]="body">
+                <div class="ui-g" style="padding-bottom: 0.5em;">
+                    <span>
+                        <input type="text" pInputText [(ngModel)]="searchSiteCode" />
+                        <button type="button" pButton label="ค้นหา" (click)="searchBySite();"></button>
+                    </span>
+                </div>
+                <div class="ui-g">
+                    <p-dataTable [value]="resultSearchSites" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedSite"
+                        (onRowSelect)="onRowSelectSite();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
+                        <p-column field="siteCode" header="รหัส"></p-column>
+                        <p-column field="siteName" header="ชื่อ"></p-column>
+                    </p-dataTable>
+                </div>
+            </p-dialog>
 
             <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500"
                 [width]="600" [appendTo]="body">
                 <div class="ui-g" style="padding-bottom: 0.5em;">
                     <span>
-                     <input type="text" id="searchEmp" pInputText [(ngModel)]="searchEmp" />
-                     <button type="button" pButton label="ค้นหา" (click)="searchByEmp();"></button>
+                        <input type="text" pInputText [(ngModel)]="searchEmp" />
+                        <button type="button" pButton label="ค้นหา" (click)="searchByEmp();"></button>
                 </span>
                 </div>
                 <div class="ui-g">
@@ -178,25 +191,61 @@
             </p-dialog>
         </p-fieldset>
     </div>
-    <br>
+
+    <br />
     <div class="ui-g">
-        <div class="ui-g-12 ui-g-nopad">
-            <p-fieldset legend="History">
-                <div class="ui-g-12">
-                    <p-dataTable [value]="historys" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="10" [paginator]="true" paginatorPosition="top"
-                        [rowsPerPageOptions]="[5,10,20]">
+        <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-sm-12 ui-md-12"></div>
+        <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad">
+            <button type="button" pButton label="บันทึกและส่งพิจารณา" (click)="showDialogSaveAndSendToApprove();"></button>
+            <button type="button" pButton label="บันทึก" (click)="save();"></button>
+            <span class="fa fa-print" style="cursor: pointer; font-size: 20px;" (click)="print();"></span>
+        </div>
+
+        <p-dialog header="บันทึกและส่งพิจารณา" [(visible)]="displaySaveAndSendToApprove" [resizable]="false" modal="modal" [appendTo]="body">
+            <div class="ui-g">
+                <button type="button" pButton label="Save Version" (click)="saveAndSendToApprove(1);"></button>
+                <button type="button" pButton label="Save New Version" (click)="saveAndSendToApprove(2);"></button>
+            </div>
+        </p-dialog>
+    </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad">
+            <p-fieldset legend="History" [toggleable]="true">
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12">
+                    <p-dataTable [value]="historys" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="5" [paginator]="true" [responsive]="true"
+                        paginatorPosition="top" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedHistory"
+                        (onRowSelect)="onRowSelectHistory();">
                         <header>
                             QA Plan History
                         </header>
-                        <p-column field="version" header="Version"></p-column>
-                        <p-column field="date" header="Date"></p-column>
-                        <p-column field="changedes" header="Change Description"></p-column>
-                        <p-column field="preparedby" header="Prepared By"></p-column>
-                        <p-column field="status" header="Status"></p-column>
-                        <p-column field="sendmail" header="Send Mail"></p-column>
+                        <p-column field="version" header="Version" [style]="{'width': '70px', 'text-align': 'center'}"></p-column>
+                        <p-column field="showDate" header="Date" [style]="{'width': '110px', 'text-align': 'center'}"></p-column>
+                        <p-column field="changeDescription" header="Change Description"></p-column>
+                        <p-column field="preparedBy" header="Prepared By" [style]="{'width': '150px', 'text-align': 'center'}"></p-column>
+                        <p-column field="status" header="Status" [style]="{'width': '100px', 'text-align': 'center'}"></p-column>
+                        <p-column field="sendMail" header="Send Mail" [style]="{'width': '70px', 'text-align': 'center'}">
+                            <template let-history="rowData" pTemplate type="body">
+                                <span *ngIf="history.sendMail" class="fa fa-check" style="font-size: 20px;"></span>
+                                <span *ngIf="!history.sendMail" class="fa fa-times" style="font-size: 20px;"></span>
+                            </template>
+                        </p-column>
                     </p-dataTable>
                 </div>
             </p-fieldset>
         </div>
+    </div>
+    <br />
+    <div class="ui-g">
+        <p-tabView>
+            <div class="ui-widget-content">
+                <p-tabPanel header="QA Schedule">
+                    <app-qad1i020 [qaSchedules]="qaSchedules"></app-qad1i020>
+                </p-tabPanel>
+                <p-tabPanel header="QA Plan">
+                    <app-qad1i010 [qaPlans]="qaPlans"></app-qad1i010>
+                </p-tabPanel>
+            </div>
+        </p-tabView>
     </div>
 </div>

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 
 import { PritInformation } from '../../api/prit-information/model/PritInformation';
 import { EmptProjectManager } from '../../api/empt-project-manager/model/EmptProjectManager';
 
 import { PritInformationApi } from '../../api/prit-information/api/PritInformationApi';
-import { EmptProjectManagerApi } from '../../api/empt-project-manager/api/EmptProjectManagerApi';
 
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 
@@ -17,6 +17,8 @@ interface SearchCondition {
     projSeniorManager?: string;
     projQAManager?: string;
     projCreateByQA?: string;
+    projCreateDate?: Date;
+    projExternalQA?: string;
 }
 
 interface SearchProjCode {
@@ -29,35 +31,35 @@ interface Emp {
     engname?: string;
 }
 
+const INDENT_MULTIPLIER: number = 0.7;
+
 @Component({
     selector: 'app-qad1q010',
     templateUrl: './qad1q010.component.html',
     styleUrls: ['./qad1q010.component.css'],
-    providers: [ThaiCalendarService, PritInformationApi, EmptProjectManagerApi]
+    providers: [ThaiCalendarService, PritInformationApi]
 })
 export class Qad1q010Component implements OnInit {
     searchCondition: SearchCondition;
-
-    private projSiteCode: string;
-    private projManager: string;
-    private projSeniorManager: string;
-    private projQAManager: string;
-    private projCreateByQA: string;
+    private historys: Array<any> = [];
+    private qaSchedulesAll: Array<any> = [];
+    private qaSchedules: Array<any> = [];
+    private qaPlansAll: Array<any> = [];
+    private qaPlans: Array<any> = [];
 
     constructor(private locale: ThaiCalendarService,
         private pritInformationService: PritInformationApi,
-        private emptProjectManagerService: EmptProjectManagerApi) { }
+        private http: Http) { }
 
     ngOnInit() {
-        this.searchCondition = {
-            projCode: ''
-        };
+        this.searchCondition = {};
         this.searchProjCode = {};
     }
 
+    private isSelectedSite: boolean = false;
     private searchProjCode: SearchProjCode;
-    private selectedProj: PritInformation;
-    private resultSearchProjects: PritInformation[];
+    private selectedProj: any;
+    private resultSearchProjects: Array<any> = [];
     displaySearchProjCode: boolean = false;
     showDialogSearchProjCode(projCode: string) {
         this.selectedProj = null;
@@ -69,23 +71,91 @@ export class Qad1q010Component implements OnInit {
     onRowSelectProj() {
         this.searchCondition.projCode = this.selectedProj.projCode;
         this.searchCondition.projName = this.selectedProj.projName;
-        this.selectedProj = null;
+
+        if (!this.isSelectedSite) {
+            let projSiteCode = this.selectedProj.projSiteCode;
+            this.http.get('app/qad/resources/data/sitesMockData.json')
+                .map(res => res.json().data)
+                .subscribe((sites) => {
+                    this.resultSearchSites = sites.filter((site) => site.siteCode === projSiteCode);
+                    if (this.resultSearchSites.length === 1) {
+                        this.searchCondition.projSiteCode = this.resultSearchSites[0].siteCode;
+                        this.searchCondition.projSiteName = this.resultSearchSites[0].siteName;
+                    }
+                });
+        }
+
+        this.selectedProj = undefined;
         this.displaySearchProjCode = false;
     }
 
     searchByProjCode() {
-        this.pritInformationService.defaultHeaders.append('Content-Type', 'application/json');
-        this.pritInformationService.defaultHeaders.append('Accept', 'application/json');
-        if (this.searchProjCode !== undefined && this.searchProjCode.projCode !== undefined && this.searchProjCode.projCode.trim() !== '') {
-            this.pritInformationService.pritInfomationFindByProjCode(this.searchProjCode.projCode.trim()).subscribe((response: PritInformation[]) => this.resultSearchProjects = response);
+        if (this.isSelectedSite) {
+            this.http.get('app/qad/resources/data/projectsMockData.json')
+                .map(res => res.json().data)
+                .subscribe((projs) => {
+                    this.resultSearchProjects = projs.filter((proj) => proj.projSiteCode === this.searchCondition.projSiteCode);
+            })
         } else {
-            this.pritInformationService.pritInformationFind().subscribe((response: PritInformation[]) => this.resultSearchProjects = response);
+            if (this.searchProjCode !== undefined && this.searchProjCode.projCode !== undefined && this.searchProjCode.projCode.trim() !== '') {
+                this.http.get('app/qad/resources/data/projectsMockData.json')
+                    .map(res => res.json().data)
+                    .subscribe((projs) => {
+                        this.resultSearchProjects = projs.filter((proj) => proj.projCode === this.searchCondition.projCode.trim());
+                    })
+            } else {
+                this.http.get('app/qad/resources/data/projectsMockData.json')
+                    .map(res => res.json().data)
+                    .subscribe((projs) => {
+                        this.resultSearchProjects = projs;
+                    })
+            }
         }
     }
 
     clearTextProjName() {
-        if (this.searchCondition.projCode !== undefined && this.searchCondition.projCode.trim() === '') {
-            this.searchCondition.projName = ''
+        this.searchCondition.projName = ''
+    }
+
+    private searchSiteCode: string;
+    private searchSiteName: string;
+    private selectedSite: any;
+    private resultSearchSites: Array<any>;
+    private displaySearchSite: boolean = false;
+    showDialogSearchSite(siteCode: string) {
+        this.selectedSite = null;
+        this.searchSiteCode = siteCode;
+        this.searchBySite();
+        this.displaySearchSite = true;
+    }
+
+    onRowSelectSite() {
+        this.searchCondition.projSiteCode = this.selectedSite.siteCode;
+        this.searchCondition.projSiteName = this.selectedSite.siteName;
+        this.isSelectedSite = true;
+        this.showDialogSearchProjCode('');
+        this.selectedSite = undefined;
+        this.displaySearchSite = false;
+    }
+
+    clearTextSiteName() {
+        this.isSelectedSite = false;
+        this.searchCondition.projSiteName = ''
+    }
+
+    searchBySite() {
+        if (this.searchSiteCode !== undefined && this.searchSiteCode.trim() !== '') {
+            this.http.get('app/qad/resources/data/sitesMockData.json')
+                .map(res => res.json().data)
+                .subscribe((sites) => {
+                    this.resultSearchSites = sites.filter((site) => site.siteCode === this.searchSiteCode.trim());
+                });
+        } else {
+            this.http.get('app/qad/resources/data/sitesMockData.json')
+                .map(res => res.json().data)
+                .subscribe((sites) => {
+                    this.resultSearchSites = sites;
+                });
         }
     }
 
@@ -218,5 +288,109 @@ export class Qad1q010Component implements OnInit {
                 break;
             default:
         }
+    }
+
+    search() {
+        this.http.get('app/qad/resources/data/historysMockData.json')
+            .map(res => res.json().data)
+            .subscribe((historys: Array<any>) => {
+                this.historys = historys.filter((history) => history.projCode === this.searchCondition.projCode);
+                let lastVersion;
+                for (let i = 0; i < this.historys.length; i++) {
+                    let date = new Date(this.historys[i].date);
+                    this.historys[i].showDate = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+
+                    if (i === 0) {
+                        lastVersion = this.historys[i].version;
+                    } else {
+                        if (lastVersion < this.historys[i].version) {
+                            lastVersion = this.historys[i].version
+                        }
+                    }
+                }
+
+                if (this.historys.length > 0) {
+                    this.http.get('app/qad/resources/data/qaSchedulesMockData.json')
+                        .map(res => res.json().data)
+                        .subscribe((qaSchedules: Array<any>) => {
+                            this.qaSchedulesAll = qaSchedules.filter((qaSchedule) => qaSchedule.projCode === this.searchCondition.projCode);
+                            this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === lastVersion);
+                            for (let i = 0; i < this.qaSchedules.length; i++) {
+                                this.qaSchedules[i].orderSeq = i.toString();
+                                let indent = this.qaSchedules[i].activityLevel * INDENT_MULTIPLIER;
+                                this.qaSchedules[i].indent = indent + 'em';
+                                if (this.qaSchedules[i].activityLevel === 0) {
+                                    this.qaSchedules[i].hidden = true;
+                                }
+                            }
+                        });
+
+                    this.http.get('app/qad/resources/data/qaPlansMockData.json')
+                        .map(res => res.json().data)
+                        .subscribe((qaPlans: Array<any>) => {
+                            this.qaPlansAll = qaPlans.filter((qaPlan) => qaPlan.projCode === this.searchCondition.projCode);
+                            this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === lastVersion);
+                            if (this.qaPlans.length === 0) {
+                                this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
+                                    .map(res => res.json().data)
+                                    .subscribe((qaActivities: Array<any>) => {
+                                        for (let i = 0; i < qaActivities.length; i++) {
+                                            qaActivities[i].workCategory = "Audit";
+                                            qaActivities[i].workCategoryCode = 1;
+                                            qaActivities[i].planAction = 1;
+                                        }
+
+                                        this.qaPlansAll.push(qaActivities);
+                                        this.qaPlans = qaActivities;
+                                    });
+                            }
+                        });
+
+                } else {
+                    console.log('else historys');
+
+                }
+            });
+    }
+
+    private displaySaveAndSendToApprove = false;
+    showDialogSaveAndSendToApprove() {
+        this.displaySaveAndSendToApprove = true;
+    }
+
+    saveAndSendToApprove(choice: number) {
+        switch (choice) {
+            case 1:
+                //todo save to database
+                this.displaySaveAndSendToApprove = false;
+                break;
+            case 2:
+                //todo gen new version and save to database
+                this.displaySaveAndSendToApprove = false;
+                break;
+        }
+    }
+
+    save() {
+
+    }
+
+    print() {
+
+    }
+
+    private selectedHistory: any;
+    onRowSelectHistory() {
+        this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === this.selectedHistory.version);
+        for (let i = 0; i < this.qaSchedules.length; i++) {
+            this.qaSchedules[i].orderSeq = i.toString();
+            let indent = this.qaSchedules[i].activityLevel * INDENT_MULTIPLIER;
+            this.qaSchedules[i].indent = indent + 'em';
+            if (this.qaSchedules[i].activityLevel === 0) {
+                this.qaSchedules[i].hidden = true;
+            }
+        }
+
+        this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === this.selectedHistory.version);
     }
 }

@@ -28,11 +28,11 @@ export class LoginComponent implements OnInit {
   credentials: Credentials = {};
 
   constructor(
-    private authApi: AuthApi, 
-    private router: Router, 
+    private authApi: AuthApi,
+    private router: Router,
     private userApi: UserApi,
     private admsMenuService: AdmsMenuService
-    ) { }
+  ) { }
 
   ngOnInit() {
   }
@@ -55,15 +55,12 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('menuList', JSON.stringify(response[0].nodes));
       });
     }
-
     // this.authApi.login(this.credentials).subscribe((response) => {
     //   if (response) {
     //     sessionStorage.setItem('token', response.id_token);
     //     this.router.navigate(['/home']);
     //   }
     // });
-
-
   }
 
 }

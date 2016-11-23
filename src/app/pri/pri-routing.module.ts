@@ -28,13 +28,6 @@ const routes: Routes = [
                     }
                 ]
             },
-            // { path: 'Pri1i010', component: Pri1i010SaveComponent, },
-            // { path: 'Pri1i010', redirectTo: 'dashboard' },
-            // {
-            //     path: 'edit/:id',
-            //     component: Pri1i010SaveComponent,
-            //     resolve: { priInfo: PriStateResolverService }
-            // },
         ]
     },
 ];

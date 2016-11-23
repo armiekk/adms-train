@@ -1,0 +1,159 @@
+{
+    "data": [
+        {
+            "orderSeq": "1",
+            "activityLevel": 1,
+            "qaActivities": "Create QA Plan"
+        },
+        {
+            "orderSeq": "2",
+            "activityLevel": 1,
+            "qaActivities": "Revise QA Plan"
+        },
+        {
+            "orderSeq": "3",
+            "activityLevel": 1,
+            "qaActivities": "Promote baseline"
+        },
+        {
+            "orderSeq": "4",
+            "activityLevel": 1,
+            "qaActivities": "Create QA Audit Checklist"
+        },
+        {
+            "orderSeq": "5",
+            "activityLevel": 1,
+            "qaActivities": "Revise QA Checklist"
+        },
+        {
+            "orderSeq": "6",
+            "activityLevel": 1,
+            "qaActivities": "Perform QA Audit ระบบ ABC/งวด x"
+        },
+        {
+            "orderSeq": "6.1",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Planning"
+        },
+        {
+            "orderSeq": "6.2",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Requirement"
+        },
+        {
+            "orderSeq": "6.3",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase System Design"
+        },
+        {
+            "orderSeq": "6.4",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Coding & Testing"
+        },
+        {
+            "orderSeq": "6.5",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase UAT & Installation"
+        },
+        {
+            "orderSeq": "6.6",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Implementation"
+        },
+        {
+            "orderSeq": "6.7",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Closure"
+        },
+        {
+            "orderSeq": "7",
+            "activityLevel": 1,
+            "qaActivities": "Perform QA Audit ระบบ XYZ/งวด x"
+        },
+        {
+            "orderSeq": "7.1",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Planning"
+        },
+        {
+            "orderSeq": "7.2",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Requirement"
+        },
+        {
+            "orderSeq": "7.3",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase System Design"
+        },
+        {
+            "orderSeq": "7.4",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Coding & Testing"
+        },
+        {
+            "orderSeq": "7.5",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase UAT & Installation"
+        },
+        {
+            "orderSeq": "7.6",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Implementation"
+        },
+        {
+            "orderSeq": "7.7",
+            "activityLevel": 2,
+            "qaActivities": "QA Audit Phase Closure"
+        },
+        {
+            "orderSeq": "8",
+            "activityLevel": 1,
+            "qaActivities": "Perform QA Re-audit"
+        },
+        {
+            "orderSeq": "9",
+            "activityLevel": 1,
+            "qaActivities": "QA Closure Project"
+        },
+        {
+            "orderSeq": "9.1",
+            "activityLevel": 2,
+            "qaActivities": "Summarize QA Report"
+        },
+        {
+            "orderSeq": "9.2",
+            "activityLevel": 2,
+            "qaActivities": "Quality Trend report"
+        },
+        {
+            "orderSeq": "10",
+            "activityLevel": 1,
+            "qaActivities": "Join Meeting"
+        },
+        {
+            "orderSeq": "10.1",
+            "activityLevel": 2,
+            "qaActivities": "Kick-off Meeting"
+        },
+        {
+            "orderSeq": "10.2",
+            "activityLevel": 2,
+            "qaActivities": "Review QA Plan and Checklist Meeting"
+        },
+        {
+            "orderSeq": "11",
+            "activityLevel": 1,
+            "qaActivities": "Document Review (Optional)"
+        },
+        {
+            "orderSeq": "12",
+            "activityLevel": 1,
+            "qaActivities": "QA Consult Project"
+        },
+        {
+            "orderSeq": "12.1",
+            "activityLevel": 2,
+            "qaActivities": "Establish Standard Document for project"
+        }
+    ]
+}

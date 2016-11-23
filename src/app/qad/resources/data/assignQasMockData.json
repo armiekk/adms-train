@@ -1,0 +1,7 @@
+{
+    "data":[
+        { "projCode": "D13-5042", "version": "1.0", "receivePlanDate": 1479229200000, "showreceivePlanDate": "", "responsibleQaName": "ศิริรุ้ง รัศมีวงศ์พร", "assignQaDate": 1479142800000, "showassignQaDate": "", "selectedNotifies": ["Email"], "status": "กำหนด QA ผู้รับผิดชอบแล้ว", "remark": "-----"},
+        { "projCode": "D13-5023", "version": "1.0", "receivePlanDate": 1479229200000, "showreceivePlanDate": "", "responsibleQaName": "ศิริรุ้ง รัศมีวงศ์พร", "assignQaDate": 1479142800000, "showassignQaDate": "", "selectedNotifies": ["ADMS"], "status": "รับทราบและดำเนินการ", "remark": "-----"},
+        { "projCode": "D16-5027", "version": "1.0", "receivePlanDate": 1479229200000, "showreceivePlanDate": "", "responsibleQaName": "", "assignQaDate": null, "showassignQaDate": "", "selectedNotifies": ["ADMS"], "status": "", "remark": ""}
+    ]
+}

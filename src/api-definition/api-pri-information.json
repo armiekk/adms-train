@@ -1,0 +1,219 @@
+{
+    "apiVersion": "1.0.0",
+    "swaggerVersion": "1.2",
+    "basePath": "/adms-pri-1.0-SNAPSHOT/resources",
+    "resourcePath": "/api/pri/information",
+    "apis": [
+        {
+            "path": "/api/pri/information/{projRef}",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "get the pritInformation",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getPritInformation",
+                    "parameters": [
+                        {
+                            "name": "projRef",
+                            "required": true,
+                            "type": "integer",
+                            "format": "int64",
+                            "paramType": "path"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Not Found"
+                        }
+                    ]
+                },
+                {
+                    "method": "DELETE",
+                    "summary": "remove the pritInformation",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "removePritInformation",
+                    "parameters": [
+                        {
+                            "name": "projRef",
+                            "required": true,
+                            "type": "integer",
+                            "format": "int64",
+                            "paramType": "path"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 404,
+                            "message": "Not Found"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/pri/information/{projCode}/customer",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "get The Customer From ProjCode",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getAllPritCustomersByProjCode",
+                    "parameters": [
+                        {
+                            "name": "projCode",
+                            "required": true,
+                            "type": "string",
+                            "paramType": "path"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/api/pri/information",
+            "operations": [
+                {
+                    "method": "POST",
+                    "summary": "create a new pritInformation",
+                    "notes": "Create a new pritInformation",
+                    "type": "void",
+                    "nickname": "createPritInformation",
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "PritInformation",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 201,
+                            "message": "Created"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        }
+                    ]
+                },
+                {
+                    "method": "PUT",
+                    "summary": "update pritInformation",
+                    "notes": "Updates an existing pritInformation",
+                    "type": "void",
+                    "nickname": "updatePritInformation",
+                    "parameters": [
+                        {
+                            "name": "body",
+                            "required": false,
+                            "type": "PritInformation",
+                            "paramType": "body"
+                        }
+                    ],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        },
+                        {
+                            "code": 400,
+                            "message": "Bad Request"
+                        },
+                        {
+                            "code": 500,
+                            "message": "Internal Server Error"
+                        }
+                    ]
+                },
+                {
+                    "method": "GET",
+                    "summary": "get all the pritInformations",
+                    "notes": "",
+                    "type": "void",
+                    "nickname": "getAllPritInformations",
+                    "parameters": [],
+                    "responseMessages": [
+                        {
+                            "code": 200,
+                            "message": "OK"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "models": {
+        "PritInformation": {
+            "id": "PritInformation",
+            "properties": {
+                "projYear": {
+                    "type": "string"
+                },
+                "projName": {
+                    "type": "string"
+                },
+                "projCode": {
+                    "type": "string"
+                },
+                "projType": {
+                    "type": "string"
+                },
+                "projStatus": {
+                    "type": "string"
+                },
+                "projOwnerOrg": {
+                    "type": "string"
+                },
+                "preSaleProjCode": {
+                    "type": "string"
+                },
+                "projBudget": {
+                    "type": "number"
+                },
+                "projDuration": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "projCurrency": {
+                    "type": "string"
+                },
+                "projOrgName": {
+                    "type": "string"
+                },
+                "projStopDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "projAbbrThai": {
+                    "type": "string"
+                },
+                "projStartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "projAbbrEng": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

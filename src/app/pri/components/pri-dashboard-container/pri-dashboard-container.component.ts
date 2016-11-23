@@ -15,7 +15,7 @@ export class PriDashboardContainerComponent implements OnInit {
   constructor(
     private admsMenuService: AdmsMenuService,
     private localtion: Location
-    ) { }
+  ) { }
 
   ngOnInit() {
     // this.programList = this.admsMenuService.getProgramList(this.localtion.path());
