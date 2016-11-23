@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Pri1i010SaveComponent, Pri1i010SearchComponent, PriDashboardContainerComponent } from './components';
+import { Pri1i010SaveComponent, Pri1i010SearchComponent, PriDashboardContainerComponent, Pri1i010Component } from './components';
 import { PriComponent } from './pri.component';
 import { AuthGuardService } from '../shared/guards/auth-guard/auth-guard.service';
 import { PriStateResolverService } from './services';
@@ -13,13 +13,20 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: PriDashboardContainerComponent },
-            { path: 'search', component: Pri1i010SearchComponent },
-            { path: 'add', component: Pri1i010SaveComponent, },
-            { path: 'edit', redirectTo: 'dashboard' },
-            {
-                path: 'edit/:id',
-                component: Pri1i010SaveComponent,
-                resolve: { priInfo: PriStateResolverService }
+            { 
+                path: 'Pri1i010', 
+                component: Pri1i010Component,
+                children: [
+                    { path: '', redirectTo: 'search' },
+                    { path: 'search', component: Pri1i010SearchComponent },
+                    { path: 'add', component: Pri1i010SaveComponent },
+                    { path: 'edit', redirectTo: 'search' },
+                    {
+                        path: 'edit:/id',
+                        component: Pri1i010SaveComponent,
+                        resolve: { priInfo: PriStateResolverService }
+                    }
+                ]
             },
         ]
     },

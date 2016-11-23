@@ -5,21 +5,21 @@
 		<form>
 
 			<div class="ui-g">
-				<div class="ui-g-1 ui-md-1 ui-lg-1 ui-xl-1 ui-sm-12"></div>
-				<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-4 ui-g-nopad">
-					<div class="ui-g-6 ui-md-4 ui-lg-6 ui-xl-6 ui-sm-12">
+				<div class="ui-g-1"></div>
+				<div class="ui-g-3 ui-lg-4 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4">
 						ปี :
 					</div>
-					<div class="ui-g-3 ui-md-2 ui-lg-3 ui-xl-3 ui-sm-10">
+					<div class="ui-g-3 ui-lg-3">
 						<input type="text" id="projYear" pInputText style="width: 100%" maxlength="4" [(ngModel)]="seachCondition.projYear" name="projYear"
 						/>
 					</div>
 				</div>
-				<div class="ui-g-7 ui-md-12 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
+				<div class="ui-g-7 ui-lg-6 ui-g-nopad">
+					<div class="ui-g-3 ui-lg-4">
 						หน่วยงานเจ้าของโครงการ :
 					</div>
-					<div class="ui-g-7 ui-md-8 ui-lg-7 ui-xl-7 ui-sm-12">
+					<div class="ui-g-9 ui-lg-8">
 						<input type="text" id="projOwnerOrg" pInputText [(ngModel)]="seachCondition.projOwnerOrg" name="projOwnerOrg" style="width: 100%"
 						/>
 					</div>
@@ -29,32 +29,24 @@
 
 			<div class="ui-g">
 				<div class="ui-g-1"></div>
-				<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-6 ui-md-4 ui-lg-6 ui-xl-6 ui-sm-12">
+				<div class="ui-g-3 ui-lg-4 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4">
 						รหัสโครงการ :
 					</div>
-					<div class="ui-g-5 ui-md-3 ui-lg-5 ui-xl-5 ui-sm-12">
-						<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
+					<div class="ui-g-8 ui-lg-8 ui-g-nopad">
+						<div class="ui-g-7 ui-lg-7">
+							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
+						</div>
+						<div class="ui-g-4 ui-lg-4">
+							<button type="button" pButton label="ค้นหา" style="width: 100%"></button>
+						</div>
 					</div>
 				</div>
-				<div class="ui-g-7 ui-md-12 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
-						ประเภทโครงการ :
-					</div>
-					<div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
-						<p-dropdown [options]="constant.projectType" [(ngModel)]="seachCondition.projType" name="projType" [style]="{'width': '130px'}"></p-dropdown>
-					</div>
-				</div>
-				<div class="ui-g-1"></div>
-			</div>
-
-			<div class="ui-g">
-				<div class="ui-g-1"></div>
-				<div class="ui-g-9 ui-md-12 ui-lg-9 ui-xl-9 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-2 ui-md-4 ui-lg-2 ui-xl-2 ui-sm-12">
+				<div class="ui-g-7 ui-lg-6 ui-g-nopad">
+					<div class="ui-g-3 ui-lg-4">
 						ชื่อโครงการ :
 					</div>
-					<div class="ui-g-10 ui-md-8 ui-lg-10 ui-xl-10 ui-sm-12">
+					<div class="ui-g-9 ui-lg-8">
 						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" />
 					</div>
 				</div>

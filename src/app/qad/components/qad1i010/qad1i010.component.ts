@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import { TreeNode, SharedModule } from 'primeng/primeng';
 
@@ -8,10 +9,37 @@ import { PritInformationApi } from '../../api/prit-information/api/PritInformati
 
 import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
+import { Subscription } from 'rxjs';
+
+interface SearchCondition {
+    projCode?: string;
+    projName?: string;
+    projCreateByQA?: string;
+    projCreateDate?: Date;
+}
 
 interface SearchProjCode {
     projCode?: string;
     projName?: string;
+}
+
+interface qaPlan {
+    qadtActivtiesRef?: number;
+    orderSeq?: number;
+    prevQadtActivtiesRef?: string;
+    activityLevel?: number;
+    qaActivties?: string;
+    versionNo?: number;
+    owner?: string;
+    createBy?: string;
+    createDate?: Date;
+    updateBy?: string;
+    updateDate?: Date;
+    workCategoryCode?: number;
+    workCategory?: string;
+    planAction?: number;
+    planEffort?: number;
+    remark?: string;
 }
 
 interface Emp {
@@ -262,4 +290,5 @@ export class Qad1i010Component implements OnInit {
             }
         }
     }
+
 }

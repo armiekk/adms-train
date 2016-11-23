@@ -21,7 +21,8 @@
                         </div>
                         <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-4 ui-sm-12 ui-g-nopad">
                             <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
-                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%" [(ngModel)]="searchCondition.projCode" (change)="clearTextProjName();" />
+                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%"
+                                    [(ngModel)]="searchCondition.projCode" (change)="clearTextProjName();" />
                             </div>
                             <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
                                 <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProjCode(searchCondition.projCode);"></button>
@@ -29,10 +30,12 @@
                         </div>
                     </div>
                     <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
-                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName" />
+                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName"
+                        />
                     </div>
                 </div>
-                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500" [appendTo]="body">
+                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500"
+                    [appendTo]="body">
                     <div class="ui-g" style="padding-bottom: 0.5em;">
                         <span>
                             <input type="text" pInputText [(ngModel)]="searchProjCode.projCode" />
@@ -60,7 +63,8 @@
                     </div>
                     <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 ui-g-nopad">
                         <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
-                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();" />
+                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();"
+                            />
 
                         </div>
                         <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
@@ -107,7 +111,8 @@
                     </div>
                     <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
                         <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA" />
+                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA"
+                            />
                         </div>
                         <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projCreateByQA, 4);"></button>
@@ -151,7 +156,8 @@
                 <button type="button" pButton label="ค้นหา" (click)="search();"></button>
             </div>
 
-            <p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+            <p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600"
+                [appendTo]="body">
                 <div class="ui-g" style="padding-bottom: 0.5em;">
                     <span>
                         <input type="text" pInputText [(ngModel)]="searchSiteCode" />
@@ -159,14 +165,16 @@
                     </span>
                 </div>
                 <div class="ui-g">
-                    <p-dataTable [value]="resultSearchSites" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedSite" (onRowSelect)="onRowSelectSite();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
+                    <p-dataTable [value]="resultSearchSites" [rows]="10" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedSite"
+                        (onRowSelect)="onRowSelectSite();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
                         <p-column field="siteCode" header="รหัส"></p-column>
                         <p-column field="siteName" header="ชื่อ"></p-column>
                     </p-dataTable>
                 </div>
             </p-dialog>
-            
-            <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+
+            <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500"
+                [width]="600" [appendTo]="body">
                 <div class="ui-g" style="padding-bottom: 0.5em;">
                     <span>
                         <input type="text" pInputText [(ngModel)]="searchEmp" />
@@ -183,6 +191,7 @@
             </p-dialog>
         </p-fieldset>
     </div>
+
     <br />
     <div class="ui-g">
         <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-sm-12 ui-md-12"></div>
@@ -204,7 +213,9 @@
         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad">
             <p-fieldset legend="History" [toggleable]="true">
                 <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12">
-                    <p-dataTable [value]="historys" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="5" [paginator]="true" [responsive]="true" paginatorPosition="top" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedHistory" (onRowSelect)="onRowSelectHistory();">
+                    <p-dataTable [value]="historys" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="5" [paginator]="true" [responsive]="true"
+                        paginatorPosition="top" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedHistory"
+                        (onRowSelect)="onRowSelectHistory();">
                         <header>
                             QA Plan History
                         </header>
@@ -226,13 +237,15 @@
     </div>
     <br />
     <div class="ui-g">
-        <p-tabView [style]="{'padding': '0'}">
-            <p-tabPanel header="QA Schedule">
-                <app-qad1i020 [qaSchedules]="qaSchedules"></app-qad1i020>
-            </p-tabPanel>
-            <p-tabPanel header="QA Plan">
-                <app-qad1i010 [qaPlans]="qaPlans"></app-qad1i010>
-            </p-tabPanel>
+        <p-tabView>
+            <div class="ui-widget-content">
+                <p-tabPanel header="QA Schedule">
+                    <app-qad1i020 [qaSchedules]="qaSchedules"></app-qad1i020>
+                </p-tabPanel>
+                <p-tabPanel header="QA Plan">
+                    <app-qad1i010 [qaPlans]="qaPlans"></app-qad1i010>
+                </p-tabPanel>
+            </div>
         </p-tabView>
     </div>
 </div>

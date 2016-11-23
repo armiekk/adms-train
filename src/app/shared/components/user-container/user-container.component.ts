@@ -24,7 +24,7 @@ export class UserContainerComponent implements OnInit {
 
       m = this.checkTime(m);
       s = this.checkTime(s);
-      this.clock = `${date.getDate()}/${date.getMonth()}/${date.getFullYear() + 543} ${h}:${m}:${s} น.`;
+      this.clock = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear() + 543} ${h}:${m}:${s} น.`;
     });
     
     this.setHeaders();

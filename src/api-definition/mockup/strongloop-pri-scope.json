@@ -1,0 +1,668 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "adms-mockup-api"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/PritScopes": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Create a new instance of the model and persist it into the data source.",
+                "operationId": "PritScope.create",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Patch an existing model instance or insert a new one into the data source.",
+                "operationId": "PritScope.upsert__put_PritScopes",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Patch an existing model instance or insert a new one into the data source.",
+                "operationId": "PritScope.upsert__patch_PritScopes",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Find all instances of the model matched by filter from the data source.",
+                "operationId": "PritScope.find",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields, where, include, order, offset, and limit",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/PritScope"
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/replaceOrCreate": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Replace an existing model instance or insert a new one into the data source.",
+                "operationId": "PritScope.replaceOrCreate",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/upsertWithWhere": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Update an existing model instance or insert a new one into the data source based on the where criteria.",
+                "operationId": "PritScope.upsertWithWhere",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/{id}/exists": {
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Check whether a model instance exists in the data source.",
+                "operationId": "PritScope.exists__get_PritScopes_{id}_exists",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exists": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/{id}": {
+            "head": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Check whether a model instance exists in the data source.",
+                "operationId": "PritScope.exists__head_PritScopes_{id}",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "exists": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Find a model instance by {{id}} from the data source.",
+                "operationId": "PritScope.findById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields and include",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Delete a model instance by {{id}} from the data source.",
+                "operationId": "PritScope.deleteById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Patch attributes for a model instance and persist it into the data source.",
+                "operationId": "PritScope.prototype.updateAttributes__put_PritScopes_{id}",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "PersistedModel id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "patch": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Patch attributes for a model instance and persist it into the data source.",
+                "operationId": "PritScope.prototype.updateAttributes__patch_PritScopes_{id}",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "PersistedModel id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/{id}/replace": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Replace attributes for a model instance and persist it into the data source.",
+                "operationId": "PritScope.replaceById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Model id",
+                        "required": true,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "Model instance data",
+                        "required": false,
+                        "schema": {
+                            "description": "Model instance data",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/findOne": {
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Find first instance of the model matched by filter from the data source.",
+                "operationId": "PritScope.findOne",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filter defining fields, where, include, order, offset, and limit",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/update": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Update instances of the model matched by {{where}} from the data source.",
+                "operationId": "PritScope.updateAll",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    },
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "description": "An object of model property name/value pairs",
+                        "required": false,
+                        "schema": {
+                            "description": "An object of model property name/value pairs",
+                            "$ref": "#/definitions/PritScope"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "description": "Information related to the outcome of the operation",
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "description": "The number of instances updated",
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/count": {
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Count instances of the model matched by where from the data source.",
+                "operationId": "PritScope.count",
+                "parameters": [
+                    {
+                        "name": "where",
+                        "in": "query",
+                        "description": "Criteria to match model instances",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "number",
+                                    "format": "double"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/PritScopes/change-stream": {
+            "post": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Create a change stream.",
+                "operationId": "PritScope.createChangeStream__post_PritScopes_change-stream",
+                "parameters": [
+                    {
+                        "name": "options",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "deprecated": false
+            },
+            "get": {
+                "tags": [
+                    "PritScope"
+                ],
+                "summary": "Create a change stream.",
+                "operationId": "PritScope.createChangeStream__get_PritScopes_change-stream",
+                "parameters": [
+                    {
+                        "name": "options",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "format": "JSON"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Request was successful",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "consumes": [
+        "application/json",
+        "application/x-www-form-urlencoded",
+        "application/xml",
+        "text/xml"
+    ],
+    "produces": [
+        "application/json",
+        "application/xml",
+        "text/xml",
+        "application/javascript",
+        "text/javascript"
+    ],
+    "definitions": {
+        "x-any": {
+            "properties": {}
+        },
+        "AccessToken": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "ttl": {
+                    "default": 1209600,
+                    "description": "time to live in seconds (2 weeks by default)",
+                    "type": "number",
+                    "format": "double"
+                },
+                "created": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "userId": {
+                    "type": "number",
+                    "format": "double"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "additionalProperties": false
+        },
+        "PritScope": {
+            "properties": {
+                "projScopeRef": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "projCode": {
+                    "maxLength": 10,
+                    "type": "string"
+                },
+                "scoreDetail": {
+                    "maxLength": 5000,
+                    "type": "string"
+                },
+                "createBy": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "createDate": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updateBy": {
+                    "maxLength": 50,
+                    "type": "string"
+                },
+                "updateDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "required": [
+                "projScopeRef"
+            ],
+            "additionalProperties": false
+        }
+    }
+}

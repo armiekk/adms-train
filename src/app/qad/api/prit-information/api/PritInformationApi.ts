@@ -34,9 +34,8 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class PritInformationApi {
-    // protected basePath = '/api';
+    protected basePath = '/api';
     // protected basePath = 'http://10.254.40.27:3000/api';
-    protected basePath = 'http://localhost:3000/api';
     public defaultHeaders : Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {

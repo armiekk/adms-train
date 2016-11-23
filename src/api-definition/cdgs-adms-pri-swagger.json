@@ -1,0 +1,599 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.2"
+  },
+  "host": "10.254.40.27:8000",
+  "basePath": "/api/pri",
+  "tags": [
+    {
+      "name": "PritInformation"
+    },
+    {
+      "name": "PriConstant"
+    },
+    {
+      "name": "Constant"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/priConstant/status": {
+      "get": {
+        "tags": [
+          "Constant"
+        ],
+        "summary": "get all the project status",
+        "description": "",
+        "operationId": "getProjStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/priConstant/type": {
+      "get": {
+        "tags": [
+          "Constant"
+        ],
+        "summary": "get all the project type",
+        "description": "",
+        "operationId": "getProjType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pritInformation": {
+      "get": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "ค้นหาข้อมูลรายละเอียดโครงการ",
+        "description": "Get All The PritInformations By Conditions",
+        "operationId": "getProjectInformationListByCondition",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 15,
+            "format": "int32"
+          },
+          {
+            "name": "projCode",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maximum": 10.0
+          },
+          {
+            "name": "projYear",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "maximum": 4.0,
+            "format": "int64"
+          },
+          {
+            "name": "projOwnerOrg",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maximum": 4.0
+          },
+          {
+            "name": "projType",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maximum": 1.0
+          },
+          {
+            "name": "projName",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maximum": 1000.0
+          },
+          {
+            "name": "projStatus",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "maximum": 1.0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProjInformationInfoBean"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "สำหรับการเพิ่มข้อมูลรายการโครงการ",
+        "description": "Create A New PritInformation",
+        "operationId": "addProjectInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProjInformationBean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PritInformation"
+            }
+          },
+          "400": {
+            "description": "Bad Request Or BEPRI0001"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "สำหรับการแก้ไขข้อมูลรายการโครงการ",
+        "description": "Create PritInformation",
+        "operationId": "editProjectInformation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ProjInformationEditBean"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ProjInformationEditBean"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "ลบข้อมูลรายการโครงการ ตาม List รายการที่เลือก",
+        "description": "Removes The PritInformation",
+        "operationId": "removeProjectInformationList",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/pritInformation/projRef/{projRef}": {
+      "get": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "ค้นหาข้อมูลรายการโครงการ ตาม Primary Key",
+        "description": "Get the PritInformation By ProjRef",
+        "operationId": "getProjectInformationByRef",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "projRef",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PritInformation"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/pritInformation/{projRef}": {
+      "delete": {
+        "tags": [
+          "PritInformation"
+        ],
+        "summary": "สำหรับการลบข้อมูลรายการโครงการ",
+        "description": "Remove The PritInformation",
+        "operationId": "removeProjectInformationByRef",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "projRef",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProjInformationEditBean": {
+      "type": "object",
+      "required": [
+        "projCode",
+        "projRef",
+        "projYear"
+      ],
+      "properties": {
+        "projYear": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4
+        },
+        "projCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4
+        },
+        "pmSupId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pmSupName": {
+          "type": "string"
+        },
+        "pmId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pmName": {
+          "type": "string"
+        },
+        "saleId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "saleName": {
+          "type": "string"
+        },
+        "projType": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1
+        },
+        "projName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "projOrgName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 250
+        },
+        "projOrgCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "projStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projStopDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projDuration": {
+          "type": "number",
+          "format": "double"
+        },
+        "preSaleProjCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "projStatus": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1
+        },
+        "projRef": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "ProjStatus": {
+      "type": "object",
+      "properties": {
+        "constantValue": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "constantThDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "ProjInformationInfoBean": {
+      "type": "object",
+      "properties": {
+        "projRef": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "projYear": {
+          "type": "string"
+        },
+        "projCode": {
+          "type": "string"
+        },
+        "projStatusDesc": {
+          "type": "string"
+        },
+        "pmName": {
+          "type": "string"
+        }
+      }
+    },
+    "ProjInformationBean": {
+      "type": "object",
+      "required": [
+        "projCode",
+        "projYear"
+      ],
+      "properties": {
+        "projYear": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 4
+        },
+        "projCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 4
+        },
+        "pmSupId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pmSupName": {
+          "type": "string"
+        },
+        "pmId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "pmName": {
+          "type": "string"
+        },
+        "saleId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "saleName": {
+          "type": "string"
+        },
+        "projType": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1
+        },
+        "projName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "projOrgName": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 250
+        },
+        "projOrgCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "projStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projStopDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projDuration": {
+          "type": "number",
+          "format": "double"
+        },
+        "preSaleProjCode": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 50
+        },
+        "projStatus": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1
+        }
+      }
+    },
+    "ProjType": {
+      "type": "object",
+      "properties": {
+        "constantValue": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "constantThDescription": {
+          "type": "string"
+        }
+      }
+    },
+    "PritInformation": {
+      "type": "object",
+      "properties": {
+        "createBy": {
+          "type": "string",
+          "readOnly": true
+        },
+        "createDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "updateBy": {
+          "type": "string",
+          "readOnly": true
+        },
+        "updateDate": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "projRef": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "projCode": {
+          "type": "string"
+        },
+        "projName": {
+          "type": "string"
+        },
+        "projType": {
+          "type": "string"
+        },
+        "projAbbrThai": {
+          "type": "string"
+        },
+        "projAbbrEng": {
+          "type": "string"
+        },
+        "projStartDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projStopDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "projBudget": {
+          "type": "number"
+        },
+        "projCurrency": {
+          "type": "string"
+        },
+        "projYear": {
+          "type": "string"
+        },
+        "projStatus": {
+          "type": "string"
+        },
+        "projOrgCode": {
+          "type": "string"
+        },
+        "projOrgName": {
+          "type": "string"
+        },
+        "projDuration": {
+          "type": "number",
+          "format": "double"
+        },
+        "preSaleProjCode": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

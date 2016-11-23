@@ -10,7 +10,7 @@ html {
 
 body {
     position: relative;
-    padding-top: 100px;
+    padding-top: 130px;
     height: auto;
 }
 
@@ -20,6 +20,7 @@ body {
     border-radius: 2px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+
 
 @media screen and (min-width: 1400px) {
     .content-container {
@@ -53,7 +54,7 @@ body {
 
 
 .adms-background {
-    background: url('/assets/vendor/retro/img/bg-01.jpg') no-repeat fixed center center;
+    background-color: #ececff;
     background-size: cover;
     font-family: Montserrat;
 }
