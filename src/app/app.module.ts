@@ -29,7 +29,7 @@ import { AppComponent } from './app.component';
     Ng2Webstorage,
     AppRoutingModule,
   ],
-  providers: [AuthApi, AuthGuardService, StateService, UserApi, PritInformationApi, AuthorizeService.UserApi , AdmsMenuService ],
+  providers: [AuthGuardService, StateService, UserApi, PritInformationApi, AuthorizeService.UserApi , AdmsMenuService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

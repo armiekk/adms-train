@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthApi } from '../shared/api/user/api/AuthApi';
 import { UserApi } from '../shared/api/mockup-user-service/api/UserApi';
 import { Router } from '@angular/router';
 import { } from 'ng2-webstorage';
@@ -28,7 +27,6 @@ export class LoginComponent implements OnInit {
   credentials: Credentials = {};
 
   constructor(
-    private authApi: AuthApi,
     private router: Router,
     private userApi: UserApi,
     private admsMenuService: AdmsMenuService
@@ -55,12 +53,6 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('menuList', JSON.stringify(response[0].nodes));
       });
     }
-    // this.authApi.login(this.credentials).subscribe((response) => {
-    //   if (response) {
-    //     sessionStorage.setItem('token', response.id_token);
-    //     this.router.navigate(['/home']);
-    //   }
-    // });
   }
 
 }

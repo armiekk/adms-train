@@ -28,10 +28,9 @@ export class PriConstantsService {
     ];
 
     this._projectType = [
-      { label: 'ระบุประเภทโครงการ', value: null },
-      { label: 'Pre-Sale', value: 1 },
-      { label: 'Post-Sale', value: 2 },
-      { label: 'MA', value: 3 }
+      { label: 'Pre Contact', value: 1 },
+      { label: 'Contact', value: 2 },
+      { label: 'Inhouse', value: 3 }
     ];
 
     this._monitorType = [

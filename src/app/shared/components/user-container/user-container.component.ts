@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { AuthApi } from '../../api/user/api/AuthApi';
 import { UserApi } from '../../api/mockup-user-service/api/UserApi';
 
 @Component({
@@ -13,7 +12,7 @@ export class UserContainerComponent implements OnInit {
   account: any = {};
   clock: string;
 
-  constructor(private authApi: AuthApi, private userApi: UserApi) { }
+  constructor(private userApi: UserApi) { }
 
   ngOnInit() {
     Observable.interval(100).timestamp().subscribe((response) => {
@@ -28,7 +27,6 @@ export class UserContainerComponent implements OnInit {
     });
     
     this.setHeaders();
-    // this.authApi.getAccount().subscribe((response) => this.account = response);
     this.userApi.userFindById(sessionStorage.getItem('id')).subscribe((response) => {
       this.account.firstName = response.username;
       this.account.lastName = response.username;
@@ -40,14 +38,6 @@ export class UserContainerComponent implements OnInit {
     return i;
   }
 
-  // setHeaders() {
-  //   if (!this.authApi.defaultHeaders.has('Authorization')) {
-  //     this.authApi.defaultHeaders.append('Content-Type', 'application/json');
-  //     this.authApi.defaultHeaders.append('Authorization', `Bearer ${sessionStorage.getItem('token')}`);
-  //     this.authApi.defaultHeaders.append('Accept', 'application/json');
-  //   }
-  //   return;
-  // }
 
   setHeaders() {
     if (!this.userApi.defaultHeaders.has('Authorization')) {
