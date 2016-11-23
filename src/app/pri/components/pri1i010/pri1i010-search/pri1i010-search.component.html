@@ -34,7 +34,7 @@
 						รหัสโครงการ :
 					</div>
 					<div class="ui-g-8 ui-lg-8 ui-g-nopad">
-						<div class="ui-g-8 ui-lg-8">
+						<div class="ui-g-7 ui-lg-7">
 							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
 						</div>
 						<div class="ui-g-4 ui-lg-4">
@@ -44,33 +44,9 @@
 				</div>
 				<div class="ui-g-7 ui-lg-6 ui-g-nopad">
 					<div class="ui-g-3 ui-lg-4">
-						ประเภทโครงการ :
+						ชื่อโครงการ :
 					</div>
 					<div class="ui-g-9 ui-lg-8">
-						<p-dropdown [options]="constant.projectType" [(ngModel)]="seachCondition.projType" name="projType" [style]="{'width': '130px'}"></p-dropdown>
-					</div>
-				</div>
-				<div class="ui-g-1"></div>
-			</div>
-
-			<div class="ui-g">
-				<div class="ui-g-1"></div>
-				<div class="ui-g-10 ui-lg-10 ui-g-nopad">
-					<div class="ui-g-2 ui-lg-2">
-						ชื่อโครงการ :
-					</div>
-					<div class="ui-g-10 ui-lg-10"></div>
-				</div>
-				<div class="ui-g-1"></div>
-			</div>
-
-			<div class="ui-g">
-				<div class="ui-g-1"></div>
-				<div class="ui-g-9 ui-md-12 ui-lg-9 ui-xl-9 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-2 ui-md-4 ui-lg-2 ui-xl-2 ui-sm-12">
-						ชื่อโครงการ :
-					</div>
-					<div class="ui-g-10 ui-md-8 ui-lg-10 ui-xl-10 ui-sm-12">
 						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" />
 					</div>
 				</div>

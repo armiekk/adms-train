@@ -1319,7 +1319,8 @@ button.ui-button::-moz-focus-inner {
     -moz-box-sizing: border-box;
 }
 .ui-fieldset, .ui-fieldset .ui-fieldset-legend {
-    padding:0.6em 1em;
+    padding: 0em 1em;
+    font-weight: 700;
 }
 
 .ui-fieldset-toggleable .ui-fieldset-legend {
