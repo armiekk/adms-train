@@ -1,8 +1,9 @@
 <div class="content-container">
 	<div class="ui-g">		
-		<div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-6 ui-sm-12"></div>
-		<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-6 ui-sm-12 ui-g-nopad">
-			<p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
+		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div style="float: right;">
+				<p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
+			</div>
 		</div>
 	</div>
 	<div class="ui-g">
@@ -17,13 +18,11 @@
 							</div>
 						</div>
 						<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-3 ui-sm-12">
-							<input type="text" id="searchProjSiteCode" pInputText style="width: 70px;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();"
-							/>
+							<input type="text" id="searchProjSiteCode" pInputText style="width: 70px;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();" />
 							<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchSite(searchCondition.projSiteCode);"></button>
 						</div>
 						<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-5 ui-sm-12">
-							<input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 80%;" [(ngModel)]="searchCondition.projSiteName"
-							/>
+							<input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 80%;" [(ngModel)]="searchCondition.projSiteName" />
 						</div>
 						<div class="ui-g-1 ui-xl-1 ui-lg-1 ui-md-1 ui-sm-12 ui-g-nopad"></div>
 					</div>
@@ -71,7 +70,7 @@
 						<div class="ui-g-7 ui-xl-7 ui-lg-7 ui-md-6 ui-sm-12"></div>
 					</div>
 
-					<p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="290" [minHeight]="500" [responsive]="true" [appendTo]="body">
+					<p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500" [responsive]="true" [appendTo]="body">
 						<div class="ui-g" style="padding-bottom: 0.5em;">
 							<span>
                             <input type="text" id="searchProjCode" pInputText [(ngModel)]="searchProjCode.projCode" />
@@ -87,7 +86,7 @@
 						</div>
 					</p-dialog>
 
-					<p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+					<p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="600" [responsive]="true" [appendTo]="body">
 						<div class="ui-g" style="padding-bottom: 0.5em;">
 							<span>
                             <input type="text" id="searchEmp" pInputText [(ngModel)]="searchEmp" />
@@ -103,7 +102,7 @@
 						</div>
 					</p-dialog>
 
-					<p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+					<p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="600" [responsive]="true" [appendTo]="body">
 						<div class="ui-g" style="padding-bottom: 0.5em;">
 							<span>
                             <input type="text" id="searchSiteCode" pInputText [(ngModel)]="searchSiteCode" />
@@ -195,6 +194,15 @@
 				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
 					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
 					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
+						<p-fileUpload name="nameFileUpload" url="" maxFileSize="1000000">
+						</p-fileUpload>
+					</div>
+					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12 ui-g-nopad"></div>
+				</div>
+
+				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-4 ui-sm-12"></div>
+					<div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-6 ui-sm-12">
 						<button type="button" pButton label="บันทึก" (click)="saveAssignQa();"></button>
 						<button type="button" pButton label="ยกเลิก" (click)="cancelAssignQa();"></button>
 					</div>
@@ -213,11 +221,14 @@
 							<label for="searchAdditionProjSiteCode">Site Code:</label>
 						</div>
 					</div>
-					<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-7 ui-sm-12">
-						<input type="text" id="searchAdditionProjSiteCode" pInputText style="width: 80%;" [(ngModel)]="searchAdditionCondition.projSiteCode" />
+					<div class="ui-g-2 ui-xl-2 ui-lg-2 ui-md-3 ui-sm-12">
+						<input type="text" id="searchAdditionProjSiteCode" pInputText style="width: 70px;" [(ngModel)]="searchAdditionCondition.projSiteCode" (change)="clearTextAdditionSiteName();" />
 						<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchAdditionSite(searchAdditionCondition.projSiteCode);"></button>
 					</div>
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12 ui-g-nopad"></div>
+					<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-5 ui-sm-12">
+						<input type="text" id="searchAdditionProjSiteName" pInputText readonly="true" style="width: 80%;" [(ngModel)]="searchAdditionCondition.projSiteName" />
+					</div>
+					<div class="ui-g-1 ui-xl-1 ui-lg-1 ui-md-1 ui-sm-12 ui-g-nopad"></div>
 				</div>
 
 				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
@@ -243,7 +254,7 @@
 					</div>
 					<div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-7 ui-sm-12">
 						<input type="text" id="searchAdditionProjResponsibleQaName" pInputText style="width: 80%;" [(ngModel)]="searchAdditionCondition.projResponsibleQaName" />
-						<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchAdditionCondition.projResponsibleQaName, 5);"></button>
+						<button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchAdditionCondition.projResponsibleQaName, 6);"></button>
 					</div>
 					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-2 ui-sm-12 ui-g-nopad"></div>
 				</div>
@@ -255,7 +266,7 @@
 					</div>
 				</div>
 
-				<p-dialog header="ค้นหา Project" [(visible)]="displaySearchAdditionProjCode" modal="modal" [responsive]="true" [appendTo]="body">
+				<p-dialog header="ค้นหา Project" [(visible)]="displaySearchAdditionProjCode" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="500" [appendTo]="body">
 					<div class="ui-g" style="padding-bottom: 0.5em;">
 						<span>
 							<input type="text" pInputText [(ngModel)]="searchAdditionProjCode.projCode" />
@@ -266,7 +277,7 @@
 						<p-dataTable [value]="resultSearchAdditionProjects" [rows]="10" [paginator]="true" [pageLinks]="3" [(selection)]="selectedAdditionProj" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
 							<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 							<p-column field="projCode" header="Project Code" [style]="{'width': '100px'}"></p-column>
-							<p-column field="projName" header="Project Name" [style]="{'width': '200px'}"></p-column>
+							<p-column field="projName" header="Project Name"></p-column>
 						</p-dataTable>
 					</div>
 					<footer>
@@ -277,7 +288,7 @@
 					</footer>
 				</p-dialog>
 
-				<p-dialog header="ค้นหา Site" [(visible)]="displaySearchAdditionSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
+				<p-dialog header="ค้นหา Site" [(visible)]="displaySearchAdditionSite" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
 					<div class="ui-g" style="padding-bottom: 0.5em;">
 						<span>
 							<input type="text" id="searchAdditionSiteCode" pInputText [(ngModel)]="searchAdditionSiteCode" />

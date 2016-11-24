@@ -1,16 +1,11 @@
 <div class="content-container">
-    <div class="ui-g">
-        <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12"></div>
-        <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-sm-12 ui-md-12 ui-g-nopad">
-            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
-                <a [routerLink]="['/qad/QAD1Q010']"><button type="button" pButton label="QA Schedule and Plan" style="width: 100%;"></button></a>
-            </div>
-            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad" style="float: right;">
-                <a [routerLink]="['/qad/QAD1I030']"><button type="button" pButton label="Assign QA" style="width: 100%;"></button></a>
-            </div>
-        </div>
-    </div>
-    <br />
+    <div class="ui-g">		
+		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div style="float: right;">
+				<p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
+			</div>
+		</div>
+	</div>
     <div class="ui-g">
         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
             <p-fieldset legend="Project Name">
@@ -30,12 +25,10 @@
                         </div>
                     </div>
                     <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
-                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName"
-                        />
+                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName" />
                     </div>
                 </div>
-                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [minWidth]="300" [minHeight]="500" [width]="500"
-                    [appendTo]="body">
+                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="500" [appendTo]="body">
                     <div class="ui-g" style="padding-bottom: 0.5em;">
                         <span>
                             <input type="text" pInputText [(ngModel)]="searchProjCode.projCode" />
@@ -63,17 +56,14 @@
                     </div>
                     <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 ui-g-nopad">
                         <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
-                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();"
-                            />
-
+                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="clearTextSiteName();" />
                         </div>
                         <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchSite(searchCondition.projSiteCode);"></button>
                         </div>
                     </div>
                     <div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-8 ui-sm-12">
-                        <input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projSiteName"
-                        />
+                        <input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projSiteName" />
                     </div>
                 </div>
                 <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-g-nopad">
@@ -111,8 +101,7 @@
                     </div>
                     <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
                         <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
-                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA"
-                            />
+                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA" />
                         </div>
                         <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
                             <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(searchCondition.projCreateByQA, 4);"></button>
@@ -156,8 +145,7 @@
                 <button type="button" pButton label="ค้นหา" (click)="search();"></button>
             </div>
 
-            <p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [minWidth]="300" [minHeight]="500" [width]="600"
-                [appendTo]="body">
+            <p-dialog header="ค้นหา Site" [(visible)]="displaySearchSite" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
                 <div class="ui-g" style="padding-bottom: 0.5em;">
                     <span>
                         <input type="text" pInputText [(ngModel)]="searchSiteCode" />
@@ -173,8 +161,7 @@
                 </div>
             </p-dialog>
 
-            <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [minWidth]="300" [minHeight]="500"
-                [width]="600" [appendTo]="body">
+            <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="600" [appendTo]="body">
                 <div class="ui-g" style="padding-bottom: 0.5em;">
                     <span>
                         <input type="text" pInputText [(ngModel)]="searchEmp" />
@@ -194,8 +181,8 @@
 
     <br />
     <div class="ui-g">
-        <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-sm-12 ui-md-12"></div>
-        <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad">
+        <div class="ui-g-8 ui-xl-9 ui-lg-8 ui-sm-12 ui-md-12"></div>
+        <div class="ui-g-4 ui-xl-3 ui-lg-4 ui-sm-12 ui-md-12 ui-g-nopad">
             <button type="button" pButton label="บันทึกและส่งพิจารณา" (click)="showDialogSaveAndSendToApprove();"></button>
             <button type="button" pButton label="บันทึก" (click)="save();"></button>
             <span class="fa fa-print" style="cursor: pointer; font-size: 20px;" (click)="print();"></span>
@@ -203,8 +190,10 @@
 
         <p-dialog header="บันทึกและส่งพิจารณา" [(visible)]="displaySaveAndSendToApprove" [resizable]="false" modal="modal" [appendTo]="body">
             <div class="ui-g">
-                <button type="button" pButton label="Save Version" (click)="saveAndSendToApprove(1);"></button>
-                <button type="button" pButton label="Save New Version" (click)="saveAndSendToApprove(2);"></button>
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12" style="text-align: center;">
+                    <button type="button" pButton label="Save Version" (click)="saveAndSendToApprove(1);"></button>
+                    <button type="button" pButton label="Save New Version" (click)="saveAndSendToApprove(2);"></button>
+                </div>
             </div>
         </p-dialog>
     </div>

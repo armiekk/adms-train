@@ -13,8 +13,7 @@
 		</div>
 	</div>
 	<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12">
-		<p-dataTable [value]="qaSchedules" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="15" [paginator]="true" [responsive]="true"
-			paginatorPosition="top" [rowsPerPageOptions]="[5,10,15,20,30]" [(selection)]="selectedQaSchedules">
+		<p-dataTable [value]="qaSchedules" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true" scrollable="true" scrollHeight="400px" [(selection)]="selectedQaSchedules">
 			<header>
 				QA Schedule
 				<div style="text-align: left">
