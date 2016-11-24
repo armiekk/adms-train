@@ -20,12 +20,7 @@ const routes: Routes = [
                     { path: '', redirectTo: 'search' },
                     { path: 'search', component: Pri1i010SearchComponent },
                     { path: 'add', component: Pri1i010SaveComponent },
-                    { path: 'edit', redirectTo: 'search' },
-                    {
-                        path: 'edit:/id',
-                        component: Pri1i010SaveComponent,
-                        resolve: { priInfo: PriStateResolverService }
-                    }
+                    { path: 'edit', component: Pri1i010SaveComponent }
                 ]
             },
         ]

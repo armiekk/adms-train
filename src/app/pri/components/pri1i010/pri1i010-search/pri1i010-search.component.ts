@@ -7,19 +7,9 @@ import { PriConstantsService } from '../../../constants';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { Message, SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
+import { SearchCondition } from '../../../services/priInformation/pri-information.service';
 
-interface SearchCondition {
-  projYear?: string;
-  projOwnerOrg?: string;
-  projCode?: string;
-  projType?: number;
-  projName?: string;
-  projStatus?: Array<number>;
-}
 
-const defaultSearchCondition: SearchCondition = {
-  projStatus: []
-};
 
 @Component({
   selector: 'app-pri1i010-search',
@@ -29,7 +19,7 @@ const defaultSearchCondition: SearchCondition = {
 })
 export class Pri1i010SearchComponent implements OnInit {
 
-  private seachCondition: SearchCondition = defaultSearchCondition;
+  private seachCondition: SearchCondition = {};
   private pritInformationList: PritInformation[] = [];
   private selectedPriInfo: PritInformation[] = [];
   private msgs: Message[] = [];
@@ -88,8 +78,14 @@ export class Pri1i010SearchComponent implements OnInit {
 
   }
 
+  onRowSelect(event: { data: PritInformation }){
+    this.state.projCode = event.data.projCode;
+    this.state.mode = 'EDIT';
+    this.router.navigate(['pri/Pri1i010/edit']);
+  }
+
   goToAddView() {
-    this.state.setState('ADD');
+    this.state.mode = 'ADD';
     this.router.navigate(['pri/Pri1i010/add']);
   }
 

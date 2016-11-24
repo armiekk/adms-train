@@ -3,15 +3,24 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StateService {
 
-  private state: string = 'ADD';
+  private _projCode: string = null;
+  private _mode: string = null;
 
   constructor() { }
 
-  getState(): string {
-    return this.state;
+  get mode(){
+    return this._mode;
   }
 
-  setState(state: string) {
-    this.state = state;
+  set mode(mode: string){
+    this._mode = mode;
+  }
+
+  set projCode(projCode: string) {
+    this._projCode = projCode;
+  }
+
+  get projCode(){
+    return this._projCode;
   }
 }

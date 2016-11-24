@@ -21,7 +21,7 @@ export class PriStateResolverService implements Resolve<PritInformation> {
     let id: string;
     let pritInformation: PritInformation;
     if (id = route.params['id']) {
-      this.state.setState('EDIT');
+      this.state.mode = 'EDIT';
       this.setHeaders();
       // return this.priService.getPritInformation(id).map((response: PritInformation) => {
       //   return pritInformation = Object.assign(

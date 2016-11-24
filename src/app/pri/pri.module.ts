@@ -6,6 +6,7 @@ import { AppSharedModule } from '../shared';
 // providers
 import { PriConstantsService } from './constants';
 import { PriStateResolverService } from './services';
+import { PriInformationService } from './services/priInformation/pri-information.service';
 import { ApipriinformationApi } from './api/pri-information/api/ApipriinformationApi';
 // import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
@@ -36,6 +37,6 @@ const COMPONENT_LIST: Array<any> = Object.keys(components).map((key) => componen
     PriDashboardContainerComponent,
     Pri1i020Component
   ],
-  providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService]
+  providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService]
 })
 export class PriModule { }
