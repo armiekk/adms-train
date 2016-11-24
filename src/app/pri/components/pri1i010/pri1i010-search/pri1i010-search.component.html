@@ -1,6 +1,6 @@
 <p-growl [value]="msgs" life="3000"></p-growl>
 <p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" [responsive]="true"
-	[modal]="true">
+	[modal]="true" [style]="{'overflow-y': 'visible'}">
 	<div class="ui-widget-content" style="width: 100%">
 		<div class="ui-g">
 			<div class="ui-g-3">ประเภทโครงการ :</div>
@@ -15,15 +15,24 @@
 
 		<div class="ui-g">
 			<div class="ui-g-3">รหัสโครงการ :</div>
-			<div class="ui-g-9 ui-g-nopad">
-				<div *ngFor="let projType of constant.projectType">
-					<div class="ui-g-4">
-						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="seachCondition.projType"></p-radioButton>
-					</div>
-				</div>
+			<div class="ui-g-9">
+				<p-multiSelect [options]="projectListItem" defaultLabel="เลือกรหัสโครงการ" overlayVisible="true" [scrollHeight]="'150px'"
+					[(ngModel)]="selectedProject" [disabled]="seachCondition.projType === undefined"></p-multiSelect>
 			</div>
 		</div>
 
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<p-dataTable [value]="selectedProject" [rows]="5" [responsive]="true" scrollable="true"
+					scrollHeight="150px" emptyMessage="ไม่ได้เลือกโครงการ" [style]="{'height': '200px'}">
+					<header>
+						โครงการ
+					</header>
+					<p-column field="projCode" header="รหัสโครงการ"></p-column>
+					<p-column field="projName" header="ชื่อโครงการ"></p-column>
+				</p-dataTable>
+			</div>
+		</div>
 
 	</div>
 </p-dialog>
@@ -31,7 +40,6 @@
 <div class="content-container">
 	<p-fieldset legend="ค้นหาข้อมูลรายละเอียดโครงการ">
 		<form>
-
 			<div class="ui-g">
 				<div class="ui-g-1"></div>
 				<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-md-12 ui-g-nopad">
@@ -66,7 +74,7 @@
 							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
 						</div>
 						<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
-							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="isShowSearchProject = !isShowSearchProject"></button>
+							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()"></button>
 						</div>
 					</div>
 				</div>
@@ -102,7 +110,7 @@
 				<div class="ui-g-8 ui-md-9 ui-lg-8 ui-xl-8 ui-sm-11 ui-g-nopad">
 					<div class="ui-g-1 ui-sm-1 ui-md-1 ui-lg-1 ui-xl-1"></div>
 					<div class="ui-g-11 ui-sm-11 ui-md-11 ui-lg-11 ui-xl-11">
-						<button pButton type="button" label="ค้นหา" (click)="search()"></button>
+						<button pButton type="button" label="ค้นหา" (click)="searchPriInformation()"></button>
 						<button pButton type="button" label="ยกเลิก"></button>
 					</div>
 				</div>

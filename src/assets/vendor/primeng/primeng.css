@@ -4011,3 +4011,25 @@ fieldset.ui-fieldset legend.ui-fieldset-legend {
 	background: -ms-linear-gradient(to bottom, #e8f0ff 0%,#cacaff 100%); /* IE10+ */
 	background: linear-gradient(to bottom, #e8f0ff 0%,#cacaff 100%); /* W3C */  
 }
+
+/*///////////////Arm-Edited////////*/
+
+.ui-fieldset {
+    padding: 0em 1.2em 1.2em 1.2em; /* arm-edited*/
+}
+
+.ui-fieldset .ui-fieldset-legend {
+    padding: 0em 1em; /* arm-edited*/
+}
+
+.ui-fieldset-toggleable .ui-fieldset-legend {
+    /*padding: 0.5em 1em 0.5em 0.5em; arm-edited */
+    cursor:pointer;
+    white-space: nowrap;
+}
+
+.ui-fieldset .ui-fieldset-toggler {
+    padding-right: .1em;
+    margin-top: 0.1em;
+    /*float:left; arm-edited */
+}

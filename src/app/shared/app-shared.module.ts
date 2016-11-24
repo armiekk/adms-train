@@ -41,7 +41,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         DropdownModule, CalendarModule, GrowlModule, PanelModule, TabViewModule, MenuModule, RadioButtonModule,
         CheckboxModule, ScheduleModule, DialogModule, InputSwitchModule, InputMaskModule, TooltipModule, 
         TemplateComponent, UserContainerComponent, DashboardComponent, TodoListComponent, LabelComponent,
-        BreadcrumbComponent, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, FileUploadModule
+        BreadcrumbComponent, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, FileUploadModule,
+        MultiSelectModule
     ]
 })
 export class AppSharedModule { }

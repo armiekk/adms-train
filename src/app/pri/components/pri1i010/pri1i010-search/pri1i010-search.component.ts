@@ -5,7 +5,7 @@ import { PritInformationApi } from '../../../../shared/api/mockup-prit-informati
 import { PritInformation } from '../../../../shared/api/mockup-prit-information-service/model/PritInformation';
 import { PriConstantsService } from '../../../constants';
 import { StateService } from '../../../../shared/services/state/state.service';
-import { Message } from 'primeng/primeng';
+import { Message, SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
 
 interface SearchCondition {
@@ -33,6 +33,8 @@ export class Pri1i010SearchComponent implements OnInit {
   private pritInformationList: PritInformation[] = [];
   private selectedPriInfo: PritInformation[] = [];
   private msgs: Message[] = [];
+  private projectListItem: SelectItem[] = [];
+  private selectedProject: PritInformation;
   private isShowSearchProject: boolean = false;
 
   constructor(
@@ -48,11 +50,21 @@ export class Pri1i010SearchComponent implements OnInit {
     this.setHeaders();
   }
 
-  search() {
-    // this.priService.getAllPritInformations(this.seachCondition)
-    //   .subscribe((response: PritInformation[]) => this.pritInformationList = response);
+  searchPriInformation() {
     this.pritInfoService.pritInformationFind()
       .subscribe((response: PritInformation[]) => this.pritInformationList = response);
+  }
+
+  searchProject(){
+    this.isShowSearchProject = !this.isShowSearchProject;
+    if(this.projectListItem.length === 0){
+      this.pritInfoService.pritInformationFind()
+      .subscribe((response: PritInformation[]) => {
+        this.projectListItem = response.map((pritInformation: PritInformation) => {
+          return {label: pritInformation.projCode, value: pritInformation };
+        });
+      });
+    }
   }
 
   delete(event) {
