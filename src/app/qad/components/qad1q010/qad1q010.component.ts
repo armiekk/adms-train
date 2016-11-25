@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { PritInformation } from '../../api/prit-information/model/PritInformation';
 import { EmptProjectManager } from '../../api/empt-project-manager/model/EmptProjectManager';
@@ -31,6 +32,11 @@ interface Emp {
     engname?: string;
 }
 
+interface Option {
+    label: string;
+    value: any;
+}
+
 const INDENT_MULTIPLIER: number = 0.7;
 
 @Component({
@@ -40,7 +46,9 @@ const INDENT_MULTIPLIER: number = 0.7;
     providers: [ThaiCalendarService, PritInformationApi]
 })
 export class Qad1q010Component implements OnInit {
-    searchCondition: SearchCondition;
+    private menus: Option[];
+    private selectedMenu: string;
+    private searchCondition: SearchCondition;
     private historys: Array<any> = [];
     private qaSchedulesAll: Array<any> = [];
     private qaSchedules: Array<any> = [];
@@ -49,11 +57,21 @@ export class Qad1q010Component implements OnInit {
 
     constructor(private locale: ThaiCalendarService,
         private pritInformationService: PritInformationApi,
-        private http: Http) { }
+        private http: Http,
+        private router: Router) {
+            this.menus = [];
+            this.menus.push({label: 'Assign QA', value: '/qad/QAD1I030'});
+            this.menus.push({label: 'QA Schedule and Plan', value: '/qad/QAD1Q010'});
+        }
 
     ngOnInit() {
+        this.selectedMenu = this.router.url;
         this.searchCondition = {};
         this.searchProjCode = {};
+    }
+
+    nav() {
+        this.router.navigate([this.selectedMenu]);
     }
 
     private isSelectedSite: boolean = false;
