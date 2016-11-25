@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { Ng2Webstorage } from 'ng2-webstorage';
 
 // services 
-import { AuthApi } from './shared/api/user/api/AuthApi';
 import * as AuthorizeService from './shared/api/cdgs-authorize-services/api/api';
 import { AdmsMenuService } from './shared/services/adms-menu/adms-menu.service';
 import { UserApi } from './shared/api/mockup-user-service/api/UserApi';

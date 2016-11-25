@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.userApi.defaultHeaders.append("Accept", "application/json");
-    this.userApi.defaultHeaders.append("Content-Type", "application/json");
+    this.userApi.defaultHeaders.append('Accept', 'application/json');
+    this.userApi.defaultHeaders.append('Content-Type', 'application/json');
     this.userApi.userLogin(this.credentials).subscribe((response) => {
       if (response) {
         sessionStorage.setItem('token', response.id);
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('login failed');
       }
-    })
+    });
 
     if (!sessionStorage.getItem('menuList')) {
       this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {

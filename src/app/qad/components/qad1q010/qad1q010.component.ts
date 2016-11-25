@@ -55,14 +55,19 @@ export class Qad1q010Component implements OnInit {
     private qaPlansAll: Array<any> = [];
     private qaPlans: Array<any> = [];
 
+    private isSelectedSite: boolean = false;
+    private searchProjCode: SearchProjCode;
+    private selectedProj: any;
+    private resultSearchProjects: Array<any> = [];
+
     constructor(private locale: ThaiCalendarService,
         private pritInformationService: PritInformationApi,
         private http: Http,
         private router: Router) {
-            this.menus = [];
-            this.menus.push({label: 'Assign QA', value: '/qad/QAD1I030'});
-            this.menus.push({label: 'QA Schedule and Plan', value: '/qad/QAD1Q010'});
-        }
+        this.menus = [];
+        this.menus.push({ label: 'Assign QA', value: '/qad/QAD1I030' });
+        this.menus.push({ label: 'QA Schedule and Plan', value: '/qad/QAD1Q010' });
+    }
 
     ngOnInit() {
         this.selectedMenu = this.router.url;
@@ -74,10 +79,7 @@ export class Qad1q010Component implements OnInit {
         this.router.navigate([this.selectedMenu]);
     }
 
-    private isSelectedSite: boolean = false;
-    private searchProjCode: SearchProjCode;
-    private selectedProj: any;
-    private resultSearchProjects: Array<any> = [];
+    
     displaySearchProjCode: boolean = false;
     showDialogSearchProjCode(projCode: string) {
         this.selectedProj = null;
@@ -113,7 +115,7 @@ export class Qad1q010Component implements OnInit {
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     this.resultSearchProjects = projs.filter((proj) => proj.projSiteCode === this.searchCondition.projSiteCode);
-            })
+                })
         } else {
             if (this.searchProjCode !== undefined && this.searchProjCode.projCode !== undefined && this.searchProjCode.projCode.trim() !== '') {
                 this.http.get('app/qad/resources/data/projectsMockData.json')
@@ -217,19 +219,19 @@ export class Qad1q010Component implements OnInit {
     onRowSelectEmp() {
         switch (this.optionSearchEmp) {
             case 1:
-                //Project Manager
+                // Project Manager
                 this.searchCondition.projManager = this.selectedEmp.thainame;
                 break;
             case 2:
-                //Senior Manager
+                // Senior Manager
                 this.searchCondition.projSeniorManager = this.selectedEmp.thainame;
                 break;
             case 3:
-                //QA Manager
+                // QA Manager
                 this.searchCondition.projQAManager = this.selectedEmp.thainame;
                 break;
             case 4:
-                //Create By (QA)
+                // Create By (QA)
                 this.searchCondition.projCreateByQA = this.selectedEmp.thainame;
                 break;
             default:
@@ -242,66 +244,66 @@ export class Qad1q010Component implements OnInit {
     searchByEmp() {
         switch (this.optionSearchEmp) {
             case 1:
-                //Project Manager
-                /*this.emptProjectManagerService.defaultHeaders.append('Content-Type', 'application/json');
+                // Project Manager
+                /* this.emptProjectManagerService.defaultHeaders.append('Content-Type', 'application/json');
                 this.emptProjectManagerService.defaultHeaders.append('Accept', 'application/json');
                 if (this.searchEmp !== undefined && this.searchEmp.trim() !== '') {
                     this.emptProjectManagerService.emptProjectManagerFindByName(this.searchEmp.trim()).subscribe((response: EmptProjectManager[]) => this.resultSearchEmps = response);
                 } else {
                     this.emptProjectManagerService.emptProjectManagerFind().subscribe((response: EmptProjectManager[]) => this.resultSearchEmps = response);
-                }*/
+                } */
                 this.resultSearchEmps = [
-                    { thainame: "กมลศักดิ์ อิทธิฤกษ์มงคล", engname: "KAMONSAK ITTIRUEGMONGKON" },
-                    { thainame: "กำพล หาญนฤชัย", engname: "KAMPON HANNARUECHAI" },
-                    { thainame: "เกศมณี คุ้มสาธิต", engname: "KATEMANEE KHOOMSATHIT" },
-                    { thainame: "เกียรติชัย สิวลีธนโชค", engname: "KIATICHAI SIWALEETHANACHOK" },
-                    { thainame: "จารุมาศ ตีระสหกุล", engname: "CHARUMAS TEERASAHAKUL" },
-                    { thainame: "จำนงค์ ขจรเดชะ", engname: "CHAMNONG KHACHONDACHA" },
-                    { thainame: "ชนิดา เลาหพิสิฐพาณิชย์", engname: "CHANIDA LAOHAPISITPANICH" },
-                    { thainame: "ชินวุธ มณีสาคร", engname: "CHINWUT MANEESACORN" },
-                    { thainame: "ชูศักดิ์ ปรมานุรักษ์", engname: "CHUSAK PARAMANURAK" },
-                    { thainame: "เดชา ศุกระแพทย์", engname: "DACHA SUKRAPHATTYA" },
-                    { thainame: "ทศพร พุทธศุภะ", engname: "THODSAPORN PHUTTASUPA" },
-                    { thainame: "ธนา เกษะประกร", engname: "THANA KASAPRAGORN" },
-                    { thainame: "ธีรยุทธ์ ฟุ้งเกียรติไพบูลย์", engname: "TEERAYUT FUNGKIATPAIBOOL" },
-                    { thainame: "ปภินวิช วสุภัทรภิญโญ", engname: "PAPHINWICH VASUPHATRAPHINYO" },
-                    { thainame: "ประไพลักษณ์ วรยศโกวิท", engname: "PRAPAILUK WORRAYOTKOVIT" },
-                    { thainame: "พงษ์ศักดิ์ จิรโพธิ์ทอง", engname: "PONGSAK JIRAPHOTHONG" },
-                    { thainame: "ไพศาล โชคพิพัฒน์ทวี", engname: "PAISAN CHOKPIPATTAWEE" },
-                    { thainame: "มนชิดา โชติเสน", engname: "MONCHIDA CHOTISEN" },
-                    { thainame: "วรเมธ วัชระบัณฑูรย์", engname: "WORAMET WATCHARABUNTOON" },
-                    { thainame: "วิจิตร ธเนศานุรักษ์", engname: "WIJIT THANESANURAK" },
-                    { thainame: "ศราวุฒ ศิริอุดม", engname: "SARAWUT SIRIUDOM" },
-                    { thainame: "สมพร นาควงษ์", engname: "SOMPORN NAKWONG" },
-                    { thainame: "สมศักดิ์ ชาญชัยรุจิรา", engname: "SOMSAK CHANCHAIRUJIRA" },
-                    { thainame: "สุรชัย สถาพรวัฒนายนต์", engname: "SURACHAI SATHAPORNWATTANAYONT" },
-                    { thainame: "สุรพล เรืองรอง", engname: "SURAPOL RUENGRONG" },
-                    { thainame: "สุรินทร์ อึงนิยม", engname: "SURIN OUNGNIYOM" },
-                    { thainame: "สุวรรณ อินยิน", engname: "SUWAN INYIN" },
-                    { thainame: "อนุชา โชติวัฒนดิลก", engname: "ANUCHA CHOTWATTANADILOK" },
-                    { thainame: "อัมรินทร์ สังขรัตน์", engname: "AMARIN SANGKARAT" },
-                    { thainame: "อัศวิน อินทร์แนม", engname: "ADSAWIN INNAEM" }
+                    { thainame: 'กมลศักดิ์ อิทธิฤกษ์มงคล', engname: 'KAMONSAK ITTIRUEGMONGKON' },
+                    { thainame: 'กำพล หาญนฤชัย', engname: 'KAMPON HANNARUECHAI' },
+                    { thainame: 'เกศมณี คุ้มสาธิต', engname: 'KATEMANEE KHOOMSATHIT' },
+                    { thainame: 'เกียรติชัย สิวลีธนโชค', engname: 'KIATICHAI SIWALEETHANACHOK' },
+                    { thainame: 'จารุมาศ ตีระสหกุล', engname: 'CHARUMAS TEERASAHAKUL' },
+                    { thainame: 'จำนงค์ ขจรเดชะ', engname: 'CHAMNONG KHACHONDACHA' },
+                    { thainame: 'ชนิดา เลาหพิสิฐพาณิชย์', engname: 'CHANIDA LAOHAPISITPANICH' },
+                    { thainame: 'ชินวุธ มณีสาคร', engname: 'CHINWUT MANEESACORN' },
+                    { thainame: 'ชูศักดิ์ ปรมานุรักษ์', engname: 'CHUSAK PARAMANURAK' },
+                    { thainame: 'เดชา ศุกระแพทย์', engname: 'DACHA SUKRAPHATTYA' },
+                    { thainame: 'ทศพร พุทธศุภะ', engname: 'THODSAPORN PHUTTASUPA' },
+                    { thainame: 'ธนา เกษะประกร', engname: 'THANA KASAPRAGORN' },
+                    { thainame: 'ธีรยุทธ์ ฟุ้งเกียรติไพบูลย์', engname: 'TEERAYUT FUNGKIATPAIBOOL' },
+                    { thainame: 'ปภินวิช วสุภัทรภิญโญ', engname: 'PAPHINWICH VASUPHATRAPHINYO' },
+                    { thainame: 'ประไพลักษณ์ วรยศโกวิท', engname: 'PRAPAILUK WORRAYOTKOVIT' },
+                    { thainame: 'พงษ์ศักดิ์ จิรโพธิ์ทอง', engname: 'PONGSAK JIRAPHOTHONG' },
+                    { thainame: 'ไพศาล โชคพิพัฒน์ทวี', engname: 'PAISAN CHOKPIPATTAWEE' },
+                    { thainame: 'มนชิดา โชติเสน', engname: 'MONCHIDA CHOTISEN' },
+                    { thainame: 'วรเมธ วัชระบัณฑูรย์', engname: 'WORAMET WATCHARABUNTOON' },
+                    { thainame: 'วิจิตร ธเนศานุรักษ์', engname: 'WIJIT THANESANURAK' },
+                    { thainame: 'ศราวุฒ ศิริอุดม', engname: 'SARAWUT SIRIUDOM' },
+                    { thainame: 'สมพร นาควงษ์', engname: 'SOMPORN NAKWONG' },
+                    { thainame: 'สมศักดิ์ ชาญชัยรุจิรา', engname: 'SOMSAK CHANCHAIRUJIRA' },
+                    { thainame: 'สุรชัย สถาพรวัฒนายนต์', engname: 'SURACHAI SATHAPORNWATTANAYONT' },
+                    { thainame: 'สุรพล เรืองรอง', engname: 'SURAPOL RUENGRONG' },
+                    { thainame: 'สุรินทร์ อึงนิยม', engname: 'SURIN OUNGNIYOM' },
+                    { thainame: 'สุวรรณ อินยิน', engname: 'SUWAN INYIN' },
+                    { thainame: 'อนุชา โชติวัฒนดิลก', engname: 'ANUCHA CHOTWATTANADILOK' },
+                    { thainame: 'อัมรินทร์ สังขรัตน์', engname: 'AMARIN SANGKARAT' },
+                    { thainame: 'อัศวิน อินทร์แนม', engname: 'ADSAWIN INNAEM' }
                 ];
                 break;
             case 2:
-                //Senior Manager
+                // Senior Manager
                 this.resultSearchEmps = [
-                    { thainame: "นางพัชรวรรณ ทันอินทรอาจ", engname: "PATCHARAWAN TANINTARAARJ" },
-                    { thainame: "นางวันเพ็ญ กาญจนประพิณ", engname: "WANPEN KANCHANAPRAPIN" },
-                    { thainame: "นายกฤษฎา รักษ์งาน", engname: "KRISADA RUKNGAN" }
+                    { thainame: 'นางพัชรวรรณ ทันอินทรอาจ', engname: 'PATCHARAWAN TANINTARAARJ' },
+                    { thainame: 'นางวันเพ็ญ กาญจนประพิณ', engname: 'WANPEN KANCHANAPRAPIN' },
+                    { thainame: 'นายกฤษฎา รักษ์งาน', engname: 'KRISADA RUKNGAN' }
                 ];
                 break;
             case 3:
-                //QA Manager
+                // QA Manager
                 this.resultSearchEmps = [
-                    { thainame: "ประไพลักษณ์ วรยศโกวิท", engname: "PRAPAILUK WORRAYOTKOVIT" }
+                    { thainame: 'ประไพลักษณ์ วรยศโกวิท', engname: 'PRAPAILUK WORRAYOTKOVIT' }
                 ];
                 break;
             case 4:
-                //Create By (QA)
+                // Create By (QA)
                 this.resultSearchEmps = [
-                    { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
-                    { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
+                    { thainame: 'ณัฐรี เตชะทวีกุล', engname: 'NATTAREE TECHATAWEEKUL' },
+                    { thainame: 'ศิริรุ้ง รัศมีวงศ์พร', engname: 'SIRIROONG RUSSAMEEWONGPORN' }
                 ];
                 break;
             default:
@@ -353,7 +355,7 @@ export class Qad1q010Component implements OnInit {
                                     .map(res => res.json().data)
                                     .subscribe((qaActivities: Array<any>) => {
                                         for (let i = 0; i < qaActivities.length; i++) {
-                                            qaActivities[i].workCategory = "Audit";
+                                            qaActivities[i].workCategory = 'Audit';
                                             qaActivities[i].workCategoryCode = 1;
                                             qaActivities[i].planAction = 1;
                                         }
@@ -379,11 +381,11 @@ export class Qad1q010Component implements OnInit {
     saveAndSendToApprove(choice: number) {
         switch (choice) {
             case 1:
-                //todo save to database
+                // todo save to database
                 this.displaySaveAndSendToApprove = false;
                 break;
             case 2:
-                //todo gen new version and save to database
+                // todo gen new version and save to database
                 this.displaySaveAndSendToApprove = false;
                 break;
         }

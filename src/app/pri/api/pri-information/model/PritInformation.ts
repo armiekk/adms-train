@@ -22,7 +22,6 @@
  * limitations under the License.
  */
 
-import * as models from './models';
 
 export interface PritInformation {
     

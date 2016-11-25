@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
 import { PriInformationService, SearchCondition, PritInformation } from '../../../services/priInformation/pri-information.service';
@@ -17,7 +17,7 @@ declare var $: any;
   styleUrls: ['./pri1i010-save.component.css'],
 })
 export class Pri1i010SaveComponent implements OnInit {
-  
+
   private _selectedTab: any = Pri1i010DetailComponent;
   private tabMenuItem: MenuItem;
   private projectSeachCondition: SearchCondition = {};
@@ -55,15 +55,15 @@ export class Pri1i010SaveComponent implements OnInit {
 
     switch (this.state.mode) {
       case 'ADD':
-          this.pritInformation = {};
+        this.pritInformation = {};
         break;
       case 'EDIT':
-          if (this.state.projCode !== null) {
-            this.getPritInformationByProjCode(this.state.projCode);
-          }
+        if (this.state.projCode !== null) {
+          this.getPritInformationByProjCode(this.state.projCode);
+        }
         break;
       default:
-          this.router.navigate(['pri/Pri1i010']);
+        this.router.navigate(['pri/Pri1i010']);
         break;
     }
 
@@ -83,9 +83,8 @@ export class Pri1i010SaveComponent implements OnInit {
   }
 
   getPritInformationByProjCode(projCode: string) {
-    this.priService
     this.priService.getPritInformationByProjCode(projCode)
-    .subscribe((pritInformation: PritInformation[]) => [ this.pritInformation ] = pritInformation );
+      .subscribe((pritInformation: PritInformation[]) => [this.pritInformation] = pritInformation);
   }
 
   cancelPritInformation() {
@@ -99,18 +98,18 @@ export class Pri1i010SaveComponent implements OnInit {
 
   }
 
-  searchProject(){
+  searchProject() {
     this.isShowSearchProject = !this.isShowSearchProject;
-    if(this.projectListItem.length === 0){
+    if (this.projectListItem.length === 0) {
       this.priService.getAllProjectInformation().subscribe((response: PritInformation[]) => {
         this.projectListItem = response.map((pritInformation: PritInformation) => {
-          return {label: pritInformation.projCode, value: pritInformation };
+          return { label: pritInformation.projCode, value: pritInformation };
         });
       });
     }
   }
-  
-  private set selectedTab(tabLabel: string){
+
+  private set selectedTab(tabLabel: string) {
     console.log(tabLabel);
     if (tabLabel === 'รายละเอียดทั่วไป') {
       this._selectedTab = Pri1i010DetailComponent;
@@ -119,7 +118,7 @@ export class Pri1i010SaveComponent implements OnInit {
     }
   }
 
-  private get selectedTab(){
+  private get selectedTab() {
     return this._selectedTab;
   }
 

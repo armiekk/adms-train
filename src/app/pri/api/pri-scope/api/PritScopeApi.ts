@@ -22,9 +22,9 @@
  * limitations under the License.
  */
 
-import {Http, Headers, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
-import {Injectable, Optional} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Http, Headers, RequestOptionsArgs, Response, URLSearchParams } from '@angular/http';
+import { Injectable, Optional } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import * as models from '../model/models';
 import 'rxjs/Rx';
 
@@ -35,7 +35,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class PritScopeApi {
     protected basePath = '/api';
-    public defaultHeaders : Headers = new Headers();
+    public defaultHeaders: Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
         if (basePath) {
@@ -48,7 +48,7 @@ export class PritScopeApi {
      * 
      * @param where Criteria to match model instances
      */
-    public pritScopeCount (where?: string, extraHttpRequestParams?: any ) : Observable<number> {
+    public pritScopeCount(where?: string, extraHttpRequestParams?: any): Observable<number> {
         const path = this.basePath + '/PritScopes/count';
 
         let queryParameters = new URLSearchParams();
@@ -78,7 +78,7 @@ export class PritScopeApi {
      * 
      * @param data Model instance data
      */
-    public pritScopeCreate (data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeCreate(data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes';
 
         let queryParameters = new URLSearchParams();
@@ -105,7 +105,7 @@ export class PritScopeApi {
      * 
      * @param options 
      */
-    public pritScopeCreateChangeStreamGetPritScopesChangeStream (options?: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritScopeCreateChangeStreamGetPritScopesChangeStream(options?: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritScopes/change-stream';
 
         let queryParameters = new URLSearchParams();
@@ -135,7 +135,7 @@ export class PritScopeApi {
      * 
      * @param options 
      */
-    public pritScopeCreateChangeStreamPostPritScopesChangeStream (options?: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritScopeCreateChangeStreamPostPritScopesChangeStream(options?: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritScopes/change-stream';
 
         let queryParameters = new URLSearchParams();
@@ -168,7 +168,7 @@ export class PritScopeApi {
      * 
      * @param id Model id
      */
-    public pritScopeDeleteById (id: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritScopeDeleteById(id: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritScopes/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -199,7 +199,7 @@ export class PritScopeApi {
      * 
      * @param id Model id
      */
-    public pritScopeExistsGetPritScopesidExists (id: string, extraHttpRequestParams?: any ) : Observable<boolean> {
+    public pritScopeExistsGetPritScopesidExists(id: string, extraHttpRequestParams?: any): Observable<boolean> {
         const path = this.basePath + '/PritScopes/{id}/exists'
             .replace('{' + 'id' + '}', String(id));
 
@@ -230,7 +230,7 @@ export class PritScopeApi {
      * 
      * @param id Model id
      */
-    public pritScopeExistsHeadPritScopesid (id: string, extraHttpRequestParams?: any ) : Observable<boolean> {
+    public pritScopeExistsHeadPritScopesid(id: string, extraHttpRequestParams?: any): Observable<boolean> {
         const path = this.basePath + '/PritScopes/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -261,7 +261,7 @@ export class PritScopeApi {
      * 
      * @param filter Filter defining fields, where, include, order, offset, and limit
      */
-    public pritScopeFind (filter?: string, extraHttpRequestParams?: any ) : Observable<Array<models.PritScope>> {
+    public pritScopeFind(filter?: string, extraHttpRequestParams?: any): Observable<Array<models.PritScope>> {
         const path = this.basePath + '/PritScopes';
 
         let queryParameters = new URLSearchParams();
@@ -292,7 +292,7 @@ export class PritScopeApi {
      * @param id Model id
      * @param filter Filter defining fields and include
      */
-    public pritScopeFindById (id: string, filter?: string, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeFindById(id: string, filter?: string, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -327,7 +327,7 @@ export class PritScopeApi {
      * 
      * @param filter Filter defining fields, where, include, order, offset, and limit
      */
-    public pritScopeFindOne (filter?: string, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeFindOne(filter?: string, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/findOne';
 
         let queryParameters = new URLSearchParams();
@@ -358,7 +358,7 @@ export class PritScopeApi {
      * @param id PersistedModel id
      * @param data An object of model property name/value pairs
      */
-    public pritScopePrototypeUpdateAttributesPatchPritScopesid (id: string, data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopePrototypeUpdateAttributesPatchPritScopesid(id: string, data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -391,7 +391,7 @@ export class PritScopeApi {
      * @param id PersistedModel id
      * @param data An object of model property name/value pairs
      */
-    public pritScopePrototypeUpdateAttributesPutPritScopesid (id: string, data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopePrototypeUpdateAttributesPutPritScopesid(id: string, data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -424,7 +424,7 @@ export class PritScopeApi {
      * @param id Model id
      * @param data Model instance data
      */
-    public pritScopeReplaceById (id: string, data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeReplaceById(id: string, data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/{id}/replace'
             .replace('{' + 'id' + '}', String(id));
 
@@ -456,7 +456,7 @@ export class PritScopeApi {
      * 
      * @param data Model instance data
      */
-    public pritScopeReplaceOrCreate (data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeReplaceOrCreate(data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/replaceOrCreate';
 
         let queryParameters = new URLSearchParams();
@@ -484,7 +484,7 @@ export class PritScopeApi {
      * @param where Criteria to match model instances
      * @param data An object of model property name/value pairs
      */
-    public pritScopeUpdateAll (where?: string, data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<string> {
+    public pritScopeUpdateAll(where?: string, data?: models.PritScope, extraHttpRequestParams?: any): Observable<string> {
         const path = this.basePath + '/PritScopes/update';
 
         let queryParameters = new URLSearchParams();
@@ -515,7 +515,7 @@ export class PritScopeApi {
      * 
      * @param data Model instance data
      */
-    public pritScopeUpsertPatchPritScopes (data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeUpsertPatchPritScopes(data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes';
 
         let queryParameters = new URLSearchParams();
@@ -542,7 +542,7 @@ export class PritScopeApi {
      * 
      * @param data Model instance data
      */
-    public pritScopeUpsertPutPritScopes (data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeUpsertPutPritScopes(data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes';
 
         let queryParameters = new URLSearchParams();
@@ -570,7 +570,7 @@ export class PritScopeApi {
      * @param where Criteria to match model instances
      * @param data An object of model property name/value pairs
      */
-    public pritScopeUpsertWithWhere (where?: string, data?: models.PritScope, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public pritScopeUpsertWithWhere(where?: string, data?: models.PritScope, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/PritScopes/upsertWithWhere';
 
         let queryParameters = new URLSearchParams();
