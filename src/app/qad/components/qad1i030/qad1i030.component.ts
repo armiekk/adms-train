@@ -59,19 +59,18 @@ export class Qad1i030Component implements OnInit {
         }
 
     ngOnInit() {
+        this.selectedMenu = this.router.url;
         this.searchProjCode = {};
         this.notifys = [
             { label: "ADMS", value: "ADMS" },
             { label: "Email", value: "Email" }
         ];
         this.selectedNotifies = ["Email"]; //default value when open page
+        this.projAssignByQAMName = 'ประไพลักษณ์ วรยศโกวิท';//Todo when connect to service find qam have one or else
     }
 
     nav() {
-        let menu = this.selectedMenu;
-        this.selectedMenu = undefined;
-        this.selectedMenu = null;
-        this.router.navigate([menu]);
+        this.router.navigate([this.selectedMenu]);
     }
 
     private isSelectedSite: boolean = false;
@@ -123,13 +122,13 @@ export class Qad1i030Component implements OnInit {
                     .map(res => res.json().data)
                     .subscribe((projs) => {
                         this.resultSearchProjects = projs.filter((proj) => proj.projCode === this.searchCondition.projCode.trim());
-                    })
+                    });
             } else {
                 this.http.get('app/qad/resources/data/projectsMockData.json')
                     .map(res => res.json().data)
                     .subscribe((projs) => {
                         this.resultSearchProjects = projs;
-                    })
+                    });
             }
         }
     }
@@ -211,6 +210,7 @@ export class Qad1i030Component implements OnInit {
                 this.findHeaderName = 'Create By (QA)';
                 break;
             case 5:
+            case 6:
                 //QA ผู้รับผิดชอบ
                 this.findHeaderName = 'QA ผู้รับผิดชอบ';
                 break;
@@ -242,6 +242,10 @@ export class Qad1i030Component implements OnInit {
             case 5:
                 //QA ผู้รับผิดชอบ
                 this.projResponsibleQaName = this.selectedEmp.thainame;
+                break;
+            case 6:
+                //QA ผู้รับผิดชอบ ในช่องตัวเลือกการค้นหา
+                this.searchAdditionCondition.projResponsibleQaName = this.selectedEmp.thainame;
                 break;
             default:
         }
@@ -316,6 +320,7 @@ export class Qad1i030Component implements OnInit {
                 ];
                 break;
             case 5:
+            case 6:
                 //QA ผู้รับผิดชอบ
                 this.resultSearchEmps = [
                     { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
@@ -365,12 +370,10 @@ export class Qad1i030Component implements OnInit {
                                 this.assignQas[i].showAssignQaDate = '';
                             }
                         }
-
                     }
                 });
         }
     }
-
 
     private searchAdditionSiteCode: string;
     private selectedAdditionSite: any;
@@ -408,6 +411,11 @@ export class Qad1i030Component implements OnInit {
         }
     }
 
+    clearTextAdditionSiteName() {
+        this.isSelectedAdditionSite = false;
+        this.searchAdditionCondition.projSiteName = '';
+    }
+
     private isSelectedAdditionSite: boolean = false;
     private isSelectedAdditionProj: boolean = false;
     private searchAdditionProjCode: SearchProjCode = {};
@@ -415,33 +423,56 @@ export class Qad1i030Component implements OnInit {
     private resultSearchAdditionProjects: Array<any> = [];
     private displaySearchAdditionProjCode: boolean = false;
     showDialogSearchAdditionProjCode(projCode: string) {
-        if(this.isSelectedAdditionSite) {
+        if (this.isSelectedAdditionSite || !this.isSelectedAdditionProj) {
             this.selectedAdditionProj = null;
         }
-        //this.selectedAdditionProj = null;
+
         this.searchAdditionByProjCode();
         this.displaySearchAdditionProjCode = true;
     }
 
     private searchAdditionByProjCode() {
-        this.http.get('app/qad/resources/data/projectsMockData.json')
-            .map(res => res.json().data)
-            .subscribe((projs) => {
-                this.resultSearchAdditionProjects = projs;
-            });
+        if (this.isSelectedAdditionSite) {
+            this.http.get('app/qad/resources/data/projectsMockData.json')
+                .map(res => res.json().data)
+                .subscribe((projs) => {
+                    this.resultSearchAdditionProjects = projs.filter((proj) => proj.projSiteCode === this.searchAdditionCondition.projSiteCode);
+                });
+        } else {
+            if (this.searchAdditionProjCode !== undefined && this.searchAdditionProjCode.projCode !== undefined && this.searchAdditionProjCode.projCode.trim() !== '') {
+                this.http.get('app/qad/resources/data/projectsMockData.json')
+                    .map(res => res.json().data)
+                    .subscribe((projs) => {
+                        this.resultSearchAdditionProjects = projs.filter((proj) => proj.projCode === this.searchAdditionProjCode.projCode.trim());
+                    });
+            } else {
+                this.http.get('app/qad/resources/data/projectsMockData.json')
+                    .map(res => res.json().data)
+                    .subscribe((projs) => {
+                        this.resultSearchAdditionProjects = projs;
+                    });
+            }
+        }
     }
 
     okDialog() {
-        let allProjCode = '';
-        for (let i = 0; i < this.selectedAdditionProj.length; i++) {
-            if (i === 0) {
-                allProjCode = this.selectedAdditionProj[i].projCode;
-            } else {
-                allProjCode = allProjCode + ',' + this.selectedAdditionProj[i].projCode;
+        if (this.selectedAdditionProj.length > 0) {
+            let allProjCode = '';
+            for (let i = 0; i < this.selectedAdditionProj.length; i++) {
+                if (i === 0) {
+                    allProjCode = this.selectedAdditionProj[i].projCode;
+                } else {
+                    allProjCode = allProjCode + ',' + this.selectedAdditionProj[i].projCode;
+                }
             }
-        }
 
-        this.searchAdditionCondition.projCode = allProjCode;
+            this.searchAdditionCondition.projCode = allProjCode;
+            this.isSelectedAdditionProj = true;
+        } else {
+            this.searchAdditionCondition.projCode = '';
+            this.isSelectedAdditionProj = false;
+        }
+        
         this.displaySearchAdditionProjCode = false;
     }
 
@@ -455,7 +486,47 @@ export class Qad1i030Component implements OnInit {
 
     searchAddition() {
         if (this.isSelectedAdditionProj) {
+            let findAssignQas: Array<any> = [];
+            this.http.get('app/qad/resources/data/assignQasMockData.json')
+                .map(res => res.json().data)
+                .subscribe((assignQas: Array<any>) => {
+                    let orderSeq = 1;
+                    for (let i = 0; i < this.selectedAdditionProj.length; i++) {
+                        let projCode = this.selectedAdditionProj[i].projCode;
+                        let find = assignQas.filter((assignQa) => assignQa.projCode === projCode);
+                        if (find.length > 0) {
+                            find.map((v) => {
+                                v.select = false;
+                                v.orderSeq = orderSeq++;
+                                if (v.receivePlanDate === null) {
+                                    v.showReceivePlanDate = '';
+                                } else {
+                                    let receivePlanDate = new Date(v.receivePlanDate);
+                                    if (receivePlanDate.toString() !== 'Invalid Date') {
+                                        v.showReceivePlanDate = receivePlanDate.getDate() + '/' + (receivePlanDate.getMonth() + 1) + '/' + receivePlanDate.getFullYear();
+                                    } else {
+                                        v.showReceivePlanDate = '';
+                                    }
+                                }
 
+                                if (v.assignQaDate == null) {
+                                    v.showAssignQaDate = '';
+                                } else {
+                                    let assignQaDate = new Date(v.assignQaDate);
+                                    if (assignQaDate.toString() !== 'Invalid Date') {
+                                        v.showAssignQaDate = assignQaDate.getDate() + '/' + (assignQaDate.getMonth() + 1) + '/' + assignQaDate.getFullYear();
+                                    } else {
+                                        v.showAssignQaDate = '';
+                                    }
+                                }
+
+                                findAssignQas.push(v);
+                            });
+                        }
+                    }
+                });
+
+            this.assignQas = findAssignQas;
         }
     }
 
@@ -472,7 +543,7 @@ export class Qad1i030Component implements OnInit {
         if (this.assignQas[index].select == true) {
             this.selectedIndexAssignQa = index;
             this.projResponsibleQaName = this.assignQas[index].responsibleQaName;
-            this.projAssignQaDate = this.assignQas[index].assignQaDate;
+            this.projAssignQaDate = new Date(this.assignQas[index].assignQaDate);
             let noti: string[] = this.assignQas[index].selectedNotifies;
             if (noti !== undefined) {
                 this.selectedNotifies = noti.slice();
@@ -482,6 +553,8 @@ export class Qad1i030Component implements OnInit {
 
             this.projAssignByQAMName = this.assignQas[index].assignByQAMName;
             this.projRemark = this.assignQas[index].remark;
+        } else {
+            this.cancelAssignQa();
         }
     }
 
@@ -557,10 +630,10 @@ export class Qad1i030Component implements OnInit {
             this.assignQas[this.selectedIndexAssignQa].select = false;
         }
 
+        this.selectedIndexAssignQa = undefined;
         this.projResponsibleQaName = '';
         this.projAssignQaDate = null;
-        this.selectedNotifies = [];
-        this.projAssignByQAMName = '';
+        this.selectedNotifies = ["Email"];
         this.projRemark = '';
     }
 

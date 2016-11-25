@@ -11,6 +11,7 @@ import { Qad1q010Component } from './components/qad1q010/qad1q010.component';
 import { Qad1i010Component } from './components/qad1i010/qad1i010.component';
 import { Qad1i020Component } from './components/qad1i020/qad1i020.component';
 import { Qad1i030Component } from './components/qad1i030/qad1i030.component';
+import { Qad2i010Component } from './components/qad2i010/qad2i010.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { Qad1i030Component } from './components/qad1i030/qad1i030.component';
     QadRoutingModule,
     AppSharedModule
   ],
-  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component]
+  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component, Qad2i010Component]
 })
 export class QadModule { }
