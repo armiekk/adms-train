@@ -4,7 +4,7 @@
     <hr>
   </div>
   <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
-    <p-dataTable [value]="projScopeList" selectionMode="multiple" [(selection)]="selectedProjScope" [rows]="5" [responsive]="true"
+    <p-dataTable [value]="projScopeList" [(selection)]="selectedProjScope" [rows]="5" [responsive]="true"
       [paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
       [totalRecords]="5">
       <header>

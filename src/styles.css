@@ -76,7 +76,7 @@ nav.nav-bar {
   margin: 0 0 32px 0;
   padding: 0;
   overflow: hidden;
-  background-color: #323276;
+  background-color: #15355e;
   z-index: 9999;
 }
 
@@ -186,7 +186,7 @@ label.ui-chkbox-label {
 
 /*loading indicator*/
 .spinner {
-  margin: 100px auto 0;
+  margin: 400px auto 0;
   width: 70px;
   text-align: center;
 }

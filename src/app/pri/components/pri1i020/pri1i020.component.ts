@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PritScopeApi } from '../../api/pri-scope/api/PritScopeApi';
 import { PritScope } from '../../api/pri-scope/model/PritScope';
+import { Pri1i020Service } from '../../services/pri1i020/pri1i020.service';
+import { StateService } from '../../../shared/services/state/state.service';
 
 class GenericObject<T> {
   edit: boolean;
@@ -10,26 +12,17 @@ class GenericObject<T> {
   selector: 'app-pri1i020',
   templateUrl: './pri1i020.component.html',
   styleUrls: ['./pri1i020.component.css'],
-  providers: [PritScopeApi]
+  providers: [Pri1i020Service]
 })
 export class Pri1i020Component implements OnInit {
 
   private projScopeList: Array<any> = [];
 
-  constructor(private priScopeService: PritScopeApi) { }
+  constructor(private priScopeService: Pri1i020Service, private state: StateService) { }
 
   ngOnInit() {
-    this.priScopeService.pritScopeFind()
-          .map((response: PritScope[]) => 
-             response.map((pritScope: PritScope) => {
-               return {
-                 projCode: pritScope.projCode,
-                 projScopeDetail: pritScope.scoreDetail,
-                 edit: false
-               }
-             })
-          )
-          .subscribe((response) => this.projScopeList = response);
+    this.priScopeService.getPritScopeList(this.state.projCode)
+          .subscribe((projScopeList) => {this.projScopeList = projScopeList; console.log(projScopeList)});
   }
 
   editRow(index: number){

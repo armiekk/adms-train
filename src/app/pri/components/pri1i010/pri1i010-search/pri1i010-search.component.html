@@ -124,7 +124,7 @@
 			<div class="ui-g-12">
 				<p-dataTable [value]="pritInformationList" selectionMode="multiple" [(selection)]="selectedPriInfo" [rows]="5" [responsive]="true"
 					[paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-					[totalRecords]="5" (onRowSelect)="onRowSelect($event)" [style]="{'margin': '16px 0px'}">
+					[totalRecords]="5" (onRowClick)="onRowSelect($event)" [style]="{'margin': '16px 0px'}">
 					<header>
 						โครงการ
 						<span style="float: right;">

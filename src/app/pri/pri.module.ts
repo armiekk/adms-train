@@ -8,6 +8,7 @@ import { PriConstantsService } from './constants';
 import { PriStateResolverService } from './services';
 import { PriInformationService } from './services/priInformation/pri-information.service';
 import { ApipriinformationApi } from './api/pri-information/api/ApipriinformationApi';
+import { PritScopeApi } from './api/pri-scope/api/PritScopeApi';
 // import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
 // pipes
@@ -41,6 +42,6 @@ const COMPONENT_LIST: Array<any> = Object.keys(components).map((key) => componen
     PriTabContentComponent,
     Pri1i010DetailComponent
   ],
-  providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService]
+  providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService, PritScopeApi]
 })
 export class PriModule { }
