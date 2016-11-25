@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { AuthApi } from '../../api/user/api/AuthApi';
+import { UserApi } from '../../api/mockup-user-service/api/UserApi';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
 
-  constructor(private authService: AuthApi, private router: Router) { }
+  constructor(private authService: UserApi, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     let token: string = sessionStorage.getItem('token');
@@ -20,13 +20,6 @@ export class AuthGuardService implements CanActivate {
     return false;
     
   }
-
-  // setTokenToHeader(token: string) {
-  //   let authHeader = this.authService.defaultHeaders.get('Authorization');
-  //   if (!authHeader) {
-  //     this.authService.defaultHeaders.append('Authorization', `Bearer ${token}`);
-  //   }
-  // }
 
   setTokenToHeader(token: string) {
     let authHeader = this.authService.defaultHeaders.get('Authorization');

@@ -7,6 +7,7 @@ import { AppSharedModule } from '../shared';
 import { PriConstantsService } from './constants';
 import { PriStateResolverService } from './services';
 import { ApipriinformationApi } from './api/pri-information/api/ApipriinformationApi';
+// import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
 // pipes
 import { ProjectStatusPipe } from './pipes/project-status.pipe';

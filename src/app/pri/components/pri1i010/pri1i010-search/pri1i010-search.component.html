@@ -1,4 +1,32 @@
 <p-growl [value]="msgs" life="3000"></p-growl>
+<p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" [responsive]="true"
+	[modal]="true">
+	<div class="ui-widget-content" style="width: 100%">
+		<div class="ui-g">
+			<div class="ui-g-3">ประเภทโครงการ :</div>
+			<div class="ui-g-9 ui-g-nopad">
+				<div *ngFor="let projType of constant.projectType">
+					<div class="ui-g-4">
+						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="seachCondition.projType"></p-radioButton>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="ui-g">
+			<div class="ui-g-3">รหัสโครงการ :</div>
+			<div class="ui-g-9 ui-g-nopad">
+				<div *ngFor="let projType of constant.projectType">
+					<div class="ui-g-4">
+						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="seachCondition.projType"></p-radioButton>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+</p-dialog>
 <!--<app-breadcrumb></app-breadcrumb>-->
 <div class="content-container">
 	<p-fieldset legend="ค้นหาข้อมูลรายละเอียดโครงการ">
@@ -6,20 +34,20 @@
 
 			<div class="ui-g">
 				<div class="ui-g-1"></div>
-				<div class="ui-g-3 ui-lg-4 ui-g-nopad">
-					<div class="ui-g-4 ui-lg-4">
+				<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-md-12 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
 						ปี :
 					</div>
-					<div class="ui-g-3 ui-lg-3">
+					<div class="ui-g-3 ui-lg-2 ui-xl-2 ui-sm-3 ui-md-2">
 						<input type="text" id="projYear" pInputText style="width: 100%" maxlength="4" [(ngModel)]="seachCondition.projYear" name="projYear"
 						/>
 					</div>
 				</div>
-				<div class="ui-g-7 ui-lg-6 ui-g-nopad">
-					<div class="ui-g-3 ui-lg-4">
+				<div class="ui-g-6 ui-lg-6 ui-xl-6 ui-sm-12 ui-md-12 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
 						หน่วยงานเจ้าของโครงการ :
 					</div>
-					<div class="ui-g-9 ui-lg-8">
+					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12">
 						<input type="text" id="projOwnerOrg" pInputText [(ngModel)]="seachCondition.projOwnerOrg" name="projOwnerOrg" style="width: 100%"
 						/>
 					</div>
@@ -29,24 +57,24 @@
 
 			<div class="ui-g">
 				<div class="ui-g-1"></div>
-				<div class="ui-g-3 ui-lg-4 ui-g-nopad">
-					<div class="ui-g-4 ui-lg-4">
+				<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-md-12 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
 						รหัสโครงการ :
 					</div>
-					<div class="ui-g-8 ui-lg-8 ui-g-nopad">
-						<div class="ui-g-7 ui-lg-7">
+					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12 ui-g-nopad">
+						<div class="ui-g-7 ui-lg-7 ui-xl-5 ui-sm-6 ui-md-4">
 							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
 						</div>
-						<div class="ui-g-4 ui-lg-4">
-							<button type="button" pButton label="ค้นหา" style="width: 100%"></button>
+						<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
+							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="isShowSearchProject = !isShowSearchProject"></button>
 						</div>
 					</div>
 				</div>
-				<div class="ui-g-7 ui-lg-6 ui-g-nopad">
-					<div class="ui-g-3 ui-lg-4">
+				<div class="ui-g-6 ui-lg-6 ui-xl-6 ui-sm-12 ui-md-12 ui-g-nopad">
+					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
 						ชื่อโครงการ :
 					</div>
-					<div class="ui-g-9 ui-lg-8">
+					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12">
 						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" />
 					</div>
 				</div>

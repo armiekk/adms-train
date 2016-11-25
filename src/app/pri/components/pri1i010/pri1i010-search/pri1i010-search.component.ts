@@ -33,6 +33,7 @@ export class Pri1i010SearchComponent implements OnInit {
   private pritInformationList: PritInformation[] = [];
   private selectedPriInfo: PritInformation[] = [];
   private msgs: Message[] = [];
+  private isShowSearchProject: boolean = false;
 
   constructor(
     private router: Router,
