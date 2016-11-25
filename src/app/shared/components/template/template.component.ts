@@ -58,7 +58,6 @@ export class TemplateComponent implements OnInit {
         } else {
             console.log('getmenu');
             this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {
-                console.log(response[0].nodes);
                 sessionStorage.setItem('menuList', JSON.stringify(response[0].nodes));
                 this.navLink = this.admsMenuService.getNavLink();
             });

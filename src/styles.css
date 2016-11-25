@@ -226,3 +226,7 @@ label.ui-chkbox-label {
     transform: scale(1.0);
   }
 }
+
+.ui-widget-header {
+    border: 1px solid transparent;
+}

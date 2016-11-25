@@ -21,6 +21,8 @@ import * as components from './components';
 import { PriComponent } from './pri.component';
 import { PriDashboardContainerComponent } from './components/pri-dashboard-container/pri-dashboard-container.component';
 import { Pri1i020Component } from './components/pri1i020/pri1i020.component';
+import { PriTabContentComponent } from './components/pri-tab-content/pri-tab-content.component';
+import { Pri1i010DetailComponent } from './components/pri1i010/pri1i010-detail/pri1i010-detail.component';
 
 const COMPONENT_LIST: Array<any> = Object.keys(components).map((key) => components[key]);
 
@@ -35,7 +37,9 @@ const COMPONENT_LIST: Array<any> = Object.keys(components).map((key) => componen
     ColumnHoverDirective,
     ...COMPONENT_LIST,
     PriDashboardContainerComponent,
-    Pri1i020Component
+    Pri1i020Component,
+    PriTabContentComponent,
+    Pri1i010DetailComponent
   ],
   providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService]
 })

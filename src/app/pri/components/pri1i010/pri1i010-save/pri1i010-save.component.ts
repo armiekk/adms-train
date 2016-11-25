@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { PritInformation } from '../../../../shared/api/mockup-prit-information-service/model/models';
-import { ApipriinformationApi } from '../../../api/pri-information/api/ApipriinformationApi';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
-import { PriInformationService, SearchCondition } from '../../../services/priInformation/pri-information.service';
+import { PriInformationService, SearchCondition, PritInformation } from '../../../services/priInformation/pri-information.service';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { MessageService } from '../../../../shared/services/message/message.service';
 import { Router } from '@angular/router';
 import { SelectItem, MenuItem } from 'primeng/primeng';
+import { Pri1i010DetailComponent } from '../pri1i010-detail/pri1i010-detail.component';
+import { Pri1i020Component } from '../../pri1i020/pri1i020.component';
 
 declare var $: any;
 
@@ -17,11 +17,11 @@ declare var $: any;
   styleUrls: ['./pri1i010-save.component.css'],
 })
 export class Pri1i010SaveComponent implements OnInit {
-
-  @ViewChild('sliderTabs') sliderTabs: ElementRef;
+  
+  private _selectedTab: any = Pri1i010DetailComponent;
+  private tabMenuItem: MenuItem;
   private projectSeachCondition: SearchCondition = {};
   private pritInformation: PritInformation = {};
-  private slider: any;
   private projectListItem: SelectItem[] = [];
   private selectedProject: PritInformation;
   private isShowSearchProject: boolean = false;
@@ -37,11 +37,21 @@ export class Pri1i010SaveComponent implements OnInit {
 
   ngOnInit() {
 
-
-    this.slider = $(this.sliderTabs.nativeElement).sliderTabs({
-      transition: 'fade',
-    });
-    
+    this.tabMenuItem = [
+      { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } },
+      { label: 'ขอบแขต', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'SDE', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'เงื่อนไขโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'งวดการส่งมอบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'ข้อจำกัด', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'Monitoring', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'ลูกค้า', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'อุปกรณ์', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'อบรม', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'อื่น ๆ', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'ระบบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+      // { label: 'Risk Analysis', command: (event) => { this.selectedTab = event.item.label; } },
+    ];
 
     switch (this.state.mode) {
       case 'ADD':
@@ -75,7 +85,7 @@ export class Pri1i010SaveComponent implements OnInit {
   getPritInformationByProjCode(projCode: string) {
     this.priService
     this.priService.getPritInformationByProjCode(projCode)
-    .subscribe((pritInformation: PritInformation[]) => { [ this.pritInformation ] = pritInformation;console.log(this.pritInformation) });
+    .subscribe((pritInformation: PritInformation[]) => [ this.pritInformation ] = pritInformation );
   }
 
   cancelPritInformation() {
@@ -100,5 +110,17 @@ export class Pri1i010SaveComponent implements OnInit {
     }
   }
   
+  private set selectedTab(tabLabel: string){
+    console.log(tabLabel);
+    if (tabLabel === 'รายละเอียดทั่วไป') {
+      this._selectedTab = Pri1i010DetailComponent;
+    } else if (tabLabel === 'ขอบแขต') {
+      this._selectedTab = Pri1i020Component;
+    }
+  }
+
+  private get selectedTab(){
+    return this._selectedTab;
+  }
 
 }

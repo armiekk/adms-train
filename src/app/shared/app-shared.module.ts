@@ -7,7 +7,7 @@ import {
     DropdownModule, CalendarModule, GrowlModule, PanelModule, TabViewModule, MenuModule, CheckboxModule,
     ScheduleModule, DialogModule, InputSwitchModule, AccordionModule, SharedModule, InputMaskModule,
     TooltipModule, BreadcrumbModule, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, 
-    FileUploadModule, MultiSelectModule
+    FileUploadModule, MultiSelectModule, TabMenuModule
 } from 'primeng/primeng';
 import { ThaiCalendarService } from './services/thai-calendar/thai-calendar.service';
 import { MessageService } from './services/message/message.service';
@@ -18,6 +18,7 @@ import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { LabelComponent } from './components/label/label/label.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { AdmsTabManagerComponent } from './components/adms-tab-manager/adms-tab-manager.component';
 
 @NgModule({
     declarations: [
@@ -28,11 +29,12 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         DrawerComponent,
         LabelComponent,
         BreadcrumbComponent,
+        AdmsTabManagerComponent,
     ],
     imports: [
         RouterModule, CommonModule, FormsModule, 
         FieldsetModule, InputTextModule, PanelModule, AccordionModule, SharedModule, BreadcrumbModule,
-        ButtonModule
+        ButtonModule, TabMenuModule
     ],
     providers: [ThaiCalendarService, MessageService],
     exports: [
@@ -42,7 +44,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
         CheckboxModule, ScheduleModule, DialogModule, InputSwitchModule, InputMaskModule, TooltipModule, 
         TemplateComponent, UserContainerComponent, DashboardComponent, TodoListComponent, LabelComponent,
         BreadcrumbComponent, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, FileUploadModule,
-        MultiSelectModule
+        MultiSelectModule, AdmsTabManagerComponent
     ]
 })
 export class AppSharedModule { }
