@@ -6,12 +6,8 @@ import {
     FieldsetModule, InputTextModule, RadioButtonModule, SelectButtonModule, ButtonModule, DataTableModule,
     DropdownModule, CalendarModule, GrowlModule, PanelModule, TabViewModule, MenuModule, CheckboxModule,
     ScheduleModule, DialogModule, InputSwitchModule, AccordionModule, SharedModule, InputMaskModule,
-<<<<<<< HEAD
-    TooltipModule, BreadcrumbModule, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, FileUploadModule, MultiSelectModule
-=======
     TooltipModule, BreadcrumbModule, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, 
     FileUploadModule, MultiSelectModule
->>>>>>> 1ac8f15a4302f0b44f1291e525217492277beb62
 } from 'primeng/primeng';
 import { ThaiCalendarService } from './services/thai-calendar/thai-calendar.service';
 import { MessageService } from './services/message/message.service';
