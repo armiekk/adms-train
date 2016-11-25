@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
+import { SelectItem } from 'primeng/primeng';
 
 import { PritInformation } from '../../api/prit-information/model/PritInformation';
 import { EmptProjectManager } from '../../api/empt-project-manager/model/EmptProjectManager';
 
 import { PritInformationApi } from '../../api/prit-information/api/PritInformationApi';
 
+import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 
 interface SearchCondition {
+    projType?: number;
     projCode?: string;
     projName?: string;
     projSiteCode?: string;
@@ -32,33 +35,29 @@ interface Emp {
     engname?: string;
 }
 
-interface Option {
-    label: string;
-    value: any;
-}
-
 const INDENT_MULTIPLIER: number = 0.7;
 
 @Component({
     selector: 'app-qad1q010',
     templateUrl: './qad1q010.component.html',
     styleUrls: ['./qad1q010.component.css'],
-    providers: [ThaiCalendarService, PritInformationApi]
+    providers: [QadConstantsService, ThaiCalendarService, PritInformationApi]
 })
 export class Qad1q010Component implements OnInit {
-    private menus: Option[];
+    private menus: SelectItem[];
     private selectedMenu: string;
-    private searchCondition: SearchCondition;
+    private searchCondition: SearchCondition = {};
     private historys: Array<any> = [];
     private qaSchedulesAll: Array<any> = [];
     private qaSchedules: Array<any> = [];
     private qaPlansAll: Array<any> = [];
     private qaPlans: Array<any> = [];
 
-    constructor(private locale: ThaiCalendarService,
-        private pritInformationService: PritInformationApi,
-        private http: Http,
-        private router: Router) {
+    constructor(private http: Http,
+        private router: Router,
+        private qadConstant: QadConstantsService,
+        private locale: ThaiCalendarService,
+        private pritInformationService: PritInformationApi) {
             this.menus = [];
             this.menus.push({label: 'Assign QA', value: '/qad/QAD1I030'});
             this.menus.push({label: 'QA Schedule and Plan', value: '/qad/QAD1Q010'});
@@ -66,130 +65,152 @@ export class Qad1q010Component implements OnInit {
 
     ngOnInit() {
         this.selectedMenu = this.router.url;
-        this.searchCondition = {};
-        this.searchProjCode = {};
+        this.searchCondition.projType = 1;
     }
 
     nav() {
         this.router.navigate([this.selectedMenu]);
     }
 
+    private displaySearchProject: boolean = false;
+    private isSelectedProject: boolean = false;
+    private projects: any[] = [];
+    private selectProject: any;
+    private selectProjects: any[] = [];
+    private displaySearchSite: boolean = false;
     private isSelectedSite: boolean = false;
-    private searchProjCode: SearchProjCode;
-    private selectedProj: any;
-    private resultSearchProjects: Array<any> = [];
-    displaySearchProjCode: boolean = false;
-    showDialogSearchProjCode(projCode: string) {
-        this.selectedProj = null;
-        this.searchProjCode.projCode = projCode;
-        this.searchByProjCode();
-        this.displaySearchProjCode = true;
+    private sites: any[] = [];
+    private selectSite: any;
+    private selectSites: any[] = [];
+    showDialogSearchProject() {
+        this.searchProject();
+        this.displaySearchProject = true;
     }
 
-    onRowSelectProj() {
-        this.searchCondition.projCode = this.selectedProj.projCode;
-        this.searchCondition.projName = this.selectedProj.projName;
-
-        if (!this.isSelectedSite) {
-            let projSiteCode = this.selectedProj.projSiteCode;
-            this.http.get('app/qad/resources/data/sitesMockData.json')
-                .map(res => res.json().data)
-                .subscribe((sites) => {
-                    this.resultSearchSites = sites.filter((site) => site.siteCode === projSiteCode);
-                    if (this.resultSearchSites.length === 1) {
-                        this.searchCondition.projSiteCode = this.resultSearchSites[0].siteCode;
-                        this.searchCondition.projSiteName = this.resultSearchSites[0].siteName;
-                    }
-                });
-        }
-
-        this.selectedProj = undefined;
-        this.displaySearchProjCode = false;
-    }
-
-    searchByProjCode() {
+    searchProject() {
+        this.selectProjects = [];
         if (this.isSelectedSite) {
+            this.isSelectedProject = false;
+            this.searchCondition.projCode = '';
+            this.searchCondition.projName = '';
+            this.selectProject = null;
+            let site = this.searchCondition.projSiteCode;
             this.http.get('app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
-                    this.resultSearchProjects = projs.filter((proj) => proj.projSiteCode === this.searchCondition.projSiteCode);
-            })
+                    let projects = projs.filter((proj) => proj.projSiteCode === site);
+                    this.projects = projects.map((proj) => {
+                        return { label: proj.projCode, value: proj };
+                    })
+                    this.projects.unshift({ label: 'เลือกรหัสโครงการ', value: null });
+                });
         } else {
-            if (this.searchProjCode !== undefined && this.searchProjCode.projCode !== undefined && this.searchProjCode.projCode.trim() !== '') {
-                this.http.get('app/qad/resources/data/projectsMockData.json')
-                    .map(res => res.json().data)
-                    .subscribe((projs) => {
-                        this.resultSearchProjects = projs.filter((proj) => proj.projCode === this.searchCondition.projCode.trim());
-                    })
-            } else {
-                this.http.get('app/qad/resources/data/projectsMockData.json')
-                    .map(res => res.json().data)
-                    .subscribe((projs) => {
-                        this.resultSearchProjects = projs;
-                    })
-            }
+            this.http.get('app/qad/resources/data/projectsMockData.json')
+                .map(res => res.json().data)
+                .subscribe((projs) => {
+                    this.projects = projs.map((proj) => {
+                        return { label: proj.projCode, value: proj };
+                    });
+                    this.projects.unshift({ label: 'เลือกรหัสโครงการ', value: null });
+                });
         }
     }
 
-    clearTextProjName() {
-        this.searchCondition.projName = ''
+    onChangeSelectProject() {
+        this.selectProjects = [];
+        if (this.selectProject !== undefined && this.selectProject !== null) {
+            this.selectProjects.push(this.selectProject);
+        }
     }
 
-    private searchSiteCode: string;
-    private searchSiteName: string;
-    private selectedSite: any;
-    private resultSearchSites: Array<any>;
-    private displaySearchSite: boolean = false;
-    showDialogSearchSite(siteCode: string) {
-        this.selectedSite = null;
-        this.searchSiteCode = siteCode;
-        this.searchBySite();
+    okSelectProject() {
+        if (this.selectProject !== undefined && this.selectProject !== null) {
+            this.searchCondition.projCode = this.selectProject.projCode;
+            this.searchCondition.projName = this.selectProject.projName;
+            this.isSelectedProject = true;
+            if (!this.isSelectedSite) {
+                let projSiteCode = this.selectProject.projSiteCode;
+                this.http.get('app/qad/resources/data/sitesMockData.json')
+                    .map(res => res.json().data)
+                    .subscribe((sites) => {
+                        this.selectSites = sites.filter((site) => site.siteCode === projSiteCode);
+                        if (this.selectSites.length === 1) {
+                            this.selectSite = this.selectSites[0];
+                            this.searchCondition.projSiteCode = this.selectSites[0].siteCode;
+                            this.searchCondition.projSiteName = this.selectSites[0].siteName;
+                            this.isSelectedSite = true;
+                        }
+                    });
+            }
+
+            this.displaySearchProject = false;
+        }
+    }
+
+    cancelSelectProject() {
+        this.displaySearchProject = false;
+    }
+
+    onChangeTextProject() {
+        this.isSelectedProject = false;
+        this.searchCondition.projName = '';
+        this.selectProject = null;
+        this.selectProjects = [];
+    }
+
+    showDialogSearchSite() {
+        this.searchSite();
         this.displaySearchSite = true;
     }
 
-    onRowSelectSite() {
-        this.searchCondition.projSiteCode = this.selectedSite.siteCode;
-        this.searchCondition.projSiteName = this.selectedSite.siteName;
-        this.isSelectedSite = true;
-        this.showDialogSearchProjCode('');
-        this.selectedSite = undefined;
+    searchSite() {
+        this.http.get('app/qad/resources/data/sitesMockData.json')
+            .map(res => res.json().data)
+            .subscribe((sites) => {
+                this.sites = sites.map((site) => {
+                    return { label: site.siteCode, value: site };
+                });
+                this.sites.unshift({ label: 'เลือกรหัสหน่วยงาน', value: null });
+            });
+    }
+
+    onChangeSelectSite() {
+        this.selectSites = [];
+        if (this.selectSite !== undefined && this.selectSite !== null) {
+            this.selectSites.push(this.selectSite);
+        }
+    }
+
+    okSelectSite() {
+        if (this.selectSite !== undefined && this.selectSite !== null) {
+            this.searchCondition.projSiteCode = this.selectSite.siteCode;
+            this.searchCondition.projSiteName = this.selectSite.siteCode;
+            this.isSelectedSite = true;
+            this.showDialogSearchProject();
+            this.displaySearchSite = false;
+        }
+    }
+
+    cancelSelectSite() {
         this.displaySearchSite = false;
     }
 
-    clearTextSiteName() {
+    onChangeTextSite() {
         this.isSelectedSite = false;
-        this.searchCondition.projSiteName = ''
-    }
-
-    searchBySite() {
-        if (this.searchSiteCode !== undefined && this.searchSiteCode.trim() !== '') {
-            this.http.get('app/qad/resources/data/sitesMockData.json')
-                .map(res => res.json().data)
-                .subscribe((sites) => {
-                    this.resultSearchSites = sites.filter((site) => site.siteCode === this.searchSiteCode.trim());
-                });
-        } else {
-            this.http.get('app/qad/resources/data/sitesMockData.json')
-                .map(res => res.json().data)
-                .subscribe((sites) => {
-                    this.resultSearchSites = sites;
-                });
-        }
+        this.searchCondition.projSiteName = '';
+        this.selectSite = null;
+        this.selectSites = [];
     }
 
     private findHeaderName: string;
     private optionSearchEmp: number;
-    private searchEmp: string;
-    private selectedEmp: Emp;
-    private resultSearchEmps: Emp[];
     private displaySearchEmp: boolean = false;
-    showDialogSearchEmp(empName: string, option: number) {
-        this.selectedEmp = null;
-        this.searchEmp = empName;
+    private emps: any[] = [];
+    private selectEmp: any;
+    private selectEmps: any[] = [];
+    showDialogSearchEmp(option: number) {
         this.optionSearchEmp = option;
-        this.searchByEmp();
         let inCaseDefault: boolean = false;
-
         switch (this.optionSearchEmp) {
             case 1:
                 //Project Manager
@@ -207,50 +228,28 @@ export class Qad1q010Component implements OnInit {
                 //Create By (QA)
                 this.findHeaderName = 'Create By (QA)';
                 break;
+            case 5:
+            case 6:
+                //QA ผู้รับผิดชอบ
+                this.findHeaderName = 'QA ผู้รับผิดชอบ';
+                break;
             default:
                 inCaseDefault = true;
+        }
+
+        if (!inCaseDefault) {
+            this.searchEmp();
         }
 
         this.displaySearchEmp = (inCaseDefault) ? false : true;
     }
 
-    onRowSelectEmp() {
+    searchEmp() {
+        this.selectEmps = [];
+        let emps;
         switch (this.optionSearchEmp) {
             case 1:
-                //Project Manager
-                this.searchCondition.projManager = this.selectedEmp.thainame;
-                break;
-            case 2:
-                //Senior Manager
-                this.searchCondition.projSeniorManager = this.selectedEmp.thainame;
-                break;
-            case 3:
-                //QA Manager
-                this.searchCondition.projQAManager = this.selectedEmp.thainame;
-                break;
-            case 4:
-                //Create By (QA)
-                this.searchCondition.projCreateByQA = this.selectedEmp.thainame;
-                break;
-            default:
-        }
-
-        this.selectedEmp = undefined;
-        this.displaySearchEmp = false;
-    }
-
-    searchByEmp() {
-        switch (this.optionSearchEmp) {
-            case 1:
-                //Project Manager
-                /*this.emptProjectManagerService.defaultHeaders.append('Content-Type', 'application/json');
-                this.emptProjectManagerService.defaultHeaders.append('Accept', 'application/json');
-                if (this.searchEmp !== undefined && this.searchEmp.trim() !== '') {
-                    this.emptProjectManagerService.emptProjectManagerFindByName(this.searchEmp.trim()).subscribe((response: EmptProjectManager[]) => this.resultSearchEmps = response);
-                } else {
-                    this.emptProjectManagerService.emptProjectManagerFind().subscribe((response: EmptProjectManager[]) => this.resultSearchEmps = response);
-                }*/
-                this.resultSearchEmps = [
+                emps = [
                     { thainame: "กมลศักดิ์ อิทธิฤกษ์มงคล", engname: "KAMONSAK ITTIRUEGMONGKON" },
                     { thainame: "กำพล หาญนฤชัย", engname: "KAMPON HANNARUECHAI" },
                     { thainame: "เกศมณี คุ้มสาธิต", engname: "KATEMANEE KHOOMSATHIT" },
@@ -282,30 +281,103 @@ export class Qad1q010Component implements OnInit {
                     { thainame: "อัมรินทร์ สังขรัตน์", engname: "AMARIN SANGKARAT" },
                     { thainame: "อัศวิน อินทร์แนม", engname: "ADSAWIN INNAEM" }
                 ];
+                this.emps = emps.map((emp) => {
+                    return { label: emp.thainame, value: emp };
+                });
+                this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 2:
                 //Senior Manager
-                this.resultSearchEmps = [
+                emps = [
                     { thainame: "นางพัชรวรรณ ทันอินทรอาจ", engname: "PATCHARAWAN TANINTARAARJ" },
                     { thainame: "นางวันเพ็ญ กาญจนประพิณ", engname: "WANPEN KANCHANAPRAPIN" },
                     { thainame: "นายกฤษฎา รักษ์งาน", engname: "KRISADA RUKNGAN" }
                 ];
+                this.emps = emps.map((emp) => {
+                    return { label: emp.thainame, value: emp };
+                });
+                this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 3:
                 //QA Manager
-                this.resultSearchEmps = [
+                emps = [
                     { thainame: "ประไพลักษณ์ วรยศโกวิท", engname: "PRAPAILUK WORRAYOTKOVIT" }
                 ];
+                this.emps = emps.map((emp) => {
+                    return { label: emp.thainame, value: emp };
+                });
+                this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 4:
                 //Create By (QA)
-                this.resultSearchEmps = [
+                emps = [
                     { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
                     { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
                 ];
+                this.emps = emps.map((emp) => {
+                    return { label: emp.thainame, value: emp };
+                });
+                this.emps.unshift({ label: 'เลือกชื่อ', value: null });
+                break;
+            case 5:
+            case 6:
+                //QA ผู้รับผิดชอบ
+                emps = [
+                    { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
+                    { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
+                ];
+                this.emps = emps.map((emp) => {
+                    return { label: emp.thainame, value: emp };
+                });
+                this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             default:
         }
+    }
+
+    onChangeSelectEmp() {
+        this.selectEmps = [];
+        if (this.selectEmp !== undefined && this.selectEmp !== null) {
+            this.selectEmps.push(this.selectEmp);
+        }
+    }
+
+    okSelectEmp() {
+        if (this.selectEmp !== undefined && this.selectEmp !== null) {
+            switch (this.optionSearchEmp) {
+                case 1:
+                    //Project Manager
+                    this.searchCondition.projManager = this.selectEmp.thainame;
+                    break;
+                case 2:
+                    //Senior Manager
+                    this.searchCondition.projSeniorManager = this.selectEmp.thainame;
+                    break;
+                case 3:
+                    //QA Manager
+                    this.searchCondition.projQAManager = this.selectEmp.thainame;
+                    break;
+                case 4:
+                    //Create By (QA)
+                    this.searchCondition.projCreateByQA = this.selectEmp.thainame;
+                    break;
+                // case 5:
+                //     //QA ผู้รับผิดชอบ
+                //     this.projResponsibleQaName = this.selectEmp.thainame;
+                //     break;
+                // case 6:
+                //     //QA ผู้รับผิดชอบ ในช่องตัวเลือกการค้นหา
+                //     this.searchAdditionCondition.projResponsibleQaName = this.selectEmp.thainame;
+                //     break;
+                default:
+            }
+
+            this.displaySearchEmp = false;
+        }
+    }
+
+    cancelSelectEmp() {
+        this.displaySearchEmp = false;
     }
 
     search() {
