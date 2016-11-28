@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Pri1i010DetailComponent } from '../pri1i010-detail/pri1i010-detail.component';
 import { Pri1i020Component } from '../../pri1i020/pri1i020.component';
+import { Pri1i030Component } from '../../pri1i030/pri1i030.component';
 
 declare var $: any;
 
@@ -37,21 +38,37 @@ export class Pri1i010SaveComponent implements OnInit {
 
   ngOnInit() {
 
-    this.tabMenuItem = [
-      { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } },
-      { label: 'ขอบแขต', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'SDE', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'เงื่อนไขโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'งวดการส่งมอบงาน', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'ข้อจำกัด', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'Monitoring', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'ลูกค้า', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'อุปกรณ์', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'อบรม', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'อื่น ๆ', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'ระบบงาน', command: (event) => { this.selectedTab = event.item.label; } },
-      // { label: 'Risk Analysis', command: (event) => { this.selectedTab = event.item.label; } },
-    ];
+    switch (this.state.mode) {
+      case 'ADD':
+        this.tabMenuItem = [
+          { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } }
+        ];
+        break;
+      case 'EDIT':
+        this.tabMenuItem = [
+          { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'ขอบแขต', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'SDE', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'เงื่อนไขโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'งวดการส่งมอบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'ข้อจำกัด', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'Monitoring', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'ลูกค้า', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'อุปกรณ์', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'อบรม', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'อื่น ๆ', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'ระบบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+          // { label: 'Risk Analysis', command: (event) => { this.selectedTab = event.item.label; } },
+        ];
+        break;
+      default:
+        this.tabMenuItem = [
+          { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } }
+        ];
+        break;
+    }
+
+
 
     switch (this.state.mode) {
       case 'ADD':
@@ -110,11 +127,12 @@ export class Pri1i010SaveComponent implements OnInit {
   }
 
   private set selectedTab(tabLabel: string) {
-    console.log(tabLabel);
     if (tabLabel === 'รายละเอียดทั่วไป') {
       this._selectedTab = Pri1i010DetailComponent;
     } else if (tabLabel === 'ขอบแขต') {
       this._selectedTab = Pri1i020Component;
+    } else if (tabLabel === 'SDE') {
+      this._selectedTab = Pri1i030Component;
     }
   }
 

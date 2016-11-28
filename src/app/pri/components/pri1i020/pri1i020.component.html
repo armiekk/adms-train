@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-    <h3>ขอบเขตของโครงการ</h3>
+    <h4><strong>ขอบเขตของโครงการ</strong></h4>
     <hr>
   </div>
 
@@ -26,11 +26,11 @@
           <p-inplace [disabled]="!projScope.edit" [active]="projScope.edit">
             <span pInplaceDisplay>
               <p>
-                {{projScope.projScopeDetail}}
+                {{projScope.scoreDetail}}
               </p>
         </span>
             <span pInplaceContent>
-          <textarea pInputTextarea [(ngModel)]="projScope.projScopeDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <textarea pInputTextarea [(ngModel)]="projScope.scoreDetail" style="width: 99%" autoResize="autoResize"></textarea>
           <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
         </span>
           </p-inplace>

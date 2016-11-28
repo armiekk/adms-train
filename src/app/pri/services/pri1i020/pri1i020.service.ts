@@ -4,7 +4,9 @@ import { PritScope } from '../../api/pri1i020/model/PritScope';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-export { PritScope } from '../../api/pri1i020/model/PritScope';
+export interface ProjScope extends PritScope {
+  edit?: boolean;
+}
 
 @Injectable()
 export class Pri1i020Service {
@@ -16,29 +18,15 @@ export class Pri1i020Service {
 
     /* for mockup */
     return this.getMockupPritScopeList(projCode)
-      .map((response: PritScope[]) =>
-        response.map((pritScope: PritScope) => {
-          return {
-            projScopeRef: pritScope.projScopeRef,  
-            projCode: pritScope.projCode,
-            projScopeDetail: pritScope.scoreDetail,
-            edit: false
-          }
-        })
+      .map((pritScopeList: PritScope[]) =>
+        pritScopeList.map((pritScope: PritScope) => Object.assign({}, pritScope, { edit: false }))
       );
-
   }
 
   getPritScopeListByProjCode(projCode: string): Observable<PritScope[]> {
     return this.priScopeService.pritScopeFind()
-      .map((response: PritScope[]) =>
-        response.map((pritScope: PritScope) => {
-          return {
-            projCode: pritScope.projCode,
-            projScopeDetail: pritScope.scoreDetail,
-            edit: false
-          }
-        })
+      .map((pritScopeList: PritScope[]) =>
+        pritScopeList.map((pritScope: PritScope) => Object.assign({}, pritScope, { edit: false }))
       );
 
   }

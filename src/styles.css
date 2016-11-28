@@ -188,6 +188,10 @@ label.ui-chkbox-label {
     float: right;
 }
 
+.ui-inplace-display.ui-state-disabled {
+    opacity: 1;
+}
+
 /*loading indicator*/
 .spinner {
   margin: 400px auto 0;

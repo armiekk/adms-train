@@ -5,7 +5,7 @@ import {
   PriInformationService, 
   PritInformation, 
   initialPritInformaitonDetail 
-} from '../../../services/priInformation/pri-information.service';
+} from '../../../services/pri1i010/pri-information.service';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { MessageService } from '../../../../shared/services/message/message.service';
 
@@ -28,7 +28,6 @@ export class Pri1i010DetailComponent implements OnInit {
 
   ngOnInit() {
     if (this.state.projCode && this.state.mode === 'EDIT') {
-      console.log(this.state.projCode)
       this.getPritInformationDetail(this.state.projCode);
     } else {
       this.pritInformationDetail = initialPritInformaitonDetail;

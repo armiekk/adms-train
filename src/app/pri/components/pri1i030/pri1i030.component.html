@@ -1,3 +1,155 @@
-<p>
-  pri1i030 works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ภาษาที่ใช้ในการพัฒนาระบบ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjLanguageRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projLanguageList" [(selection)]="selectedProjLanguage" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ภาษาที่ใช้ในการพัฒนาระบบ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียดภาษาที่ใช้ในการพัฒนาระบบ
+        </template>
+        <template let-i="rowIndex" let-projLanguage="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projLanguage.edit" [active]="projLanguage.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projLanguage.languageDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projLanguage.languageDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projLanguage="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projLanguage.edit" (click)="editProjLanguageRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projLanguage.edit" (click)="saveEditedProjLanguageRow(projLanguage, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projLanguage.edit" (click)="cancelEditedProjLanguageRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>วิธีการที่ใช้ในการพัฒนาระบบ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjMethodRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projMethodList" [(selection)]="selectedProjMethod" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        วิธีการที่ใช้ในการพัฒนาระบบ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียดวิธีการที่ใช้ในการพัฒนาระบบ
+        </template>
+        <template let-i="rowIndex" let-projMethod="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projMethod.edit" [active]="projMethod.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projMethod.methodDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projMethod.methodDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projMethod="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projMethod.edit" (click)="editProjMethodRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projMethod.edit" (click)="saveEditedProjMethodRow(projMethod, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projMethod.edit" (click)="cancelEditedProjMethodRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
+
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>เครื่องมือที่ใช้ในการพัฒนาระบบ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjToolsRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projToolsList" [(selection)]="selectedProjTools" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        เครื่องมือที่ใช้ในการพัฒนาระบบ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียดเครื่องมือที่ใช้ในการพัฒนาระบบ
+        </template>
+        <template let-i="rowIndex" let-projTools="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projTools.edit" [active]="projTools.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projTools.toolDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projTools.toolDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projTools="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projTools.edit" (click)="editProjToolsRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projTools.edit" (click)="saveEditedProjToolsRow(projTools, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projTools.edit" (click)="cancelEditedProjToolsRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

@@ -42,7 +42,7 @@ export class Pri1i010SearchComponent implements OnInit {
 
   searchPriInformation() {
     this.pritInfoService.pritInformationFind()
-      .subscribe((response: PritInformation[]) => {this.pritInformationList = response; console.log(this.pritInformationList)});
+      .subscribe((response: PritInformation[]) => this.pritInformationList = response);
   }
 
   searchProject(){

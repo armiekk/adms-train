@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pri1i020Service, PritScope } from '../../services/pri1i020/pri1i020.service';
+import { Pri1i020Service, ProjScope } from '../../services/pri1i020/pri1i020.service';
 import { StateService } from '../../../shared/services/state/state.service';
 
 
@@ -11,7 +11,8 @@ import { StateService } from '../../../shared/services/state/state.service';
 })
 export class Pri1i020Component implements OnInit {
 
-  private projScopeList: Array<any> = [];
+  private projScopeList: ProjScope[] = [];
+  private selectedProjScope: ProjScope[] = [];
 
   constructor(private priScopeService: Pri1i020Service, private state: StateService) { }
 
@@ -21,7 +22,7 @@ export class Pri1i020Component implements OnInit {
   }
 
   addRowData(){
-    let dummyRow: PritScope = {};
+    let dummyRow: ProjScope = { edit: false };
     this.projScopeList = [  dummyRow, ...this.projScopeList];
   }
 

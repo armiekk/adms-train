@@ -34,7 +34,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class PritMethodApi {
-    protected basePath = 'https://localhost/api';
+    protected basePath = '/api';
     public defaultHeaders : Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
