@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
-interface MapValue {
+export interface MapValue {
   label: string;
   value: number;
 }
@@ -14,7 +14,6 @@ export class PriConstantsService {
   private _tabLabel: Array<{ label: string, value: string }>;
 
   constructor() {
-
     this._projectStatus = [
       { label: 'ดำเนินการก่อนมีสัญญา', value: 1 },
       { label: 'ระหว่างดำเนินการ', value: 2 },
@@ -54,8 +53,8 @@ export class PriConstantsService {
       { label: 'ระบบงานในโครงการ', value: '#proj-systems' },
       { label: 'Risk Analysis', value: '#risk-analysis' },
     ];
-
   }
+
 
   get projectStatus(): Array<MapValue> {
     return this._projectStatus;

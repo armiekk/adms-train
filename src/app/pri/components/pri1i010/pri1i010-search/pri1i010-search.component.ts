@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 // import { PritInformation } from '../../../api/pri-information';
-import { ApipriinformationApi } from '../../../api/pri-information/api/ApipriinformationApi';
+import { ApipriinformationApi } from '../../../api/pri1i010/api/ApipriinformationApi';
 import { PritInformationApi } from '../../../../shared/api/mockup-prit-information-service/api/PritInformationApi';
 import { PritInformation } from '../../../../shared/api/mockup-prit-information-service/model/PritInformation';
 import { PriConstantsService } from '../../../constants';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { Message, SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { SearchCondition } from '../../../services/priInformation/pri-information.service';
+import { SearchCondition } from '../../../services/pri1i010/pri-information.service';
 
 
 
@@ -42,7 +42,7 @@ export class Pri1i010SearchComponent implements OnInit {
 
   searchPriInformation() {
     this.pritInfoService.pritInformationFind()
-      .subscribe((response: PritInformation[]) => this.pritInformationList = response);
+      .subscribe((response: PritInformation[]) => {this.pritInformationList = response; console.log(this.pritInformationList)});
   }
 
   searchProject(){

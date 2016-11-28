@@ -11,7 +11,7 @@ import { FwMenuBean } from '../shared/api/cdgs-authorize-services/model/models';
 //   rememberMe?: boolean;
 // }
 
-interface Credentials {
+export interface Credentials {
   username?: string;
   password?: string;
 }
@@ -24,7 +24,7 @@ interface Credentials {
 export class LoginComponent implements OnInit {
 
   // credentials: Credentials = { rememberMe: true };
-  credentials: Credentials = {};
+  private credentials: Credentials = {};
 
   constructor(
     private router: Router,

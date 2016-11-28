@@ -1,8 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { PritScopeApi } from '../../api/pri-scope/api/PritScopeApi';
-import { PritScope } from '../../api/pri-scope/model/PritScope';
+import { PritScopeApi } from '../../api/pri1i020/api/PritScopeApi';
+import { PritScope } from '../../api/pri1i020/model/PritScope';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+
+export { PritScope } from '../../api/pri1i020/model/PritScope';
 
 @Injectable()
 export class Pri1i020Service {
@@ -45,5 +47,14 @@ export class Pri1i020Service {
     return this.http.get('app/pri/mockup/pri1i020/mockup.json')
       .map((response: Response) => response.json())
       .map((pritScopeList: PritScope[]) => pritScopeList.filter((pritScope: PritScope) => pritScope.projCode === projCode));
+  }
+
+  private setHeaders() {
+    if (!this.priScopeService.defaultHeaders.has('Authorization')) {
+      this.priScopeService.defaultHeaders.append('Content-Type', 'application/json');
+      this.priScopeService.defaultHeaders.append('Authorization', `Bearer ${sessionStorage.getItem('token')}`);
+      this.priScopeService.defaultHeaders.append('Accept', 'application/json');
+    }
+    return;
   }
 }

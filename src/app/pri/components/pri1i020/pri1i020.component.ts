@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PritScopeApi } from '../../api/pri-scope/api/PritScopeApi';
-import { PritScope } from '../../api/pri-scope/model/PritScope';
-import { Pri1i020Service } from '../../services/pri1i020/pri1i020.service';
+import { Pri1i020Service, PritScope } from '../../services/pri1i020/pri1i020.service';
 import { StateService } from '../../../shared/services/state/state.service';
 
-class GenericObject<T> {
-  edit: boolean;
-}
 
 @Component({
   selector: 'app-pri1i020',
@@ -22,7 +17,12 @@ export class Pri1i020Component implements OnInit {
 
   ngOnInit() {
     this.priScopeService.getPritScopeList(this.state.projCode)
-          .subscribe((projScopeList) => {this.projScopeList = projScopeList; console.log(projScopeList)});
+          .subscribe((projScopeList) => this.projScopeList = projScopeList);
+  }
+
+  addRowData(){
+    let dummyRow: PritScope = {};
+    this.projScopeList = [  dummyRow, ...this.projScopeList];
   }
 
   editRow(index: number){

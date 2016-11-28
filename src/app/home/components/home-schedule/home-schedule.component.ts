@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 declare var moment: any;
 
-class Event {
+export class Event {
     id: number;
     title: string;
     start: string;
@@ -17,10 +17,10 @@ class Event {
 })
 export class HomeScheduleComponent implements OnInit {
 
-    calendarTitle: string;
-    events: Event[] = [];
-    event: Event;
-    dialogVisible: boolean = false;
+    private calendarTitle: string;
+    private events: Event[] = [];
+    private event: Event;
+    private dialogVisible: boolean = false;
 
     constructor(private locale: ThaiCalendarService) { }
 

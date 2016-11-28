@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
-import { PriInformationService, SearchCondition, PritInformation } from '../../../services/priInformation/pri-information.service';
+import { PriInformationService, SearchCondition, PritInformation } from '../../../services/pri1i010/pri-information.service';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { MessageService } from '../../../../shared/services/message/message.service';
 import { Router } from '@angular/router';

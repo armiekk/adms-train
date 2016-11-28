@@ -6,9 +6,10 @@ import { AppSharedModule } from '../shared';
 // providers
 import { PriConstantsService } from './constants';
 import { PriStateResolverService } from './services';
-import { PriInformationService } from './services/priInformation/pri-information.service';
-import { ApipriinformationApi } from './api/pri-information/api/ApipriinformationApi';
-import { PritScopeApi } from './api/pri-scope/api/PritScopeApi';
+import { PriInformationService } from './services/pri1i010/pri-information.service';
+import { ApipriinformationApi } from './api/pri1i010/api/ApipriinformationApi';
+import { PritScopeApi } from './api/pri1i020/api/PritScopeApi';
+import { PritLanguageApi, PritMethodApi, PritToolsApi } from './api/pri1i030/api/api';
 // import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
 // pipes
@@ -24,6 +25,7 @@ import { PriDashboardContainerComponent } from './components/pri-dashboard-conta
 import { Pri1i020Component } from './components/pri1i020/pri1i020.component';
 import { PriTabContentComponent } from './components/pri-tab-content/pri-tab-content.component';
 import { Pri1i010DetailComponent } from './components/pri1i010/pri1i010-detail/pri1i010-detail.component';
+import { Pri1i030Component } from './components/pri1i030/pri1i030.component';
 
 
 @NgModule({
@@ -41,8 +43,12 @@ import { Pri1i010DetailComponent } from './components/pri1i010/pri1i010-detail/p
     PriDashboardContainerComponent,
     Pri1i020Component,
     PriTabContentComponent,
-    Pri1i010DetailComponent
+    Pri1i010DetailComponent,
+    Pri1i030Component
   ],
-  providers: [ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService, PritScopeApi]
+  providers: [
+    ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService, PritScopeApi, 
+    PritLanguageApi, PritMethodApi, PritToolsApi
+  ]
 })
 export class PriModule { }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 // import { PritInformation } from '../api/pri-information';
-import { ApipriinformationApi } from '../api/pri-information/api/ApipriinformationApi';
+import { ApipriinformationApi } from '../api/pri1i010/api/ApipriinformationApi';
 import { PritInformationApi } from '../../shared/api/mockup-prit-information-service/api/PritInformationApi';
 import { PritInformation } from '../../shared/api/mockup-prit-information-service/model/PritInformation';
 import { StateService } from '../../shared/services/state/state.service';

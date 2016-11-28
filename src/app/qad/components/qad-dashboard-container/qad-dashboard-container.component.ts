@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface ProgramDetail {
+export interface ProgramDetail {
   id?: string;
   name?: string;
   uri?: string;

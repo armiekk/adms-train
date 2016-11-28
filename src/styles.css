@@ -184,6 +184,10 @@ label.ui-chkbox-label {
     background-color: #337ab7;
 }
 
+.table-manager-panel {
+    float: right;
+}
+
 /*loading indicator*/
 .spinner {
   margin: 400px auto 0;
