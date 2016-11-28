@@ -9,6 +9,18 @@ import { SelectItem, MenuItem } from 'primeng/primeng';
 import { Pri1i010DetailComponent } from '../pri1i010-detail/pri1i010-detail.component';
 import { Pri1i020Component } from '../../pri1i020/pri1i020.component';
 import { Pri1i030Component } from '../../pri1i030/pri1i030.component';
+import { Pri1i040Component } from '../../pri1i040/pri1i040.component';;
+import { Pri1i050Component } from '../../pri1i050/pri1i050.component';
+import { Pri1i060Component } from '../../pri1i060/pri1i060.component';
+import { Pri1i070Component } from '../../pri1i070/pri1i070.component';
+import { Pri1i080Component } from '../../pri1i080/pri1i080.component';
+import { Pri1i090Component } from '../../pri1i090/pri1i090.component';
+import { Pri1i100Component } from '../../pri1i100/pri1i100.component';
+import { Pri1i110Component } from '../../pri1i110/pri1i110.component';
+import { Pri1i120Component } from '../../pri1i120/pri1i120.component';
+import { Pri1i130Component } from '../../pri1i130/pri1i130.component';
+import { Pri1i140Component } from '../../pri1i140/pri1i140.component';
+import { Pri1i150Component } from '../../pri1i150/pri1i150.component';
 
 declare var $: any;
 
@@ -49,16 +61,18 @@ export class Pri1i010SaveComponent implements OnInit {
           { label: 'รายละเอียดทั่วไป', command: (event) => { this.selectedTab = event.item.label; } },
           { label: 'ขอบแขต', command: (event) => { this.selectedTab = event.item.label; } },
           { label: 'SDE', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'เงื่อนไขโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'งวดการส่งมอบงาน', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'ข้อจำกัด', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'Monitoring', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'ลูกค้า', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'อุปกรณ์', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'อบรม', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'อื่น ๆ', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'ระบบงาน', command: (event) => { this.selectedTab = event.item.label; } },
-          // { label: 'Risk Analysis', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'เงื่อนไขโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'งวดการส่งมอบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'ข้อจำกัด', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'Monitoring', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'ลูกค้า', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'อุปกรณ์', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'อบรม', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'อื่น ๆ', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'บุคลากรในโครงการ', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'ระบบงาน', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'Risk Analysis', command: (event) => { this.selectedTab = event.item.label; } },
+          { label: 'Project Information Effort', command: (event) => { this.selectedTab = event.item.label; } },
         ];
         break;
       default:
@@ -133,7 +147,31 @@ export class Pri1i010SaveComponent implements OnInit {
       this._selectedTab = Pri1i020Component;
     } else if (tabLabel === 'SDE') {
       this._selectedTab = Pri1i030Component;
-    }
+    } else if (tabLabel === 'เงื่อนไขโครงการ') {
+      this._selectedTab = Pri1i040Component;
+    } else if (tabLabel === 'งวดการส่งมอบงาน') {
+      this._selectedTab = Pri1i050Component;
+    } else if (tabLabel === 'ข้อจำกัด') {
+      this._selectedTab = Pri1i060Component;
+    } else if (tabLabel === 'Monitoring') {
+      this._selectedTab = Pri1i070Component;
+    } else if (tabLabel === 'ลูกค้า') {
+      this._selectedTab = Pri1i080Component;
+    } else if (tabLabel === 'อุปกรณ์') {
+      this._selectedTab = Pri1i090Component;
+    } else if (tabLabel === 'อบรม') {
+      this._selectedTab = Pri1i100Component;
+    } else if (tabLabel === 'อื่น ๆ') {
+      this._selectedTab = Pri1i110Component;
+    } else if (tabLabel === 'บุคลากรในโครงการ') {
+      this._selectedTab = Pri1i120Component;
+    } else if (tabLabel === 'ระบบงาน') {
+      this._selectedTab = Pri1i130Component;
+    } else if (tabLabel === 'Risk Analysis') {
+      this._selectedTab = Pri1i140Component;
+    } else if (tabLabel === 'Project Information Effort') {
+      this._selectedTab = Pri1i050Component;
+    }  
   }
 
   private get selectedTab() {

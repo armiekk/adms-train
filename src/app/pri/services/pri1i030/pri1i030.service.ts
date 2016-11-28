@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { PritLanguageApi, PritMethodApi, PritToolsApi } from '../../api/pri1i030/api/api';
-import { PritInformation } from '../../api/pri1i010';
 import { PritLanguage, PritMethod, PritTools } from '../../api/pri1i030/model/models';
 import { Observable } from 'rxjs/Observable';
 
