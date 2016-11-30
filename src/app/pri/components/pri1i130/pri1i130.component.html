@@ -1,3 +1,84 @@
-<p>
-  pri1i130 works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลระบบต่าง ๆ ของโครงการ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjSystemsRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projSystemsList" [(selection)]="selectedProjSystems" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลระบบต่าง ๆ ของโครงการ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          ชื่อย่อระบบ
+        </template>
+        <template pTemplate let-i="rowIndex" let-projSystems="rowData" type="body">
+          <p-inplace [disabled]="!projSystems.edit" [active]="projSystems.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projSystems.systemAbbr}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projSystems.systemAbbr" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '50%'}">
+        <template pTemplate type="header">
+          ชื่อระบบ
+        </template>
+        <template pTemplate let-i="rowIndex" let-projSystems="rowData" type="body">
+          <p-inplace [disabled]="!projSystems.edit" [active]="projSystems.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projSystems.systemName}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projSystems.systemName" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '30%'}">
+        <template pTemplate type="header">
+          คำอธิบาย
+        </template>
+        <template pTemplate let-i="rowIndex" let-projSystems="rowData" type="body">
+          <p-inplace [disabled]="!projSystems.edit" [active]="projSystems.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projSystems.systemDetail}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projSystems.systemDetail" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projSystems="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projSystems.edit" (click)="editProjSystemsRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projSystems.edit" (click)="saveEditedProjSystemsRow(projSystems, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projSystems.edit" (click)="cancelEditedProjSystemsRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

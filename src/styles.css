@@ -192,6 +192,14 @@ label.ui-chkbox-label {
     opacity: 1;
 }
 
+textarea {
+    resize: none;
+}
+
+table {
+    border-color: transparent;
+}
+
 /*loading indicator*/
 .spinner {
   margin: 400px auto 0;

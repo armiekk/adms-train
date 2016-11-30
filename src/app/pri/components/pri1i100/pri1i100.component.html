@@ -1,3 +1,84 @@
-<p>
-  pri1i100 works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลอุปกรณ์ของโครงการ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjTrainRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projTrainList" [(selection)]="selectedProjTrain" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลอุปกรณ์ของโครงการ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '75%'}">
+        <template pTemplate type="header">
+          หลักสูตร
+        </template>
+        <template pTemplate let-i="rowIndex" let-projTrain="rowData" type="body">
+          <p-inplace [disabled]="!projTrain.edit" [active]="projTrain.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projTrain.trainCourse}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projTrain.trainCourse" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          ระยะเวลา(วัน)
+        </template>
+        <template pTemplate let-i="rowIndex" let-projTrain="rowData" type="body">
+          <p-inplace [disabled]="!projTrain.edit" [active]="projTrain.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projTrain.trainDate}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projTrain.trainDate" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          จำนวน(คน)
+        </template>
+        <template pTemplate let-i="rowIndex" let-projTrain="rowData" type="body">
+          <p-inplace [disabled]="!projTrain.edit" [active]="projTrain.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projTrain.personAmount}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projTrain.personAmount" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projTrain="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projTrain.edit" (click)="editProjTrainRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projTrain.edit" (click)="saveEditedProjTrainRow(projTrain, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projTrain.edit" (click)="cancelEditedProjTrainRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>
