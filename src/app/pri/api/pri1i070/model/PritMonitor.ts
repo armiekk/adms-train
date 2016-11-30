@@ -34,7 +34,7 @@ export interface PritMonitor {
 
     monitorType?: string;
 
-    monotorDetail?: string;
+    monitorDetail?: string;
 
     createBy?: string;
 

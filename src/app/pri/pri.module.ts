@@ -12,6 +12,14 @@ import { PritScopeApi } from './api/pri1i020/api/PritScopeApi';
 import { PritLanguageApi, PritMethodApi, PritToolsApi } from './api/pri1i030/api/api';
 import { PritConditionApi } from './api/pri1i040/api/api';
 import { PritDeliverApi } from './api/pri1i050/api/api';
+import { PritLimitApi } from './api/pri1i060/api/api';
+import { PritMonitorApi } from './api/pri1i070/api/api';
+import { PritCustomerApi } from './api/pri1i080/api/api';
+import { PritAccessoriesApi } from './api/pri1i090/api/api';
+import { PritTrainApi } from './api/pri1i100/api/api';
+import { PritOtherApi } from './api/pri1i110/api/api';
+import { PritSystemsApi } from './api/pri1i130/api/api';
+import { PritRiskAnalystApi } from './api/pri1i140/api/api';
 // import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
 // pipes
@@ -74,7 +82,8 @@ import { Pri1i150Component } from './components/pri1i150/pri1i150.component';
   ],
   providers: [
     ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService, PritScopeApi, 
-    PritLanguageApi, PritMethodApi, PritToolsApi, PritConditionApi, PritDeliverApi
+    PritLanguageApi, PritMethodApi, PritToolsApi, PritConditionApi, PritDeliverApi, PritLimitApi, PritMonitorApi,
+    PritCustomerApi, PritAccessoriesApi, PritTrainApi, PritOtherApi, PritSystemsApi, PritRiskAnalystApi
   ]
 })
 export class PriModule { }

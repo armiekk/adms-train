@@ -10,10 +10,10 @@ export interface ProjDeliver extends PritDeliver {
 @Injectable()
 export class Pri1i050Service {
 
-  constructor(private PritDeliverApi: PritDeliverApi) { }
+  constructor(private pritDeliverApi: PritDeliverApi) { }
 
   getProjDeliverList(projCode: string): Observable<ProjDeliver[]> {
-    return this.PritDeliverApi.pritDeliverFind()
+    return this.pritDeliverApi.pritDeliverFind()
       .map((projDeliverList: PritDeliver[]) =>
         projDeliverList.filter((projDeliver: PritDeliver) => Object.assign({}, projDeliver, { edit: false })
         )
@@ -21,10 +21,10 @@ export class Pri1i050Service {
   }
 
   private setHeaders() {
-    if (!this.PritDeliverApi.defaultHeaders.has('Authorization')) {
-      this.PritDeliverApi.defaultHeaders.append('Content-Type', 'application/json');
-      this.PritDeliverApi.defaultHeaders.append('Authorization', `Bearer ${sessionStorage.getItem('token')}`);
-      this.PritDeliverApi.defaultHeaders.append('Accept', 'application/json');
+    if (!this.pritDeliverApi.defaultHeaders.has('Authorization')) {
+      this.pritDeliverApi.defaultHeaders.append('Content-Type', 'application/json');
+      this.pritDeliverApi.defaultHeaders.append('Authorization', `Bearer ${sessionStorage.getItem('token')}`);
+      this.pritDeliverApi.defaultHeaders.append('Accept', 'application/json');
     }
     return;
   }
