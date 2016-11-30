@@ -1,0 +1,135 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลลูกค้า</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjCustomerRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projCustomerList" [(selection)]="selectedProjCustomer" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลลูกค้า
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column>
+        <template pTemplate type="header">
+          ชื่อ - สกุล
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.fullName}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.fullName" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column>
+        <template pTemplate type="header">
+          ตำแหน่งในโครงการ
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.projPosition}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.projPosition" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column>
+        <template pTemplate type="header">
+          ตำแหน่งในหน่วยงาน
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.orgPosition}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.orgPosition" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column>
+        <template pTemplate type="header">
+          หมายเลขติดต่อ
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.tel}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.tel" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column>
+        <template pTemplate type="header">
+          Email
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.email}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.email" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column>
+        <template pTemplate type="header">
+          ชื่อหน่วยงาน
+        </template>
+        <template pTemplate let-i="rowIndex" let-projCustomer="rowData" type="body">
+          <p-inplace [disabled]="!projCustomer.edit" [active]="projCustomer.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCustomer.orgName}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projCustomer.orgName" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projCustomer="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projCustomer.edit" (click)="editProjCustomerRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projCustomer.edit" (click)="saveEditedProjCustomerRow(projCustomer, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projCustomer.edit" (click)="cancelEditedProjCustomerRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

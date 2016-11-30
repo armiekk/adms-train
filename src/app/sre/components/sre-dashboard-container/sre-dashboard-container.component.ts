@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SreDashboardContainerComponent implements OnInit {
 
-  programList: Array<{}>;
-  todoListData: Array<{}>;
+  private programList: Array<{}>;
+  private todoListData: Array<{}>;
 
   constructor() { }
 

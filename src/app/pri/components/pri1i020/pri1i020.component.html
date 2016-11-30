@@ -1,18 +1,21 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-    <h3>ขอบเขตของโครงการ</h3>
+    <h4><strong>ขอบเขตของโครงการ</strong></h4>
     <hr>
   </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
   <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
-    <p-dataTable [value]="projScopeList" selectionMode="multiple" [(selection)]="selectedProjScope" [rows]="5" [responsive]="true"
-      [paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-      [totalRecords]="5">
+    <p-dataTable [value]="projScopeList" [(selection)]="selectedProjScope" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
       <header>
         เงื่อนไขของโครงการ
-        <span style="float: right;">
-                <!--<a (click)="goToAddView()"><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></a>-->
-                <!--<a href="" (click)="delete($event)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>-->
-            </span>
       </header>
       <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
       <p-column [style]="{'width': '90%'}">
@@ -23,11 +26,11 @@
           <p-inplace [disabled]="!projScope.edit" [active]="projScope.edit">
             <span pInplaceDisplay>
               <p>
-                {{projScope.projScopeDetail}}
+                {{projScope.scoreDetail}}
               </p>
         </span>
             <span pInplaceContent>
-          <textarea pInputTextarea [(ngModel)]="projScope.projScopeDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <textarea pInputTextarea [(ngModel)]="projScope.scoreDetail" style="width: 99%" autoResize="autoResize"></textarea>
           <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
         </span>
           </p-inplace>
@@ -44,4 +47,4 @@
         </template>
       </p-column>
     </p-dataTable>
-</div>
+  </div>

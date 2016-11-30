@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot } from '@angular/router';
 // import { PritInformation } from '../api/pri-information';
-import { ApipriinformationApi } from '../api/pri-information/api/ApipriinformationApi';
+import { ApipriinformationApi } from '../api/pri1i010/api/ApipriinformationApi';
 import { PritInformationApi } from '../../shared/api/mockup-prit-information-service/api/PritInformationApi';
 import { PritInformation } from '../../shared/api/mockup-prit-information-service/model/PritInformation';
 import { StateService } from '../../shared/services/state/state.service';
@@ -21,7 +21,7 @@ export class PriStateResolverService implements Resolve<PritInformation> {
     let id: string;
     let pritInformation: PritInformation;
     if (id = route.params['id']) {
-      this.state.setState('EDIT');
+      this.state.mode = 'EDIT';
       this.setHeaders();
       // return this.priService.getPritInformation(id).map((response: PritInformation) => {
       //   return pritInformation = Object.assign(

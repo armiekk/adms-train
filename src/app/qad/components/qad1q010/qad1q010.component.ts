@@ -425,7 +425,7 @@ export class Qad1q010Component implements OnInit {
                                     .map(res => res.json().data)
                                     .subscribe((qaActivities: Array<any>) => {
                                         for (let i = 0; i < qaActivities.length; i++) {
-                                            qaActivities[i].workCategory = "Audit";
+                                            qaActivities[i].workCategory = 'Audit';
                                             qaActivities[i].workCategoryCode = 1;
                                             qaActivities[i].planAction = 1;
                                         }
@@ -451,11 +451,11 @@ export class Qad1q010Component implements OnInit {
     saveAndSendToApprove(choice: number) {
         switch (choice) {
             case 1:
-                //todo save to database
+                // todo save to database
                 this.displaySaveAndSendToApprove = false;
                 break;
             case 2:
-                //todo gen new version and save to database
+                // todo gen new version and save to database
                 this.displaySaveAndSendToApprove = false;
                 break;
         }

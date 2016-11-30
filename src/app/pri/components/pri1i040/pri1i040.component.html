@@ -1,0 +1,51 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>เงื่อนไขในการพัฒนาระบบ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjConditionRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projConditionList" [(selection)]="selectedProjCondition" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        เงื่อนไขในการพัฒนาระบบ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียดเงื่อนไขในการพัฒนาระบบ
+        </template>
+        <template let-i="rowIndex" let-projCondition="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projCondition.edit" [active]="projCondition.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projCondition.conditionDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projCondition.conditionDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projCondition="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projCondition.edit" (click)="editProjConditionRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projCondition.edit" (click)="saveEditedProjConditionRow(projCondition, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projCondition.edit" (click)="cancelEditedProjConditionRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

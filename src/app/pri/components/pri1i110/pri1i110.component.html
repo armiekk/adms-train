@@ -1,0 +1,50 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลอื่น ๆ ของโครงการ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjOtherRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projOtherList" [(selection)]="selectedProjOther" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลอื่น ๆ ของโครงการ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียด
+        </template>
+        <template pTemplate let-i="rowIndex" let-projOther="rowData" type="body">
+          <p-inplace [disabled]="!projOther.edit" [active]="projOther.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projOther.otherDetail}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projOther.otherDetail" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projOther="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projOther.edit" (click)="editProjOtherRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projOther.edit" (click)="saveEditedProjOtherRow(projOther, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projOther.edit" (click)="cancelEditedProjOtherRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

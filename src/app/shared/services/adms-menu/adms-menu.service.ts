@@ -4,13 +4,13 @@ import { FwMenuBean, FwRoleBean, FwActiveRoleBean, FwNodeBean } from '../../api/
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-interface Program {
+export interface Program {
   name: string;
   id: number;
   subProgram?: Array<SubProgram>;
 }
 
-interface SubProgram {
+export interface SubProgram {
   name: string;
   subProgramId: string;
   uri: string;

@@ -63,10 +63,10 @@ export class Qad1i030Component implements OnInit {
         this.selectedMenu = this.router.url;
         this.searchCondition.projType = 1;
         this.notifys = [
-            { label: "ADMS", value: "ADMS" },
-            { label: "Email", value: "Email" }
+            { label: 'ADMS', value: 'ADMS' },
+            { label: 'Email', value: 'Email' }
         ];
-        this.selectedNotifies = ["Email"]; //default value when open page
+        this.selectedNotifies = ['Email']; //default value when open page
         this.projAssignByQAMName = 'ประไพลักษณ์ วรยศโกวิท';//Todo when connect to service find qam have one or else
     }
 
@@ -516,7 +516,7 @@ export class Qad1i030Component implements OnInit {
                     for (let i = 0; i < this.assignQas.length; i++) {
                         this.assignQas[i].select = false;
                         this.assignQas[i].orderSeq = i + 1;
-                        if (this.assignQas[i].receivePlanDate == null) {
+                        if (this.assignQas[i].receivePlanDate === null) {
                             this.assignQas[i].showReceivePlanDate = '';
                         } else {
                             let receivePlanDate = new Date(this.assignQas[i].receivePlanDate);
@@ -527,7 +527,7 @@ export class Qad1i030Component implements OnInit {
                             }
                         }
 
-                        if (this.assignQas[i].assignQaDate == null) {
+                        if (this.assignQas[i].assignQaDate === null) {
                             this.assignQas[i].showAssignQaDate = '';
                         } else {
                             let assignQaDate = new Date(this.assignQas[i].assignQaDate);
@@ -567,7 +567,7 @@ export class Qad1i030Component implements OnInit {
                                     }
                                 }
 
-                                if (v.assignQaDate == null) {
+                                if (v.assignQaDate === null) {
                                     v.showAssignQaDate = '';
                                 } else {
                                     let assignQaDate = new Date(v.assignQaDate);
@@ -598,7 +598,7 @@ export class Qad1i030Component implements OnInit {
             }
         }
 
-        if (this.assignQas[index].select == true) {
+        if (this.assignQas[index].select === true) {
             this.selectedIndexAssignQa = index;
             this.projResponsibleQaName = this.assignQas[index].responsibleQaName;
             this.projAssignQaDate = new Date(this.assignQas[index].assignQaDate);
@@ -691,14 +691,14 @@ export class Qad1i030Component implements OnInit {
         this.selectedIndexAssignQa = undefined;
         this.projResponsibleQaName = '';
         this.projAssignQaDate = null;
-        this.selectedNotifies = ["Email"];
+        this.selectedNotifies = ['Email'];
         this.projRemark = '';
     }
 
     deleteRowAssignQa(assignQa: any) {
         let index = -1;
         index = this.assignQas.indexOf(assignQa);
-        if (this.assignQas[index].status == 'รับทราบและดำเนินการ') {
+        if (this.assignQas[index].status === 'รับทราบและดำเนินการ') {
             alert('ไม่สามารถลบได้');
         } else {
             let orderSeq = +this.assignQas[index].orderSeq;

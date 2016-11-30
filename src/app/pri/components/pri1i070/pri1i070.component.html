@@ -1,0 +1,59 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูล Project Monitoring (Meeting and Progress report)</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjMonitorRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projMonitorList" [(selection)]="selectedProjMonitor" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูล Project Monitoring (Meeting and Progress report)
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          Monitor Type
+        </template>
+        <template pTemplate let-i="rowIndex" let-projMonitor="rowData" type="body">
+          <p-dropdown [options]="constant.monitorType" [(ngModel)]="projMonitor.monitorType"></p-dropdown>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '80%'}">
+        <template pTemplate type="header">
+          Detail
+        </template>
+        <template let-i="rowIndex" let-projMonitor="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projMonitor.edit" [active]="projMonitor.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projMonitor.monitorDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projMonitor.monitorDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projMonitor="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projMonitor.edit" (click)="editProjMonitorRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projMonitor.edit" (click)="saveEditedProjMonitorRow(projMonitor, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projMonitor.edit" (click)="cancelEditedProjMonitorRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

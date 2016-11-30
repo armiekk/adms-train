@@ -11,7 +11,7 @@ import { FwMenuBean } from '../shared/api/cdgs-authorize-services/model/models';
 //   rememberMe?: boolean;
 // }
 
-interface Credentials {
+export interface Credentials {
   username?: string;
   password?: string;
 }
@@ -24,7 +24,7 @@ interface Credentials {
 export class LoginComponent implements OnInit {
 
   // credentials: Credentials = { rememberMe: true };
-  credentials: Credentials = {};
+  private credentials: Credentials = {};
 
   constructor(
     private router: Router,
@@ -36,8 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.userApi.defaultHeaders.append("Accept", "application/json");
-    this.userApi.defaultHeaders.append("Content-Type", "application/json");
+    this.userApi.defaultHeaders.append('Accept', 'application/json');
+    this.userApi.defaultHeaders.append('Content-Type', 'application/json');
     this.userApi.userLogin(this.credentials).subscribe((response) => {
       if (response) {
         sessionStorage.setItem('token', response.id);
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log('login failed');
       }
-    })
+    });
 
     if (!sessionStorage.getItem('menuList')) {
       this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {

@@ -1,0 +1,67 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลอุปกรณ์ของโครงการ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjAccessoriesRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projAccessoriesList" [(selection)]="selectedProjAccessories" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลอุปกรณ์ของโครงการ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '85%'}">
+        <template pTemplate type="header">
+          รายการ
+        </template>
+        <template pTemplate let-i="rowIndex" let-projAccessories="rowData" type="body">
+          <p-inplace [disabled]="!projAccessories.edit" [active]="projAccessories.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projAccessories.accName}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projAccessories.accName" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '5%'}">
+        <template pTemplate type="header">
+          จำนวน
+        </template>
+        <template pTemplate let-i="rowIndex" let-projAccessories="rowData" type="body">
+          <p-inplace [disabled]="!projAccessories.edit" [active]="projAccessories.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projAccessories.accQuantity}}
+              </p>
+            </span>
+            <span pInplaceContent>
+              <textarea pInputTextarea [(ngModel)]="projAccessories.accQuantity" style="width: 99%" autoResize="autoResize"></textarea>
+            </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projAccessories="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projAccessories.edit" (click)="editProjAccessoriesRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projAccessories.edit" (click)="saveEditedProjAccessoriesRow(projAccessories, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projAccessories.edit" (click)="cancelEditedProjAccessoriesRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

@@ -18,14 +18,14 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css",
+        "assets/vendor/retro/css/bootstrap.css",
+        "assets/vendor/retro/css/bootstrap-responsive.css",
         "assets/vendor/primeng/themes/omega/theme.css",
         "assets/vendor/font-awesome/css/font-awesome.min.css",
         "assets/vendor/fullcalendar/fullcalendar.min.css",
         "assets/vendor/primeng/primeng.css",
-        "assets/vendor/retro/css/bootstrap.css",
-        "assets/vendor/retro/css/bootstrap-responsive.css",
-        "assets/vendor/sliderTabs/styles/jquery.sliderTabs.css"
+        "assets/vendor/sliderTabs/styles/jquery.sliderTabs.css",
+        "styles.css"
       ],
       "scripts": [
         "assets/vendor/jquery/jquery-3.1.1.min.js",

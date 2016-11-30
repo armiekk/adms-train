@@ -1,0 +1,51 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
+    <h4><strong>ข้อมูลการส่งมอบโครงการ</strong></h4>
+    <hr>
+  </div>
+
+  <div class="ui-g-12">
+    <div class="table-manager-panel">
+      <button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="addProjDeliverRowData()"></button>
+      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
+    </div>
+  </div>
+
+  <div class="ui-g-12 ui-md-12 ui-lg-12 ui-lx-12">
+    <p-dataTable [value]="projDeliverList" [(selection)]="selectedProjDeliver" [rows]="5" [responsive]="true" [paginator]="true"
+      emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]" [totalRecords]="5">
+      <header>
+        ข้อมูลการส่งมอบโครงการ
+      </header>
+      <p-column [style]="{'width':'35px', 'text-align': 'center'}" selectionMode="multiple"></p-column>
+      <p-column [style]="{'width': '90%'}">
+        <template pTemplate type="header">
+          รายละเอียดข้อมูลการส่งมอบโครงการ
+        </template>
+        <template let-i="rowIndex" let-projDeliver="rowData" pTemplate type="body">
+          <p-inplace [disabled]="!projDeliver.edit" [active]="projDeliver.edit">
+            <span pInplaceDisplay>
+              <p>
+                {{projDeliver.deliverDetail}}
+              </p>
+        </span>
+            <span pInplaceContent>
+          <textarea pInputTextarea [(ngModel)]="projDeliver.deliverDetail" style="width: 99%" autoResize="autoResize"></textarea>
+          <!--<input type="text" [(ngModel)]="projScope.projScopeDetail" pInputText>-->
+        </span>
+          </p-inplace>
+        </template>
+      </p-column>
+      <p-column [style]="{'width': '10%'}">
+        <template pTemplate type="header">
+          -
+        </template>
+        <template let-i="rowIndex" let-projDeliver="rowData" pTemplate type="body">
+          <button type="button" pButton icon="fa-pencil" *ngIf="!projDeliver.edit" (click)="editProjDeliverRow(i)"></button>
+          <button type="button" pButton icon="fa-floppy-o" *ngIf="projDeliver.edit" (click)="saveEditedProjDeliverRow(projDeliver, i)"></button>
+          <button type="button" pButton icon="fa-ban" *ngIf="projDeliver.edit" (click)="cancelEditedProjDeliverRow(i)"></button>
+        </template>
+      </p-column>
+    </p-dataTable>
+  </div>
+</div>

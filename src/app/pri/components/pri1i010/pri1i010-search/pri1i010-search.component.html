@@ -1,6 +1,6 @@
 <p-growl [value]="msgs" life="3000"></p-growl>
-<p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" [responsive]="true"
-	[modal]="true">
+<p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" responsive="true"
+	[modal]="true" [style]="{'overflow-y': 'visible'}">
 	<div class="ui-widget-content" style="width: 100%">
 		<div class="ui-g">
 			<div class="ui-g-3">ประเภทโครงการ :</div>
@@ -15,23 +15,30 @@
 
 		<div class="ui-g">
 			<div class="ui-g-3">รหัสโครงการ :</div>
-			<div class="ui-g-9 ui-g-nopad">
-				<div *ngFor="let projType of constant.projectType">
-					<div class="ui-g-4">
-						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="seachCondition.projType"></p-radioButton>
-					</div>
-				</div>
+			<div class="ui-g-9">
+				<p-multiSelect [options]="projectListItem" defaultLabel="เลือกรหัสโครงการ" overlayVisible="true" [scrollHeight]="'150px'"
+					[(ngModel)]="selectedProject" [disabled]="seachCondition.projType === undefined"></p-multiSelect>
 			</div>
 		</div>
 
-
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<p-dataTable [value]="selectedProject" [rows]="5" [responsive]="true" scrollable="true" scrollHeight="150px" emptyMessage="ไม่ได้เลือกโครงการ"
+					[style]="{'height': '210px'}">
+					<header>
+						โครงการ
+					</header>
+					<p-column [style]="{'width': '20%'}" field="projCode" header="รหัสโครงการ"></p-column>
+					<p-column [style]="{'width': '80%'}" field="projName" header="ชื่อโครงการ"></p-column>
+				</p-dataTable>
+			</div>
+		</div>
 	</div>
 </p-dialog>
 <!--<app-breadcrumb></app-breadcrumb>-->
 <div class="content-container">
 	<p-fieldset legend="ค้นหาข้อมูลรายละเอียดโครงการ">
 		<form>
-
 			<div class="ui-g">
 				<div class="ui-g-1"></div>
 				<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-md-12 ui-g-nopad">
@@ -44,10 +51,10 @@
 					</div>
 				</div>
 				<div class="ui-g-6 ui-lg-6 ui-xl-6 ui-sm-12 ui-md-12 ui-g-nopad">
-					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
+					<div class="ui-g-4 ui-lg-4 ui-xl-3 ui-sm-12">
 						หน่วยงานเจ้าของโครงการ :
 					</div>
-					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12">
+					<div class="ui-g-8 ui-lg-8 ui-xl-9 ui-sm-12">
 						<input type="text" id="projOwnerOrg" pInputText [(ngModel)]="seachCondition.projOwnerOrg" name="projOwnerOrg" style="width: 100%"
 						/>
 					</div>
@@ -63,19 +70,21 @@
 					</div>
 					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12 ui-g-nopad">
 						<div class="ui-g-7 ui-lg-7 ui-xl-5 ui-sm-6 ui-md-4">
-							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" />
+							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" [readonly]="true"
+							/>
 						</div>
 						<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
-							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="isShowSearchProject = !isShowSearchProject"></button>
+							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()"></button>
 						</div>
 					</div>
 				</div>
 				<div class="ui-g-6 ui-lg-6 ui-xl-6 ui-sm-12 ui-md-12 ui-g-nopad">
-					<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
+					<div class="ui-g-4 ui-lg-4 ui-xl-3 ui-sm-12">
 						ชื่อโครงการ :
 					</div>
-					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12">
-						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" />
+					<div class="ui-g-8 ui-lg-8 ui-xl-9 ui-sm-12">
+						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" [readonly]="true"
+						/>
 					</div>
 				</div>
 				<div class="ui-g-1"></div>
@@ -102,7 +111,7 @@
 				<div class="ui-g-8 ui-md-9 ui-lg-8 ui-xl-8 ui-sm-11 ui-g-nopad">
 					<div class="ui-g-1 ui-sm-1 ui-md-1 ui-lg-1 ui-xl-1"></div>
 					<div class="ui-g-11 ui-sm-11 ui-md-11 ui-lg-11 ui-xl-11">
-						<button pButton type="button" label="ค้นหา" (click)="search()"></button>
+						<button pButton type="button" label="ค้นหา" (click)="searchPriInformation()"></button>
 						<button pButton type="button" label="ยกเลิก"></button>
 					</div>
 				</div>
@@ -111,44 +120,48 @@
 	</p-fieldset>
 	<br>
 	<p-fieldset legend="ตารางแสดงรายละเอียดโครงการ">
+
+		<div class="ui-g">
+			<div class="ui-g-12">
+				<div class="table-manager-panel">
+					<button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="goToAddView()"></button>
+					<button type="button" pButton label="ลบข้อมูล" icon="fa-trash" (click)="delete($event)"></button>
+				</div>
+			</div>
+		</div>
+
 		<div class="ui-g">
 			<div class="ui-g-12">
 				<p-dataTable [value]="pritInformationList" selectionMode="multiple" [(selection)]="selectedPriInfo" [rows]="5" [responsive]="true"
 					[paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
-					[totalRecords]="5" [style]="{'margin': '16px 0px'}">
+					[totalRecords]="5" (onRowClick)="onRowSelect($event)" [style]="{'margin': '16px 0px'}">
 					<header>
 						โครงการ
-						<span style="float: right;">
-						<a (click)="goToAddView()"><i class="fa fa-plus-square fa-lg" aria-hidden="true"></i></a>
-						<a href="" (click)="delete($event)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-            		</span>
 					</header>
 					<p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
 					<p-column field="projYear" header="ปี" [style]="{'text-align': 'center', 'width': '5%'}">
 						<template let-priInfo="rowData" pTemplate type="body">
-							<a [routerLink]="['/pri/edit', priInfo.projRef]" style="display:block; width: 100%">{{ priInfo.projYear }}</a>
+							{{ priInfo.projYear }}
 						</template>
 					</p-column>
 					<p-column field="projCode" header="รหัสโครงการ" [style]="{'text-align': 'center', 'width': '15%'}">
 						<template let-priInfo="rowData" pTemplate type="body">
-							<a [routerLink]="['/pri/edit', priInfo.projRef]" style="display:block; width: 100%">{{ priInfo.projCode }}</a>
+							{{ priInfo.projCode }}
 						</template>
 					</p-column>
 					<!--<p-column field="projOwnerOrg" header="หน่วยงาน" [style]="{'width': '20%'}">
 					<template let-priInfo="rowData" pTemplate type="body">
-						<a [routerLink]="['/pri/edit', priInfo.projRef]" style="display:block; width: 100%">{{ priInfo.projOwnerOrg }}</a>
+						{{ priInfo.projOwnerOrg }}
 					</template>
 				</p-column>-->
 					<p-column field="projName" header="ชื่อโครงการ">
 						<template let-priInfo="rowData" pTemplate type="body">
-							<a [routerLink]="['/pri/edit', priInfo.projRef]" style="display:block; width: 100%">{{ priInfo.projName }}</a>
+							{{ priInfo.projName }}
 						</template>
 					</p-column>
 					<p-column field="projStatus" header="สถานะโครงการ" [style]="{'width': '20%'}">
 						<template let-priInfo="rowData" pTemplate type="body">
-							<a [routerLink]="['/pri/edit', priInfo.projRef]" style="display:block; width: 100%">
-                    {{priInfo.projStatus | projectStatus}} 
-                </a>
+							{{priInfo.projStatus | projectStatus}}
 						</template>
 					</p-column>
 				</p-dataTable>

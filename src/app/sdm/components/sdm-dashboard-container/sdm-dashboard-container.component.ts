@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-interface ProgramDetail {
+export interface ProgramDetail {
   id?: string;
   name?: string;
   url?: string;
@@ -15,8 +15,8 @@ interface ProgramDetail {
 })
 export class SdmDashboardContainerComponent implements OnInit {
 
-  programList: Array<ProgramDetail>;
-  todoListData: Array<{}>;
+  private programList: Array<ProgramDetail>;
+  private todoListData: Array<{}>;
 
   constructor() { }
 
