@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class QadConstantsService {
     private _projectType: Array<{ label: string, value: number }>;
     private _workCategory: Array<{ label: string, value: number }>;
+    private _historyStatus: Array<{ label: string, value: number }>;
     private _notify: Array<{ label: string, value: number }>;
     private _documentCMMIType: Array<{ label: string, value: number }>;
 
@@ -18,6 +19,12 @@ export class QadConstantsService {
             { label: "Audit", value: 1 },
             { label: "Re-audit", value: 2 },
             { label: "Other", value: 3 }
+        ];
+
+        this._historyStatus = [
+            { label: "Active", value: 1 },
+            { label: "Non-Active", value: 2 },
+            { label: "Cancel", value: 3 }
         ];
 
         this._notify = [
@@ -42,6 +49,10 @@ export class QadConstantsService {
 
     get workCategory(): Array<{ label: string, value: number }> {
         return this._workCategory;
+    }
+
+    get historyStatus(): Array<{ label: string, value: number}> {
+        return this._historyStatus;
     }
 
     get documentCMMIType(): Array<{ label: string, value: number }> {

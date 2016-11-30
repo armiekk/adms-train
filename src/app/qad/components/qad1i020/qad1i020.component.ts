@@ -43,6 +43,10 @@ export class Qad1i020Component implements OnInit {
             });
     }
 
+    private set qaDatas(qaDatas: any[]) {
+        this.qaSchedules = qaDatas;
+    }
+
     selectActionPlanOption() {
         if (this.actionPlanOption === "file") {
             this.disableFileUpload = false;

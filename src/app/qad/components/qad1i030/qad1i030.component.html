@@ -91,7 +91,7 @@
 							</div>
 							<div class="ui-g">
 								<div class="ui-g-12">
-									<p-dataTable [value]="selectProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px">
+									<p-dataTable [value]="selectProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
 										<header>
 											โครงการ
 										</header>
@@ -119,7 +119,7 @@
 							</div>
 							<div class="ui-g">
 								<div class="ui-g-12">
-									<p-dataTable [value]="selectSites" [rows]="5" emptyMessage="ไม่ได้เลือกหน่วยงาน" [responsive]="true" scrollable="true" scrollHeight="400px">
+									<p-dataTable [value]="selectSites" [rows]="5" emptyMessage="ไม่ได้เลือกหน่วยงาน" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
 										<header>
 											หน่วยงาน
 										</header>
@@ -147,7 +147,7 @@
 							</div>
 							<div class="ui-g">
 								<div class="ui-g-12">
-									<p-dataTable [value]="selectEmps" [rows]="5" emptyMessage="ไม่ได้เลือกชื่อ" [responsive]="true" scrollable="true" scrollHeight="400px">
+									<p-dataTable [value]="selectEmps" [rows]="5" emptyMessage="ไม่ได้เลือกชื่อ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
 										<header>
 											ชื่อ
 										</header>
@@ -333,7 +333,7 @@
 						</div>
 						<div class="ui-g">
 							<div class="ui-g-12">
-								<p-dataTable [value]="selectAdditionProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px">
+								<p-dataTable [value]="selectAdditionProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
 									<header>
 										โครงการ
 									</header>
@@ -343,7 +343,7 @@
 							</div>
 						</div>
 						<footer>
-							<div class="ui-widget-content ui-helper-clearfix" style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+							<div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
 								<button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectAdditionProject();"></button>
 								<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectAdditionProject();"></button>
 							</div>
@@ -362,7 +362,7 @@
 						</div>
 						<div class="ui-g">
 							<div class="ui-g-12">
-								<p-dataTable [value]="selectAdditionSites" [rows]="5" emptyMessage="ไม่ได้เลือกหน่วยงาน" [responsive]="true" scrollable="true" scrollHeight="400px">
+								<p-dataTable [value]="selectAdditionSites" [rows]="5" emptyMessage="ไม่ได้เลือกหน่วยงาน" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
 									<header>
 										หน่วยงาน
 									</header>
@@ -372,7 +372,7 @@
 							</div>
 						</div>
 						<footer>
-							<div class="ui-widget-content ui-helper-clearfix" style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+							<div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
 								<button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectAdditionSite();"></button>
 								<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectAdditionSite();"></button>
 							</div>

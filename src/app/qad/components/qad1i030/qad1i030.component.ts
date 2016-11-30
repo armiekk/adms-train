@@ -62,6 +62,7 @@ export class Qad1i030Component implements OnInit {
     ngOnInit() {
         this.selectedMenu = this.router.url;
         this.searchCondition.projType = 1;
+        this.searchAdditionCondition.projType = 1;
         this.notifys = [
             { label: "ADMS", value: "ADMS" },
             { label: "Email", value: "Email" }

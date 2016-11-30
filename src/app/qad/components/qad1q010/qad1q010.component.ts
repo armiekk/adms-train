@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
-import { SelectItem } from 'primeng/primeng';
+import { SelectItem, MenuItem } from 'primeng/primeng';
 
 import { PritInformation } from '../../api/prit-information/model/PritInformation';
 import { EmptProjectManager } from '../../api/empt-project-manager/model/EmptProjectManager';
@@ -10,6 +10,10 @@ import { PritInformationApi } from '../../api/prit-information/api/PritInformati
 
 import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
+
+import { Qad1i010Component } from '../../components/qad1i010/qad1i010.component';
+import { Qad1i020Component } from '../../components/qad1i020/qad1i020.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 interface SearchCondition {
     projType?: number;
@@ -47,6 +51,10 @@ export class Qad1q010Component implements OnInit {
     private menus: SelectItem[];
     private selectedMenu: string;
     private searchCondition: SearchCondition = {};
+    private currentSelectedTab: string;
+    private _selectedTab: any = Qad1i020Component;
+    private qaDatas: any[] = [];
+    private tabMenuItem: MenuItem[];
     private historys: Array<any> = [];
     private qaSchedulesAll: Array<any> = [];
     private qaSchedules: Array<any> = [];
@@ -66,6 +74,11 @@ export class Qad1q010Component implements OnInit {
     ngOnInit() {
         this.selectedMenu = this.router.url;
         this.searchCondition.projType = 1;
+        this.tabMenuItem = [
+            { label: 'QA Schedule', command: (event) => { this.selectedTab = event.item.label; this.currentSelectedTab = event.item.label; }},
+            { label: 'QA Plan', command: (event) => { this.selectedTab = event.item.label; this.currentSelectedTab = event.item.label; }}
+        ];
+        this.currentSelectedTab = this.tabMenuItem[0].label;
     }
 
     nav() {
@@ -400,6 +413,7 @@ export class Qad1q010Component implements OnInit {
                 }
 
                 if (this.historys.length > 0) {
+                    this.selectedTab = 'LOADING';
                     this.http.get('app/qad/resources/data/qaSchedulesMockData.json')
                         .map(res => res.json().data)
                         .subscribe((qaSchedules: Array<any>) => {
@@ -412,6 +426,10 @@ export class Qad1q010Component implements OnInit {
                                 if (this.qaSchedules[i].activityLevel === 0) {
                                     this.qaSchedules[i].hidden = true;
                                 }
+                            }
+
+                            if (this.currentSelectedTab === 'QA Schedule') {
+                                this.selectedTab = this.currentSelectedTab;
                             }
                         });
 
@@ -432,7 +450,15 @@ export class Qad1q010Component implements OnInit {
 
                                         this.qaPlansAll.push(qaActivities);
                                         this.qaPlans = qaActivities;
+                                        if (this.currentSelectedTab === 'QA Plan') {
+                                            this.selectedTab = this.currentSelectedTab;
+                                        }
                                     });
+
+                            } else {
+                                if (this.currentSelectedTab === 'QA Plan') {
+                                    this.selectedTab = this.currentSelectedTab;
+                                }
                             }
                         });
 
@@ -471,6 +497,7 @@ export class Qad1q010Component implements OnInit {
 
     private selectedHistory: any;
     onRowSelectHistory() {
+        this.selectedTab = 'LOADING';
         this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === this.selectedHistory.version);
         for (let i = 0; i < this.qaSchedules.length; i++) {
             this.qaSchedules[i].orderSeq = i.toString();
@@ -482,5 +509,24 @@ export class Qad1q010Component implements OnInit {
         }
 
         this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === this.selectedHistory.version);
+        setTimeout(() => {
+            this.selectedTab = this.currentSelectedTab;
+        }, 100);
+    }
+
+    private set selectedTab(tabLabel: string) {
+        if (tabLabel === 'QA Schedule') {
+            this.qaDatas = this.qaSchedules;
+            this._selectedTab = Qad1i020Component;
+        } else if (tabLabel === 'QA Plan') {
+            this.qaDatas = this.qaPlans;
+            this._selectedTab = Qad1i010Component;
+        } else if (tabLabel === 'LOADING') {
+            this._selectedTab = LoadingComponent;
+        }
+    }
+
+    private get selectedTab() {
+        return this._selectedTab;
     }
 }
