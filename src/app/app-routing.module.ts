@@ -10,6 +10,7 @@ const routes: Routes = [
     { path: 'asm', loadChildren: './asm/asm.module#AsmModule' },
     { path: 'qad', loadChildren: './qad/qad.module#QadModule' },
     { path: 'sdm', loadChildren: './sdm/sdm.module#SdmModule' },
+    { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

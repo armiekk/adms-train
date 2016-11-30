@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
-import { Ng2Webstorage } from 'ng2-webstorage';
 
 // services 
 import { AuthApi } from './shared/api/user/api/AuthApi';
@@ -26,7 +25,6 @@ import { AppComponent } from './app.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    Ng2Webstorage,
     AppRoutingModule,
   ],
   providers: [AuthGuardService, StateService, UserApi, PritInformationApi, AuthorizeService.UserApi , AdmsMenuService ],
