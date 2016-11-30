@@ -19,6 +19,7 @@ import { DrawerComponent } from './components/drawer/drawer.component';
 import { LabelComponent } from './components/label/label/label.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AdmsTabManagerComponent } from './components/adms-tab-manager/adms-tab-manager.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
     declarations: [
@@ -30,6 +31,7 @@ import { AdmsTabManagerComponent } from './components/adms-tab-manager/adms-tab-
         LabelComponent,
         BreadcrumbComponent,
         AdmsTabManagerComponent,
+        LoadingComponent,
     ],
     imports: [
         RouterModule, CommonModule, FormsModule, 

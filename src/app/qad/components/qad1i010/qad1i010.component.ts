@@ -70,6 +70,10 @@ export class Qad1i010Component implements OnInit {
         this.projVersion = "1.0";
     }
 
+    private set qaDatas(qaDatas: any[]) {
+        this.qaPlans = qaDatas;
+    }
+
     private display: boolean = false;
     private editQaPlan: any;
     private dialogQaPlan: any;

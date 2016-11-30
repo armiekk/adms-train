@@ -1,9 +1,9 @@
 { 
     "data":[
-        { "projCode": "D06-5011", "projName": "(SPM-198/05) การจัดจ้างทำเว็บไซด์การรับฟังความคิดเห็นของประชาชนของศูนนย์บริการประชาชน)", "version": "1.0", "date": 1406566800000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "Active", "sendMail": true },
-        { "projCode": "D13-5042", "projName": "ประกวดราคาจ้างโครงการพัฒนาระบบฐานข้อมูลการประกันภัย", "version": "1.0", "date": 1406653200000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "Active", "sendMail": false },
-        { "projCode": "D13-5023", "projName": "โครงการพัฒนาระบบจัดเก็บเอกสารทะเบียนเรือกรมเจ้าท่า", "version": "1.0", "date": 1406826000000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "Cancel", "sendMail": false },
-        { "projCode": "D16-5027", "projName": "โครงการพัฒนาและปรับปรุงระบบเว็บไซต์", "version": "1.0", "date": 1407776400000, "changeDescription": "", "preparedBy": "ณัฐรี เตชะทวีกุล", "status": "Non-Active", "sendMail": true },
-        { "projCode": "D16-5027", "projName": "โครงการพัฒนาและปรับปรุงระบบเว็บไซต์", "version": "2.0", "date": 1409504400000, "changeDescription": "แก้ไข Master Plan", "preparedBy": "ณัฐรี เตชะทวีกุล", "status": "Active", "sendMail": true }
+        { "projCode": "D06-5011", "projName": "(SPM-198/05) การจัดจ้างทำเว็บไซด์การรับฟังความคิดเห็นของประชาชนของศูนนย์บริการประชาชน)", "version": "1.0", "date": 1406566800000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "1", "sendMail": true },
+        { "projCode": "D13-5042", "projName": "ประกวดราคาจ้างโครงการพัฒนาระบบฐานข้อมูลการประกันภัย", "version": "1.0", "date": 1406653200000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "1", "sendMail": false },
+        { "projCode": "D13-5023", "projName": "โครงการพัฒนาระบบจัดเก็บเอกสารทะเบียนเรือกรมเจ้าท่า", "version": "1.0", "date": 1406826000000, "changeDescription": "", "preparedBy": "ศิริรุ้ง รัศมีวงศ์พร", "status": "3", "sendMail": false },
+        { "projCode": "D16-5027", "projName": "โครงการพัฒนาและปรับปรุงระบบเว็บไซต์", "version": "1.0", "date": 1407776400000, "changeDescription": "", "preparedBy": "ณัฐรี เตชะทวีกุล", "status": "2", "sendMail": true },
+        { "projCode": "D16-5027", "projName": "โครงการพัฒนาและปรับปรุงระบบเว็บไซต์", "version": "2.0", "date": 1409504400000, "changeDescription": "แก้ไข Master Plan", "preparedBy": "ณัฐรี เตชะทวีกุล", "status": "1", "sendMail": true }
     ]
 }
