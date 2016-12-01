@@ -1,0 +1,83 @@
+<div *ngFor="let table of documentChecks; let i = index">
+	<p-dataTable [value]="table.value" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true">
+		<p-headerColumnGroup>
+			<p-row>
+				<p-column [style]="{'width': '50px'}"></p-column>
+				<p-column></p-column>
+				<p-column [style]="{'width': '50px'}"></p-column>
+				<p-column [style]="{'width': '50px'}"></p-column>
+				<p-column [style]="{'width': '25%'}"></p-column>
+				<p-column [style]="{'width': '10%'}"></p-column>
+			</p-row>
+			<p-row>
+				<p-column [header]="table.header" colspan="6" [style]="{'text-align': 'left'}"></p-column>
+			</p-row>
+		</p-headerColumnGroup>
+		<p-column field="orderSeq" header="No."></p-column>
+		<p-column field="documentCheckName" header="Document Check List"></p-column>
+		<p-column field="send" header="ทำ">
+			<template let-data="rowData" pTemplate type="body">
+				<p-checkbox [(ngModel)]="data.send" [binary]="true"></p-checkbox>
+			</template>
+		</p-column>
+		<p-column field="send" header="ไม่ทำ">
+			<template let-data="rowData" pTemplate type="body">
+				<p-checkbox [(ngModel)]="!data.send" [disabled]="true" [binary]="true"></p-checkbox>
+			</template>
+		</p-column>
+		<p-column field="remark" header="Remark">
+			<template let-data="rowData" pTemplate type="body">
+				<input type="text" pInputText style="width: 90%" [(ngModel)]="data.remark" />
+			</template>
+		</p-column>
+		<p-column>
+			<template let-data="rowData" pTemplate type="body">
+				<span class="fa fa-file-text" style="cursor: pointer; font-size: 20px;" (click)="duplicateRowData(i, data)"></span>
+				<span class="fa fa-pencil" style="cursor: pointer; font-size: 20px;" (click)="showDialogEditCMMI(data);"></span>
+				<span class="fa fa-trash" style="cursor: pointer; font-size: 20px;" (click)="deleteRowData(i, data);"></span>
+			</template>
+		</p-column>
+	</p-dataTable>
+</div>
+<p-dialog header="แก้ไขรายการ" [(visible)]="displayDialog" modal="modal" [minWidth]="300" [minHeight]="350" [width]="500" [appendTo]="body">
+	<div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                No.
+			</div>
+			<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+				{{dialogCMMI.orderSeq}}
+			</div>
+		</div>
+		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                <label for="documentCheckName">Document Check Name</label>
+			</div>
+			<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+				<input type="text" id="documentCheckName" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" autofocus [(ngModel)]="dialogCMMI.documentCheckName" />
+			</div>
+		</div>
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                เอกสารที่ต้องนำส่ง (ทำ/ไม่ทำ)
+			</div>
+			<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+				<p-checkbox [(ngModel)]="dialogCMMI.send" [binary]="true"></p-checkbox>
+			</div>
+		</div>
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+			<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                <label for="remark">Remark</label>
+			</div>
+			<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+				<input type="text" id="remark" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" autofocus [(ngModel)]="dialogCMMI.remark" />
+			</div>
+		</div>
+	</div>
+    <footer>
+		<div class="ui-widget-content ui-helper-clearfix" style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+			<button type="button" pButton label="แก้ไข" icon="fa fa-check" (click)="editDialogEditCMMI();"></button>
+			<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelDialogEditCMMI();"></button>
+		</div>
+	</footer>
+</p-dialog>
