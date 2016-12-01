@@ -174,6 +174,14 @@ export class Pri1i010SaveComponent implements OnInit {
     }  
   }
 
+  submitSelectProject(){
+    
+  }
+
+  cancelSelectProject(){
+    
+  }
+
   private get selectedTab() {
     return this._selectedTab;
   }
