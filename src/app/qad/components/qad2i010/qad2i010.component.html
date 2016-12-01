@@ -16,10 +16,10 @@
                         </div>
                         <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-4 ui-sm-12 ui-g-nopad">
                             <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
-                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%" [(ngModel)]="searchCondition.projCode" (change)="clearTextProjName();" />
+                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%" [(ngModel)]="searchCondition.projCode" (change)="onChangeTextProject();" />
                             </div>
                             <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
-                                <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProjCode(searchCondition.projCode);"></button>
+                                <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProject();"></button>
                             </div>
                         </div>
                     </div>
@@ -56,48 +56,129 @@
                         <div class="ui-g-6 ui-xl-7 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad"></div>
                     </div>
                 </div>
-                <p-dialog header="ค้นหา Project" [(visible)]="displaySearchProjCode" modal="modal" [responsive]="true" [minWidth]="300" [minHeight]="500" [width]="500" [appendTo]="body">
-                    <div class="ui-g" style="padding-bottom: 0.5em;">
-                        <span>
-                            <input type="text" pInputText [(ngModel)]="searchProjCode.projCode" />
-                            <button type="button" pButton label="ค้นหา" (click)="searchByProjCode();"></button>
-                        </span>
-                    </div>
-                    <div class="ui-g">
-                        <p-dataTable [value]="resultSearchProjects" [rows]="5" [paginator]="true" [pageLinks]="3" selectionMode="single" [(selection)]="selectedProj" (onRowSelect)="onRowSelectProj();" emptyMessage="ไม่พบข้อมูลที่ค้นหา">
-                            <p-column field="projCode" header="Project Code" [style]="{'width': '100px'}"></p-column>
-                            <p-column field="projName" header="Project Name"></p-column>
-                        </p-dataTable>
+
+                <p-dialog header="ค้นหาโครงการ" [(visible)]="displaySearchProject" modal="modal" [resizable]="false" dragable="false" [width]="700" [responsive]="true" [appendTo]="body">
+                    <div class="ui-widget-content" style="width: 100%">
+                        <div class="ui-g">
+                            <div class="ui-g-3">ประเภทโครงการ:</div>
+                            <div class="ui-g-9 ui-g-nopad">
+                                <div *ngFor="let projType of qadConstant.projectType">
+                                    <div class="ui-g-4">
+                                        <p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="searchCondition.projType"></p-radioButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-g-3">รหัสโครงการ:</div>
+                            <div class="ui-g-9">
+                                <p-dropdown [options]="projects" [scrollHeight]="'150px'" [(ngModel)]="selectProject" [style]="{'width':'150px'}" filter="filter"
+                                    [disabled]="searchCondition.projType === undefined" (onChange)="onChangeSelectProject();"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <p-dataTable [value]="selectProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
+                                    <header>
+                                        โครงการ
+                                    </header>
+                                    <p-column field="projCode" header="รหัสโครงการ"></p-column>
+                                    <p-column field="projName" header="ชื่อโครงการ"></p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                        <footer>
+                            <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                                <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectProject();"></button>
+                                <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
+                            </div>
+                        </footer>
                     </div>
                 </p-dialog>
             </p-fieldset>
         </div>
     </div>
+    <br />
     <div class="ui-g">
         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
             <p-fieldset legend="CMMI Document">
                 <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                    <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-12 ui-sm-12">
                         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
                             <p-fieldset legend="Template CMMI">
                                 <p-menu [model]="templateCMMIItems"></p-menu>
                             </p-fieldset>
                         </div>
-                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                            <p-dataTable [value]="statusSystemDocuments">
+                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad" style="padding-top: 0.5em;">
+                            <p-dataTable [value]="systemDocumentStatus" emptyMessage="ไม่มีรายการข้อมูลที่แสดง">
                                 <header>
                                     ตารางสถานะการบันทึกข้อมูล
                                 </header>
-                                <p-column field="orderSeq" header="-"></p-column>
-                                <p-column field="documentType" header="Document Type"></p-column>
+                                <p-column field="orderSeq" header="-" [style]="{'width': '50px', 'text-align': 'center'}"></p-column>
+                                <p-column field="documentType" header="Document Type" [style]="{'width': '30%'}"></p-column>
                                 <p-column field="documentName" header="ระบบ/เอกสาร"></p-column>
-                                <p-column field="status" header="">
+                                <p-column field="status" header="" [style]="{'width': '50px', 'text-align': 'center'}">
 
                                 </p-column>
                             </p-dataTable>
                         </div>
                     </div>
-                    <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-12 ui-sm-12">
+                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                            <p-fieldset legend="Document Detail">
+                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                            <label>Document Type:</label>
+                                        </div>
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                            <p-dropdown [options]="documentTypes" [style]="{'width': '150px'}" [autoWidth]="false" [(ngModel)]="selectDocumentType" (onChange)="onChangeSelectDocumentType();"></p-dropdown>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                            <label>Reference Group:</label>
+                                        </div>
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                            <p-dropdown [options]="referenceGroups" [style]="{'width': '150px'}" [autoWidth]="false" [(ngModel)]="selectReferenceGroup"></p-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                            <label>System:</label>
+                                        </div>
+                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                            <p-multiSelect [options]="systemDocuments" [scrollHeight]="'150px'" [(ngModel)]="selectSystemDocuments"></p-multiSelect>
+                                        </div>
+                                    </div>
+                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                        Selected System: {{selectSystemDocuments}}
+                                    </div>
+                                </div>
+                            </p-fieldset>
+                            <br />
+                            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                <p-dataTable [value]="documentCMMICheckLists" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true">
+                                    <p-headerColumnGroup>
+                                        <p-row>
+                                            <p-column header="No." rowspan="2" [style]="{'width': '50px'}"></p-column>
+                                            <p-column header="Document Check List" rowspan="2"></p-column>
+                                            <p-column header="เอกสารที่ต้องนำส่ง" colspan="2" [style]="{'width': '100px'}"></p-column>
+                                            <p-column header="Remark" rowspan="2" [style]="{'width': '25%'}"></p-column>
+                                            <p-column rowspan="2" [style]="{'width': '10%'}"></p-column>
+                                        </p-row>
+                                        <p-row>
+                                            <p-column header="ทำ"></p-column>
+                                            <p-column header="ไม่ทำ"></p-column>
+                                        </p-row>
+                                    </p-headerColumnGroup>
+                                </p-dataTable>
+
+                                <app-qad1-tab-content [componentData]="selectedTab" [qaDatas]="qaDatas"></app-qad1-tab-content>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </p-fieldset>
