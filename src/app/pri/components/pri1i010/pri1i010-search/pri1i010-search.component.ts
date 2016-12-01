@@ -89,6 +89,14 @@ export class Pri1i010SearchComponent implements OnInit {
     this.router.navigate(['pri/Pri1i010/add']);
   }
 
+  submitSelectProject(){
+    
+  }
+
+  cancelSelectProject(){
+    
+  }
+
   setHeaders() {
     if (!this.priService.defaultHeaders.has('Authorization')) {
       this.priService.defaultHeaders.append('Content-Type', 'application/json');
