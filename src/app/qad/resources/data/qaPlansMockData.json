@@ -3,7 +3,7 @@
         {
             "orderSeq": "1",
             "activityLevel": 1,
-            "qaActivties": "Create QA Plan1",
+            "qaActivities": "Create QA Plan1",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -15,7 +15,7 @@
         {
             "orderSeq": "2",
             "activityLevel": 1,
-            "qaActivties": "Revise QA Plan",
+            "qaActivities": "Revise QA Plan",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -27,7 +27,7 @@
         {
             "orderSeq": "3",
             "activityLevel": 1,
-            "qaActivties": "Promote baseline",
+            "qaActivities": "Promote baseline",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -39,7 +39,7 @@
         {
             "orderSeq": "4",
             "activityLevel": 1,
-            "qaActivties": "Create QA Audit Checklist",
+            "qaActivities": "Create QA Audit Checklist",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -51,7 +51,7 @@
         {
             "orderSeq": "5",
             "activityLevel": 1,
-            "qaActivties": "Revise QA Checklist",
+            "qaActivities": "Revise QA Checklist",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -63,7 +63,7 @@
         {
             "orderSeq": "6",
             "activityLevel": 1,
-            "qaActivties": "Perform QA Audit โครงการพัฒนาและปรับปรุงระบบเว็บไซต์/งวด 1 (test)",
+            "qaActivities": "Perform QA Audit โครงการพัฒนาและปรับปรุงระบบเว็บไซต์/งวด 1 (test)",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -75,7 +75,7 @@
         {
             "orderSeq": "6.1",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Planning",
+            "qaActivities": "QA Audit Phase Planning",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -87,7 +87,7 @@
         {
             "orderSeq": "6.2",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Requirement",
+            "qaActivities": "QA Audit Phase Requirement",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -99,7 +99,7 @@
         {
             "orderSeq": "6.3",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase System Design",
+            "qaActivities": "QA Audit Phase System Design",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -111,7 +111,7 @@
         {
             "orderSeq": "6.4",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Coding & Testing",
+            "qaActivities": "QA Audit Phase Coding & Testing",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -123,7 +123,7 @@
         {
             "orderSeq": "6.5",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase UAT & Installation",
+            "qaActivities": "QA Audit Phase UAT & Installation",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -135,7 +135,7 @@
         {
             "orderSeq": "6.6",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Implementation",
+            "qaActivities": "QA Audit Phase Implementation",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -147,7 +147,7 @@
         {
             "orderSeq": "6.7",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Closure",
+            "qaActivities": "QA Audit Phase Closure",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -159,7 +159,7 @@
         {
             "orderSeq": "7",
             "activityLevel": 1,
-            "qaActivties": "Perform QA Audit ระบบ XYZ/งวด 2 (test)",
+            "qaActivities": "Perform QA Audit ระบบ XYZ/งวด 2 (test)",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -171,7 +171,7 @@
         {
             "orderSeq": "7.1",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Planning",
+            "qaActivities": "QA Audit Phase Planning",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -183,7 +183,7 @@
         {
             "orderSeq": "7.2",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Requirement",
+            "qaActivities": "QA Audit Phase Requirement",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -195,7 +195,7 @@
         {
             "orderSeq": "7.3",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase System Design",
+            "qaActivities": "QA Audit Phase System Design",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -207,7 +207,7 @@
         {
             "orderSeq": "7.4",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Coding & Testing",
+            "qaActivities": "QA Audit Phase Coding & Testing",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -219,7 +219,7 @@
         {
             "orderSeq": "7.5",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase UAT & Installation",
+            "qaActivities": "QA Audit Phase UAT & Installation",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -231,7 +231,7 @@
         {
             "orderSeq": "7.6",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Implementation",
+            "qaActivities": "QA Audit Phase Implementation",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -243,7 +243,7 @@
         {
             "orderSeq": "7.7",
             "activityLevel": 2,
-            "qaActivties": "QA Audit Phase Closure",
+            "qaActivities": "QA Audit Phase Closure",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -255,7 +255,7 @@
         {
             "orderSeq": "8",
             "activityLevel": 1,
-            "qaActivties": "Perform QA Re-audit",
+            "qaActivities": "Perform QA Re-audit",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -267,7 +267,7 @@
         {
             "orderSeq": "9",
             "activityLevel": 1,
-            "qaActivties": "QA Closure Project",
+            "qaActivities": "QA Closure Project",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -279,7 +279,7 @@
         {
             "orderSeq": "9.1",
             "activityLevel": 2,
-            "qaActivties": "Summarize QA Report",
+            "qaActivities": "Summarize QA Report",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -291,7 +291,7 @@
         {
             "orderSeq": "9.2",
             "activityLevel": 2,
-            "qaActivties": "Quality Trend report",
+            "qaActivities": "Quality Trend report",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -303,7 +303,7 @@
         {
             "orderSeq": "10",
             "activityLevel": 1,
-            "qaActivties": "Join Meeting",
+            "qaActivities": "Join Meeting",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -315,7 +315,7 @@
         {
             "orderSeq": "10.1",
             "activityLevel": 2,
-            "qaActivties": "Kick-off Meeting",
+            "qaActivities": "Kick-off Meeting",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -327,7 +327,7 @@
         {
             "orderSeq": "10.2",
             "activityLevel": 2,
-            "qaActivties": "Review QA Plan and Checklist Meeting",
+            "qaActivities": "Review QA Plan and Checklist Meeting",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -339,7 +339,7 @@
         {
             "orderSeq": "11",
             "activityLevel": 1,
-            "qaActivties": "Document Review (Optional)",
+            "qaActivities": "Document Review (Optional)",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -351,7 +351,7 @@
         {
             "orderSeq": "12",
             "activityLevel": 1,
-            "qaActivties": "QA Consult Project",
+            "qaActivities": "QA Consult Project",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,
@@ -363,7 +363,7 @@
         {
             "orderSeq": "12.1",
             "activityLevel": 2,
-            "qaActivties": "Establish Standard Document for project",
+            "qaActivities": "Establish Standard Document for project",
             "workCategory": "Audit",
             "workCategoryCode": 1,
             "planAction": 1,

@@ -11,42 +11,6 @@ import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
 import { Subscription } from 'rxjs';
 
-interface SearchCondition {
-    projCode?: string;
-    projName?: string;
-    projCreateByQA?: string;
-    projCreateDate?: Date;
-}
-
-interface SearchProjCode {
-    projCode?: string;
-    projName?: string;
-}
-
-interface qaPlan {
-    qadtActivtiesRef?: number;
-    orderSeq?: number;
-    prevQadtActivtiesRef?: string;
-    activityLevel?: number;
-    qaActivties?: string;
-    versionNo?: number;
-    owner?: string;
-    createBy?: string;
-    createDate?: Date;
-    updateBy?: string;
-    updateDate?: Date;
-    workCategoryCode?: number;
-    workCategory?: string;
-    planAction?: number;
-    planEffort?: number;
-    remark?: string;
-}
-
-interface Emp {
-    thainame?: string;
-    engname?: string;
-}
-
 @Component({
     selector: 'app-qad1i010',
     templateUrl: './qad1i010.component.html',
@@ -56,7 +20,7 @@ interface Emp {
 export class Qad1i010Component implements OnInit {
     private projVersionDate: Date;
     private projVersion: string;
-    @Input() qaPlans: Array<any>;
+    @Input() qaPlans: any[];
 
     constructor(private locale: ThaiCalendarService,
                 private qadtActivitesService: QadtActivtiesApi,
@@ -65,49 +29,12 @@ export class Qad1i010Component implements OnInit {
     }
 
     ngOnInit() {
-        this.dialogQaPlan = {};
         this.projVersionDate = new Date();
         this.projVersion = "1.0";
     }
 
     private set qaDatas(qaDatas: any[]) {
         this.qaPlans = qaDatas;
-    }
-
-    private display: boolean = false;
-    private editQaPlan: any;
-    private dialogQaPlan: any;
-    private newQaActivities: string;
-    private newPlanAction: number;
-    showDialogEditQaActivities(qaPlan: any) {
-        this.editQaPlan = qaPlan;
-        this.dialogQaPlan.orderSeq = qaPlan.orderSeq;
-        this.dialogQaPlan.qaActivities = qaPlan.qaActivities;
-        this.dialogQaPlan.workCategory = qaPlan.workCategory;
-        this.dialogQaPlan.workCategoryCode = qaPlan.workCategoryCode;
-        this.dialogQaPlan.planAction = qaPlan.planAction;
-        this.dialogQaPlan.planEffort = qaPlan.planEffort;
-        this.dialogQaPlan.remark = qaPlan.remark;
-        this.display = true;
-    }
-
-    editDialogEditQaActivities() {
-        if (this.editQaPlan != null) {
-            this.editQaPlan.qaActivities = this.dialogQaPlan.qaActivities;
-            this.editQaPlan.workCategory = this.dialogQaPlan.workCategory;
-            this.editQaPlan.workCategoryCode = this.dialogQaPlan.workCategoryCode;
-            this.editQaPlan.planAction = this.dialogQaPlan.planAction;
-            this.editQaPlan.planEffort = this.dialogQaPlan.planEffort;
-            this.editQaPlan.remark = this.dialogQaPlan.remark;
-        }
-
-        this.editQaPlan = null;
-        this.display = false;
-    }
-
-    cancelDialogEditQaActivities() {
-        this.editQaPlan = null;
-        this.display = false;
     }
 
     changeDisplayWorkCategory() {
@@ -134,7 +61,7 @@ export class Qad1i010Component implements OnInit {
             }
 
             let c = this.qaPlans.slice(index, endIndex + 1);
-            let r: Array<any> = [];
+            let r: any[] = [];
             if (endIndex + 1 < this.qaPlans.length) {
                 r = this.qaPlans.splice(endIndex + 1, this.qaPlans.length - 1 - endIndex);
             }
@@ -202,6 +129,20 @@ export class Qad1i010Component implements OnInit {
             newQaPlan.orderSeq = currentDataOrderSeqArray.join('.');
             this.qaPlans.push(newQaPlan);
         }
+    }
+
+    editRowQaPlan(qaPlan: any) {
+        qaPlan.tmpQaActivities = qaPlan.qaActivities;
+        qaPlan.edit = true;
+    }
+
+    saveRowQaPlan(qaPlan: any) {
+        qaPlan.edit = false;
+    }
+
+    cancelEditRowQaPlan(qaPlan: any) {
+        qaPlan.qaActivities = qaPlan.tmpQaActivities;
+        qaPlan.edit = false;
     }
 
     deleteRowQaPlan(qaPlan: any) {

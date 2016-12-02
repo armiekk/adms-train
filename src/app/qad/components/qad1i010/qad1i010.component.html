@@ -56,7 +56,18 @@
 					QA Plan
 				</header>
 				<p-column field="orderSeq" header="No." [style]="{'width': '40px'}"></p-column>
-				<p-column field="qaActivities" header="QA Activites" [style]="{'width': '30%'}"></p-column>
+				<p-column field="qaActivities" header="QA Activites" [style]="{'width': '30%'}">
+					<template let-qaPlan="rowData" pTemplate type="body">
+						<p-inplace [active]="qaPlan.edit" [disabled]="!qaPlan.edit">
+							<span pInplaceDisplay>
+								{{qaPlan.qaActivities}}
+							</span>
+							<span pInplaceContent>
+								<input type="text" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" [(ngModel)]="qaPlan.qaActivities" />
+							</span>
+						</p-inplace>
+					</template>
+				</p-column>
 				<p-column field="workCategory" header="Work Category" [style]="{'width': '15%', 'overflow': 'visible'}">
 					<template let-col let-qaPlan="rowData" pTemplate type="body">
 						<p-dropdown [options]="qadConstant.workCategory" [style]="{'width': '80%'}" [(ngModel)]="qaPlan.workCategoryCode"></p-dropdown>
@@ -79,74 +90,14 @@
 				</p-column>
 				<p-column field="icon" header="-" [style]="{'width': '10%', 'text-align': 'center'}">
 					<template let-qaPlan="rowData" pTemplate type="body">
-						<span class="fa fa-file-text fa-lg" style="cursor: pointer" (click)="duplicateRowQaPlan(qaPlan)"></span>
-						<span class="fa fa-pencil fa-lg" style="cursor: pointer" (click)="showDialogEditQaActivities(qaPlan);"></span>
-						<span class="fa fa-trash fa-lg" style="cursor: pointer" (click)="deleteRowQaPlan(qaPlan);"></span>
+						<span *ngIf="!qaPlan.edit" class="fa fa-file-text fa-lg" style="cursor: pointer" (click)="duplicateRowQaPlan(qaPlan)"></span>
+						<span *ngIf="!qaPlan.edit" class="fa fa-pencil fa-lg" style="cursor: pointer" (click)="editRowQaPlan(qaPlan);"></span>
+						<span *ngIf="!qaPlan.edit" class="fa fa-trash fa-lg" style="cursor: pointer" (click)="deleteRowQaPlan(qaPlan);"></span>
+						<span *ngIf="qaPlan.edit" class="fa fa-check" style="cursor: pointer; font-size: 20px;" (click)="saveRowQaPlan(qaPlan);"></span>
+						<span *ngIf="qaPlan.edit" class="fa fa-times" style="cursor: pointer; font-size: 20px;" (click)="cancelEditRowQaPlan(qaPlan);"></span>
 					</template>
 				</p-column>
 			</p-dataTable>
 		</div>
-
-		<p-dialog header="แก้ไขรายการ" [(visible)]="display" modal="modal" [minWidth]="300" [minHeight]="350" [width]="500" [appendTo]="body">
-			<div class="ui-g">
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						No.
-					</div>
-					<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
-						{{dialogQaPlan.orderSeq}}
-					</div>
-				</div>
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						QA Activities
-					</div>
-					<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
-						<input type="text" id="newQaActivities" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" autofocus [(ngModel)]="dialogQaPlan.qaActivities" />
-					</div>
-				</div>
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						Work Category
-					</div>
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						<p-dropdown [options]="qadConstant.workCategory" [style]="{'width': '100%'}" [autoWidth]="false" [(ngModel)]="dialogQaPlan.workCategoryCode"></p-dropdown>
-					</div>
-				</div>
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						Plan Action (Round)
-					</div>
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						<input type="text" pInputText style="width: 100%; text-align: center; padding-left: 0px; padding-right: 0px;" [(ngModel)]="dialogQaPlan.planAction"
-						/>
-					</div>
-				</div>
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						Plan Effort (MD)
-					</div>
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						<input type="text" pInputText style="width: 100%; text-align: center; padding-left: 0px; padding-right: 0px;" [(ngModel)]="dialogQaPlan.planEffort"
-						/>
-					</div>
-				</div>
-				<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-					<div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
-						Remark
-					</div>
-					<div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
-						<input type="text" pInputText style="width: 100%; padding-left: 0px; padding-right: 0px;" [(ngModel)]="dialogQaPlan.remark"
-						/>
-					</div>
-				</div>
-			</div>
-			<footer>
-				<div class="ui-widget-content ui-helper-clearfix" style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
-					<button type="button" pButton label="แก้ไข" icon="fa fa-check" (click)="editDialogEditQaActivities();"></button>
-					<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelDialogEditQaActivities();"></button>
-				</div>
-			</footer>
-		</p-dialog>
 	</div>
 </div>

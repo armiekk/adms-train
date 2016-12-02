@@ -55,11 +55,11 @@ export class Qad1q010Component implements OnInit {
     private _selectedTab: any = Qad1i020Component;
     private qaDatas: any[] = [];
     private tabMenuItem: MenuItem[];
-    private historys: Array<any> = [];
-    private qaSchedulesAll: Array<any> = [];
-    private qaSchedules: Array<any> = [];
-    private qaPlansAll: Array<any> = [];
-    private qaPlans: Array<any> = [];
+    private historys: any[] = [];
+    private qaSchedulesAll: any[] = [];
+    private qaSchedules: any[] = [];
+    private qaPlansAll: any[] = [];
+    private qaPlans: any[] = [];
 
     constructor(private http: Http,
         private router: Router,
@@ -396,7 +396,7 @@ export class Qad1q010Component implements OnInit {
     search() {
         this.http.get('app/qad/resources/data/historysMockData.json')
             .map(res => res.json().data)
-            .subscribe((historys: Array<any>) => {
+            .subscribe((historys: any[]) => {
                 this.historys = historys.filter((history) => history.projCode === this.searchCondition.projCode);
                 let lastVersion;
                 for (let i = 0; i < this.historys.length; i++) {
@@ -416,7 +416,7 @@ export class Qad1q010Component implements OnInit {
                     this.selectedTab = 'LOADING';
                     this.http.get('app/qad/resources/data/qaSchedulesMockData.json')
                         .map(res => res.json().data)
-                        .subscribe((qaSchedules: Array<any>) => {
+                        .subscribe((qaSchedules: any[]) => {
                             this.qaSchedulesAll = qaSchedules.filter((qaSchedule) => qaSchedule.projCode === this.searchCondition.projCode);
                             this.qaSchedules = this.qaSchedulesAll.filter((qaSchedule: any) => qaSchedule.version === lastVersion);
                             for (let i = 0; i < this.qaSchedules.length; i++) {
@@ -435,20 +435,21 @@ export class Qad1q010Component implements OnInit {
 
                     this.http.get('app/qad/resources/data/qaPlansMockData.json')
                         .map(res => res.json().data)
-                        .subscribe((qaPlans: Array<any>) => {
+                        .subscribe((qaPlans: any[]) => {
                             this.qaPlansAll = qaPlans.filter((qaPlan) => qaPlan.projCode === this.searchCondition.projCode);
                             this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === lastVersion);
                             if (this.qaPlans.length === 0) {
                                 this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
                                     .map(res => res.json().data)
-                                    .subscribe((qaActivities: Array<any>) => {
+                                    .subscribe((qaActivities: any[]) => {
                                         for (let i = 0; i < qaActivities.length; i++) {
                                             qaActivities[i].workCategory = 'Audit';
                                             qaActivities[i].workCategoryCode = 1;
                                             qaActivities[i].planAction = 1;
+                                            qaActivities[i].version = lastVersion.toString();
                                         }
-
-                                        this.qaPlansAll.push(qaActivities);
+                                        
+                                        this.qaPlansAll.push(...qaActivities);
                                         this.qaPlans = qaActivities;
                                         if (this.currentSelectedTab === 'QA Plan') {
                                             this.selectedTab = this.currentSelectedTab;
