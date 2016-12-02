@@ -33,7 +33,7 @@ export class Pri1i010SaveComponent implements OnInit {
 
   private _selectedTab: any = Pri1i010DetailComponent;
   private tabMenuItem: MenuItem;
-  private projectSeachCondition: SearchCondition = {};
+  private projectSeachCondition: SearchCondition = {start: 0, size: 15};
   private pritInformation: PritInformation = {};
   private projectListItem: SelectItem[] = [];
   private selectedProject: PritInformation;
@@ -89,8 +89,8 @@ export class Pri1i010SaveComponent implements OnInit {
         this.pritInformation = {};
         break;
       case 'EDIT':
-        if (this.state.projCode !== null) {
-          this.getPritInformationByProjCode(this.state.projCode);
+        if (this.state.projRef !== null) {
+          this.getPritInformationDetail(this.state.projRef);
         }
         break;
       default:
@@ -113,14 +113,14 @@ export class Pri1i010SaveComponent implements OnInit {
   editPritInformation() {
   }
 
-  getPritInformationByProjCode(projCode: string) {
-    this.priService.getPritInformationByProjCode(projCode)
-      .subscribe((pritInformation: PritInformation[]) => [this.pritInformation] = pritInformation);
+  getPritInformationDetail(projRef: number) {
+    this.priService.getPritInformationDetail(projRef)
+      .subscribe((pritInformation: PritInformation) => this.pritInformation = pritInformation);
   }
 
   cancelPritInformation() {
     if (this.state.mode === 'EDIT') {
-      this.getPritInformationByProjCode(this.state.projCode);
+      this.getPritInformationDetail(this.state.projRef);
       this.message.warnMessage('ยกเลิกการแก้ไข');
     } else {
       this.pritInformation = {};
@@ -132,7 +132,7 @@ export class Pri1i010SaveComponent implements OnInit {
   searchProject() {
     this.isShowSearchProject = !this.isShowSearchProject;
     if (this.projectListItem.length === 0) {
-      this.priService.getAllProjectInformation().subscribe((response: PritInformation[]) => {
+      this.priService.getPritInformationByProjCode(this.projectSeachCondition).subscribe((response: PritInformation[]) => {
         this.projectListItem = response.map((pritInformation: PritInformation) => {
           return { label: pritInformation.projCode, value: pritInformation };
         });

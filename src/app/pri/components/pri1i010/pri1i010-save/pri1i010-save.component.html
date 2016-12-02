@@ -58,7 +58,7 @@
 						/>
 					</div>
 					<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
-						<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()"></button>
+						<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()" *ngIf="state.mode === 'ADD'"></button>
 					</div>
 				</div>
 			</div>

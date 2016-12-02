@@ -25,42 +25,20 @@
 'use strict';
 import * as models from './models';
 
-export interface ProjInformationEditBean {
+export interface PritDeliver {
     
 
-    projYear?: string;
+    createBy?: string;
+
+    createDate?: Date;
+
+    updateBy?: string;
+
+    updateDate?: Date;
+
+    projDeliverRef?: number;
 
     projCode?: string;
 
-    pmSupId?: number;
-
-    pmSupName?: string;
-
-    pmId?: number;
-
-    pmName?: string;
-
-    saleId?: number;
-
-    saleName?: string;
-
-    projType?: string;
-
-    projName?: string;
-
-    projOrgName?: string;
-
-    projOrgCode?: string;
-
-    projStartDate?: Date;
-
-    projStopDate?: Date;
-
-    projDuration?: number;
-
-    preSaleProjCode?: string;
-
-    projStatus?: string;
-
-    projRef?: number;
+    deliverDetail?: string;
 }

@@ -25,40 +25,12 @@
 'use strict';
 import * as models from './models';
 
-export interface ProjInformationBean {
+export interface ProjMethodBean {
     
 
-    projYear?: string;
+    updateDate?: Date;
 
-    projCode?: string;
+    projMethodRef?: number;
 
-    pmSupId?: number;
-
-    pmSupName?: string;
-
-    pmId?: number;
-
-    pmName?: string;
-
-    saleId?: number;
-
-    saleName?: string;
-
-    projType?: string;
-
-    projName?: string;
-
-    projOrgName?: string;
-
-    projOrgCode?: string;
-
-    projStartDate?: Date;
-
-    projStopDate?: Date;
-
-    projDuration?: number;
-
-    preSaleProjCode?: string;
-
-    projStatus?: string;
+    methodDetail?: string;
 }

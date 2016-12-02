@@ -1,15 +1,12 @@
 
 import { Component, OnInit, Input } from '@angular/core';
-import { TreeNode, SharedModule } from 'primeng/primeng';
 
-import { PritInformation } from '../../api/prit-information/model/PritInformation';
 
 import { QadtActivtiesApi } from '../../api/qadt-activities/api/QadtActivtiesApi';
 import { PritInformationApi } from '../../api/prit-information/api/PritInformationApi';
 
 import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
-import { Subscription } from 'rxjs';
 
 interface SearchCondition {
     projCode?: string;
@@ -59,15 +56,15 @@ export class Qad1i010Component implements OnInit {
     @Input() qaPlans: Array<any>;
 
     constructor(private locale: ThaiCalendarService,
-                private qadtActivitesService: QadtActivtiesApi,
-                private qadConstant: QadConstantsService,
-                private pritInformationService: PritInformationApi) {
+        private qadtActivitesService: QadtActivtiesApi,
+        private qadConstant: QadConstantsService,
+        private pritInformationService: PritInformationApi) {
     }
 
     ngOnInit() {
         this.dialogQaPlan = {};
         this.projVersionDate = new Date();
-        this.projVersion = "1.0";
+        this.projVersion = '1.0';
     }
 
     private set qaDatas(qaDatas: any[]) {
@@ -77,8 +74,6 @@ export class Qad1i010Component implements OnInit {
     private display: boolean = false;
     private editQaPlan: any;
     private dialogQaPlan: any;
-    private newQaActivities: string;
-    private newPlanAction: number;
     showDialogEditQaActivities(qaPlan: any) {
         this.editQaPlan = qaPlan;
         this.dialogQaPlan.orderSeq = qaPlan.orderSeq;
@@ -138,7 +133,7 @@ export class Qad1i010Component implements OnInit {
             if (endIndex + 1 < this.qaPlans.length) {
                 r = this.qaPlans.splice(endIndex + 1, this.qaPlans.length - 1 - endIndex);
             }
-            
+
             if (c.length > 0) {
                 v++;
             }
@@ -239,18 +234,18 @@ export class Qad1i010Component implements OnInit {
             }
         }
 
-        this.qaPlans.splice(index, 1); //Delete
+        this.qaPlans.splice(index, 1); // Delete
 
-        if (deleteAtLevel == 1) {
+        if (deleteAtLevel === 1) {
             let deleteOrderSeqArray = deleteOrderSeq.split('.');
             let v = +deleteOrderSeqArray[deleteAtLevel - 1];
             let firstTimeIf = true;
 
             for (let i = index; i < this.qaPlans.length; i++) {
                 let currentDataLevel = this.qaPlans[i].orderSeq.toString().split('.').length;
-                if (currentDataLevel == deleteAtLevel) {
+                if (currentDataLevel === deleteAtLevel) {
                     let currentDataOrderSeqArray = this.qaPlans[i].orderSeq.toString().split('.');
-                    if (firstTimeIf) { //ไม่เลื่อนค่า
+                    if (firstTimeIf) { // ไม่เลื่อนค่า
                         firstTimeIf = false;
                     } else {
                         v++;
@@ -275,9 +270,9 @@ export class Qad1i010Component implements OnInit {
                 if (currentDataLevel < deleteAtLevel) {
                     break;
 
-                } else if (currentDataLevel == deleteAtLevel) {
+                } else if (currentDataLevel === deleteAtLevel) {
                     let currentDataOrderSeqArray = this.qaPlans[i].orderSeq.toString().split('.');
-                    if (firstTimeIf) { //ไม่เลื่อนค่า
+                    if (firstTimeIf) { // ไม่เลื่อนค่า
                         firstTimeIf = false;
                     } else {
                         v++;

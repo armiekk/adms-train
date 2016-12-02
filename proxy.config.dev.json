@@ -1,6 +1,11 @@
 {
-    "/api/*": {
+    "/mockup-api/*": {
         "target": "http://10.254.40.27:3000",
+        "secure": false,
+        "logLevel": "debug"
+    },
+    "/api/*": {
+        "target": "http://10.254.40.27:8000/",
         "secure": false,
         "logLevel": "debug"
     },

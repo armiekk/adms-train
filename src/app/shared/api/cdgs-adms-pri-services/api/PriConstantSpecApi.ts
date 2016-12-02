@@ -33,8 +33,8 @@ import 'rxjs/Rx';
 'use strict';
 
 @Injectable()
-export class ConstantApi {
-    protected basePath = 'http://10.254.40.27:8000/api/pri';
+export class PriConstantSpecApi {
+    protected basePath = 'http://localhost:8080/adms-pri/api/pri';
     public defaultHeaders : Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
@@ -44,8 +44,8 @@ export class ConstantApi {
     }
 
     /**
-     * get all the project status
-     * 
+     * PriConstantSpec.getProjStatus
+     * สำหรับการค้นหาสถานะโครงการ
      */
     public getProjStatus (extraHttpRequestParams?: any ) : Observable<{}> {
         const path = this.basePath + '/priConstant/status';
@@ -69,8 +69,8 @@ export class ConstantApi {
     }
 
     /**
-     * get all the project type
-     * 
+     * PriConstantSpec.getProjType
+     * สำหรับการค้นหาประเภทโครงการ
      */
     public getProjType (extraHttpRequestParams?: any ) : Observable<{}> {
         const path = this.basePath + '/priConstant/type';

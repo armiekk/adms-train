@@ -25,16 +25,14 @@
 'use strict';
 import * as models from './models';
 
-export interface ProjInformationInfoBean {
+export interface ProjAccessoriesBean {
     
 
-    projRef?: number;
+    updateDate?: Date;
 
-    projYear?: string;
+    projAccRef?: number;
 
-    projCode?: string;
+    accName?: string;
 
-    projStatusDesc?: string;
-
-    pmName?: string;
+    accQuantity?: number;
 }

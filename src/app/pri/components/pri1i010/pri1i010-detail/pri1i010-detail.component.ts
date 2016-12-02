@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
-import { 
+import {
   PriInformationService, 
   PritInformation, 
-  initialPritInformaitonDetail 
+  initialPritInformaitonDetail
 } from '../../../services/pri1i010/pri-information.service';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { MessageService } from '../../../../shared/services/message/message.service';
@@ -27,17 +27,16 @@ export class Pri1i010DetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.state.projCode && this.state.mode === 'EDIT') {
-      this.getPritInformationDetail(this.state.projCode);
+    if (this.state.projRef && this.state.mode === 'EDIT') {
+      this.getPritInformationDetail(this.state.projRef);
     } else {
       this.pritInformationDetail = initialPritInformaitonDetail;
     }
   }
 
-  getPritInformationDetail(projCode: string) {
-    this.priService
-    this.priService.getPritInformationDetail(projCode)
-      .subscribe((pritInformationDetail: PritInformation[]) => [this.pritInformationDetail] = pritInformationDetail);
+  getPritInformationDetail(projRef: number) {
+    this.priService.getPritInformationDetail(projRef)
+      .subscribe((pritInformationDetail: PritInformation) => this.pritInformationDetail = pritInformationDetail);
   }
 
   savePritInformationDetail() {

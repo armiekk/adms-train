@@ -34,7 +34,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class PritInformationApi {
-    protected basePath = 'http://10.254.40.27:8000/api/pri';
+    protected basePath = '/api/pri';
     public defaultHeaders : Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
@@ -44,11 +44,11 @@ export class PritInformationApi {
     }
 
     /**
-     * สำหรับการเพิ่มข้อมูลรายการโครงการ
-     * Create A New PritInformation
+     * PriBussinessSpec.addProjectInformation
+     * สำหรับการบันทึกข้อมูลรายละเอียดโครงการ
      * @param body 
      */
-    public addProjectInformation (body?: models.ProjInformationBean, extraHttpRequestParams?: any ) : Observable<models.PritInformation> {
+    public addProjectInformation (body?: models.ProjectInformationBean, extraHttpRequestParams?: any ) : Observable<models.PritInformation> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -71,11 +71,11 @@ export class PritInformationApi {
     }
 
     /**
-     * สำหรับการแก้ไขข้อมูลรายการโครงการ
-     * Create PritInformation
+     * PriBussinessSpec.editProjectInformation
+     * สำหรับการแก้ไขข้อมูลรายละเอียดโครงการ
      * @param body 
      */
-    public editProjectInformation (body?: models.ProjInformationEditBean, extraHttpRequestParams?: any ) : Observable<models.ProjInformationEditBean> {
+    public editProjectInformation (body?: models.ProjectInformationEditBean, extraHttpRequestParams?: any ) : Observable<models.ProjectInformationEditBean> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -98,8 +98,8 @@ export class PritInformationApi {
     }
 
     /**
-     * ค้นหาข้อมูลรายการโครงการ ตาม Primary Key
-     * Get the PritInformation By ProjRef
+     * PriBussinessSpec.getProjectInformationByRef
+     * สำหรับการค้นหาตารางข้อมูลรายละเอียดโครงการ ตาม Primary Key
      * @param projRef 
      */
     public getProjectInformationByRef (projRef: number, extraHttpRequestParams?: any ) : Observable<models.PritInformation> {
@@ -129,18 +129,18 @@ export class PritInformationApi {
     }
 
     /**
-     * ค้นหาข้อมูลรายละเอียดโครงการ
-     * Get All The PritInformations By Conditions
+     * PriBussinessSpec.getProjectInformationListByCondition
+     * สำหรับการค้นหาตารางข้อมูลรายละเอียดโครงการ
      * @param start 
      * @param size 
      * @param projCode 
      * @param projYear 
-     * @param projOwnerOrg 
+     * @param projOrgCode 
      * @param projType 
      * @param projName 
      * @param projStatus 
      */
-    public getProjectInformationListByCondition (start?: number, size?: number, projCode?: string, projYear?: number, projOwnerOrg?: string, projType?: string, projName?: string, projStatus?: string, extraHttpRequestParams?: any ) : Observable<Array<models.ProjInformationInfoBean>> {
+    public getProjectInformationListByCondition (start?: number, size?: number, projCode?: string, projYear?: number, projOrgCode?: string, projType?: string, projName?: string, projStatus?: string, extraHttpRequestParams?: any ) : Observable<Array<models.ProjectInformationInfoBean>> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -161,8 +161,8 @@ export class PritInformationApi {
             queryParameters.set('projYear', String(projYear));
         }
 
-        if (projOwnerOrg !== undefined) {
-            queryParameters.set('projOwnerOrg', String(projOwnerOrg));
+        if (projOrgCode !== undefined) {
+            queryParameters.set('projOrgCode', String(projOrgCode));
         }
 
         if (projType !== undefined) {
@@ -194,8 +194,8 @@ export class PritInformationApi {
     }
 
     /**
-     * สำหรับการลบข้อมูลรายการโครงการ
-     * Remove The PritInformation
+     * PriBussinessSpec.removeProjectInformationByRef
+     * สำหรับการลบข้อมูลรายละเอียดโครงการ ตาม Primary Key
      * @param projRef 
      */
     public removeProjectInformationByRef (projRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
@@ -225,8 +225,8 @@ export class PritInformationApi {
     }
 
     /**
-     * ลบข้อมูลรายการโครงการ ตาม List รายการที่เลือก
-     * Removes The PritInformation
+     * PriBussinessSpec.removeProjectInformationList
+     * สำหรับการลบข้อมูลรายละเอียดโครงการ
      * @param body 
      */
     public removeProjectInformationList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {

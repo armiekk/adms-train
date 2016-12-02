@@ -22,9 +22,9 @@
  * limitations under the License.
  */
 
-import {Http, Headers, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
-import {Injectable, Optional} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Http, Headers, RequestOptionsArgs, Response, URLSearchParams } from '@angular/http';
+import { Injectable, Optional } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import * as models from '../model/models';
 import 'rxjs/Rx';
 
@@ -35,7 +35,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class PritLanguageApi {
     protected basePath = '/api';
-    public defaultHeaders : Headers = new Headers();
+    public defaultHeaders: Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
         if (basePath) {
@@ -48,7 +48,7 @@ export class PritLanguageApi {
      * 
      * @param where Criteria to match model instances
      */
-    public pritLanguageCount (where?: string, extraHttpRequestParams?: any ) : Observable<models.InlineResponse200> {
+    public pritLanguageCount(where?: string, extraHttpRequestParams?: any): Observable<models.InlineResponse200> {
         const path = this.basePath + '/PritLanguages/count';
 
         let queryParameters = new URLSearchParams();
@@ -78,7 +78,7 @@ export class PritLanguageApi {
      * 
      * @param data Model instance data
      */
-    public pritLanguageCreate (data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageCreate(data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages';
 
         let queryParameters = new URLSearchParams();
@@ -105,7 +105,7 @@ export class PritLanguageApi {
      * 
      * @param options 
      */
-    public pritLanguageCreateChangeStreamGetPritLanguagesChangeStream (options?: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritLanguageCreateChangeStreamGetPritLanguagesChangeStream(options?: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritLanguages/change-stream';
 
         let queryParameters = new URLSearchParams();
@@ -135,7 +135,7 @@ export class PritLanguageApi {
      * 
      * @param options 
      */
-    public pritLanguageCreateChangeStreamPostPritLanguagesChangeStream (options?: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritLanguageCreateChangeStreamPostPritLanguagesChangeStream(options?: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritLanguages/change-stream';
 
         let queryParameters = new URLSearchParams();
@@ -168,7 +168,7 @@ export class PritLanguageApi {
      * 
      * @param id Model id
      */
-    public pritLanguageDeleteById (id: string, extraHttpRequestParams?: any ) : Observable<any> {
+    public pritLanguageDeleteById(id: string, extraHttpRequestParams?: any): Observable<any> {
         const path = this.basePath + '/PritLanguages/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -199,7 +199,7 @@ export class PritLanguageApi {
      * 
      * @param id Model id
      */
-    public pritLanguageExistsGetPritLanguagesidExists (id: string, extraHttpRequestParams?: any ) : Observable<models.InlineResponse2002> {
+    public pritLanguageExistsGetPritLanguagesidExists(id: string, extraHttpRequestParams?: any): Observable<models.InlineResponse2002> {
         const path = this.basePath + '/PritLanguages/{id}/exists'
             .replace('{' + 'id' + '}', String(id));
 
@@ -230,7 +230,7 @@ export class PritLanguageApi {
      * 
      * @param id Model id
      */
-    public pritLanguageExistsHeadPritLanguagesid (id: string, extraHttpRequestParams?: any ) : Observable<models.InlineResponse2002> {
+    public pritLanguageExistsHeadPritLanguagesid(id: string, extraHttpRequestParams?: any): Observable<models.InlineResponse2002> {
         const path = this.basePath + '/PritLanguages/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -261,7 +261,7 @@ export class PritLanguageApi {
      * 
      * @param filter Filter defining fields, where, include, order, offset, and limit
      */
-    public pritLanguageFind (filter?: string, extraHttpRequestParams?: any ) : Observable<Array<models.PritLanguage>> {
+    public pritLanguageFind(filter?: string, extraHttpRequestParams?: any): Observable<Array<models.PritLanguage>> {
         const path = this.basePath + '/PritLanguages';
 
         let queryParameters = new URLSearchParams();
@@ -292,7 +292,7 @@ export class PritLanguageApi {
      * @param id Model id
      * @param filter Filter defining fields and include
      */
-    public pritLanguageFindById (id: string, filter?: string, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageFindById(id: string, filter?: string, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -327,7 +327,7 @@ export class PritLanguageApi {
      * 
      * @param filter Filter defining fields, where, include, order, offset, and limit
      */
-    public pritLanguageFindOne (filter?: string, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageFindOne(filter?: string, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/findOne';
 
         let queryParameters = new URLSearchParams();
@@ -358,7 +358,7 @@ export class PritLanguageApi {
      * @param id PersistedModel id
      * @param data An object of model property name/value pairs
      */
-    public pritLanguagePrototypeUpdateAttributesPatchPritLanguagesid (id: string, data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguagePrototypeUpdateAttributesPatchPritLanguagesid(id: string, data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -391,7 +391,7 @@ export class PritLanguageApi {
      * @param id PersistedModel id
      * @param data An object of model property name/value pairs
      */
-    public pritLanguagePrototypeUpdateAttributesPutPritLanguagesid (id: string, data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguagePrototypeUpdateAttributesPutPritLanguagesid(id: string, data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/{id}'
             .replace('{' + 'id' + '}', String(id));
 
@@ -424,7 +424,7 @@ export class PritLanguageApi {
      * @param id Model id
      * @param data Model instance data
      */
-    public pritLanguageReplaceById (id: string, data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageReplaceById(id: string, data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/{id}/replace'
             .replace('{' + 'id' + '}', String(id));
 
@@ -456,7 +456,7 @@ export class PritLanguageApi {
      * 
      * @param data Model instance data
      */
-    public pritLanguageReplaceOrCreate (data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageReplaceOrCreate(data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/replaceOrCreate';
 
         let queryParameters = new URLSearchParams();
@@ -484,7 +484,7 @@ export class PritLanguageApi {
      * @param where Criteria to match model instances
      * @param data An object of model property name/value pairs
      */
-    public pritLanguageUpdateAll (where?: string, data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.InlineResponse2001> {
+    public pritLanguageUpdateAll(where?: string, data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.InlineResponse2001> {
         const path = this.basePath + '/PritLanguages/update';
 
         let queryParameters = new URLSearchParams();
@@ -515,7 +515,7 @@ export class PritLanguageApi {
      * 
      * @param data Model instance data
      */
-    public pritLanguageUpsertPatchPritLanguages (data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageUpsertPatchPritLanguages(data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages';
 
         let queryParameters = new URLSearchParams();
@@ -542,7 +542,7 @@ export class PritLanguageApi {
      * 
      * @param data Model instance data
      */
-    public pritLanguageUpsertPutPritLanguages (data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageUpsertPutPritLanguages(data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages';
 
         let queryParameters = new URLSearchParams();
@@ -570,7 +570,7 @@ export class PritLanguageApi {
      * @param where Criteria to match model instances
      * @param data An object of model property name/value pairs
      */
-    public pritLanguageUpsertWithWhere (where?: string, data?: models.PritLanguage, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public pritLanguageUpsertWithWhere(where?: string, data?: models.PritLanguage, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/PritLanguages/upsertWithWhere';
 
         let queryParameters = new URLSearchParams();

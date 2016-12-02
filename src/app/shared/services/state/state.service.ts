@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StateService {
 
-  private _projCode: string = null;
+  private _projRef: number = null;
   private _mode: string = null;
 
   constructor() { }
@@ -16,11 +16,11 @@ export class StateService {
     this._mode = mode;
   }
 
-  set projCode(projCode: string) {
-    this._projCode = projCode;
+  set projRef(projRef: number) {
+    this._projRef = projRef;
   }
 
-  get projCode(){
-    return this._projCode;
+  get projRef(){
+    return this._projRef;
   }
 }

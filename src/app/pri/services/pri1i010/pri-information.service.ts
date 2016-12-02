@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { PritInformationApi } from '../../../shared/api/mockup-prit-information-service/api/PritInformationApi';
-import { PritInformation } from '../../../shared/api/mockup-prit-information-service/model/models';
+import { PritInformationApi } from '../../../shared/api/cdgs-adms-pri-services/api/PritInformationApi';
+import { PritInformation, ProjectInformationInfoBean } from '../../../shared/api/cdgs-adms-pri-services/model/models';
 import { Observable } from 'rxjs/Observable';
 
 export interface SearchCondition {
-  projYear?: string;
-  projOwnerOrg?: string;
+  projYear?: number;
+  projOrgCode?: string;
   projCode?: string;
-  projType?: number;
+  projType?: string;
   projName?: string;
-  projStatus?: Array<number>;
+  projStatus?: string;
+  start: number;
+  size: number;
 }
 
-export { PritInformation } from '../../../shared/api/mockup-prit-information-service/model/models';
+export { PritInformation, ProjectInformationInfoBean } from '../../../shared/api/cdgs-adms-pri-services/model/models';
 
 export const initialPritInformaiton: PritInformation = {
   projCode: null,
@@ -35,46 +37,22 @@ export class PriInformationService {
 
   constructor(private priService: PritInformationApi) { }
 
-  getPritInformationByProjCode(projCode: string): Observable<PritInformation[]> {
-    this.setHeaders();
-    return this.priService.pritInformationFind()
-      .map((pritInformationList: PritInformation[]) =>
-        pritInformationList
-          .filter((pritInformation: PritInformation) => pritInformation.projCode === projCode)
-          .map((pritInformation: PritInformation) => {
-            return {
-              projCode: pritInformation.projCode,
-              projName: pritInformation.projName
-            }
-          })
-      );
+  getPritInformationByProjCode(condition: SearchCondition): Observable<ProjectInformationInfoBean[]> {
+    return this.getProjectInformationByCondition(condition);
   }
 
-  getPritInformationDetail(projCode: string): Observable<PritInformation[]> {
+  getPritInformationDetail(projRef: number): Observable<PritInformation> {
     this.setHeaders();
-    return this.priService.pritInformationFind()
-      .map((pritInformationList: PritInformation[]) =>
-        pritInformationList
-          .filter((pritInformation: PritInformation) => pritInformation.projCode === projCode)
-          .map((pritInformation: PritInformation) => {
-            return {
-              projYear: pritInformation.projYear,
-              projOwnerOrg: pritInformation.projOrgName,
-              projStartDate: pritInformation.projStartDate,
-              projStopDate: pritInformation.projStopDate,
-              projDuration: pritInformation.projDuration,
-              projBudget: pritInformation.projBudget,
-              preSaleProjCode: pritInformation.preSaleProjCode,
-              projStatus: pritInformation.projStatus
-            }
-          })
-      );
+    return this.priService.getProjectInformationByRef(projRef)
+      .map((response: PritInformation) => response);
   }
 
-  getAllProjectInformation(): Observable<PritInformation[]> {
+  getProjectInformationByCondition(condition: SearchCondition): Observable<ProjectInformationInfoBean[]> {
     this.setHeaders();
-    return this.priService.pritInformationFind()
-      .map((response: PritInformation[]) => response);
+    return this.priService.getProjectInformationListByCondition(condition.start, condition.size, condition.projCode,
+      condition.projYear, condition.projOrgCode, condition.projType,
+      condition.projName, condition.projStatus)
+      .map((response: ProjectInformationInfoBean[]) => response);
   }
 
   private setHeaders() {

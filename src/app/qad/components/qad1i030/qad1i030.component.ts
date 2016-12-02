@@ -42,38 +42,13 @@ export class Qad1i030Component implements OnInit {
     private assignQas: any[] = [];
     private notifys: Option[] = [];
 
-    //for QA inspector project
+    // for QA inspector project
     private selectedIndexAssignQa: number;
     private projResponsibleQaName: string;
     private projAssignQaDate: Date;
     private selectedNotifies: string[] = [];
     private projAssignByQAMName: string;
     private projRemark: string;
-
-    constructor(private http: Http,
-        private router: Router,
-        private qadConstant: QadConstantsService,
-        private locale: ThaiCalendarService) {
-            this.menus = [];
-            this.menus.push({label: 'Assign QA', value: '/qad/QAD1I030'});
-            this.menus.push({label: 'QA Schedule and Plan', value: '/qad/QAD1Q010'});
-        }
-
-    ngOnInit() {
-        this.selectedMenu = this.router.url;
-        this.searchCondition.projType = 1;
-        this.searchAdditionCondition.projType = 1;
-        this.notifys = [
-            { label: 'ADMS', value: 'ADMS' },
-            { label: 'Email', value: 'Email' }
-        ];
-        this.selectedNotifies = ['Email']; //default value when open page
-        this.projAssignByQAMName = 'ประไพลักษณ์ วรยศโกวิท';//Todo when connect to service find qam have one or else
-    }
-
-    nav() {
-        this.router.navigate([this.selectedMenu]);
-    }
 
     private displaySearchProject: boolean = false;
     private isSelectedProject: boolean = false;
@@ -85,6 +60,50 @@ export class Qad1i030Component implements OnInit {
     private sites: any[] = [];
     private selectSite: any;
     private selectSites: any[] = [];
+
+    private displaySearchAdditionProject: boolean = false;
+    private isSelectedAdditionProject: boolean = false;
+    private additionProjects: SelectItem[] = [];
+    private selectAdditionProjects: any[] = [];
+    private displaySearchAdditionSite: boolean = false;
+    private isSelectedAdditionSite: boolean = false;
+    private additionSites: any[] = [];
+    private selectAdditionSite: any;
+    private selectAdditionSites: any[] = [];
+
+    private findHeaderName: string;
+    private optionSearchEmp: number;
+    private displaySearchEmp: boolean = false;
+    private emps: any[] = [];
+    private selectEmp: any;
+    private selectEmps: any[] = [];
+
+    constructor(private http: Http,
+        private router: Router,
+        private qadConstant: QadConstantsService,
+        private locale: ThaiCalendarService) {
+        this.menus = [];
+        this.menus.push({ label: 'Assign QA', value: '/qad/QAD1I030' });
+        this.menus.push({ label: 'QA Schedule and Plan', value: '/qad/QAD1Q010' });
+    }
+
+    ngOnInit() {
+        this.selectedMenu = this.router.url;
+        this.searchCondition.projType = 1;
+        this.searchAdditionCondition.projType = 1;
+        this.notifys = [
+            { label: 'ADMS', value: 'ADMS' },
+            { label: 'Email', value: 'Email' }
+        ];
+        this.selectedNotifies = ['Email']; // default value when open page
+        this.projAssignByQAMName = 'ประไพลักษณ์ วรยศโกวิท';// Todo when connect to service find qam have one or else
+    }
+
+    nav() {
+        this.router.navigate([this.selectedMenu]);
+    }
+
+    
     showDialogSearchProject() {
         this.searchProject();
         this.displaySearchProject = true;
@@ -206,15 +225,6 @@ export class Qad1i030Component implements OnInit {
         this.selectSites = [];
     }
 
-    private displaySearchAdditionProject: boolean = false;
-    private isSelectedAdditionProject: boolean = false;
-    private additionProjects: SelectItem[] = [];
-    private selectAdditionProjects: any[] = [];
-    private displaySearchAdditionSite: boolean = false;
-    private isSelectedAdditionSite: boolean = false;
-    private additionSites: any[] = [];
-    private selectAdditionSite: any;
-    private selectAdditionSites: any[] = [];
     showDialogSearchAdditionProject() {
         this.searchAdditionProject();
         this.displaySearchAdditionProject = true;
@@ -321,35 +331,29 @@ export class Qad1i030Component implements OnInit {
         this.selectAdditionSites = [];
     }
 
-    private findHeaderName: string;
-    private optionSearchEmp: number;
-    private displaySearchEmp: boolean = false;
-    private emps: any[] = [];
-    private selectEmp: any;
-    private selectEmps: any[] = [];
     showDialogSearchEmp(option: number) {
         this.optionSearchEmp = option;
         let inCaseDefault: boolean = false;
         switch (this.optionSearchEmp) {
             case 1:
-                //Project Manager
+                // Project Manager
                 this.findHeaderName = 'Project Manager';
                 break;
             case 2:
-                //Senior Manager
+                // Senior Manager
                 this.findHeaderName = 'Senior Manager';
                 break;
             case 3:
-                //QA Manager
+                // QA Manager
                 this.findHeaderName = 'QA Manager';
                 break;
             case 4:
-                //Create By (QA)
+                // Create By (QA)
                 this.findHeaderName = 'Create By (QA)';
                 break;
             case 5:
             case 6:
-                //QA ผู้รับผิดชอบ
+                // QA ผู้รับผิดชอบ
                 this.findHeaderName = 'QA ผู้รับผิดชอบ';
                 break;
             default:
@@ -369,36 +373,36 @@ export class Qad1i030Component implements OnInit {
         switch (this.optionSearchEmp) {
             case 1:
                 emps = [
-                    { thainame: "กมลศักดิ์ อิทธิฤกษ์มงคล", engname: "KAMONSAK ITTIRUEGMONGKON" },
-                    { thainame: "กำพล หาญนฤชัย", engname: "KAMPON HANNARUECHAI" },
-                    { thainame: "เกศมณี คุ้มสาธิต", engname: "KATEMANEE KHOOMSATHIT" },
-                    { thainame: "เกียรติชัย สิวลีธนโชค", engname: "KIATICHAI SIWALEETHANACHOK" },
-                    { thainame: "จารุมาศ ตีระสหกุล", engname: "CHARUMAS TEERASAHAKUL" },
-                    { thainame: "จำนงค์ ขจรเดชะ", engname: "CHAMNONG KHACHONDACHA" },
-                    { thainame: "ชนิดา เลาหพิสิฐพาณิชย์", engname: "CHANIDA LAOHAPISITPANICH" },
-                    { thainame: "ชินวุธ มณีสาคร", engname: "CHINWUT MANEESACORN" },
-                    { thainame: "ชูศักดิ์ ปรมานุรักษ์", engname: "CHUSAK PARAMANURAK" },
-                    { thainame: "เดชา ศุกระแพทย์", engname: "DACHA SUKRAPHATTYA" },
-                    { thainame: "ทศพร พุทธศุภะ", engname: "THODSAPORN PHUTTASUPA" },
-                    { thainame: "ธนา เกษะประกร", engname: "THANA KASAPRAGORN" },
-                    { thainame: "ธีรยุทธ์ ฟุ้งเกียรติไพบูลย์", engname: "TEERAYUT FUNGKIATPAIBOOL" },
-                    { thainame: "ปภินวิช วสุภัทรภิญโญ", engname: "PAPHINWICH VASUPHATRAPHINYO" },
-                    { thainame: "ประไพลักษณ์ วรยศโกวิท", engname: "PRAPAILUK WORRAYOTKOVIT" },
-                    { thainame: "พงษ์ศักดิ์ จิรโพธิ์ทอง", engname: "PONGSAK JIRAPHOTHONG" },
-                    { thainame: "ไพศาล โชคพิพัฒน์ทวี", engname: "PAISAN CHOKPIPATTAWEE" },
-                    { thainame: "มนชิดา โชติเสน", engname: "MONCHIDA CHOTISEN" },
-                    { thainame: "วรเมธ วัชระบัณฑูรย์", engname: "WORAMET WATCHARABUNTOON" },
-                    { thainame: "วิจิตร ธเนศานุรักษ์", engname: "WIJIT THANESANURAK" },
-                    { thainame: "ศราวุฒ ศิริอุดม", engname: "SARAWUT SIRIUDOM" },
-                    { thainame: "สมพร นาควงษ์", engname: "SOMPORN NAKWONG" },
-                    { thainame: "สมศักดิ์ ชาญชัยรุจิรา", engname: "SOMSAK CHANCHAIRUJIRA" },
-                    { thainame: "สุรชัย สถาพรวัฒนายนต์", engname: "SURACHAI SATHAPORNWATTANAYONT" },
-                    { thainame: "สุรพล เรืองรอง", engname: "SURAPOL RUENGRONG" },
-                    { thainame: "สุรินทร์ อึงนิยม", engname: "SURIN OUNGNIYOM" },
-                    { thainame: "สุวรรณ อินยิน", engname: "SUWAN INYIN" },
-                    { thainame: "อนุชา โชติวัฒนดิลก", engname: "ANUCHA CHOTWATTANADILOK" },
-                    { thainame: "อัมรินทร์ สังขรัตน์", engname: "AMARIN SANGKARAT" },
-                    { thainame: "อัศวิน อินทร์แนม", engname: "ADSAWIN INNAEM" }
+                    { thainame: 'กมลศักดิ์ อิทธิฤกษ์มงคล', engname: 'KAMONSAK ITTIRUEGMONGKON' },
+                    { thainame: 'กำพล หาญนฤชัย', engname: 'KAMPON HANNARUECHAI' },
+                    { thainame: 'เกศมณี คุ้มสาธิต', engname: 'KATEMANEE KHOOMSATHIT' },
+                    { thainame: 'เกียรติชัย สิวลีธนโชค', engname: 'KIATICHAI SIWALEETHANACHOK' },
+                    { thainame: 'จารุมาศ ตีระสหกุล', engname: 'CHARUMAS TEERASAHAKUL' },
+                    { thainame: 'จำนงค์ ขจรเดชะ', engname: 'CHAMNONG KHACHONDACHA' },
+                    { thainame: 'ชนิดา เลาหพิสิฐพาณิชย์', engname: 'CHANIDA LAOHAPISITPANICH' },
+                    { thainame: 'ชินวุธ มณีสาคร', engname: 'CHINWUT MANEESACORN' },
+                    { thainame: 'ชูศักดิ์ ปรมานุรักษ์', engname: 'CHUSAK PARAMANURAK' },
+                    { thainame: 'เดชา ศุกระแพทย์', engname: 'DACHA SUKRAPHATTYA' },
+                    { thainame: 'ทศพร พุทธศุภะ', engname: 'THODSAPORN PHUTTASUPA' },
+                    { thainame: 'ธนา เกษะประกร', engname: 'THANA KASAPRAGORN' },
+                    { thainame: 'ธีรยุทธ์ ฟุ้งเกียรติไพบูลย์', engname: 'TEERAYUT FUNGKIATPAIBOOL' },
+                    { thainame: 'ปภินวิช วสุภัทรภิญโญ', engname: 'PAPHINWICH VASUPHATRAPHINYO' },
+                    { thainame: 'ประไพลักษณ์ วรยศโกวิท', engname: 'PRAPAILUK WORRAYOTKOVIT' },
+                    { thainame: 'พงษ์ศักดิ์ จิรโพธิ์ทอง', engname: 'PONGSAK JIRAPHOTHONG' },
+                    { thainame: 'ไพศาล โชคพิพัฒน์ทวี', engname: 'PAISAN CHOKPIPATTAWEE' },
+                    { thainame: 'มนชิดา โชติเสน', engname: 'MONCHIDA CHOTISEN' },
+                    { thainame: 'วรเมธ วัชระบัณฑูรย์', engname: 'WORAMET WATCHARABUNTOON' },
+                    { thainame: 'วิจิตร ธเนศานุรักษ์', engname: 'WIJIT THANESANURAK' },
+                    { thainame: 'ศราวุฒ ศิริอุดม', engname: 'SARAWUT SIRIUDOM' },
+                    { thainame: 'สมพร นาควงษ์', engname: 'SOMPORN NAKWONG' },
+                    { thainame: 'สมศักดิ์ ชาญชัยรุจิรา', engname: 'SOMSAK CHANCHAIRUJIRA' },
+                    { thainame: 'สุรชัย สถาพรวัฒนายนต์', engname: 'SURACHAI SATHAPORNWATTANAYONT' },
+                    { thainame: 'สุรพล เรืองรอง', engname: 'SURAPOL RUENGRONG' },
+                    { thainame: 'สุรินทร์ อึงนิยม', engname: 'SURIN OUNGNIYOM' },
+                    { thainame: 'สุวรรณ อินยิน', engname: 'SUWAN INYIN' },
+                    { thainame: 'อนุชา โชติวัฒนดิลก', engname: 'ANUCHA CHOTWATTANADILOK' },
+                    { thainame: 'อัมรินทร์ สังขรัตน์', engname: 'AMARIN SANGKARAT' },
+                    { thainame: 'อัศวิน อินทร์แนม', engname: 'ADSAWIN INNAEM' }
                 ];
                 this.emps = emps.map((emp) => {
                     return { label: emp.thainame, value: emp };
@@ -406,11 +410,11 @@ export class Qad1i030Component implements OnInit {
                 this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 2:
-                //Senior Manager
+                // Senior Manager
                 emps = [
-                    { thainame: "นางพัชรวรรณ ทันอินทรอาจ", engname: "PATCHARAWAN TANINTARAARJ" },
-                    { thainame: "นางวันเพ็ญ กาญจนประพิณ", engname: "WANPEN KANCHANAPRAPIN" },
-                    { thainame: "นายกฤษฎา รักษ์งาน", engname: "KRISADA RUKNGAN" }
+                    { thainame: 'นางพัชรวรรณ ทันอินทรอาจ', engname: 'PATCHARAWAN TANINTARAARJ' },
+                    { thainame: 'นางวันเพ็ญ กาญจนประพิณ', engname: 'WANPEN KANCHANAPRAPIN' },
+                    { thainame: 'นายกฤษฎา รักษ์งาน', engname: 'KRISADA RUKNGAN' }
                 ];
                 this.emps = emps.map((emp) => {
                     return { label: emp.thainame, value: emp };
@@ -418,9 +422,9 @@ export class Qad1i030Component implements OnInit {
                 this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 3:
-                //QA Manager
+                // QA Manager
                 emps = [
-                    { thainame: "ประไพลักษณ์ วรยศโกวิท", engname: "PRAPAILUK WORRAYOTKOVIT" }
+                    { thainame: 'ประไพลักษณ์ วรยศโกวิท', engname: 'PRAPAILUK WORRAYOTKOVIT' }
                 ];
                 this.emps = emps.map((emp) => {
                     return { label: emp.thainame, value: emp };
@@ -428,10 +432,10 @@ export class Qad1i030Component implements OnInit {
                 this.emps.unshift({ label: 'เลือกชื่อ', value: null });
                 break;
             case 4:
-                //Create By (QA)
+                // Create By (QA)
                 emps = [
-                    { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
-                    { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
+                    { thainame: 'ณัฐรี เตชะทวีกุล', engname: 'NATTAREE TECHATAWEEKUL' },
+                    { thainame: 'ศิริรุ้ง รัศมีวงศ์พร', engname: 'SIRIROONG RUSSAMEEWONGPORN' }
                 ];
                 this.emps = emps.map((emp) => {
                     return { label: emp.thainame, value: emp };
@@ -440,10 +444,10 @@ export class Qad1i030Component implements OnInit {
                 break;
             case 5:
             case 6:
-                //QA ผู้รับผิดชอบ
+                // QA ผู้รับผิดชอบ
                 emps = [
-                    { thainame: "ณัฐรี เตชะทวีกุล", engname: "NATTAREE TECHATAWEEKUL" },
-                    { thainame: "ศิริรุ้ง รัศมีวงศ์พร", engname: "SIRIROONG RUSSAMEEWONGPORN" }
+                    { thainame: 'ณัฐรี เตชะทวีกุล', engname: 'NATTAREE TECHATAWEEKUL' },
+                    { thainame: 'ศิริรุ้ง รัศมีวงศ์พร', engname: 'SIRIROONG RUSSAMEEWONGPORN' }
                 ];
                 this.emps = emps.map((emp) => {
                     return { label: emp.thainame, value: emp };
@@ -465,11 +469,11 @@ export class Qad1i030Component implements OnInit {
         if (this.selectEmp !== undefined && this.selectEmp !== null) {
             switch (this.optionSearchEmp) {
                 case 1:
-                    //Project Manager
+                    // Project Manager
                     this.searchCondition.projManager = this.selectEmp.thainame;
                     break;
                 // case 2:
-                //     //Senior Manager
+                //     Senior Manager
                 //     this.searchCondition.projSeniorManager = this.selectEmp.thainame;
                 //     break;
                 case 3:
@@ -477,15 +481,15 @@ export class Qad1i030Component implements OnInit {
                     this.projAssignByQAMName = this.selectEmp.thainame;
                     break;
                 // case 4:
-                //     //Create By (QA)
+                //     Create By (QA)
                 //     this.searchCondition.projCreateByQA = this.selectEmp.thainame;
                 //     break;
                 case 5:
-                    //QA ผู้รับผิดชอบ
+                    // QA ผู้รับผิดชอบ
                     this.projResponsibleQaName = this.selectEmp.thainame;
                     break;
                 case 6:
-                    //QA ผู้รับผิดชอบ ในช่องตัวเลือกการค้นหา
+                    // QA ผู้รับผิดชอบ ในช่องตัวเลือกการค้นหา
                     this.searchAdditionCondition.projResponsibleQaName = this.selectEmp.thainame;
                     break;
                 default:
@@ -619,28 +623,28 @@ export class Qad1i030Component implements OnInit {
 
     saveAssignQa() {
         let alertMessage = '';
-        if (this.searchCondition.projCode == undefined || this.searchCondition.projCode.trim() == '') {
+        if (this.searchCondition.projCode === undefined || this.searchCondition.projCode.trim() === '') {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ค้นหา "Project"';
         }
 
-        if (this.searchCondition.projSiteCode == undefined || this.searchCondition.projSiteCode.trim() == '') {
+        if (this.searchCondition.projSiteCode === undefined || this.searchCondition.projSiteCode.trim() == '') {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ค้นหา "Site"';
         }
 
-        if (this.projResponsibleQaName == undefined || this.projResponsibleQaName.trim() == '') {
+        if (this.projResponsibleQaName === undefined || this.projResponsibleQaName.trim() === '') {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ระบุ "QA ผู้รับผิดชอบ"';
         }
 
-        if (this.projAssignQaDate == null) {
+        if (this.projAssignQaDate === null) {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ระบุ "วันที่ Assign QA"';
         }
 
         let noti = this.selectedNotifies;
-        if (noti.length == 0) {
+        if (noti.length === 0) {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ระบุ "แจ้ง QA ผู้รับผิดชอบ"';
         }
 
-        if (this.projAssignByQAMName == undefined || this.projAssignByQAMName.trim() == '') {
+        if (this.projAssignByQAMName === undefined || this.projAssignByQAMName.trim() === '') {
             alertMessage = alertMessage + ((alertMessage !== '') ? ', \n' : '') + 'ไม่ได้ระบุ "Assign โดย (QA Manager)"';
         }
 
@@ -655,7 +659,7 @@ export class Qad1i030Component implements OnInit {
                 this.assignQas[this.selectedIndexAssignQa].assignByQAMName = this.projAssignByQAMName;
                 this.assignQas[this.selectedIndexAssignQa].remark = this.projRemark
             } else {
-                //Add new
+                // Add new
                 let newAssignQa: any = {};
                 let orderSeq = 1;
                 if (this.assignQas.length > 0) {
@@ -675,7 +679,7 @@ export class Qad1i030Component implements OnInit {
                 newAssignQa.assignByQAMName = this.projAssignByQAMName;
                 newAssignQa.status = 'กำหนด QA ผู้รับผิดชอบแล้ว';
                 newAssignQa.remark = this.projRemark
-                
+
                 this.assignQas.push(newAssignQa);
             }
         } else {
@@ -704,9 +708,9 @@ export class Qad1i030Component implements OnInit {
         } else {
             let orderSeq = +this.assignQas[index].orderSeq;
 
-            this.assignQas.splice(index, 1); //Delete
+            this.assignQas.splice(index, 1); // Delete
 
-            //Reorder
+            // Reorder
             for (let i = index; i < this.assignQas.length; i++) {
                 this.assignQas[i].orderSeq = orderSeq;
                 orderSeq++;
