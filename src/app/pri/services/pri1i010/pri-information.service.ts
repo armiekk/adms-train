@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PritInformationApi } from '../../../shared/api/cdgs-adms-pri-services/api/PritInformationApi';
-import { PritInformation, ProjectInformationInfoBean } from '../../../shared/api/cdgs-adms-pri-services/model/models';
+import { PritInformationApi } from '../../api/api/PritInformationApi';
+import { PritInformation, ProjectInformationInfoBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
 export interface SearchCondition {
@@ -14,7 +14,7 @@ export interface SearchCondition {
   size: number;
 }
 
-export { PritInformation, ProjectInformationInfoBean } from '../../../shared/api/cdgs-adms-pri-services/model/models';
+export { PritInformation, ProjectInformationInfoBean } from '../../api/model/models';
 
 export const initialPritInformaiton: PritInformation = {
   projCode: null,

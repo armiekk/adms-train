@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
-import { PritLanguageApi, PritMethodApi, PritToolsApi } from '../../api/pri1i030/api/api';
-import { PritLanguage, PritMethod, PritTools } from '../../api/pri1i030/model/models';
+import { PritLanguageApi } from '../../api/api/PritLanguageApi';
+import { PritMethodApi } from '../../api/api/PritMethodApi';
+import { PritToolsApi } from '../../api/api/PritToolsApi';
+import { 
+  PritLanguage, 
+  PritMethod, 
+  PritTools, 
+  ProjLanguageBean, 
+  ProjMethodBean,
+  ProjToolsBean
+} from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjLanguage extends PritLanguage {
+export interface ProjLanguage extends ProjLanguageBean {
   edit?: boolean;
 }
 
-export interface ProjMethod extends PritMethod {
+export interface ProjMethod extends ProjMethodBean  {
   edit?: boolean;
 }
 
-export interface ProjTools extends PritTools {
+export interface ProjTools extends ProjToolsBean {
   edit?: boolean;
 }
 
@@ -27,17 +36,11 @@ export class Pri1i030Service {
   getProjSDEList(projCode: string){
     return Observable.combineLatest(
       // async combine 3 observable and add edit property
-      this.getProjLanguageList(projCode)
-        .map((projLanguageList: PritLanguage[]) => 
-            projLanguageList.map((projLanguage: PritLanguage) => Object.assign({}, projLanguage, { edit: false }))),
-      this.getProjMethodList(projCode)
-        .map((projMethodList: PritMethod[]) =>
-            projMethodList.map((projMethod: PritMethod) => Object.assign({}, projMethod, { edit: false }))),
-      this.getProjToolsList(projCode)
-        .map((projToolsList: PritTools[]) => 
-          projToolsList.map((projTools: PritTools) => Object.assign({}, projTools, { edit: false }))),
+      this.getProjLanguageList(projCode),
+      this.getProjMethodList(projCode),
+      this.getProjToolsList(projCode),
       // return combined result
-      (projLanguageList: PritTools[], projMethodList: PritMethod[], projToolsList: PritTools[] ) => {
+      (projLanguageList: ProjLanguage[], projMethodList: ProjMethod[], projToolsList: ProjTools[] ) => {
           return {
             projLanguageList,
             projMethodList,
@@ -47,22 +50,22 @@ export class Pri1i030Service {
     );
   }
 
-  getProjLanguageList(projCode: string): Observable<PritLanguage[]> {
-    return this.pritLanguageApi.pritLanguageFind()
-      .map((projLanguageList: PritLanguage[]) =>
-        projLanguageList.filter((projLanguage) => projLanguage.projCode === projCode));
+  getProjLanguageList(projCode: string): Observable<ProjLanguage[]> {
+    return this.pritLanguageApi.getProjLanguageList(projCode)
+      .map((projLanguageList: ProjLanguageBean[]) =>
+        projLanguageList.map((projLanguage: ProjLanguageBean) => Object.assign({}, projLanguage, { edit: false })));
   }
 
-  getProjMethodList(projCode: string): Observable<PritMethod[]> {
-    return this.pritMethodApi.pritMethodFind()
-      .map((projMethodList: PritMethod[]) =>
-        projMethodList.filter((projMethod) => projMethod.projCode === projCode));
+  getProjMethodList(projCode: string): Observable<ProjMethod[]> {
+    return this.pritMethodApi.getProjMethodList(projCode)
+      .map((projMethodList: ProjMethodBean[]) =>
+        projMethodList.map((projMethod: ProjMethodBean) => Object.assign({}, projMethod, { edit: false })));
   }
 
-  getProjToolsList(projCode: string): Observable<PritTools[]> {
-    return this.pritToolsApi.pritToolsFind()
-      .map((projToolsList: PritTools[]) =>
-        projToolsList.filter((projTools) => projTools.projCode === projCode));
+  getProjToolsList(projCode: string): Observable<ProjTools[]> {
+    return this.pritToolsApi.getProjToolsList(projCode)
+      .map((projToolsList: ProjToolsBean[]) =>
+        projToolsList.map((projTools: ProjToolsBean) => Object.assign({}, projTools, { edit: false })));
   }
 
   private setHeaders() {

@@ -9,7 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import * as AuthorizeService from './shared/api/cdgs-authorize-services/api/api';
 import { AdmsMenuService } from './shared/services/adms-menu/adms-menu.service';
 import { UserApi } from './shared/api/mockup-user-service/api/UserApi';
-import { PritInformationApi } from './shared/api/cdgs-adms-pri-services/api/PritInformationApi';
 import { AuthGuardService } from './shared/guards/auth-guard/auth-guard.service';
 import { StateService } from './shared/services/state/state.service';
 
@@ -26,7 +25,7 @@ import { AppComponent } from './app.component';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [AuthGuardService, StateService, UserApi, PritInformationApi, AuthorizeService.UserApi , AdmsMenuService ],
+  providers: [AuthGuardService, StateService, UserApi, AuthorizeService.UserApi , AdmsMenuService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

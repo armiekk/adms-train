@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritOtherApi } from '../../api/pri1i110/api/api';
-import { PritOther } from '../../api/pri1i110/model/models';
+import { PritOtherApi } from '../../api/api/PritOtherApi';
+import { PritOther, ProjOtherBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjOther extends PritOther {
+export interface ProjOther extends ProjOtherBean {
   edit?: boolean;
 }
 
@@ -12,10 +12,10 @@ export class Pri1i110Service {
 
   constructor(private pritOtherApi: PritOtherApi) { }
 
-  getProjOtherList(projCode: string): Observable<ProjOther[]>{
-    return this. pritOtherApi.pritOtherFind()
-      .map((projOtherList: PritOther[]) =>
-        projOtherList.filter((projOther: PritOther) => Object.assign({}, projOther, { edit: false })
+  getProjOtherList(projCode: string): Observable<ProjOther[]> {
+    return this.pritOtherApi.getProjOtherList(projCode)
+      .map((projOtherList: ProjOtherBean[]) =>
+        projOtherList.map((projOther: ProjOtherBean) => Object.assign({}, projOther, { edit: false })
         )
       );
   }

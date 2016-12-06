@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritDeliverApi } from '../../api/pri1i050/api/api';
-import { PritDeliver } from '../../api/pri1i050/model/models';
+import { PritDeliverApi } from '../../api/api/PritDeliverApi';
+import { PritDeliver, ProjDeliverBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjDeliver extends PritDeliver {
+export interface ProjDeliver extends ProjDeliverBean {
   edit?: boolean;
 }
 
@@ -13,9 +13,9 @@ export class Pri1i050Service {
   constructor(private pritDeliverApi: PritDeliverApi) { }
 
   getProjDeliverList(projCode: string): Observable<ProjDeliver[]> {
-    return this.pritDeliverApi.pritDeliverFind()
-      .map((projDeliverList: PritDeliver[]) =>
-        projDeliverList.filter((projDeliver: PritDeliver) => Object.assign({}, projDeliver, { edit: false })
+    return this.pritDeliverApi.getProjDeliverList(projCode)
+      .map((projDeliverList: ProjDeliverBean[]) =>
+        projDeliverList.map((projDeliver: ProjDeliverBean) => Object.assign({}, projDeliver, { edit: false })
         )
       );
   }

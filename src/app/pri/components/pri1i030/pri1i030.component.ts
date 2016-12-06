@@ -9,7 +9,7 @@ import { StateService } from '../../../shared/services/state/state.service';
   providers: [Pri1i030Service]
 })
 export class Pri1i030Component implements OnInit {
-  
+
   // projLanguage properties
   private projLanguageList: ProjLanguage[] = [];
   private selectedProjLanguage: ProjLanguage[] = [];
@@ -23,79 +23,79 @@ export class Pri1i030Component implements OnInit {
   private selectedProjTools: ProjTools[] = [];
 
 
-  constructor(private pri1i030Service: Pri1i030Service, private state: StateService) 
+  constructor(private pri1i030Service: Pri1i030Service, private state: StateService)
   { }
 
   ngOnInit() {
     this.pri1i030Service.getProjSDEList(this.state.projCode)
-      .subscribe((response: { 
-        projLanguageList: ProjLanguage[], 
-        projMethodList: ProjMethod[], 
-        projToolsList: ProjTools[] }) => 
-        {
-          this.projLanguageList = response.projLanguageList;
-          this.projMethodList = response.projMethodList;
-          this.projToolsList = response.projToolsList;
+      .subscribe((response: {
+        projLanguageList: ProjLanguage[],
+        projMethodList: ProjMethod[],
+        projToolsList: ProjTools[]
+      }) => {
+        this.projLanguageList = response.projLanguageList;
+        this.projMethodList = response.projMethodList;
+        this.projToolsList = response.projToolsList;
       });
   }
 
   // projLanguage Method
 
-  addProjLanguageRowData(){
+  addProjLanguageRowData() {
     let dummyRow: ProjLanguage = { edit: false };
-    this.projLanguageList = [  dummyRow, ...this.projLanguageList];
+    this.projLanguageList = [dummyRow, ...this.projLanguageList];
   }
 
-  editProjLanguageRow(index: number){
+  editProjLanguageRow(index: number) {
     this.projLanguageList[index].edit = true;
   }
 
-  saveEditedProjLanguageRow(projScope: any, index: number){
+  saveEditedProjLanguageRow(projScope: any, index: number) {
     this.projLanguageList.splice(index, projScope);
     this.projLanguageList[index].edit = false;
   }
 
-  cancelEditedProjLanguageRow(index: number){
+  cancelEditedProjLanguageRow(index: number) {
     this.projLanguageList[index].edit = false;
   }
 
   // projMethod method 
-  
-  addProjMethodRowData(){
+
+  addProjMethodRowData() {
     let dummyRow: ProjMethod = { edit: false };
-    this.projMethodList = [  dummyRow, ...this.projMethodList];
+    this.projMethodList = [dummyRow, ...this.projMethodList];
   }
 
-  editProjMethodRow(index: number){
+  editProjMethodRow(index: number) {
     this.projMethodList[index].edit = true;
   }
 
-  saveEditedProjMethodRow(projScope: any, index: number){
+  saveEditedProjMethodRow(projScope: any, index: number) {
     this.projMethodList.splice(index, projScope);
     this.projMethodList[index].edit = false;
   }
 
-  cancelEditedProjMethodRow(index: number){
+  cancelEditedProjMethodRow(index: number) {
     this.projMethodList[index].edit = false;
   }
 
   // projTools method
 
-  addProjToolsRowData(){
+  addProjToolsRowData() {
     let dummyRow: ProjTools = { edit: false };
-    this.projToolsList = [  dummyRow, ...this.projToolsList];
+    this.projToolsList = [dummyRow, ...this.projToolsList];
   }
 
-  editProjToolsRow(index: number){
+  editProjToolsRow(index: number) {
     this.projToolsList[index].edit = true;
   }
 
-  saveEditedProjToolsRow(projScope: any, index: number){
+  saveEditedProjToolsRow(projScope: any, index: number) {
     this.projToolsList.splice(index, projScope);
     this.projToolsList[index].edit = false;
   }
 
-  cancelEditedProjToolsRow(index: number){
+  cancelEditedProjToolsRow(index: number) {
     this.projToolsList[index].edit = false;
   }
 }

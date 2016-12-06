@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { PritInformation } from '../../../api/pri-information';
-import { ApipriinformationApi } from '../../../api/pri1i010/api/ApipriinformationApi';
 import { PriConstantsService } from '../../../constants';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { Message, SelectItem } from 'primeng/primeng';
@@ -13,7 +11,6 @@ import { SearchCondition, PriInformationService, PritInformation, ProjectInforma
   selector: 'app-pri1i010-search',
   templateUrl: './pri1i010-search.component.html',
   styleUrls: ['./pri1i010-search.component.css'],
-  providers: [ApipriinformationApi]
 })
 export class Pri1i010SearchComponent implements OnInit {
 
@@ -74,6 +71,7 @@ export class Pri1i010SearchComponent implements OnInit {
 
   onRowSelect(event: { data: ProjectInformationInfoBean }){
     this.state.projRef = event.data.projRef;
+    this.state.projCode = event.data.projCode;
     this.state.mode = 'EDIT';
     this.router.navigate(['pri/Pri1i010/edit']);
   }

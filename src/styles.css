@@ -246,3 +246,20 @@ table {
 .ui-widget-header {
     border: 1px solid transparent;
 }
+
+.widget-content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+    transform: translateX(-80%);
+}
+
+.widget-content-center p {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.text-editor-content {
+    padding: 1em;
+}

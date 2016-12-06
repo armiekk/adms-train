@@ -7,7 +7,7 @@ import {
     DropdownModule, CalendarModule, GrowlModule, PanelModule, TabViewModule, MenuModule, CheckboxModule,
     ScheduleModule, DialogModule, InputSwitchModule, AccordionModule, SharedModule, InputMaskModule,
     TooltipModule, BreadcrumbModule, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, 
-    FileUploadModule, MultiSelectModule, TabMenuModule
+    FileUploadModule, MultiSelectModule, TabMenuModule, EditorModule
 } from 'primeng/primeng';
 import { ThaiCalendarService } from './services/thai-calendar/thai-calendar.service';
 import { MessageService } from './services/message/message.service';
@@ -46,7 +46,7 @@ import { LoadingComponent } from './components/loading/loading.component';
         CheckboxModule, ScheduleModule, DialogModule, InputSwitchModule, InputMaskModule, TooltipModule, 
         TemplateComponent, UserContainerComponent, DashboardComponent, TodoListComponent, LabelComponent,
         BreadcrumbComponent, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, FileUploadModule,
-        MultiSelectModule, AdmsTabManagerComponent
+        MultiSelectModule, AdmsTabManagerComponent, EditorModule
     ]
 })
 export class AppSharedModule { }
