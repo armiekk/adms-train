@@ -19,9 +19,9 @@ export class Qad1i020Component implements OnInit {
     private actionPlanOption: string;
     private disableFileUpload: boolean;
 
-    @Input () qaSchedules: Array<any>;
-    private selectedQaSchedules: Array<any> = [];
-    private qaActivities: Array<any> = [];
+    @Input () qaSchedules: any[];
+    private selectedQaSchedules: any[] = [];
+    private qaActivities: any[] = [];
     private qaActivitiesOption: Array<Option> = [];
 
     constructor(private http: Http) { }
@@ -32,7 +32,7 @@ export class Qad1i020Component implements OnInit {
 
         this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
             .map(res => res.json().data)
-            .subscribe((qaActivities: Array<any>) => {
+            .subscribe((qaActivities: any[]) => {
                 this.qaActivities = qaActivities;
                 this.qaActivities.push({qaActivities: "Other"});
                 //Create list option qaActivities

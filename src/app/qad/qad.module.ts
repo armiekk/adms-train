@@ -15,6 +15,10 @@ import { Qad2i010Component } from './components/qad2i010/qad2i010.component';
 import { Qad1TabContentComponent } from './components/qad1-tab-content/qad1-tab-content.component';
 import { HistoryStatusPipe } from './pipes/history-status.pipe';
 import { Qad2i010TableComponent } from './components/qad2i010-table/qad2i010-table.component';
+import { Qad2q010Component } from './components/qad2q010/qad2q010.component';
+import { Qad0i030Component } from './components/qad0i030/qad0i030.component';
+import { Qad0i030SaveComponent } from './components/qad0i030-save/qad0i030-save.component';
+import { Qad0i030TableComponent } from './components/qad0i030-table/qad0i030-table.component';
 
 @NgModule({
   imports: [
@@ -22,6 +26,6 @@ import { Qad2i010TableComponent } from './components/qad2i010-table/qad2i010-tab
     QadRoutingModule,
     AppSharedModule
   ],
-  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component, Qad2i010Component, Qad1TabContentComponent, HistoryStatusPipe, Qad2i010TableComponent]
+  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component, Qad2i010Component, Qad1TabContentComponent, HistoryStatusPipe, Qad2i010TableComponent, Qad2q010Component, Qad0i030Component, Qad0i030SaveComponent, Qad0i030TableComponent]
 })
 export class QadModule { }

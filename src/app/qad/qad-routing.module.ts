@@ -5,6 +5,8 @@ import { QadDashboardContainerComponent } from './components/qad-dashboard-conta
 import { Qad1q010Component } from './components/qad1q010/qad1q010.component';
 import { Qad1i030Component } from './components/qad1i030/qad1i030.component';
 import { Qad2i010Component } from './components/qad2i010/qad2i010.component';
+import { Qad2q010Component } from './components/qad2q010/qad2q010.component';
+import { Qad0i030Component } from './components/qad0i030/qad0i030.component';
 
 const routes: Routes = [
     {
@@ -15,7 +17,9 @@ const routes: Routes = [
             { path: 'dashboard', component: QadDashboardContainerComponent },
             { path: 'QAD1Q010', component: Qad1q010Component },
             { path: 'QAD1I030', component: Qad1i030Component },
-            { path: 'QAD2I010', component: Qad2i010Component }
+            { path: 'QAD2I010', component: Qad2i010Component },
+            { path: 'QAD2Q010', component: Qad2q010Component },
+            { path: 'QAD0I030', component: Qad0i030Component }
         ]
     },
 ];

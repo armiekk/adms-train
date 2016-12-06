@@ -503,7 +503,7 @@ export class Qad1i030Component implements OnInit {
         if (this.isSelectedProject) {
             this.http.get('app/qad/resources/data/assignQasMockData.json')
                 .map(res => res.json().data)
-                .subscribe((assignQas: Array<any>) => {
+                .subscribe((assignQas: any[]) => {
                     let projCode = this.searchCondition.projCode;
                     assignQas = assignQas.filter((assignQa) => assignQa.projCode === projCode);
 
@@ -545,10 +545,10 @@ export class Qad1i030Component implements OnInit {
 
     searchAddition() {
         if (this.isSelectedAdditionProject) {
-            let findAssignQas: Array<any> = [];
+            let findAssignQas: any[] = [];
             this.http.get('app/qad/resources/data/assignQasMockData.json')
                 .map(res => res.json().data)
-                .subscribe((assignQas: Array<any>) => {
+                .subscribe((assignQas: any[]) => {
                     let orderSeq = 1;
                     for (let i = 0; i < this.selectAdditionProjects.length; i++) {
                         let projCode = this.selectAdditionProjects[i].projCode;

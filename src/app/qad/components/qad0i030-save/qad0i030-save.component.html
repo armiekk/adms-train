@@ -1,0 +1,99 @@
+<div class="ui-g">
+    <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+        <p-fieldset legend="สร้างกลุ่มเอกสาร CMMI">
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                    Document Type:
+                </div>
+                <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                    {{masterDocumentName}}
+                </div>
+            </div>
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                    <label for="masterGroupName">Group Name:</label>
+                </div>
+                <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                    <input type="text" id="masterGroupName" pInputText style="width: 100%;" [(ngModel)]="masterGroupName" />
+                </div>
+            </div>
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                    <label for="masterRemark">Remark:</label>
+                </div>
+                <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                    <input type="text" id="masterRemark" pInputText style="width: 100%;" [(ngModel)]="masterRemark" />
+                </div>
+            </div>
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12"></div>
+                <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                    <button type="button" pButton label="บันทึก" (click)="saveCMMI();"></button>
+                    <button type="button" pButton label="ยกเลิก" (click)="cancelCMMI();"></button>
+                </div>
+            </div>
+        </p-fieldset>
+    </div>
+</div>
+<br />
+<div class="ui-g">
+    <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+        <p-dataTable [value]="headerTables" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true">
+            <p-headerColumnGroup>
+                <p-row>
+                    <p-column header="No." rowspan="2" [style]="{'width': '50px'}"></p-column>
+                    <p-column header="Document Check List" rowspan="2"></p-column>
+                    <p-column header="เอกสารที่ต้องนำส่ง" colspan="2" [style]="{'width': '100px'}"></p-column>
+                    <p-column header="Remark" rowspan="2" [style]="{'width': '25%'}"></p-column>
+                    <p-column rowspan="2" [style]="{'width': '10%'}">
+                        <template pTemplate type="header">
+                            <span class="fa fa-plus" style="cursor: pointer; font-size: 20px;" (click)="showDialogAddNewPhase();"></span>
+                            <span class="fa fa-trash" style="cursor: pointer; font-size: 20px;" (click)="showDialogDeletePhase();"></span>
+                        </template>
+                    </p-column>
+                </p-row>
+                <p-row>
+                    <p-column header="ทำ"></p-column>
+                    <p-column header="ไม่ทำ"></p-column>
+                </p-row>
+            </p-headerColumnGroup>
+        </p-dataTable>
+
+        <p-dialog header="New Phase" [(visible)]="displayNewPhase" modal="modal" [resizable]="false" dragable="false" [width]="700" [responsive]="true" [appendTo]="body">
+            <div class="ui-widget-content" style="width: 100%">
+                <div class="ui-g">
+                    <div class="ui-g-3">
+                        <label for="newPhaseName">New Phase Name:</label>
+                    </div>
+                    <div class="ui-g-9">
+                        <input type="text" id="newPhaseName" pInputText style="width: 90%;" [(ngModel)]="newPhaseName" />
+                    </div>
+                </div>
+                <footer>
+                    <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                        <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="saveNewPhaseName();"></button>
+                        <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelNewPhaseName();"></button>
+                    </div>
+                </footer>
+            </div>
+        </p-dialog>
+
+        <p-dialog header="Delete Phase" [(visible)]="displayDeletePhase" modal="modal" [resizable]="false" dragable="false" [width]="300" [responsive]="true" [appendTo]="body">
+            <div class="ui-widget-content" style="width: 100%">
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12" style="text-align: center; height: 200px;">
+                        <p-dropdown [options]="phases" [scrollHeight]="'150px'" [(ngModel)]="selectPhase" [style]="{'text-align': 'left', 'width':'150px'}" ></p-dropdown>
+                    </div>
+                </div>
+                <footer>
+                    <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                        <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="deletePhaseName();"></button>
+                        <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelDeletePhaseName();"></button>
+                    </div>
+                </footer>
+            </div>
+        </p-dialog>
+
+        <app-qad1-tab-content [componentData]="selectedTab" [qaDatas]="documentCheckDatas"></app-qad1-tab-content>
+    </div>
+</div>

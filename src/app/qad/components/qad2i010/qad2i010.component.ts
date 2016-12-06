@@ -5,9 +5,11 @@ import { SelectItem, MenuItem } from 'primeng/primeng';
 
 import { QadConstantsService } from '../../constants';
 import { ThaiCalendarService } from '../../../shared/services/thai-calendar/thai-calendar.service';
+import { StateService } from '../../../shared/services/state/state.service';
 
 import { Qad2i010TableComponent } from '../../components/qad2i010-table/qad2i010-table.component';
-import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component'
+import { Qad0i030SaveComponent } from '../../components/qad0i030-save/qad0i030-save.component';
 
 interface SearchCondition {
     projType?: number;
@@ -48,9 +50,13 @@ export class Qad2i010Component implements OnInit {
     private menus: SelectItem[];
     private selectedMenu: string;
     private searchCondition: SearchCondition = {};
+    private CMMIVersionDate: Date;
+    private CMMIVersion: string;
+    private CMMIChangeDes: string;
+    private _selectedCMMITemplate: any;
     private _selectedTab: any;
+    private CMMITemplateDatas: any[] = [];
     private qaDatas: any[] = [];
-    private selectDatas: any[] = [];
     private documentCMMIType: any[] = [];
     private templateCMMIItems: MenuItem[] = [];
     private systemDocumentStatus: any[] = [];
@@ -61,74 +67,57 @@ export class Qad2i010Component implements OnInit {
     private documentTypes: SelectItem[] = [];
     private selectDocumentType: any;
     private documentCMMICheckLists: any[] = [];
-    private dataJson: any[] = [];
     private documentChecksAll: any[] = [];
     private documentChecks: any[] = [];
+    private isCreateMasterTemplateCMMI: boolean = false;
+    private isSearch: boolean = false;
 
     constructor(private http: Http,
         private router: Router,
         private locale: ThaiCalendarService,
-        private qadConstant: QadConstantsService) {
+        private qadConstant: QadConstantsService,
+        private state: StateService) {
             this.menus = [];
             this.menus.push({label: 'History', value: '/qad/QAD2Q010'});
             this.menus.push({label: 'CMMI Document', value: '/qad/QAD2I010'});
-            this.documentCMMIType = qadConstant.documentCMMIType;
+            this.documentCMMIType = qadConstant.groupDocumentCMMIType;
             this.documentTypes = qadConstant.documentCMMIType;
             this.documentTypes.unshift({ label: 'เลือก Document Type', value: null });
         }
 
     ngOnInit() {
         this.selectedMenu = this.router.url;
+        if (this.state.projCode !== null) {
+            this.http.get('app/qad/resources/data/projectsMockData.json')
+            .map(res => res.json().data)
+            .subscribe((projs: any[]) => {
+                let project = projs.filter((proj) => proj.projCode === this.state.projCode);
+                if (project.length === 1) {
+                    this.searchCondition.projCode = project[0].projCode;
+                    this.searchCondition.projName = project[0].projName;
+                    this.isSelectedProject = true;
+                    this.search();
+                }
+            });
+        }
+
         this.searchCondition.projType = 1;
         this.templateCMMIItems = [];
         this.documentCMMIType.map((v) => {
             let n: MenuItem = {};
             n.label = v.label;
             n.icon = 'fa fa-plus-circle';
+            n.command = (event) => {
+                this.selectedCMMITemplate = 'LOADING';
+                setTimeout(() => { this.selectedCMMITemplate = event.item.label; }, 100);
+            };
             this.templateCMMIItems.push(n);
         });
-        this.referenceGroups.push({ label: 'referenceGroup 1', value: 'referenceGroup 1' });
-        this.referenceGroups.push({ label: 'referenceGroup 2', value: 'referenceGroup 2' });
-        this.referenceGroups.push({ label: 'referenceGroup 2', value: 'referenceGroup 2' });
+        this.documentCMMIType.map((v) => { 
+            this.referenceGroups.push(v);
+        });
+        this.referenceGroups.unshift({ label: 'เลือกกลุ่มเอกสาร', value: null });
         this.documentCMMICheckLists = [{}];
-        this.dataJson = [
-            { "phaseType": "Phase: Planning", "orderSeq": "1", "documentCheckName": "Job Assignment Form [FM-04-031]", "send": true, "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "2", "documentCheckName": "Project Information Form [FM-01-011]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "3", "documentCheckName": "Equipment List Form [FM-01-003]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "4", "documentCheckName": "Contract Change Control Form [FM-01-013]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "5", "documentCheckName": "เอกสารสรุปรายละเอียดโครงการ [FM-04-158]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "6", "documentCheckName": "รายงานการวิเคราะห์ความเสี่ยง (Risk Analysis Report)", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "7", "documentCheckName": "แผนผังทีมงานโครงการ [FM-04-159]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "8", "documentCheckName": "Project Management Team (2) Software Development Team", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "9", "documentCheckName": "เอกสารการเตรียมสภาพแวดล้อมในการทำงาน [FM-04-0161]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "10", "documentCheckName": "Project Master Plan [FM-04-035]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "11", "documentCheckName": "Data Migration Plan (ถ้ามี)", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "12", "documentCheckName": "Service Request Form [FM-05-029]", "remark": "" },
-            { "phaseType": "Phase: Planning", "orderSeq": "13", "documentCheckName": "Cost Estimate Form [FM-01-004]", "remark": "" },
-            { "phaseType": "Phase: UAT", "orderSeq": "1", "documentCheckName": "ใบส่งสินค้าชั่วคราว [FM-05-112] หรือใบส่งสินค้าที่ออกโดยแผนกบัญชี", "remark": "" },
-            { "phaseType": "Phase: UAT", "orderSeq": "2", "documentCheckName": "จดหมายส่งมอบงาน", "remark": "" },
-            { "phaseType": "Phase: Closure", "orderSeq": "1", "documentCheckName": "แบบประเมินผลโครงการ [FM-04-046]", "remark": "" },
-            { "phaseType": "Phase: Closure", "orderSeq": "2", "documentCheckName": "รายงานการประชุมประเมินผลโครงการ [FM-05-037]", "remark": "" },
-            { "phaseType": "Phase: Closure", "orderSeq": "3", "documentCheckName": "Metrics Sheet", "remark": "" },
-            { "phaseType": "Phase: Closure", "orderSeq": "4", "documentCheckName": "QA Report", "remark": "" },
-            { "phaseType": "Phase: Closure", "orderSeq": "5", "documentCheckName": "CM Report", "remark": "" }
-        ];
-
-        let phase;
-        for (let i = 0; i < this.dataJson.length; i++) {
-            if (i === 0) {
-                phase = this.dataJson[i].phaseType;
-
-                let data = this.dataJson.filter((data) => data.phaseType === phase);
-                this.documentChecks.push({ header: phase, value: data });
-            } else {
-                if (this.dataJson[i].phaseType !== phase) {
-                    phase = this.dataJson[i].phaseType;
-                    let data = this.dataJson.filter((data) => data.phaseType === phase);
-                    this.documentChecks.push({ header: phase, value: data });
-                } 
-            }
-        }
     }
 
     nav() {
@@ -172,6 +161,7 @@ export class Qad2i010Component implements OnInit {
             this.isSelectedProject = true;
             this.displaySearchProject = false;
 
+            this.isSearch = false;
             this.selectedTab = 'LOADING';
             this.documentChecks = [];
             setTimeout(() => {
@@ -190,10 +180,20 @@ export class Qad2i010Component implements OnInit {
         this.searchCondition.projName = '';
         this.selectProject = null;
         this.selectProjects = [];
+        
+        this.isSearch = false;
+        //Clear table
+        this.selectedTab = 'LOADING';
+        this.documentChecks = [];
+        setTimeout(() => {
+            this.selectedTab = '';
+        }, 100);
+        this.selectDocumentType = null;
     }
 
     search() {
         if (this.isSelectedProject) {
+            this.isSearch = true;
             this.selectedTab = 'LOADING';
             this.http.get('app/qad/resources/data/documentCMMIMockData.json')
             .map(res => res.json().data)
@@ -208,6 +208,53 @@ export class Qad2i010Component implements OnInit {
         }
     }
 
+    private displaySaveAndSendToApprove = false;
+    showDialogSaveAndSendToApprove() {
+        this.displaySaveAndSendToApprove = true;
+    }
+
+    saveAndSendToApprove(choice: number) {
+        switch (choice) {
+            case 1:
+                // todo save to database
+                this.displaySaveAndSendToApprove = false;
+                break;
+            case 2:
+                // todo gen new version and save to database
+                this.displaySaveAndSendToApprove = false;
+                break;
+        }
+    }
+
+    save() {
+
+    }
+
+    print() {
+        console.log('--start--print--');
+        console.log(this.CMMITemplateDatas);
+        console.log(this.documentChecksAll);
+        console.log('--end--print--');
+    }
+
+    private set selectedCMMITemplate(label: string) {
+        if(this.isSelectedProject && this.isSearch) {
+            this.isCreateMasterTemplateCMMI = true;
+            if (label === 'LOADING') {
+                this._selectedCMMITemplate = LoadingComponent;
+            } else {
+                let item = this.documentCMMIType.filter((item) => item.label === label);
+                let type = item[0].value.toString();
+                this.CMMITemplateDatas = [{ documentType: type, documentName: label, projCode: this.searchCondition.projCode, value: [] }];
+                this._selectedCMMITemplate = Qad0i030SaveComponent;
+            }
+        }
+    }
+
+    private get selectedCMMITemplate() {
+        return this._selectedCMMITemplate;
+    }
+
     private set selectedTab(tabLabel: string) {
         if (tabLabel === 'LOADING') {
             this._selectedTab = LoadingComponent;
@@ -217,12 +264,41 @@ export class Qad2i010Component implements OnInit {
         }
     }
 
+    onSaveCMMITemplate(value: any) {
+        let isSave = value[0].isSave;
+        if (isSave) {
+            //1. Save to master template database <== Todo
+            //2. Save to variable 'documentChecksAll' on page with 'projCode'
+
+            let data: any[] = [];
+            let v = value[0].value;
+            for (let i = 0; i < v.length; i++) {
+                let v2 = v[i].value;
+                for (let j = 0; j < v2.length; j++) {
+                    let newData: any = {};
+                    newData.projCode = value[0].projCode;
+                    newData.documentCMMIType = value[0].documentType;
+                    newData.phaseType = v2[j].phaseType;
+                    newData.orderSeq = v2[j].orderSeq;
+                    newData.documentCheckName = v2[j].documentCheckName;
+                    newData.send = v2[j].send;
+                    newData.remark = v2[j].remark;
+                    data.push(newData);
+                }
+            }
+
+            this.documentChecksAll.push(...data);
+        }
+
+        this.isCreateMasterTemplateCMMI = false;
+    }
+
     private get selectedTab() {
         return this._selectedTab;
     }
 
     onChangeSelectDocumentType() {
-        if (this.selectDocumentType !== null) {
+        if (this.isSelectedProject && this.selectDocumentType !== null) {
             this.selectedTab = 'LOADING';
             let docCheck: any[] = [];
 
@@ -279,5 +355,9 @@ export class Qad2i010Component implements OnInit {
                 
             }
         }
+    }
+
+    onChangeSelectReferenceGroup() {
+
     }
 }

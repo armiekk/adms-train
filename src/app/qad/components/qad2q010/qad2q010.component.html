@@ -1,0 +1,215 @@
+<div class="content-container">
+    <div class="ui-g">		
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <div style="float: right;">
+                <p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <p-fieldset legend="Project Name">
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12">
+                            <label for="searchProjCode">Project Code<span class="red-text">*</span>:</label>
+                        </div>
+                        <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-4 ui-sm-12 ui-g-nopad">
+                            <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
+                                <input type="text" id="searchProjCode" pTooltip="Precontact Contact In-house" tooltipPosition="bottom" pInputText style="width: 100%" [(ngModel)]="searchCondition.projCode" (change)="onChangeTextProject();" />
+                            </div>
+                            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
+                                <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchProject();"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12">
+                        <input type="text" id="searchProjName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projName" />
+                    </div>
+                </div>
+
+                <p-dialog header="ค้นหาโครงการ" [(visible)]="displaySearchProject" modal="modal" [resizable]="false" dragable="false" [width]="700" [responsive]="true" [appendTo]="body">
+                    <div class="ui-widget-content" style="width: 100%">
+                        <div class="ui-g">
+                            <div class="ui-g-3">ประเภทโครงการ:</div>
+                            <div class="ui-g-9 ui-g-nopad">
+                                <div *ngFor="let projType of qadConstant.projectType">
+                                    <div class="ui-g-4">
+                                        <p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="searchCondition.projType"></p-radioButton>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-g-3">รหัสโครงการ:</div>
+                            <div class="ui-g-9">
+                                <p-dropdown [options]="projects" [scrollHeight]="'150px'" [(ngModel)]="selectProject" [style]="{'width':'150px'}" filter="filter" [disabled]="searchCondition.projType === undefined" (onChange)="onChangeSelectProject();"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="ui-g">
+                            <div class="ui-g-12">
+                                <p-dataTable [value]="selectProjects" [rows]="5" emptyMessage="ไม่ได้เลือกโครงการ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
+                                    <header>
+                                        โครงการ
+                                    </header>
+                                    <p-column field="projCode" header="รหัสโครงการ"></p-column>
+                                    <p-column field="projName" header="ชื่อโครงการ"></p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+                        <footer>
+                            <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                                <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectProject();"></button>
+                                <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
+                            </div>
+                        </footer>
+                    </div>
+                </p-dialog>
+            </p-fieldset>
+        </div>
+    </div>
+    <br />
+    <div class="ui-g">
+        <p-fieldset legend="Project Detail">
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjSiteCode">Site Code:</label>
+                    </div>
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-4 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-9 ui-sm-10">
+                            <input type="text" id="searchProjSiteCode" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projSiteCode" (change)="onChangeTextSite();" />
+                        </div>
+                        <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-3 ui-sm-2">
+                            <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchSite();"></button>
+                        </div>
+                    </div>
+                    <div class="ui-g-5 ui-xl-5 ui-lg-5 ui-md-8 ui-sm-12">
+                        <input type="text" id="searchProjSiteName" pInputText readonly="true" style="width: 100%;" [(ngModel)]="searchCondition.projSiteName" />
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjCreateByQA">Create By (QA)<span class="red-text">*</span>:</label>
+                    </div>
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjCreateByQA" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projCreateByQA" />
+                        </div>
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
+                            <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(4);"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                        <label for="searchProjManager">Project Manager:</label>
+                    </div>
+                    <div class="ui-g-9 ui-xl-9 ui-lg-9 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-10 ui-xl-10 ui-lg-10 ui-sm-10 ui-md-11">
+                            <input type="text" id="searchProjManager" pInputText style="width: 100%;" [(ngModel)]="searchCondition.projManager" />
+                        </div>
+                        <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-2 ui-md-1">
+                            <button type="button" pButton icon="fa fa-search" (click)="showDialogSearchEmp(1);"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <label for="searchProjCreateDate">Create Date<span class="red-text">*</span>:</label>
+                    </div>
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <p-calendar [showIcon]="true" name="searchProjCreateDate" [inputStyle]="{'width': '80px'}" [monthNavigator]="false" [yearNavigator]="false"></p-calendar>
+                    </div>
+                    <div class="ui-g-2 ui-xl-2 ui-lg-2 ui-sm-12 ui-md-12">
+                        <label for="searchProjExternalQA">External QA:</label>
+                    </div>
+                    <div class="ui-g-3 ui-xl-3 ui-lg-3 ui-sm-12 ui-md-12">
+                        <input type="text" id="searchProjExternalQA" pInputText style="width: 100%;" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad" style="text-align: center;">
+                <button type="button" pButton label="ค้นหา" (click)="search();"></button>
+            </div>
+
+            <p-dialog header="ค้นหาหน่วยงาน" [(visible)]="displaySearchSite" modal="modal" [resizable]="false" dragable="false" [width]="700" [responsive]="true" [appendTo]="body">
+                <div class="ui-widget-content" style="width: 100%">
+                    <div class="ui-g">
+                        <div class="ui-g-3">รหัสหน่วยงาน:</div>
+                        <div class="ui-g-9">
+                            <p-dropdown [options]="sites" [scrollHeight]="'150px'" [(ngModel)]="selectSite" [style]="{'width':'150px'}" filter="filter" (onChange)="onChangeSelectSite();"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p-dataTable [value]="selectSites" [rows]="5" emptyMessage="ไม่ได้เลือกหน่วยงาน" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
+                                <header>
+                                    หน่วยงาน
+                                </header>
+                                <p-column field="siteCode" header="รหัสหน่วยงาน"></p-column>
+                                <p-column field="siteName" header="ชื่อหน่วยงาน"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <footer>
+                        <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectSite();"></button>
+                            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectSite();"></button>
+                        </div>
+                    </footer>
+                </div>
+            </p-dialog>
+
+            <p-dialog header="ค้นหา {{findHeaderName}}" [(visible)]="displaySearchEmp" modal="modal" [resizable]="false" dragable="false" [width]="700" [responsive]="true" [appendTo]="body">
+                <div class="ui-widget-content" style="width: 100%">
+                    <div class="ui-g">
+                        <div class="ui-g-3">ชื่อ:</div>
+                        <div class="ui-g-9">
+                            <p-dropdown [options]="emps" [scrollHeight]="'150px'" [(ngModel)]="selectEmp" [style]="{'width':'150px'}" filter="filter" (onChange)="onChangeSelectEmp();"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p-dataTable [value]="selectEmps" [rows]="5" emptyMessage="ไม่ได้เลือกชื่อ" [responsive]="true" scrollable="true" scrollHeight="400px" [style]="{'height': '170px'}">
+                                <header>
+                                    ชื่อ
+                                </header>
+                                <p-column field="thainame" header="ชื่อ"></p-column>
+                                <p-column field="engname" header="ชื่อ (อังกฤษ)"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                    <footer>
+                        <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+                            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="okSelectEmp();"></button>
+                            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectEmp();"></button>
+                        </div>
+                    </footer>
+                </div>
+            </p-dialog>
+        </p-fieldset>
+    </div>
+    <br />
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <p-fieldset legend="History">
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12">
+                    <p-dataTable [value]="historys" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [rows]="5" [paginator]="true" [responsive]="true" paginatorPosition="top" [rowsPerPageOptions]="[5,10,20]" selectionMode="single" [(selection)]="selectedHistory" (onRowSelect)="onRowSelectHistory($event);">
+                        <header>
+                            CMMI Document History
+                        </header>
+                        <p-column field="version" header="Version" [style]="{'width': '70px', 'text-align': 'center'}"></p-column>
+                        <p-column field="showDate" header="Date" [style]="{'width': '110px', 'text-align': 'center'}"></p-column>
+                        <p-column field="changeDescription" header="Change Description"></p-column>
+                        <p-column field="preparedBy" header="Prepared By" [style]="{'width': '150px', 'text-align': 'center'}"></p-column>
+                    </p-dataTable>
+                </div>
+            </p-fieldset>
+        </div>
+    </div>
+</div>

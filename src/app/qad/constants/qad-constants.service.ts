@@ -6,6 +6,7 @@ export class QadConstantsService {
     private _workCategory: Array<{ label: string, value: number }>;
     private _historyStatus: Array<{ label: string, value: number }>;
     private _notify: Array<{ label: string, value: number }>;
+    private _groupDocumentCMMIType: Array<{ label: string, value: number }>;
     private _documentCMMIType: Array<{ label: string, value: number }>;
 
     constructor() {
@@ -32,7 +33,13 @@ export class QadConstantsService {
             { label: "Email", value: 2 }
         ];
 
-        this._documentCMMIType= [
+        this._groupDocumentCMMIType = [
+            { label: "PM", value: 1 },
+            { label: "SYSTEM", value: 2 },
+            { label: "BI", value: 3 }
+        ];
+
+        this._documentCMMIType = [
             { label: "PM", value: 1 },
             { label: "SYSTEM", value: 2 },
             { label: "BI", value: 3 }
@@ -53,6 +60,10 @@ export class QadConstantsService {
 
     get historyStatus(): Array<{ label: string, value: number}> {
         return this._historyStatus;
+    }
+
+    get groupDocumentCMMIType(): Array<{ label: string, value: number }> {
+        return this._groupDocumentCMMIType;
     }
 
     get documentCMMIType(): Array<{ label: string, value: number }> {

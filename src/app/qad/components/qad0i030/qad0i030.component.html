@@ -1,0 +1,18 @@
+<div class="content-container">
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-12 ui-sm-12">
+                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <p-fieldset legend="Template CMMI">
+                        <p-menu [model]="templateCMMIItems"></p-menu>
+                    </p-fieldset>
+                </div>
+            </div>
+            <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-12 ui-sm-12">
+                <div *ngIf="isCreateMasterTemplateCMMI" class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                    <app-qad1-tab-content [componentData]="selectedCMMITemplate" [qaDatas]="CMMITemplateDatas" (onSave)="onSaveCMMITemplate($event);"></app-qad1-tab-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

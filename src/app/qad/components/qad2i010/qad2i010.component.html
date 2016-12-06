@@ -1,11 +1,11 @@
 <div class="content-container">
-  <div class="ui-g">		
-		<div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-			<div style="float: right;">
-				<p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
-			</div>
-		</div>
-	</div>
+    <div class="ui-g">		
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <div style="float: right;">
+                <p-selectButton [options]="menus" [(ngModel)]="selectedMenu" (onChange)="nav();"></p-selectButton>
+            </div>
+        </div>
+    </div>
     <div class="ui-g">
         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
             <p-fieldset legend="Project Name">
@@ -101,6 +101,61 @@
     <br />
     <div class="ui-g">
         <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <p-fieldset>
+                <div class="ui-g-8 ui-xl-9 ui-lg-8 ui-md-12 ui-sm-12">
+                    <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-5 ui-xl-3 ui-lg-5 ui-md-12 ui-sm-12 ui-g-nopad">
+                            <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                <label for="CMMIVersionDate">Version Date:</label>
+                            </div>
+                            <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                <p-calendar [showIcon]="true" name="CMMIVersionDate" [inputStyle]="{'width': '80px'}" dateFormat="dd/mm/yy" [monthNavigator]="false" [yearNavigator]="false" [(ngModel)]="CMMIVersionDate"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="ui-g-5 ui-xl-3 ui-lg-5 ui-md-12 ui-sm-12 ui-g-nopad">
+                            <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                <div class="ui-g-2 ui-xl-1 ui-lg-2 ui-md-12 ui-sm-12"></div>
+                                <label for="CMMIVersion">Version:</label>
+                            </div>
+                            <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                <input type="text" id="CMMIVersion" pInputText style="width: 100%" [(ngModel)]="CMMIVersion" />
+                            </div>
+                        </div>
+                        <div class="ui-g-2 ui-xl-3 ui-lg-2 ui-md-12 ui-sm-12 ui-g-nopad"></div>
+                    </div>
+
+                    <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                        <div class="ui-g-11 ui-xl-6 ui-lg-11 ui-md-12 ui-sm-12 ui-g-nopad">
+                            <div class="ui-g-4 ui-xl-3 ui-lg-3 ui-md-12 ui-sm-12">
+                                <label for="CMMIChangeDes">Change Description:</label>
+                            </div>
+                            <div class="ui-g-8 ui-xl-9 ui-lg-8 ui-md-12 ui-sm-12">
+                                <input type="text" id="CMMIChangeDes" pInputText style="width: 100%;" [(ngModel)]="CMMIChangeDes" />
+                            </div>
+                        </div>
+                        <div class="ui-g-1 ui-xl-6 ui-lg-1 ui-md-12 ui-sm-12 ui-g-nopad"></div>
+                    </div>
+                </div>
+                <div class="ui-g-4 ui-xl-3 ui-lg-4 ui-md-12 ui-sm-12">
+                    <button type="button" pButton label="บันทึกและส่งพิจารณา" (click)="showDialogSaveAndSendToApprove();"></button>
+                    <button type="button" pButton label="บันทึก" (click)="save();"></button>
+                    <span class="fa fa-print" style="cursor: pointer; font-size: 20px;" (click)="print();"></span>
+                </div>
+
+                <p-dialog header="บันทึกและส่งพิจารณา" [(visible)]="displaySaveAndSendToApprove" [resizable]="false" modal="modal" [appendTo]="body">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12" style="text-align: center;">
+                            <button type="button" pButton label="Save Version" (click)="saveAndSendToApprove(1);"></button>
+                            <button type="button" pButton label="Save New Version" (click)="saveAndSendToApprove(2);"></button>
+                        </div>
+                    </div>
+                </p-dialog>
+            </p-fieldset>
+        </div>
+    </div>
+    <br />
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
             <p-fieldset legend="CMMI Document">
                 <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
                     <div class="ui-g-4 ui-xl-4 ui-lg-4 ui-md-12 ui-sm-12">
@@ -124,59 +179,69 @@
                         </div>
                     </div>
                     <div class="ui-g-8 ui-xl-8 ui-lg-8 ui-md-12 ui-sm-12">
-                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                            <p-fieldset legend="Document Detail">
-                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
-                                            <label>Document Type:</label>
-                                        </div>
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
-                                            <p-dropdown [options]="documentTypes" [style]="{'width': '150px'}" [autoWidth]="false" [(ngModel)]="selectDocumentType" (onChange)="onChangeSelectDocumentType();"></p-dropdown>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
-                                            <label>Reference Group:</label>
-                                        </div>
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
-                                            <p-dropdown [options]="referenceGroups" [style]="{'width': '150px'}" [autoWidth]="false" [(ngModel)]="selectReferenceGroup"></p-dropdown>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
-                                            <label>System:</label>
-                                        </div>
-                                        <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
-                                            <p-multiSelect [options]="systemDocuments" [scrollHeight]="'150px'" [(ngModel)]="selectSystemDocuments"></p-multiSelect>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12">
-                                        Selected System: {{selectSystemDocuments}}
-                                    </div>
-                                </div>
-                            </p-fieldset>
-                            <br />
-                            <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
-                                <p-dataTable [value]="documentCMMICheckLists" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true">
-                                    <p-headerColumnGroup>
-                                        <p-row>
-                                            <p-column header="No." rowspan="2" [style]="{'width': '50px'}"></p-column>
-                                            <p-column header="Document Check List" rowspan="2"></p-column>
-                                            <p-column header="เอกสารที่ต้องนำส่ง" colspan="2" [style]="{'width': '100px'}"></p-column>
-                                            <p-column header="Remark" rowspan="2" [style]="{'width': '25%'}"></p-column>
-                                            <p-column rowspan="2" [style]="{'width': '10%'}"></p-column>
-                                        </p-row>
-                                        <p-row>
-                                            <p-column header="ทำ"></p-column>
-                                            <p-column header="ไม่ทำ"></p-column>
-                                        </p-row>
-                                    </p-headerColumnGroup>
-                                </p-dataTable>
+                        <div *ngIf="isCreateMasterTemplateCMMI">
+                            <app-qad1-tab-content [componentData]="selectedCMMITemplate" [qaDatas]="CMMITemplateDatas" (onSave)="onSaveCMMITemplate($event);"></app-qad1-tab-content>
+                        </div>
 
-                                <app-qad1-tab-content [componentData]="selectedTab" [qaDatas]="qaDatas"></app-qad1-tab-content>
+                        <div *ngIf="!isCreateMasterTemplateCMMI">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                    <p-fieldset legend="Document Detail">
+                                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                            <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                                    <label>Document Type:</label>
+                                                </div>
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                                    <p-dropdown [options]="documentTypes" [style]="{'width': '80%'}" [autoWidth]="false" [(ngModel)]="selectDocumentType" (onChange)="onChangeSelectDocumentType();"></p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-6 ui-xl-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                                    <label>Reference Group:</label>
+                                                </div>
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                                    <p-dropdown [options]="referenceGroups" [style]="{'width': '80%'}" [autoWidth]="false" [(ngModel)]="selectReferenceGroup" (onChange)="onChangeSelectReferenceGroup();"></p-dropdown>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                            <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12 ui-g-nopad">
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-5 ui-md-12 ui-sm-12">
+                                                    <label>System:</label>
+                                                </div>
+                                                <div class="ui-g-6 ui-lx-6 ui-lg-7 ui-md-12 ui-sm-12">
+                                                    <p-multiSelect [options]="systemDocuments" [scrollHeight]="'150px'" [(ngModel)]="selectSystemDocuments"></p-multiSelect>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g-6 ui-lx-6 ui-lg-6 ui-md-12 ui-sm-12">
+                                                Selected System: {{selectSystemDocuments}}
+                                            </div>
+                                        </div>
+                                    </p-fieldset>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+                                    <p-dataTable [value]="documentCMMICheckLists" emptyMessage="ไม่มีรายการข้อมูลที่แสดง" [responsive]="true">
+                                        <p-headerColumnGroup>
+                                            <p-row>
+                                                <p-column header="No." rowspan="2" [style]="{'width': '50px'}"></p-column>
+                                                <p-column header="Document Check List" rowspan="2"></p-column>
+                                                <p-column header="เอกสารที่ต้องนำส่ง" colspan="2" [style]="{'width': '100px'}"></p-column>
+                                                <p-column header="Remark" rowspan="2" [style]="{'width': '25%'}"></p-column>
+                                                <p-column rowspan="2" [style]="{'width': '10%'}"></p-column>
+                                            </p-row>
+                                            <p-row>
+                                                <p-column header="ทำ"></p-column>
+                                                <p-column header="ไม่ทำ"></p-column>
+                                            </p-row>
+                                        </p-headerColumnGroup>
+                                    </p-dataTable>
+
+                                    <app-qad1-tab-content [componentData]="selectedTab" [qaDatas]="qaDatas"></app-qad1-tab-content>
+                                </div>
                             </div>
                         </div>
                     </div>

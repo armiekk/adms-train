@@ -10,13 +10,24 @@
                 <p-column [style]="{'width': '10%'}"></p-column>
             </p-row>
             <p-row>
-                <p-column [header]="table.header" colspan="6" [style]="{'text-align': 'left'}"></p-column>
+                <p-column [header]="table.header" colspan="6" [style]="{'text-align': 'left'}">
+                    <template pTemplate type="header">
+                        <div class="ui-g">
+                            <div class="ui-g-11 ui-xl-11 ui-lg-11 ui-md-11 ui-sm-11 ui-g-nopad">
+                                {{table.header}}
+                            </div>
+                            <div class="ui-g-1 ui-xl-1 ui-lg-1 ui-md-1 ui-sm-1 ui-g-nopad" style="text-align: right;">
+                                <span class="fa fa-plus" style="cursor: pointer; font-size: 20px;" (click)="addNewRowData(i);"></span>
+                            </div>
+                        </div>
+                    </template>
+                </p-column>
             </p-row>
         </p-headerColumnGroup>
         <p-column field="orderSeq" header="No."></p-column>
         <p-column field="documentCheckName" header="Document Check List">
             <template let-data="rowData" pTemplate type="body">
-                <p-inplace [active]="data.edit" [disabled]="!data.edit">
+                <p-inplace [active]="data.edit||data.newRowData" [disabled]="!data.edit">
                     <span pInplaceDisplay>
                         {{data.documentCheckName}}
                     </span>
@@ -43,11 +54,11 @@
         </p-column>
         <p-column>
             <template let-data="rowData" pTemplate type="body">
-                <span *ngIf="!data.edit" class="fa fa-file-text" style="cursor: pointer; font-size: 20px;" (click)="duplicateRowData(i, data)"></span>
-                <span *ngIf="!data.edit" class="fa fa-pencil" style="cursor: pointer; font-size: 20px;" (click)="editRowData(data);"></span>
-                <span *ngIf="!data.edit" class="fa fa-trash" style="cursor: pointer; font-size: 20px;" (click)="deleteRowData(i, data);"></span>
-                <span *ngIf="data.edit" class="fa fa-check" style="cursor: pointer; font-size: 20px;" (click)="saveRowData(data);"></span>
+                <span *ngIf="!(data.edit||data.newRowData)" class="fa fa-file-text" style="cursor: pointer; font-size: 20px;" (click)="duplicateRowData(i, data)"></span>
+                <span *ngIf="!(data.edit||data.newRowData)" class="fa fa-pencil" style="cursor: pointer; font-size: 20px;" (click)="editRowData(data);"></span>
+                <span *ngIf="data.edit||data.newRowData" class="fa fa-check" style="cursor: pointer; font-size: 20px;" (click)="saveRowData(data);"></span>
                 <span *ngIf="data.edit" class="fa fa-times" style="cursor: pointer; font-size: 20px;" (click)="cancelEditRowData(data);"></span>
+                <span *ngIf="!data.edit||data.newRowData" class="fa fa-trash" style="cursor: pointer; font-size: 20px;" (click)="deleteRowData(i, data);"></span>
             </template>
         </p-column>
     </p-dataTable>
