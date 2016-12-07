@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
   constructor(private authService: UserApi, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    let token: string = sessionStorage.getItem('token');
+    let token: string = localStorage.getItem('token');
     if(token){
       return true;
     }

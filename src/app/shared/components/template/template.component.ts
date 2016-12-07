@@ -23,6 +23,9 @@ import {
     FwRoleBean,
     FwSubSystemBean
 } from '../../api/cdgs-authorize-services/model/models';
+import { AuthService } from '../../services/auth/auth.service';
+
+import { SelectItem } from 'primeng/primeng';
 
 @Component({
     selector: 'app-template',
@@ -43,21 +46,23 @@ export class TemplateComponent implements OnInit {
     private drawerType: string;
     private programMenu: FwNodeBean[];
     private navLink: Array<{ name: string, uri: string }>;
-
+    
     constructor(
         private router: Router,
         private route: ActivatedRoute,
+        private authService: AuthService,
         private admsMenuService: AdmsMenuService
     ) {
 
     }
 
     ngOnInit() {
-        if (sessionStorage.getItem('menuList')) {
+
+        if (localStorage.getItem('menuList')) {
             this.navLink = this.admsMenuService.getNavLink();
         } else {
             this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {
-                sessionStorage.setItem('menuList', JSON.stringify(response[0].nodes));
+                localStorage.setItem('menuList', JSON.stringify(response[0].nodes));
                 this.navLink = this.admsMenuService.getNavLink();
             });
         }
@@ -71,7 +76,10 @@ export class TemplateComponent implements OnInit {
 
     logout(event) {
         event.preventDefault();
-        sessionStorage.clear();
+        localStorage.removeItem('token');
+        localStorage.removeItem('menuList');
+        // localStorage.clear();
+        this.authService.tokenHolder.next(localStorage.getItem('token'));
         this.router.navigate(['/login']);
     }
 

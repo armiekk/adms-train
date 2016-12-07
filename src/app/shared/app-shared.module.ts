@@ -36,7 +36,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     imports: [
         RouterModule, CommonModule, FormsModule, 
         FieldsetModule, InputTextModule, PanelModule, AccordionModule, SharedModule, BreadcrumbModule,
-        ButtonModule, TabMenuModule
+        ButtonModule, TabMenuModule, DropdownModule
     ],
     providers: [ThaiCalendarService, MessageService],
     exports: [

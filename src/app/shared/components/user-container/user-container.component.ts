@@ -27,7 +27,7 @@ export class UserContainerComponent implements OnInit {
     });
     
     this.setHeaders();
-    this.userApi.userFindById(sessionStorage.getItem('id')).subscribe((response) => {
+    this.userApi.userFindById(localStorage.getItem('id')).subscribe((response) => {
       this.account.firstName = response.username;
       this.account.lastName = response.username;
     });
@@ -42,7 +42,7 @@ export class UserContainerComponent implements OnInit {
   setHeaders() {
     if (!this.userApi.defaultHeaders.has('Authorization')) {
       this.userApi.defaultHeaders.append('Content-Type', 'application/json');
-      this.userApi.defaultHeaders.append('Authorization', `${sessionStorage.getItem('token')}`);
+      this.userApi.defaultHeaders.append('Authorization', `${localStorage.getItem('token')}`);
       this.userApi.defaultHeaders.append('Accept', 'application/json');
     }
     return;
