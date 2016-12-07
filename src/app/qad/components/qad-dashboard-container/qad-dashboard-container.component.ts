@@ -32,8 +32,8 @@ export class QadDashboardContainerComponent implements OnInit {
       {
         moduleName: 'CMMI DOCUMENT',
         subProgram: [
-          { name: 'CMMI Document', id: 'QAD2I010', uri: 'QAD2I010' },
-          { name: 'CMMI Document History', id: 'QAD2Q010', uri: 'QAD2Q010' },
+          { name: 'CMMI Document', id: 'QAD2I010', uri: '/qad/QAD2I010' },
+          { name: 'CMMI Document History', id: 'QAD2Q010', uri: '/qad/QAD2Q010' },
           { name: 'CMMI Document', id: 'QAD2R010', uri: 'QAD2R010' },
         ]
       },
@@ -69,7 +69,7 @@ export class QadDashboardContainerComponent implements OnInit {
           { name: 'QA MENU', id: '', uri: '' },
           { name: 'QA Activities', id: 'QAD0Q010', uri: 'QAD0Q010' },
           { name: 'Work Category', id: '', uri: '' },
-          { name: 'CMMI Document (Document, BI)', id: '', uri: '' },
+          { name: 'CMMI Document (Document, BI)', id: 'QAD0I030', uri: 'qad/QAD0I030' },
           { name: 'Checklist Details', id: '', uri: '' },
           { name: 'Work Product', id: '', uri: '' },
         ]
