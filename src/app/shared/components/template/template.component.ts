@@ -23,7 +23,7 @@ import {
     FwRoleBean,
     FwSubSystemBean
 } from '../../api/cdgs-authorize-services/model/models';
-import { AuthService } from '../../services/auth/auth.service';
+import { RoleManagementService } from '../../services/role-management/role-management.service';
 
 import { SelectItem } from 'primeng/primeng';
 
@@ -50,7 +50,7 @@ export class TemplateComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private authService: AuthService,
+        private roleManagement: RoleManagementService,
         private admsMenuService: AdmsMenuService
     ) {
 
@@ -79,7 +79,7 @@ export class TemplateComponent implements OnInit {
         localStorage.removeItem('token');
         localStorage.removeItem('menuList');
         // localStorage.clear();
-        this.authService.tokenHolder.next(localStorage.getItem('token'));
+        this.roleManagement.tokenHolder.next(localStorage.getItem('token'));
         this.router.navigate(['/login']);
     }
 

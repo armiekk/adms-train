@@ -11,9 +11,6 @@ import { EventManager } from '@angular/platform-browser';
 })
 export class AppComponent implements OnInit {
 
-  private tabId: string = sessionStorage.getItem('tabId') || null;
-  private tabValue: string = localStorage.getItem('tabValue') || null;
-
   constructor(private router: Router, private location: Location, private eventManager: EventManager) {
   }
 
@@ -27,9 +24,6 @@ export class AppComponent implements OnInit {
         } else {
           this.router.navigate(['login']);
         }
-        break;
-      case 'tabValue':
-        console.log(event.newValue);
         break;
       default:
         break;
@@ -46,25 +40,40 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.setTabValue(this.getTabIdOnce());
-
+    if (!this.isDuplicatedTab()) {
+      this.setTabValue(this.getTabIdOnce());
+    }
   }
-  
-  setTabValue(tabId: string){
-    if (this.tabValue && tabId.trim().length > 0) {
-      localStorage.setItem('tabValue', `${this.tabValue}.${tabId}`)
-    } else if (tabId.trim().length > 0) {
+
+  setTabValue(tabId: string) {
+    let tabValue: string = localStorage.getItem('tabValue') || null;
+    if (tabValue && tabId) {
+      localStorage.setItem('tabValue', `${tabValue}.${tabId}`);
+    } else {
       localStorage.setItem('tabValue', `${tabId}`);
     }
   }
 
-  getTabIdOnce(){
-    if(this.tabId) {
-      return '';
-    } else {
+  getTabIdOnce() {
+    let tabId: string = sessionStorage.getItem('tabId') || null;
+    if (!tabId) {
       sessionStorage.setItem('tabId', `${Math.floor((Math.random() * 1000) + 1)}`);
       return sessionStorage.getItem('tabId');
     }
+    return;
   }
-  
+
+  isDuplicatedTab() {
+    let tabId: string = sessionStorage.getItem('tabId');
+    let tabValue: string[] = localStorage.getItem('tabValue') ? localStorage.getItem('tabValue').split('.') : null;
+    if (tabValue && tabId && tabValue.indexOf(tabId) > -1) {
+      sessionStorage.setItem('tabId', `${Math.floor((Math.random() * 1000) + 1)}`);
+      let changedTabId = sessionStorage.getItem('tabId');
+      localStorage.setItem('tabValue', `${tabValue.join('.')}.${changedTabId}`);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

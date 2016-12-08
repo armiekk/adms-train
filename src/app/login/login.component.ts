@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserApi } from '../shared/api/mockup-user-service/api/UserApi';
 import { Router } from '@angular/router';
-import { AuthService } from '../shared/services/auth/auth.service';
+import { RoleManagementService } from '../shared/services/role-management/role-management.service';
 import { AdmsMenuService } from '../shared/services/adms-menu/adms-menu.service';
 import { FwMenuBean } from '../shared/api/cdgs-authorize-services/model/models';
 
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private userApi: UserApi,
-    private authService: AuthService,
+    private roleManagementService: RoleManagementService,
     private admsMenuService: AdmsMenuService
   ) {
     if (localStorage.getItem('token')) {
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     this.userApi.userLogin(this.credentials).subscribe((response) => {
       if (response) {
         localStorage.setItem('token', response.id);
-        this.authService.tokenHolder.next(localStorage.getItem('token'));
+        this.roleManagementService.tokenHolder.next(localStorage.getItem('token'));
         localStorage.setItem('id', response.userId);
         this.router.navigate(['/home']);
       } else {

@@ -32,7 +32,7 @@ declare var $: any;
 export class Pri1i010SaveComponent implements OnInit {
 
   private _selectedTab: any = Pri1i010DetailComponent;
-  private tabMenuItem: MenuItem;
+  private tabMenuItem: MenuItem[];
   private projectSeachCondition: SearchCondition = {start: 0, size: 15};
   private pritInformation: PritInformation = {};
   private projectListItem: SelectItem[] = [];
@@ -81,7 +81,6 @@ export class Pri1i010SaveComponent implements OnInit {
         ];
         break;
     }
-
 
 
     switch (this.state.mode) {
