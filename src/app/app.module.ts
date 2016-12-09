@@ -11,7 +11,7 @@ import { AdmsMenuService } from './shared/services/adms-menu/adms-menu.service';
 import { UserApi } from './shared/api/mockup-user-service/api/UserApi';
 import { AuthGuardService } from './shared/guards/auth-guard/auth-guard.service';
 import { StateService } from './shared/services/state/state.service';
-import { RoleManagementService } from './shared/services/role-management/role-management.service';
+import { UserManagementService } from './shared/services/user-management/user-management.service';
 
 // components 
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
     HttpModule,
     AppRoutingModule,
   ],
-  providers: [AuthGuardService, StateService, UserApi, AuthorizeService.UserApi , AdmsMenuService, RoleManagementService ],
+  providers: [AuthGuardService, StateService, UserApi, AuthorizeService.UserApi , AdmsMenuService, UserManagementService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

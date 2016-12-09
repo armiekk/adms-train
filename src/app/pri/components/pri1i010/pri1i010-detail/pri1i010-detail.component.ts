@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
 import {
-  RoleManagementService,
-} from '../../../../shared/services/role-management/role-management.service';
+  UserManagementService,
+} from '../../../../shared/services/user-management/user-management.service';
 import {
   PriInformationService,
   PritInformation,
@@ -29,7 +29,7 @@ export class Pri1i010DetailComponent implements OnInit {
     private constant: PriConstantsService,
     private priService: PriInformationService,
     private locale: ThaiCalendarService,
-    private roleManagement: RoleManagementService
+    private roleManagement: UserManagementService
   ) { }
 
   ngOnInit() {

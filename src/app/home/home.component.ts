@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RoleManagementService } from '../shared/services/role-management/role-management.service';
+import { UserManagementService } from '../shared/services/user-management/user-management.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +8,10 @@ import { RoleManagementService } from '../shared/services/role-management/role-m
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private roleManagementService: RoleManagementService) { }
+  constructor(private userManagementService: UserManagementService) { }
 
   ngOnInit() {
-    this.roleManagementService.changeDropdownVisibility();
+    this.userManagementService.changeDropdownVisibility();
   }
 
 }

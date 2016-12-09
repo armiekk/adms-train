@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { UserApi } from '../../api/mockup-user-service/api/UserApi';
 import { Location } from '@angular/common';
-import { RoleManagementService } from '../../services/role-management/role-management.service';
+import { UserManagementService, User } from '../../services/user-management/user-management.service';
 import { SelectItem } from 'primeng/primeng';
 
 @Component({
@@ -20,11 +20,11 @@ export class UserContainerComponent implements OnInit {
   constructor(
     private userApi: UserApi,
     private location: Location,
-    private roleManagementService: RoleManagementService) { }
+    private userManagementService: UserManagementService) { }
 
   ngOnInit() {
 
-    this.roleManagementService.isDashboard.subscribe((response: boolean) => this.isDashboard = response);
+    this.userManagementService.isDashboard.subscribe((response: boolean) => this.isDashboard = response);
 
     // initial mockup role
     this.mockupRole = [
@@ -45,11 +45,11 @@ export class UserContainerComponent implements OnInit {
       this.clock = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear() + 543} ${h}:${m}:${s} น.`;
     });
 
-    this.setHeaders();
-    this.userApi.userFindById(localStorage.getItem('id')).subscribe((response) => {
-      this.account.firstName = response.username;
-      this.account.lastName = response.username;
-    });
+    this.userManagementService.getUserInformation()
+      .subscribe((user: User) => {
+        this.account.firstName = user.username;
+        this.account.lastName = user.username;
+      });
   }
 
   checkTime(i) {
@@ -69,17 +69,7 @@ export class UserContainerComponent implements OnInit {
         { label: 'PG: Programmer', value: '100' },
       ];
     } else {
-      this.roleManagementService.changeRole(event.value);
+      this.userManagementService.changeRole(event.value);
     }
-  }
-
-
-  setHeaders() {
-    if (!this.userApi.defaultHeaders.has('Authorization')) {
-      this.userApi.defaultHeaders.append('Content-Type', 'application/json');
-      this.userApi.defaultHeaders.append('Authorization', `${localStorage.getItem('token')}`);
-      this.userApi.defaultHeaders.append('Accept', 'application/json');
-    }
-    return;
   }
 }

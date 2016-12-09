@@ -3,7 +3,7 @@ import { PriConstantsService } from '../../../constants';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { Message, SelectItem } from 'primeng/primeng';
 import { Router } from '@angular/router';
-import { RoleManagementService } from '../../../../shared/services/role-management/role-management.service';
+import { UserManagementService } from '../../../../shared/services/user-management/user-management.service';
 import { SearchCondition, PriInformationService, PritInformation, ProjectInformationInfoBean } from '../../../services/pri1i010/pri-information.service';
 
 
@@ -26,12 +26,12 @@ export class Pri1i010SearchComponent implements OnInit {
     private state: StateService,
     private constant: PriConstantsService,
     private pritInfoService: PriInformationService,
-    private roleManagementService: RoleManagementService, 
+    private userManagementService: UserManagementService, 
   ) {
   }
 
   ngOnInit() {
-    this.roleManagementService.changeDropdownVisibility();
+    this.userManagementService.changeDropdownVisibility();
   }
 
   searchPriInformation() {

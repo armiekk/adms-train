@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserApi } from '../shared/api/mockup-user-service/api/UserApi';
 import { Router } from '@angular/router';
-import { RoleManagementService } from '../shared/services/role-management/role-management.service';
+import { UserManagementService, Credentials, JWT } from '../shared/services/user-management/user-management.service';
 import { AdmsMenuService } from '../shared/services/adms-menu/adms-menu.service';
 import { FwMenuBean } from '../shared/api/cdgs-authorize-services/model/models';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
-
-export interface Credentials {
-  username?: string;
-  password?: string;
-}
 
 @Component({
   selector: 'app-login',
@@ -24,10 +20,10 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private userApi: UserApi,
-    private roleManagementService: RoleManagementService,
+    private userManagementService: UserManagementService,
     private admsMenuService: AdmsMenuService
   ) {
-    if (localStorage.getItem('token')) {
+    if (this.userManagementService.isLoggedIn()) {
       this.router.navigate(['/']);
     }
   }
@@ -36,18 +32,15 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.userApi.defaultHeaders.append('Accept', 'application/json');
-    this.userApi.defaultHeaders.append('Content-Type', 'application/json');
-    this.userApi.userLogin(this.credentials).subscribe((response) => {
-      if (response) {
-        localStorage.setItem('token', response.id);
-        this.roleManagementService.tokenHolder.next(localStorage.getItem('token'));
-        localStorage.setItem('id', response.userId);
-        this.router.navigate(['/home']);
-      } else {
-        console.log('login failed');
-      }
-    });
+    this.userManagementService.logIn(this.credentials)
+      .subscribe((response: JWT) => {
+        if (response) {
+          Cookie.set('JWT', JSON.stringify(response), response.ttl);
+          this.router.navigate(['/home']);
+        } else {
+          console.log('login failed');
+        }
+      });
 
     if (!localStorage.getItem('menuList')) {
       this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {
