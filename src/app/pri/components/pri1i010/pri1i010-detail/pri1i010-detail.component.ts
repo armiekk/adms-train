@@ -34,7 +34,6 @@ export class Pri1i010DetailComponent implements OnInit {
 
   ngOnInit() {
     this.currentPermission = this.roleManagement.getPermission();
-    console.log(this.roleManagement.PA_PERMISSION);
     if (this.state.projRef && this.state.mode === 'EDIT') {
       this.getPritInformationDetail(this.state.projRef);
     } else {

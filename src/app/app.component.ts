@@ -60,11 +60,11 @@ export class AppComponent implements OnInit {
       sessionStorage.setItem('tabId', `${Math.floor((Math.random() * 1000) + 1)}`);
       return sessionStorage.getItem('tabId');
     }
-    return;
+    return tabId;
   }
 
   isDuplicatedTab() {
-    let tabId: string = sessionStorage.getItem('tabId');
+    let tabId: string = sessionStorage.getItem('tabId') || null;
     let tabValue: string[] = localStorage.getItem('tabValue') ? localStorage.getItem('tabValue').split('.') : null;
     if (tabValue && tabId && tabValue.indexOf(tabId) > -1) {
       sessionStorage.setItem('tabId', `${Math.floor((Math.random() * 1000) + 1)}`);
