@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Http } from '@angular/http';
-import { FileUploadModule } from 'primeng/primeng';
 
 interface Option {
     label: string;
@@ -27,16 +26,16 @@ export class Qad1i020Component implements OnInit {
     constructor(private http: Http) { }
 
     ngOnInit() {
-        this.actionPlanOption = "sdm";
+        this.actionPlanOption = 'sdm';
         this.disableFileUpload = true;
 
         this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
             .map(res => res.json().data)
             .subscribe((qaActivities: any[]) => {
                 this.qaActivities = qaActivities;
-                this.qaActivities.push({qaActivities: "Other"});
-                //Create list option qaActivities
-                this.qaActivitiesOption.push({ label: "-- Select QA Activites --", value: null });
+                this.qaActivities.push({ qaActivities: 'Other' });
+                // Create list option qaActivities
+                this.qaActivitiesOption.push({ label: '-- Select QA Activites --', value: null });
                 for (let i = 0; i < qaActivities.length; i++) {
                     this.qaActivitiesOption.push({ label: qaActivities[i].qaActivities, value: qaActivities[i] });
                 }
@@ -48,7 +47,7 @@ export class Qad1i020Component implements OnInit {
     }
 
     selectActionPlanOption() {
-        if (this.actionPlanOption === "file") {
+        if (this.actionPlanOption === 'file') {
             this.disableFileUpload = false;
         } else {
             this.disableFileUpload = true;
@@ -56,7 +55,7 @@ export class Qad1i020Component implements OnInit {
     }
 
     onUpload($event) {
-        //To do receive data from server after upload file
+        // To do receive data from server after upload file
     }
 
     deSelectAll() {
@@ -103,15 +102,15 @@ export class Qad1i020Component implements OnInit {
     }
 
     addRowQaSchedule(index: number) {
-        if(this.qaSchedules[index].edit === false) {
+        if (this.qaSchedules[index].edit === false) {
             let activityLevel = this.qaSchedules[index].activityLevel;
-            
+
             let orderSeq = +this.qaSchedules[index].orderSeq;
             orderSeq++;
-            let newQaSchedule = { orderSeq: orderSeq.toString(), taskName: "",indent: (activityLevel * INDENT_MULTIPLIER) + 'em', activityLevel: activityLevel, bgColor: "green", duration: "", hidden: false, edit: true};
+            let newQaSchedule = { orderSeq: orderSeq.toString(), taskName: '', indent: (activityLevel * INDENT_MULTIPLIER) + 'em', activityLevel: activityLevel, bgColor: 'green', duration: '', hidden: false, edit: true };
             if (index + 1 < this.qaSchedules.length) {
                 let r = this.qaSchedules.splice(index + 1, this.qaSchedules.length - 1 - index, newQaSchedule);
-                
+
                 for (let j = 0; j < r.length; j++) {
                     orderSeq++;
                     let old: any = {};
@@ -166,9 +165,9 @@ export class Qad1i020Component implements OnInit {
     cancelEditRowQaSchedule(index: number) {
         let orderSeq = +this.qaSchedules[index].orderSeq;
 
-        this.qaSchedules.splice(index, 1); //Delete
+        this.qaSchedules.splice(index, 1); // Delete
 
-        //Reorder
+        // Reorder
         for (let i = index; i < this.qaSchedules.length; i++) {
             this.qaSchedules[i].orderSeq = orderSeq;
             orderSeq++;
@@ -194,7 +193,7 @@ export class Qad1i020Component implements OnInit {
 
     calDurationOrDate(index: number) {
         if ((this.qaSchedules[index].startDate !== undefined && this.qaSchedules[index].startDate !== null) && (this.qaSchedules[index].finishDate !== undefined && this.qaSchedules[index].finishDate !== null)) {
-            if (this.qaSchedules[index].duration == undefined || this.qaSchedules[index].duration == null || this.qaSchedules[index].duration == '') {
+            if (this.qaSchedules[index].duration === undefined || this.qaSchedules[index].duration === null || this.qaSchedules[index].duration === '') {
                 let startDate: Date = new Date(this.qaSchedules[index].startDate);
                 let finishDate: Date = new Date(this.qaSchedules[index].finishDate);
                 let count: number = 0;
@@ -205,13 +204,13 @@ export class Qad1i020Component implements OnInit {
                 this.qaSchedules[index].showFinishDate = SHORT_DAY[finishDate.getDay()] + ' ' + finishDate.getDate() + '/' + (finishDate.getMonth() + 1) + '/' + finishDate.getFullYear();
             }
         } else if ((this.qaSchedules[index].duration !== undefined && this.qaSchedules[index].duration !== null && this.qaSchedules[index].duration !== '') && (this.qaSchedules[index].startDate !== undefined && this.qaSchedules[index].startDate !== null)) {
-            if (this.qaSchedules[index].finishDate == undefined || this.qaSchedules[index].finishDate == null) {
+            if (this.qaSchedules[index].finishDate === undefined || this.qaSchedules[index].finishDate === null) {
                 let duration: number = +this.qaSchedules[index].duration;
                 let startDate: Date = new Date(this.qaSchedules[index].startDate);
                 if (duration > 0) {
                     startDate.setSeconds(86400 * (duration - 1));
                 }
-                
+
                 this.qaSchedules[index].finishDate = startDate;
                 this.qaSchedules[index].showStartDate = SHORT_DAY[startDate.getDay()] + ' ' + startDate.getDate() + '/' + (startDate.getMonth() + 1) + '/' + startDate.getFullYear();
             }

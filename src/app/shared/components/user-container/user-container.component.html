@@ -1,7 +1,14 @@
-<div class="user-bar-container">
+<div class="userbar-container">
 	<div class="ui-g">
-		<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
-			<span class="user-bar-detail">{{clock}} | ผู้ใช้งาน&nbsp;{{account.firstName}}&nbsp;&nbsp;{{account.lastName}}&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i></span>
+		<div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12 ui-g-nopad">
+			<div class="ui-g-6 ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6 dropdown-role">
+				<div class="ui-g-12 ui-sm-12 ui-md-5 ui-lg-3 ui-xl-3 ui-g-nopad" *ngIf="isDashboard">
+					<p-dropdown [options]="mockupRole" [(ngModel)]="selectedRole" [style]="{'width': '90%'}" (onChange)="onSelectDropDownRole($event)"></p-dropdown>
+				</div>
+			</div>
+			<div class="ui-g-6 ui-sm-12 ui-md-6 ui-lg-6 ui-xl-6">
+				<span class="userbar-detail">{{clock}} | ผู้ใช้งาน&nbsp;{{account.firstName}}&nbsp;&nbsp;{{account.lastName}}&nbsp;&nbsp;<i class="fa fa-user" aria-hidden="true"></i></span>
+			</div>
 		</div>
 	</div>
 </div>

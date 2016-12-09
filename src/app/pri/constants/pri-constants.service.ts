@@ -30,7 +30,8 @@ export class PriConstantsService {
     this._projectType = [
       { label: 'Pre Contact', value: 1 },
       { label: 'Contact', value: 2 },
-      { label: 'Inhouse', value: 3 }
+      { label: 'Inhouse', value: 3 },
+      { label: 'ALL', value: 4 }
     ];
 
     this._monitorType = [

@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { PriConstantsService } from '../../../constants';
 import { ThaiCalendarService } from '../../../../shared/services/thai-calendar/thai-calendar.service';
-import { 
-  PriInformationService, 
-  PritInformation, 
-  initialPritInformaitonDetail 
+import {
+  RoleManagementService,
+} from '../../../../shared/services/role-management/role-management.service';
+import {
+  PriInformationService,
+  PritInformation,
+  initialPritInformaitonDetail
 } from '../../../services/pri1i010/pri-information.service';
 import { StateService } from '../../../../shared/services/state/state.service';
 import { MessageService } from '../../../../shared/services/message/message.service';
@@ -16,7 +19,9 @@ import { MessageService } from '../../../../shared/services/message/message.serv
 })
 export class Pri1i010DetailComponent implements OnInit {
 
+  
   private pritInformationDetail: PritInformation = initialPritInformaitonDetail;
+  private currentPermission: string;
 
   constructor(
     private message: MessageService,
@@ -24,20 +29,22 @@ export class Pri1i010DetailComponent implements OnInit {
     private constant: PriConstantsService,
     private priService: PriInformationService,
     private locale: ThaiCalendarService,
+    private roleManagement: RoleManagementService
   ) { }
 
   ngOnInit() {
-    if (this.state.projCode && this.state.mode === 'EDIT') {
-      this.getPritInformationDetail(this.state.projCode);
+    this.currentPermission = this.roleManagement.getPermission();
+    console.log(this.roleManagement.PA_PERMISSION);
+    if (this.state.projRef && this.state.mode === 'EDIT') {
+      this.getPritInformationDetail(this.state.projRef);
     } else {
       this.pritInformationDetail = initialPritInformaitonDetail;
     }
   }
 
-  getPritInformationDetail(projCode: string) {
-    this.priService
-    this.priService.getPritInformationDetail(projCode)
-      .subscribe((pritInformationDetail: PritInformation[]) => [this.pritInformationDetail] = pritInformationDetail);
+  getPritInformationDetail(projRef: number) {
+    this.priService.getPritInformationDetail(projRef)
+      .subscribe((pritInformationDetail: PritInformation) => this.pritInformationDetail = pritInformationDetail);
   }
 
   savePritInformationDetail() {

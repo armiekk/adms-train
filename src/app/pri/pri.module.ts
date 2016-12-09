@@ -5,21 +5,21 @@ import { AppSharedModule } from '../shared';
 
 // providers
 import { PriConstantsService } from './constants';
-import { PriStateResolverService } from './services';
 import { PriInformationService } from './services/pri1i010/pri-information.service';
-import { ApipriinformationApi } from './api/pri1i010/api/ApipriinformationApi';
-import { PritScopeApi } from './api/pri1i020/api/PritScopeApi';
-import { PritLanguageApi, PritMethodApi, PritToolsApi } from './api/pri1i030/api/api';
-import { PritConditionApi } from './api/pri1i040/api/api';
-import { PritDeliverApi } from './api/pri1i050/api/api';
-import { PritLimitApi } from './api/pri1i060/api/api';
-import { PritMonitorApi } from './api/pri1i070/api/api';
-import { PritCustomerApi } from './api/pri1i080/api/api';
-import { PritAccessoriesApi } from './api/pri1i090/api/api';
-import { PritTrainApi } from './api/pri1i100/api/api';
-import { PritOtherApi } from './api/pri1i110/api/api';
-import { PritSystemsApi } from './api/pri1i130/api/api';
-import { PritRiskAnalystApi } from './api/pri1i140/api/api';
+import { PritInformationApi } from './api/api/PritInformationApi';
+import { PritScopeApi } from './api/api/PritScopeApi';
+import { PritLanguageApi } from './api/api/PritLanguageApi';
+import { PritMethodApi } from './api/api/PritMethodApi';
+import { PritToolsApi } from './api/api/PritToolsApi';
+import { PritConditionApi } from './api/api/PritConditionApi';
+import { PritDeliverApi } from './api/api/PritDeliverApi';
+import { PritLimitApi } from './api/api/PritLimitApi';
+import { PritMonitorApi } from './api/api/PritMonitorApi';
+import { PritCustomerApi } from './api/api/PritCustomerApi';
+import { PritAccessoriesApi } from './api/api/PritAccessoriesApi';
+import { PritTrainApi } from './api/api/PritTrainApi';
+import { PritOtherApi } from './api/api/PritOtherApi';
+import { PritSystemsApi } from './api/api/PritSystemsApi';
 // import { ConstantApi } from '../shared/api/cdgs-adms-pri-services';
 
 // pipes
@@ -81,9 +81,9 @@ import { Pri1i150Component } from './components/pri1i150/pri1i150.component';
     Pri1i150Component
   ],
   providers: [
-    ApipriinformationApi, PriConstantsService, PriStateResolverService, PriInformationService, PritScopeApi, 
+    PritInformationApi, PriConstantsService, PriInformationService, PritScopeApi, 
     PritLanguageApi, PritMethodApi, PritToolsApi, PritConditionApi, PritDeliverApi, PritLimitApi, PritMonitorApi,
-    PritCustomerApi, PritAccessoriesApi, PritTrainApi, PritOtherApi, PritSystemsApi, PritRiskAnalystApi
+    PritCustomerApi, PritAccessoriesApi, PritTrainApi, PritOtherApi, PritSystemsApi, 
   ]
 })
 export class PriModule { }

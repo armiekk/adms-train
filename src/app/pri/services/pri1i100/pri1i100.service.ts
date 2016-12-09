@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritTrainApi } from '../../api/pri1i100/api/api';
-import { PritTrain } from '../../api/pri1i100/model/models';
+import { PritTrainApi } from '../../api/api/PritTrainApi';
+import { PritTrain, ProjTrainBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjTrain extends PritTrain {
+export interface ProjTrain extends ProjTrainBean {
   edit?: boolean;
 }
 
@@ -13,9 +13,9 @@ export class Pri1i100Service {
   constructor(private pritTrainApi: PritTrainApi) { }
 
   getProjTrainList(projCode: string): Observable<ProjTrain[]>{
-    return this. pritTrainApi.pritTrainFind()
-      .map((projTrainList: PritTrain[]) =>
-        projTrainList.filter((projTrain: PritTrain) => Object.assign({}, projTrain, { edit: false })
+    return this. pritTrainApi.getProjTrainList(projCode)
+      .map((projTrainList: ProjTrainBean[]) =>
+        projTrainList.map((projTrain: ProjTrainBean) => Object.assign({}, projTrain, { edit: false })
         )
       );
   }

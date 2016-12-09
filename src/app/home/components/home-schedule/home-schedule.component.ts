@@ -17,7 +17,6 @@ export class Event {
 })
 export class HomeScheduleComponent implements OnInit {
 
-    private calendarTitle: string;
     private events: Event[] = [];
     private event: Event;
     private dialogVisible: boolean = false;
@@ -25,7 +24,6 @@ export class HomeScheduleComponent implements OnInit {
     constructor(private locale: ThaiCalendarService) { }
 
     ngOnInit() {
-        // this.calendarTitle = moment().format('[วัน]dddd[ที่] Do ');
 
     }
 

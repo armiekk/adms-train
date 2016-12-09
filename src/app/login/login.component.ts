@@ -1,15 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserApi } from '../shared/api/mockup-user-service/api/UserApi';
 import { Router } from '@angular/router';
-import { } from 'ng2-webstorage';
+import { RoleManagementService } from '../shared/services/role-management/role-management.service';
 import { AdmsMenuService } from '../shared/services/adms-menu/adms-menu.service';
 import { FwMenuBean } from '../shared/api/cdgs-authorize-services/model/models';
 
-// interface Credentials {
-//   username?: string;
-//   password?: string;
-//   rememberMe?: boolean;
-// }
 
 export interface Credentials {
   username?: string;
@@ -29,8 +24,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private userApi: UserApi,
+    private roleManagementService: RoleManagementService,
     private admsMenuService: AdmsMenuService
-  ) { }
+  ) {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit() {
   }
@@ -40,17 +40,18 @@ export class LoginComponent implements OnInit {
     this.userApi.defaultHeaders.append('Content-Type', 'application/json');
     this.userApi.userLogin(this.credentials).subscribe((response) => {
       if (response) {
-        sessionStorage.setItem('token', response.id);
-        sessionStorage.setItem('id', response.userId);
+        localStorage.setItem('token', response.id);
+        this.roleManagementService.tokenHolder.next(localStorage.getItem('token'));
+        localStorage.setItem('id', response.userId);
         this.router.navigate(['/home']);
       } else {
         console.log('login failed');
       }
     });
 
-    if (!sessionStorage.getItem('menuList')) {
+    if (!localStorage.getItem('menuList')) {
       this.admsMenuService.getMenuByActiveRole().subscribe((response: FwMenuBean[]) => {
-        sessionStorage.setItem('menuList', JSON.stringify(response[0].nodes));
+        localStorage.setItem('menuList', JSON.stringify(response[0].nodes));
       });
     }
   }

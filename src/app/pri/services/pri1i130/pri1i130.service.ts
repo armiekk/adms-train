@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritSystemsApi } from '../../api/pri1i130/api/api';
-import { PritSystems } from '../../api/pri1i130/model/models';
+import { PritSystemsApi } from '../../api/api/PritSystemsApi';
+import { PritSystems, ProjSystemsBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjSystems extends PritSystems {
+export interface ProjSystems extends ProjSystemsBean {
   edit?: boolean;
 }
 
@@ -13,9 +13,9 @@ export class Pri1i130Service {
   constructor(private pritSystemsApi: PritSystemsApi) { }
 
   getProjSystemsList(projCode: string): Observable<ProjSystems[]>{
-    return this. pritSystemsApi.pritSystemsFind()
-      .map((projSystemsList: PritSystems[]) =>
-        projSystemsList.filter((projSystems: PritSystems) => Object.assign({}, projSystems, { edit: false })
+    return this. pritSystemsApi.getProjSystemsList(projCode)
+      .map((projSystemsList: ProjSystemsBean[]) =>
+        projSystemsList.map((projSystems: ProjSystemsBean) => Object.assign({}, projSystems, { edit: false })
         )
       );
   }

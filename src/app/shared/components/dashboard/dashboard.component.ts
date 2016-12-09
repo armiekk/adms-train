@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { RoleManagementService } from '../../services/role-management/role-management.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +11,12 @@ export class DashboardComponent implements OnInit {
 
   @Input() programList: Array<{}>;
 
-  constructor() { }
+  constructor(
+    private roleManagementService: RoleManagementService
+  ) { }
 
   ngOnInit() {
+    this.roleManagementService.changeDropdownVisibility();
   }
 
 }

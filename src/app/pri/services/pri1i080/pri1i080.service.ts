@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PritCustomerApi } from '../../api/pri1i080/api/api';
-import { PritCustomer } from '../../api/pri1i080/model/models';
+import { PritCustomerApi } from '../../api/api/PritCustomerApi';
+import { PritCustomer, ProjCustomerBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
 export interface ProjCustomer extends PritCustomer {
@@ -12,10 +12,10 @@ export class Pri1i080Service {
 
   constructor(private pritCustomerApi: PritCustomerApi) { }
 
-  getProjCustomerList(projCode: string): Observable<ProjCustomer[]>{
-    return this. pritCustomerApi.pritCustomerFind()
-      .map((projCustomerList: PritCustomer[]) =>
-        projCustomerList.filter((projCustomer: PritCustomer) => Object.assign({}, projCustomer, { edit: false })
+  getProjCustomerList(projCode: string): Observable<ProjCustomerBean[]>{
+    return this. pritCustomerApi.getProjCustomerList(projCode)
+      .map((projCustomerList: ProjCustomerBean[]) =>
+        projCustomerList.map((projCustomer: ProjCustomerBean) => Object.assign({}, projCustomer, { edit: false })
         )
       );
   }

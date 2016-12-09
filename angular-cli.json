@@ -25,6 +25,8 @@
         "assets/vendor/fullcalendar/fullcalendar.min.css",
         "assets/vendor/primeng/primeng.css",
         "assets/vendor/sliderTabs/styles/jquery.sliderTabs.css",
+        "assets/vendor/quill/quill.core.css",
+        "assets/vendor/quill/quill.snow.css",
         "styles.css"
       ],
       "scripts": [
@@ -35,7 +37,8 @@
         "assets/vendor/fullcalendar/locale/th.js",
         "assets/vendor/retro/js/jquery.smooth-scroll.min.js",
         "assets/vendor/retro/js/bootstrap.min.js",
-        "assets/vendor/retro/js/retro.js"
+        "assets/vendor/retro/js/retro.js",
+        "assets/vendor/quill/quill.min.js"
       ],
       "environments": {
         "source": "environments/environment.ts",

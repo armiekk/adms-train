@@ -11,7 +11,7 @@
 			<div class="nav-collapse collapse" id="main-menu">
 				<ul class="nav pull-right">
 					<li><a [routerLink]=" ['/home'] ">CALENDAR</a></li>
-					<li *ngFor="let link of navLink" ><a [routerLink]=" [link.uri] ">{{link.name}}</a></li>
+					<li *ngFor="let link of navLink"><a [routerLink]=" [link.uri] ">{{link.name}}</a></li>
 					<li><a href="/logout" (click)="logout($event)"><span>ออกจากระบบ&nbsp;<i class="fa fa-sign-out" aria-hidden="true"></i></span></a></li>
 				</ul>
 			</div>
@@ -19,7 +19,6 @@
 	</div>
 	<app-user-container></app-user-container>
 </nav>
-
 <main>
 	<div class="ui-g">
 		<div class="ui-g-1 ui-md-1 ui-lg-1 ui-lx-1"></div>

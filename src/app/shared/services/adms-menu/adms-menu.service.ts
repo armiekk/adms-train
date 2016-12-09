@@ -25,8 +25,8 @@ export class AdmsMenuService implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('menuList')) {
-      this.menuList = JSON.parse(sessionStorage.getItem('menuList'));
+    if (localStorage.getItem('menuList')) {
+      this.menuList = JSON.parse(localStorage.getItem('menuList'));
     }
   }
 
@@ -42,7 +42,7 @@ export class AdmsMenuService implements OnInit {
   }
 
   getNavLink() {
-    return JSON.parse(sessionStorage.getItem('menuList'))
+    return JSON.parse(localStorage.getItem('menuList'))
       .filter((node: FwNodeBean) => node.type === 'f' && node.parent === null)
       .map((node: FwNodeBean) => { return { name: node.name, uri: node.uri } });
   }
@@ -79,7 +79,7 @@ export class AdmsMenuService implements OnInit {
   }
 
   getSystemId(parentName: string) {
-    return JSON.parse(sessionStorage.getItem('menuList'))
+    return JSON.parse(localStorage.getItem('menuList'))
       .filter((node: FwNodeBean) => parentName.indexOf(node.uri) >= 0)
       .map((node: FwNodeBean) => node.id);
   }

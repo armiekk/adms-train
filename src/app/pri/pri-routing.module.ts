@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { Pri1i010SaveComponent, Pri1i010SearchComponent, PriDashboardContainerComponent, Pri1i010Component } from './components';
 import { PriComponent } from './pri.component';
 import { AuthGuardService } from '../shared/guards/auth-guard/auth-guard.service';
-import { PriStateResolverService } from './services';
 
 const routes: Routes = [
     {

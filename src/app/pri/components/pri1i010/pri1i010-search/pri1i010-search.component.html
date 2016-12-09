@@ -1,40 +1,5 @@
 <p-growl [value]="msgs" life="3000"></p-growl>
-<p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" responsive="true"
-	[modal]="true" [style]="{'overflow-y': 'visible'}">
-	<div class="ui-widget-content" style="width: 100%">
-		<div class="ui-g">
-			<div class="ui-g-3">ประเภทโครงการ :</div>
-			<div class="ui-g-9 ui-g-nopad">
-				<div *ngFor="let projType of constant.projectType">
-					<div class="ui-g-4">
-						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="seachCondition.projType"></p-radioButton>
-					</div>
-				</div>
-			</div>
-		</div>
 
-		<div class="ui-g">
-			<div class="ui-g-3">รหัสโครงการ :</div>
-			<div class="ui-g-9">
-				<p-multiSelect [options]="projectListItem" defaultLabel="เลือกรหัสโครงการ" overlayVisible="true" [scrollHeight]="'150px'"
-					[(ngModel)]="selectedProject" [disabled]="seachCondition.projType === undefined"></p-multiSelect>
-			</div>
-		</div>
-
-		<div class="ui-g">
-			<div class="ui-g-12">
-				<p-dataTable [value]="selectedProject" [rows]="5" [responsive]="true" scrollable="true" scrollHeight="150px" emptyMessage="ไม่ได้เลือกโครงการ"
-					[style]="{'height': '210px'}">
-					<header>
-						โครงการ
-					</header>
-					<p-column [style]="{'width': '20%'}" field="projCode" header="รหัสโครงการ"></p-column>
-					<p-column [style]="{'width': '80%'}" field="projName" header="ชื่อโครงการ"></p-column>
-				</p-dataTable>
-			</div>
-		</div>
-	</div>
-</p-dialog>
 <!--<app-breadcrumb></app-breadcrumb>-->
 <div class="content-container">
 	<p-fieldset legend="ค้นหาข้อมูลรายละเอียดโครงการ">
@@ -46,7 +11,7 @@
 						ปี :
 					</div>
 					<div class="ui-g-3 ui-lg-2 ui-xl-2 ui-sm-3 ui-md-2">
-						<input type="text" id="projYear" pInputText style="width: 100%" maxlength="4" [(ngModel)]="seachCondition.projYear" name="projYear"
+						<input type="text" id="projYear" pInputText style="width: 100%" maxlength="4" [(ngModel)]="searchCondition.projYear" name="projYear"
 						/>
 					</div>
 				</div>
@@ -55,8 +20,25 @@
 						หน่วยงานเจ้าของโครงการ :
 					</div>
 					<div class="ui-g-8 ui-lg-8 ui-xl-9 ui-sm-12">
-						<input type="text" id="projOwnerOrg" pInputText [(ngModel)]="seachCondition.projOwnerOrg" name="projOwnerOrg" style="width: 100%"
+						<input type="text" id="projOrgCode" pInputText [(ngModel)]="searchCondition.projOrgCode" name="projOrgCode" style="width: 100%"
 						/>
+					</div>
+				</div>
+				<div class="ui-g-1"></div>
+			</div>
+
+			<div class="ui-g">
+				<div class="ui-g-1 ui-md-1 ui-lg-1 ui-xl-1 ui-sm-12"></div>
+				<div class="ui-g-9 ui-md-12 ui-lg-9 ui-xl-9 ui-sm-12 ui-g-nopad">
+					<div class="ui-g-2 ui-md-4 ui-lg-2 ui-xl-2 ui-sm-12">
+						ประเภทโครงการ :
+					</div>
+					<div class="ui-g-10 ui-md-8 ui-lg-10 ui-xl-10 ui-sm-12 ui-g-nopad">
+						<div *ngFor="let projType of constant.projectType">
+							<div class="ui-g-3">
+								<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="searchCondition.projType"></p-radioButton>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="ui-g-1"></div>
@@ -70,11 +52,7 @@
 					</div>
 					<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12 ui-g-nopad">
 						<div class="ui-g-7 ui-lg-7 ui-xl-5 ui-sm-6 ui-md-4">
-							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="seachCondition.projCode" name="projCode" [readonly]="true"
-							/>
-						</div>
-						<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
-							<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()"></button>
+							<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="searchCondition.projCode" name="projCode" />
 						</div>
 					</div>
 				</div>
@@ -83,8 +61,7 @@
 						ชื่อโครงการ :
 					</div>
 					<div class="ui-g-8 ui-lg-8 ui-xl-9 ui-sm-12">
-						<input type="text" id="projName" pInputText [(ngModel)]="seachCondition.projName" name="projName" style="width: 100%" [readonly]="true"
-						/>
+						<input type="text" id="projName" pInputText [(ngModel)]="searchCondition.projName" name="projName" style="width: 100%" />
 					</div>
 				</div>
 				<div class="ui-g-1"></div>
@@ -97,9 +74,9 @@
 						สถานะ :
 					</div>
 					<div class="ui-g-10 ui-md-8 ui-lg-10 ui-xl-10 ui-sm-12 ui-g-nopad">
-						<div class="ui-g-4 ui-md-12 ui-lg-4 ui-xl-4 ui-sm-12" *ngFor="let status of constant.projectStatus">
-							<p-checkbox name="projStatus" [value]="status.value" [label]="status.label" [(ngModel)]="seachCondition.projStatus">
-							</p-checkbox>
+						<div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12" *ngFor="let status of constant.projectStatus">
+							<p-radioButton name="projStatus" [value]="status.value" [label]="status.label" [(ngModel)]="searchCondition.projStatus">
+							</p-radioButton>
 						</div>
 					</div>
 				</div>
@@ -125,7 +102,6 @@
 			<div class="ui-g-12">
 				<div class="table-manager-panel">
 					<button type="button" pButton label="เพิ่มข้อมูล" icon="fa-plus-square" (click)="goToAddView()"></button>
-					<button type="button" pButton label="ลบข้อมูล" icon="fa-trash" (click)="delete($event)"></button>
 				</div>
 			</div>
 		</div>
@@ -149,9 +125,9 @@
 							{{ priInfo.projCode }}
 						</template>
 					</p-column>
-					<!--<p-column field="projOwnerOrg" header="หน่วยงาน" [style]="{'width': '20%'}">
+					<!--<p-column field="projOrgCode" header="หน่วยงาน" [style]="{'width': '20%'}">
 					<template let-priInfo="rowData" pTemplate type="body">
-						{{ priInfo.projOwnerOrg }}
+						{{ priInfo.projOrgCode }}
 					</template>
 				</p-column>-->
 					<p-column field="projName" header="ชื่อโครงการ">

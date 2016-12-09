@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { PritMonitorApi } from '../../api/pri1i070/api/api';
-import { PritMonitor } from '../../api/pri1i070/model/models';
+import { PritMonitorApi } from '../../api/api/PritMonitorApi';
+import { PritMonitor, ProjMonitorBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
 export interface ProjMonitor extends PritMonitor {
@@ -13,9 +13,9 @@ export class Pri1i070Service {
   constructor(private pritMonitorApi: PritMonitorApi) { }
 
   getProjMonitorList(projCode: string): Observable<ProjMonitor[]>{
-    return this. pritMonitorApi.pritMonitorFind()
-      .map((projMonitorList: PritMonitor[]) =>
-        projMonitorList.filter((projMonitor: PritMonitor) => Object.assign({}, projMonitor, { edit: false })
+    return this. pritMonitorApi.getProjMonitorList(projCode)
+      .map((projMonitorList: ProjMonitorBean[]) =>
+        projMonitorList.map((projMonitor: ProjMonitorBean) => Object.assign({}, projMonitor, { edit: false })
         )
       );
   }

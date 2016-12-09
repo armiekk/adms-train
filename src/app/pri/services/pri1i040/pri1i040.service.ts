@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritConditionApi } from '../../api/pri1i040/api/api';
-import { PritCondition } from '../../api/pri1i040/model/models';
+import { PritConditionApi } from '../../api/api/PritConditionApi';
+import { PritCondition, ProjConditionBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjCondition extends PritCondition {
+export interface ProjCondition extends ProjConditionBean {
   edit?: boolean;
 }
 
@@ -13,9 +13,9 @@ export class Pri1i040Service {
   constructor(private pritConditionApi: PritConditionApi) { }
 
   getProjConditionList(projCode: string): Observable<ProjCondition[]> {
-    return this.pritConditionApi.pritConditionFind()
-      .map((projConditionList: PritCondition[]) =>
-        projConditionList.filter((projCondition: PritCondition) => Object.assign({}, projCondition, { edit: false })
+    return this.pritConditionApi.getProjConditionList(projCode)
+      .map((projConditionList: ProjConditionBean[]) =>
+        projConditionList.map((projCondition: ProjConditionBean) => Object.assign({}, projCondition, { edit: false })
         )
       );
   }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuardService } from '../shared/guards/auth-guard/auth-guard.service';
 import { QadComponent } from './qad.component';
 import { QadDashboardContainerComponent } from './components/qad-dashboard-container/qad-dashboard-container.component';
 import { Qad1q010Component } from './components/qad1q010/qad1q010.component';
@@ -12,6 +13,7 @@ const routes: Routes = [
     {
         path: '',
         component: QadComponent,
+        canActivate: [AuthGuardService],
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: QadDashboardContainerComponent },

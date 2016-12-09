@@ -35,7 +35,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class UserApi {
     // protected basePath = '/api';
-    protected basePath = 'http://10.254.40.27:3000/api';
+    protected basePath = 'http://10.254.40.27:3000/mockup-api';
     public defaultHeaders : Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {

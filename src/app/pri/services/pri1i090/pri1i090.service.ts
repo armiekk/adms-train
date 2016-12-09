@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { PritAccessoriesApi } from '../../api/pri1i090/api/api';
-import { PritAccessories } from '../../api/pri1i090/model/models';
+import { PritAccessoriesApi } from '../../api/api/PritAccessoriesApi';
+import { PritAccessories, ProjAccessoriesBean } from '../../api/model/models';
 import { Observable } from 'rxjs/Observable';
 
-export interface ProjAccessories extends PritAccessories {
+export interface ProjAccessories extends ProjAccessoriesBean {
   edit?: boolean;
 }
 
@@ -13,9 +13,9 @@ export class Pri1i090Service {
   constructor(private pritAccessoriesApi: PritAccessoriesApi) { }
 
   getProjAccessoriesList(projCode: string): Observable<ProjAccessories[]>{
-    return this. pritAccessoriesApi.pritAccessoriesFind()
-      .map((projAccessoriesList: PritAccessories[]) =>
-        projAccessoriesList.filter((projAccessories: PritAccessories) => Object.assign({}, projAccessories, { edit: false })
+    return this. pritAccessoriesApi.getProjAccessoriesList(projCode)
+      .map((projAccessoriesList: ProjAccessoriesBean[]) =>
+        projAccessoriesList.map((projAccessories: ProjAccessoriesBean) => Object.assign({}, projAccessories, { edit: false })
         )
       );
   }
