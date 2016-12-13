@@ -39,8 +39,8 @@ export class Qad2q010Component implements OnInit {
         private qadConstant: QadConstantsService,
         private state: StateService) {
             this.menus = [];
-            this.menus.push({label: 'History', value: '/qad/QAD2Q010'});
-            this.menus.push({label: 'CMMI Document', value: '/qad/QAD2I010'});
+            this.menus.push({label: 'History', value: '/qad/Qad2q010'});
+            this.menus.push({label: 'CMMI Document', value: '/qad/Qad2i010'});
         }
 
     ngOnInit() {

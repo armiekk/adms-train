@@ -47,7 +47,7 @@ interface Option {
     providers: [QadConstantsService, ThaiCalendarService]
 })
 export class Qad2i010Component implements OnInit {
-    private menus: SelectItem[];
+    private menus: SelectItem[] = [];
     private selectedMenu: string;
     private searchCondition: SearchCondition = {};
     private CMMIVersionDate: Date;
@@ -77,9 +77,8 @@ export class Qad2i010Component implements OnInit {
         private locale: ThaiCalendarService,
         private qadConstant: QadConstantsService,
         private state: StateService) {
-            this.menus = [];
-            this.menus.push({label: 'History', value: '/qad/QAD2Q010'});
-            this.menus.push({label: 'CMMI Document', value: '/qad/QAD2I010'});
+            this.menus.push({label: 'History', value: '/qad/Qad2q010'});
+            this.menus.push({label: 'CMMI Document', value: '/qad/Qad2i010'});
             this.documentCMMIType = qadConstant.groupDocumentCMMIType;
             this.documentTypes = qadConstant.documentCMMIType;
             this.documentTypes.unshift({ label: 'เลือก Document Type', value: null });

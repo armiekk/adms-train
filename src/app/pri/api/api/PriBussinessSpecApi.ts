@@ -22,9 +22,9 @@
  * limitations under the License.
  */
 
-import {Http, Headers, RequestOptionsArgs, Response, URLSearchParams} from '@angular/http';
-import {Injectable, Optional} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
+import { Http, Headers, RequestOptionsArgs, Response, URLSearchParams } from '@angular/http';
+import { Injectable, Optional } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import * as models from '../model/models';
 import 'rxjs/Rx';
 
@@ -35,7 +35,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class PriBussinessSpecApi {
     protected basePath = '/api/pri';
-    public defaultHeaders : Headers = new Headers();
+    public defaultHeaders: Headers = new Headers();
 
     constructor(protected http: Http, @Optional() basePath: string) {
         if (basePath) {
@@ -48,7 +48,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Accessories
      * @param body 
      */
-    public addProjAccessories (body?: models.ProjAccessoriesAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjAccessories(body?: models.ProjAccessoriesAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritAccessories';
 
         let queryParameters = new URLSearchParams();
@@ -75,7 +75,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลเงื่อนไขของโครงการ
      * @param body 
      */
-    public addProjCondition (body?: models.ProjConditionAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjCondition(body?: models.ProjConditionAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCondition';
 
         let queryParameters = new URLSearchParams();
@@ -102,7 +102,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Customer
      * @param body 
      */
-    public addProjCustomer (body?: models.ProjCustomerAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjCustomer(body?: models.ProjCustomerAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCustomer';
 
         let queryParameters = new URLSearchParams();
@@ -129,7 +129,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลการส่งมอบโครงการ
      * @param body 
      */
-    public addProjDeliver (body?: models.ProjDeliverAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjDeliver(body?: models.ProjDeliverAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritDeliver';
 
         let queryParameters = new URLSearchParams();
@@ -156,7 +156,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Language
      * @param body 
      */
-    public addProjLanguage (body?: models.ProjLanguageAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjLanguage(body?: models.ProjLanguageAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLanguage';
 
         let queryParameters = new URLSearchParams();
@@ -183,7 +183,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Limit
      * @param body 
      */
-    public addProjLimit (body?: models.ProjLimitAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjLimit(body?: models.ProjLimitAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLimit';
 
         let queryParameters = new URLSearchParams();
@@ -210,7 +210,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Method
      * @param body 
      */
-    public addProjMethod (body?: models.ProjMethodAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjMethod(body?: models.ProjMethodAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMethod';
 
         let queryParameters = new URLSearchParams();
@@ -237,7 +237,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Monitor
      * @param body 
      */
-    public addProjMonitor (body?: models.ProjMonitorAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjMonitor(body?: models.ProjMonitorAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMonitor';
 
         let queryParameters = new URLSearchParams();
@@ -264,7 +264,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Other
      * @param body 
      */
-    public addProjOther (body?: models.ProjOtherAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjOther(body?: models.ProjOtherAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritOther';
 
         let queryParameters = new URLSearchParams();
@@ -291,7 +291,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลขอบเขตของโครงการ
      * @param body 
      */
-    public addProjScope (body?: models.ProjScopeAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjScope(body?: models.ProjScopeAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritScope';
 
         let queryParameters = new URLSearchParams();
@@ -318,7 +318,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Systems
      * @param body 
      */
-    public addProjSystems (body?: models.ProjSystemsAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjSystems(body?: models.ProjSystemsAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritSystems';
 
         let queryParameters = new URLSearchParams();
@@ -345,7 +345,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Tools
      * @param body 
      */
-    public addProjTools (body?: models.ProjToolsAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjTools(body?: models.ProjToolsAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTools';
 
         let queryParameters = new URLSearchParams();
@@ -372,7 +372,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลProject Train
      * @param body 
      */
-    public addProjTrain (body?: models.ProjTrainAddBean, extraHttpRequestParams?: any ) : Observable<{}> {
+    public addProjTrain(body?: models.ProjTrainAddBean, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTrain';
 
         let queryParameters = new URLSearchParams();
@@ -399,7 +399,7 @@ export class PriBussinessSpecApi {
      * สำหรับการบันทึกข้อมูลรายละเอียดโครงการ
      * @param body 
      */
-    public addProjectInformation (body?: models.ProjectInformationBean, extraHttpRequestParams?: any ) : Observable<models.PritInformation> {
+    public addProjectInformation(body?: models.ProjectInformationBean, extraHttpRequestParams?: any): Observable<models.PritInformation> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -426,7 +426,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Accessories
      * @param body 
      */
-    public editProjAccessories (body?: models.ProjAccessoriesBean, extraHttpRequestParams?: any ) : Observable<models.ProjAccessoriesBean> {
+    public editProjAccessories(body?: models.ProjAccessoriesBean, extraHttpRequestParams?: any): Observable<models.ProjAccessoriesBean> {
         const path = this.basePath + '/pritAccessories';
 
         let queryParameters = new URLSearchParams();
@@ -453,7 +453,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลเงื่อนไขของโครงการ
      * @param body 
      */
-    public editProjCondition (body?: models.ProjConditionBean, extraHttpRequestParams?: any ) : Observable<models.ProjConditionBean> {
+    public editProjCondition(body?: models.ProjConditionBean, extraHttpRequestParams?: any): Observable<models.ProjConditionBean> {
         const path = this.basePath + '/pritCondition';
 
         let queryParameters = new URLSearchParams();
@@ -480,7 +480,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Customer
      * @param body 
      */
-    public editProjCustomer (body?: models.ProjCustomerBean, extraHttpRequestParams?: any ) : Observable<models.ProjCustomerBean> {
+    public editProjCustomer(body?: models.ProjCustomerBean, extraHttpRequestParams?: any): Observable<models.ProjCustomerBean> {
         const path = this.basePath + '/pritCustomer';
 
         let queryParameters = new URLSearchParams();
@@ -507,7 +507,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลการส่งมอบโครงการ
      * @param body 
      */
-    public editProjDeliver (body?: models.ProjDeliverBean, extraHttpRequestParams?: any ) : Observable<models.ProjDeliverBean> {
+    public editProjDeliver(body?: models.ProjDeliverBean, extraHttpRequestParams?: any): Observable<models.ProjDeliverBean> {
         const path = this.basePath + '/pritDeliver';
 
         let queryParameters = new URLSearchParams();
@@ -534,7 +534,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Language
      * @param body 
      */
-    public editProjLanguage (body?: models.ProjLanguageBean, extraHttpRequestParams?: any ) : Observable<models.ProjLanguageBean> {
+    public editProjLanguage(body?: models.ProjLanguageBean, extraHttpRequestParams?: any): Observable<models.ProjLanguageBean> {
         const path = this.basePath + '/pritLanguage';
 
         let queryParameters = new URLSearchParams();
@@ -561,7 +561,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Limit
      * @param body 
      */
-    public editProjLimit (body?: models.ProjLimitBean, extraHttpRequestParams?: any ) : Observable<models.ProjLimitBean> {
+    public editProjLimit(body?: models.ProjLimitBean, extraHttpRequestParams?: any): Observable<models.ProjLimitBean> {
         const path = this.basePath + '/pritLimit';
 
         let queryParameters = new URLSearchParams();
@@ -588,7 +588,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Method
      * @param body 
      */
-    public editProjMethod (body?: models.ProjMethodBean, extraHttpRequestParams?: any ) : Observable<models.ProjMethodBean> {
+    public editProjMethod(body?: models.ProjMethodBean, extraHttpRequestParams?: any): Observable<models.ProjMethodBean> {
         const path = this.basePath + '/pritMethod';
 
         let queryParameters = new URLSearchParams();
@@ -615,7 +615,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Monitor
      * @param body 
      */
-    public editProjMonitor (body?: models.ProjMonitorBean, extraHttpRequestParams?: any ) : Observable<models.ProjMonitorBean> {
+    public editProjMonitor(body?: models.ProjMonitorBean, extraHttpRequestParams?: any): Observable<models.ProjMonitorBean> {
         const path = this.basePath + '/pritMonitor';
 
         let queryParameters = new URLSearchParams();
@@ -642,7 +642,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Other
      * @param body 
      */
-    public editProjOther (body?: models.ProjOtherBean, extraHttpRequestParams?: any ) : Observable<models.ProjOtherBean> {
+    public editProjOther(body?: models.ProjOtherBean, extraHttpRequestParams?: any): Observable<models.ProjOtherBean> {
         const path = this.basePath + '/pritOther';
 
         let queryParameters = new URLSearchParams();
@@ -669,7 +669,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลขอบเขตของโครงการ
      * @param body 
      */
-    public editProjScope (body?: models.ProjScopeBean, extraHttpRequestParams?: any ) : Observable<models.ProjScopeBean> {
+    public editProjScope(body?: models.ProjScopeBean, extraHttpRequestParams?: any): Observable<models.ProjScopeBean> {
         const path = this.basePath + '/pritScope';
 
         let queryParameters = new URLSearchParams();
@@ -696,7 +696,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Systems
      * @param body 
      */
-    public editProjSystems (body?: models.ProjSystemsBean, extraHttpRequestParams?: any ) : Observable<models.ProjSystemsBean> {
+    public editProjSystems(body?: models.ProjSystemsBean, extraHttpRequestParams?: any): Observable<models.ProjSystemsBean> {
         const path = this.basePath + '/pritSystems';
 
         let queryParameters = new URLSearchParams();
@@ -723,7 +723,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Tools
      * @param body 
      */
-    public editProjTools (body?: models.ProjToolsBean, extraHttpRequestParams?: any ) : Observable<models.ProjToolsBean> {
+    public editProjTools(body?: models.ProjToolsBean, extraHttpRequestParams?: any): Observable<models.ProjToolsBean> {
         const path = this.basePath + '/pritTools';
 
         let queryParameters = new URLSearchParams();
@@ -750,7 +750,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลProject Train
      * @param body 
      */
-    public editProjTrain (body?: models.ProjTrainBean, extraHttpRequestParams?: any ) : Observable<models.ProjTrainBean> {
+    public editProjTrain(body?: models.ProjTrainBean, extraHttpRequestParams?: any): Observable<models.ProjTrainBean> {
         const path = this.basePath + '/pritTrain';
 
         let queryParameters = new URLSearchParams();
@@ -777,7 +777,7 @@ export class PriBussinessSpecApi {
      * สำหรับการแก้ไขข้อมูลรายละเอียดโครงการ
      * @param body 
      */
-    public editProjectInformation (body?: models.ProjectInformationEditBean, extraHttpRequestParams?: any ) : Observable<models.ProjectInformationEditBean> {
+    public editProjectInformation(body?: models.ProjectInformationEditBean, extraHttpRequestParams?: any): Observable<models.ProjectInformationEditBean> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -804,7 +804,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Accessories ตาม Primary key
      * @param projAccessoriesRef 
      */
-    public getProjAccessoriesByRef (projAccessoriesRef: number, extraHttpRequestParams?: any ) : Observable<models.PritAccessories> {
+    public getProjAccessoriesByRef(projAccessoriesRef: number, extraHttpRequestParams?: any): Observable<models.PritAccessories> {
         const path = this.basePath + '/pritAccessories/{projAccessoriesRef}'
             .replace('{' + 'projAccessoriesRef' + '}', String(projAccessoriesRef));
 
@@ -837,7 +837,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjAccessoriesList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjAccessoriesBean>> {
+    public getProjAccessoriesList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjAccessoriesBean>> {
         const path = this.basePath + '/pritAccessories/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -876,7 +876,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลเงื่อนไขของโครงการ ตาม Primary Key
      * @param projConditionRef 
      */
-    public getProjConditionByRef (projConditionRef: number, extraHttpRequestParams?: any ) : Observable<models.PritCondition> {
+    public getProjConditionByRef(projConditionRef: number, extraHttpRequestParams?: any): Observable<models.PritCondition> {
         const path = this.basePath + '/pritCondition/{projConditionRef}'
             .replace('{' + 'projConditionRef' + '}', String(projConditionRef));
 
@@ -909,7 +909,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjConditionList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjConditionBean>> {
+    public getProjConditionList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjConditionBean>> {
         const path = this.basePath + '/pritCondition/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -948,7 +948,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Customer ตาม Primary key
      * @param projCustomerRef 
      */
-    public getProjCustomerByRef (projCustomerRef: number, extraHttpRequestParams?: any ) : Observable<models.PritCustomer> {
+    public getProjCustomerByRef(projCustomerRef: number, extraHttpRequestParams?: any): Observable<models.PritCustomer> {
         const path = this.basePath + '/pritCustomer/{projCustomerRef}'
             .replace('{' + 'projCustomerRef' + '}', String(projCustomerRef));
 
@@ -981,7 +981,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjCustomerList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjCustomerBean>> {
+    public getProjCustomerList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjCustomerBean>> {
         const path = this.basePath + '/pritCustomer/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1020,7 +1020,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลการส่งมอบโครงการ ตาม Primary key
      * @param projDeliverRef 
      */
-    public getProjDeliverByRef (projDeliverRef: number, extraHttpRequestParams?: any ) : Observable<models.PritDeliver> {
+    public getProjDeliverByRef(projDeliverRef: number, extraHttpRequestParams?: any): Observable<models.PritDeliver> {
         const path = this.basePath + '/pritDeliver/{projDeliverRef}'
             .replace('{' + 'projDeliverRef' + '}', String(projDeliverRef));
 
@@ -1053,7 +1053,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjDeliverList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjDeliverBean>> {
+    public getProjDeliverList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjDeliverBean>> {
         const path = this.basePath + '/pritDeliver/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1092,7 +1092,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Language ตาม Primary key
      * @param projLanguageRef 
      */
-    public getProjLanguageByRef (projLanguageRef: number, extraHttpRequestParams?: any ) : Observable<models.PritLanguage> {
+    public getProjLanguageByRef(projLanguageRef: number, extraHttpRequestParams?: any): Observable<models.PritLanguage> {
         const path = this.basePath + '/pritLanguage/{projLanguageRef}'
             .replace('{' + 'projLanguageRef' + '}', String(projLanguageRef));
 
@@ -1125,7 +1125,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjLanguageList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjLanguageBean>> {
+    public getProjLanguageList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjLanguageBean>> {
         const path = this.basePath + '/pritLanguage/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1164,7 +1164,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Limit ตาม Primary key
      * @param projLimitRef 
      */
-    public getProjLimitByRef (projLimitRef: number, extraHttpRequestParams?: any ) : Observable<models.PritLimit> {
+    public getProjLimitByRef(projLimitRef: number, extraHttpRequestParams?: any): Observable<models.PritLimit> {
         const path = this.basePath + '/pritLimit/{projLimitRef}'
             .replace('{' + 'projLimitRef' + '}', String(projLimitRef));
 
@@ -1197,7 +1197,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjLimitList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjLimitBean>> {
+    public getProjLimitList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjLimitBean>> {
         const path = this.basePath + '/pritLimit/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1236,7 +1236,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Method ตาม Primary key
      * @param projMethodRef 
      */
-    public getProjMethodByRef (projMethodRef: number, extraHttpRequestParams?: any ) : Observable<models.PritMethod> {
+    public getProjMethodByRef(projMethodRef: number, extraHttpRequestParams?: any): Observable<models.PritMethod> {
         const path = this.basePath + '/pritMethod/{projMethodRef}'
             .replace('{' + 'projMethodRef' + '}', String(projMethodRef));
 
@@ -1269,7 +1269,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjMethodList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjMethodBean>> {
+    public getProjMethodList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjMethodBean>> {
         const path = this.basePath + '/pritMethod/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1308,7 +1308,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Monitor ตาม Primary key
      * @param projMonitorRef 
      */
-    public getProjMonitorByRef (projMonitorRef: number, extraHttpRequestParams?: any ) : Observable<models.PritMonitor> {
+    public getProjMonitorByRef(projMonitorRef: number, extraHttpRequestParams?: any): Observable<models.PritMonitor> {
         const path = this.basePath + '/pritMonitor/{projMonitorRef}'
             .replace('{' + 'projMonitorRef' + '}', String(projMonitorRef));
 
@@ -1341,7 +1341,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjMonitorList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjMonitorBean>> {
+    public getProjMonitorList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjMonitorBean>> {
         const path = this.basePath + '/pritMonitor/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1380,7 +1380,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Other ตาม Primary key
      * @param projOtherRef 
      */
-    public getProjOtherByRef (projOtherRef: number, extraHttpRequestParams?: any ) : Observable<models.PritOther> {
+    public getProjOtherByRef(projOtherRef: number, extraHttpRequestParams?: any): Observable<models.PritOther> {
         const path = this.basePath + '/pritOther/{projOtherRef}'
             .replace('{' + 'projOtherRef' + '}', String(projOtherRef));
 
@@ -1413,7 +1413,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjOtherList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjOtherBean>> {
+    public getProjOtherList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjOtherBean>> {
         const path = this.basePath + '/pritOther/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1452,7 +1452,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลขอบเขตของโครงการ ตาม Primary key
      * @param projScopeRef 
      */
-    public getProjScopeByRef (projScopeRef: number, extraHttpRequestParams?: any ) : Observable<models.PritScope> {
+    public getProjScopeByRef(projScopeRef: number, extraHttpRequestParams?: any): Observable<models.PritScope> {
         const path = this.basePath + '/pritScope/{projScopeRef}'
             .replace('{' + 'projScopeRef' + '}', String(projScopeRef));
 
@@ -1485,7 +1485,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjScopeList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjScopeBean>> {
+    public getProjScopeList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjScopeBean>> {
         const path = this.basePath + '/pritScope/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1524,7 +1524,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Systems ตาม Primary key
      * @param projSystemsRef 
      */
-    public getProjSystemsByRef (projSystemsRef: number, extraHttpRequestParams?: any ) : Observable<models.PritSystems> {
+    public getProjSystemsByRef(projSystemsRef: number, extraHttpRequestParams?: any): Observable<models.PritSystems> {
         const path = this.basePath + '/pritSystems/{projSystemsRef}'
             .replace('{' + 'projSystemsRef' + '}', String(projSystemsRef));
 
@@ -1557,7 +1557,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjSystemsList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjSystemsBean>> {
+    public getProjSystemsList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjSystemsBean>> {
         const path = this.basePath + '/pritSystems/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1596,7 +1596,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Tools ตาม Primary key
      * @param projToolsRef 
      */
-    public getProjToolsByRef (projToolsRef: number, extraHttpRequestParams?: any ) : Observable<models.PritTools> {
+    public getProjToolsByRef(projToolsRef: number, extraHttpRequestParams?: any): Observable<models.PritTools> {
         const path = this.basePath + '/pritTools/{projToolsRef}'
             .replace('{' + 'projToolsRef' + '}', String(projToolsRef));
 
@@ -1629,7 +1629,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjToolsList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjToolsBean>> {
+    public getProjToolsList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjToolsBean>> {
         const path = this.basePath + '/pritTools/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1668,7 +1668,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลProject Train ตาม Primary key
      * @param projTrainRef 
      */
-    public getProjTrainByRef (projTrainRef: number, extraHttpRequestParams?: any ) : Observable<models.PritTrain> {
+    public getProjTrainByRef(projTrainRef: number, extraHttpRequestParams?: any): Observable<models.PritTrain> {
         const path = this.basePath + '/pritTrain/{projTrainRef}'
             .replace('{' + 'projTrainRef' + '}', String(projTrainRef));
 
@@ -1701,7 +1701,7 @@ export class PriBussinessSpecApi {
      * @param start 
      * @param size 
      */
-    public getProjTrainList (projCode: string, start?: number, size?: number, extraHttpRequestParams?: any ) : Observable<Array<models.ProjTrainBean>> {
+    public getProjTrainList(projCode: string, start?: number, size?: number, extraHttpRequestParams?: any): Observable<Array<models.ProjTrainBean>> {
         const path = this.basePath + '/pritTrain/projCode/{projCode}'
             .replace('{' + 'projCode' + '}', String(projCode));
 
@@ -1740,7 +1740,7 @@ export class PriBussinessSpecApi {
      * สำหรับการค้นหาตารางข้อมูลรายละเอียดโครงการ ตาม Primary Key
      * @param projRef 
      */
-    public getProjectInformationByRef (projRef: number, extraHttpRequestParams?: any ) : Observable<models.PritInformation> {
+    public getProjectInformationByRef(projRef: number, extraHttpRequestParams?: any): Observable<models.PritInformation> {
         const path = this.basePath + '/pritInformation/projRef/{projRef}'
             .replace('{' + 'projRef' + '}', String(projRef));
 
@@ -1778,7 +1778,7 @@ export class PriBussinessSpecApi {
      * @param projName 
      * @param projStatus 
      */
-    public getProjectInformationListByCondition (start?: number, size?: number, projCode?: string, projYear?: number, projOrgCode?: string, projType?: string, projName?: string, projStatus?: string, extraHttpRequestParams?: any ) : Observable<Array<models.ProjectInformationInfoBean>> {
+    public getProjectInformationListByCondition(start?: number, size?: number, projCode?: string, projYear?: number, projOrgCode?: string, projType?: string, projName?: string, projStatus?: string, extraHttpRequestParams?: any): Observable<Array<models.ProjectInformationInfoBean>> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();
@@ -1836,7 +1836,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Accessories ตาม Primary Key
      * @param projAccessoriesRef 
      */
-    public removeProjAccessoriesByRef (projAccessoriesRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjAccessoriesByRef(projAccessoriesRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritAccessories/{projAccessoriesRef}'
             .replace('{' + 'projAccessoriesRef' + '}', String(projAccessoriesRef));
 
@@ -1867,7 +1867,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Accessories
      * @param body 
      */
-    public removeProjAccessoriesList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjAccessoriesList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritAccessories';
 
         let queryParameters = new URLSearchParams();
@@ -1894,7 +1894,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลเงื่อนไขของโครงการ ตาม Primary Key
      * @param projConditionRef 
      */
-    public removeProjConditionByRef (projConditionRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjConditionByRef(projConditionRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCondition/{projConditionRef}'
             .replace('{' + 'projConditionRef' + '}', String(projConditionRef));
 
@@ -1925,7 +1925,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลเงื่อนไขของโครงการ
      * @param body 
      */
-    public removeProjConditionList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjConditionList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCondition';
 
         let queryParameters = new URLSearchParams();
@@ -1952,7 +1952,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Customer ตาม Primary Key
      * @param projCustomerRef 
      */
-    public removeProjCustomerByRef (projCustomerRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjCustomerByRef(projCustomerRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCustomer/{projCustomerRef}'
             .replace('{' + 'projCustomerRef' + '}', String(projCustomerRef));
 
@@ -1983,7 +1983,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Customer
      * @param body 
      */
-    public removeProjCustomerList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjCustomerList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritCustomer';
 
         let queryParameters = new URLSearchParams();
@@ -2010,7 +2010,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลการส่งมอบโครงการ ตาม Primary Key
      * @param projDeliverRef 
      */
-    public removeProjDeliverByRef (projDeliverRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjDeliverByRef(projDeliverRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritDeliver/{projDeliverRef}'
             .replace('{' + 'projDeliverRef' + '}', String(projDeliverRef));
 
@@ -2041,7 +2041,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลการส่งมอบโครงการ
      * @param body 
      */
-    public removeProjDeliverList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjDeliverList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritDeliver';
 
         let queryParameters = new URLSearchParams();
@@ -2068,7 +2068,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Language ตาม Primary Key
      * @param projLanguageRef 
      */
-    public removeProjLanguageByRef (projLanguageRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjLanguageByRef(projLanguageRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLanguage/{projLanguageRef}'
             .replace('{' + 'projLanguageRef' + '}', String(projLanguageRef));
 
@@ -2099,7 +2099,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Language
      * @param body 
      */
-    public removeProjLanguageList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjLanguageList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLanguage';
 
         let queryParameters = new URLSearchParams();
@@ -2126,7 +2126,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Limit ตาม Primary Key
      * @param projLimitRef 
      */
-    public removeProjLimitByRef (projLimitRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjLimitByRef(projLimitRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLimit/{projLimitRef}'
             .replace('{' + 'projLimitRef' + '}', String(projLimitRef));
 
@@ -2157,7 +2157,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Limit
      * @param body 
      */
-    public removeProjLimitList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjLimitList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritLimit';
 
         let queryParameters = new URLSearchParams();
@@ -2184,7 +2184,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Method ตาม Primary Key
      * @param projMethodRef 
      */
-    public removeProjMethodByRef (projMethodRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjMethodByRef(projMethodRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMethod/{projMethodRef}'
             .replace('{' + 'projMethodRef' + '}', String(projMethodRef));
 
@@ -2215,7 +2215,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Method
      * @param body 
      */
-    public removeProjMethodList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjMethodList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMethod';
 
         let queryParameters = new URLSearchParams();
@@ -2242,7 +2242,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Monitor ตาม Primary Key
      * @param projMonitorRef 
      */
-    public removeProjMonitorByRef (projMonitorRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjMonitorByRef(projMonitorRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMonitor/{projMonitorRef}'
             .replace('{' + 'projMonitorRef' + '}', String(projMonitorRef));
 
@@ -2273,7 +2273,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Monitor
      * @param body 
      */
-    public removeProjMonitorList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjMonitorList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritMonitor';
 
         let queryParameters = new URLSearchParams();
@@ -2300,7 +2300,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Other ตาม Primary Key
      * @param projOtherRef 
      */
-    public removeProjOtherByRef (projOtherRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjOtherByRef(projOtherRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritOther/{projOtherRef}'
             .replace('{' + 'projOtherRef' + '}', String(projOtherRef));
 
@@ -2331,7 +2331,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Other
      * @param body 
      */
-    public removeProjOtherList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjOtherList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritOther';
 
         let queryParameters = new URLSearchParams();
@@ -2358,7 +2358,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลขอบเขตของโครงการ ตาม Primary Key
      * @param projScopeRef 
      */
-    public removeProjScopeByRef (projScopeRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjScopeByRef(projScopeRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritScope/{projScopeRef}'
             .replace('{' + 'projScopeRef' + '}', String(projScopeRef));
 
@@ -2389,7 +2389,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลขอบเขตของโครงการ
      * @param body 
      */
-    public removeProjScopeList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjScopeList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritScope';
 
         let queryParameters = new URLSearchParams();
@@ -2416,7 +2416,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Systems ตาม Primary Key
      * @param projSystemsRef 
      */
-    public removeProjSystemsByRef (projSystemsRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjSystemsByRef(projSystemsRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritSystems/{projSystemsRef}'
             .replace('{' + 'projSystemsRef' + '}', String(projSystemsRef));
 
@@ -2447,7 +2447,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Systems
      * @param body 
      */
-    public removeProjSystemsList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjSystemsList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritSystems';
 
         let queryParameters = new URLSearchParams();
@@ -2474,7 +2474,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Tools ตาม Primary Key
      * @param projToolsRef 
      */
-    public removeProjToolsByRef (projToolsRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjToolsByRef(projToolsRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTools/{projToolsRef}'
             .replace('{' + 'projToolsRef' + '}', String(projToolsRef));
 
@@ -2505,7 +2505,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Tools
      * @param body 
      */
-    public removeProjToolsList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjToolsList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTools';
 
         let queryParameters = new URLSearchParams();
@@ -2532,7 +2532,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Train ตาม Primary Key
      * @param projTrainRef 
      */
-    public removeProjTrainByRef (projTrainRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjTrainByRef(projTrainRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTrain/{projTrainRef}'
             .replace('{' + 'projTrainRef' + '}', String(projTrainRef));
 
@@ -2563,7 +2563,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลProject Train
      * @param body 
      */
-    public removeProjTrainList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjTrainList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritTrain';
 
         let queryParameters = new URLSearchParams();
@@ -2590,7 +2590,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลรายละเอียดโครงการ ตาม Primary Key
      * @param projRef 
      */
-    public removeProjectInformationByRef (projRef: number, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjectInformationByRef(projRef: number, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritInformation/{projRef}'
             .replace('{' + 'projRef' + '}', String(projRef));
 
@@ -2621,7 +2621,7 @@ export class PriBussinessSpecApi {
      * สำหรับการลบข้อมูลรายละเอียดโครงการ
      * @param body 
      */
-    public removeProjectInformationList (body?: Array<number>, extraHttpRequestParams?: any ) : Observable<{}> {
+    public removeProjectInformationList(body?: Array<number>, extraHttpRequestParams?: any): Observable<{}> {
         const path = this.basePath + '/pritInformation';
 
         let queryParameters = new URLSearchParams();

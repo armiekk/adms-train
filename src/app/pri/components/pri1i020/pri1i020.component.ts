@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pri1i020Service, ProjScope, ProjScopeAddBean, initProjScope } from '../../services/pri1i020/pri1i020.service';
+import { Pri1i020Service, ProjScope, ProjScopeAddBean, initProjScope, ProjScopeBean } from '../../services/pri1i020/pri1i020.service';
 import { StateService } from '../../../shared/services/state/state.service';
 
 
@@ -37,18 +37,29 @@ export class Pri1i020Component implements OnInit {
     this.projScopeList = [dummyRow, ...this.projScopeList];
   }
 
-  addProjScope(){
+  addProjScope() {
     this.projScope.edit = true;
     this.projScope.scoreDetail = '';
   }
 
-  editProjScope(){
+  editProjScope() {
     this.projScope.edit = true;
   }
 
-  saveProjScope(){
-    let projScopeAddBean: ProjScopeAddBean = { projCode: this.state.projCode, scoreDetail: this.projScope.scoreDetail };
-    this.priScopeService.savePritScope(projScopeAddBean).subscribe((status: string) => console.log(status));
+  saveProjScope() {
+    if (!this.projScope.projScopeRef) {
+      let projScopeAddBean: ProjScopeAddBean = { projCode: this.state.projCode, scoreDetail: this.projScope.scoreDetail };
+      this.priScopeService.savePritScope(projScopeAddBean)
+        .subscribe((projScope: ProjScope[]) => [this.projScope] = projScope);
+    } else {
+      let projScopeBean: ProjScopeBean = {
+        projScopeRef: this.projScope.projScopeRef, 
+        scoreDetail: this.projScope.scoreDetail,
+        updateDate: new Date()
+      };
+      this.priScopeService.updatePritScope(projScopeBean, this.state.projCode)
+        .subscribe((projScope: ProjScope[]) => [this.projScope] = projScope);
+    }
     this.projScope.edit = false;
     this.projScope.projScopeRef = 1;
   }

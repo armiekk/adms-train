@@ -72,7 +72,7 @@
     </div>
     <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-lx-12" *ngIf="projScope.edit || projScope.projScopeRef === null">
       <div style="float: right">
-        <button type="button" pButton label="บันทึกข้อมูล" icon="fa-floppy-o" (click)="saveProjScope()"></button>
+        <button type="button" pButton label="บันทึกข้อมูล" icon="fa-floppy-o" (click)="saveProjScope()" [disabled]="projScope.scoreDetail === null"></button>
         <button type="button" pButton label="ล้างข้อมูล" icon="fa-times"></button>
       </div>
     </div>

@@ -83,8 +83,8 @@ export class Qad1i030Component implements OnInit {
         private qadConstant: QadConstantsService,
         private locale: ThaiCalendarService) {
         this.menus = [];
-        this.menus.push({ label: 'Assign QA', value: '/qad/QAD1I030' });
-        this.menus.push({ label: 'QA Schedule and Plan', value: '/qad/QAD1Q010' });
+        this.menus.push({ label: 'Assign QA', value: '/qad/Qad1i030' });
+        this.menus.push({ label: 'QA Schedule and Plan', value: '/qad/Qad1q010' });
     }
 
     ngOnInit() {

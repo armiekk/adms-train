@@ -23,7 +23,6 @@ export class QadDashboardContainerComponent implements OnInit {
 
   ngOnInit() {
     this.programList = this.admsMenuService.getProgramList(this.admsMenuService.getParentNodeId());
-    console.log(this.programList);
     this.todoListData = [
       {
         system: 'QAD',

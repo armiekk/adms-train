@@ -12,7 +12,7 @@ export interface SearchCondition {
   projStatus?: string;
   start: number;
   size: number;
-}
+};
 
 export { PritInformation, ProjectInformationInfoBean } from '../../api/model/models';
 

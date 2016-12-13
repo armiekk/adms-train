@@ -17,10 +17,10 @@ const routes: Routes = [
         children: [
             { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
             { path: 'dashboard', component: QadDashboardContainerComponent },
-            { path: 'QAD1Q010', component: Qad1q010Component },
-            { path: 'QAD1I030', component: Qad1i030Component },
-            { path: 'QAD2I010', component: Qad2i010Component },
-            { path: 'QAD2Q010', component: Qad2q010Component },
+            { path: 'Qad1q010', component: Qad1q010Component },
+            { path: 'Qad1i030', component: Qad1i030Component },
+            { path: 'Qad2i010', component: Qad2i010Component },
+            { path: 'Qad2q010', component: Qad2q010Component },
             { path: 'QAD0I030', component: Qad0i030Component }
         ]
     },

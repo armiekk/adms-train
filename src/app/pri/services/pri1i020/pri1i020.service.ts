@@ -8,7 +8,7 @@ export interface ProjScope extends ProjScopeBean {
   edit?: boolean;
 }
 
-export { ProjScopeAddBean } from '../../api/model/models';
+export { ProjScopeAddBean, ProjScopeBean } from '../../api/model/models';
 
 export const initProjScope: ProjScope = {
   projScopeRef: null,
@@ -21,10 +21,12 @@ export const initProjScope: ProjScope = {
 export class Pri1i020Service {
 
   constructor(private priScopeService: PritScopeApi, private http: Http) {
+    this.priScopeService.defaultHeaders.append('Content-Type', 'application/json');
+    this.priScopeService.defaultHeaders.append('Accept', 'application/json');
   }
 
 
-  getPritScopeListByProjCode(projCode: string): Observable<ProjScopeBean[]> {
+  getPritScopeListByProjCode(projCode: string): Observable<ProjScope[]> {
     return this.priScopeService.getProjScopeList(projCode)
       .map((pritScopeList: ProjScopeBean[]) =>
         pritScopeList.map((pritScope: ProjScopeBean) => Object.assign({}, pritScope, { edit: false }))
@@ -32,8 +34,21 @@ export class Pri1i020Service {
 
   }
 
-  savePritScope(projScopeBean: ProjScopeAddBean): Observable<string> {
-    return this.priScopeService.addProjScope(projScopeBean).map((status: string) => status);
+  savePritScope(projScopeAddBean: ProjScopeAddBean): Observable<ProjScope[]> {
+    return this.priScopeService.addProjScope(projScopeAddBean).switchMap((response: { projScopeRef: number }) => {
+      if (response.projScopeRef) {
+        return this.getPritScopeListByProjCode(projScopeAddBean.projCode);
+      }
+    });
+
+  }
+
+  updatePritScope(projScopeBean: ProjScopeBean, projCode: string): Observable<ProjScope[]> {
+    return this.priScopeService.editProjScope(projScopeBean).switchMap((response: { projScopeRef: number }) => {
+      if (response.projScopeRef) {
+        return this.getPritScopeListByProjCode(projCode);
+      }
+    });
   }
 
   getMockupPritScopeList(projCode: string): Observable<PritScope[]> {
