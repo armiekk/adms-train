@@ -1,27 +1,22 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { UserApi } from '../../api/cdgs-authorize-services/api/api';
 import { FwMenuBean, FwRoleBean, FwActiveRoleBean, FwNodeBean } from '../../api/cdgs-authorize-services/model/models';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-export interface Program {
-  name: string;
-  id: number;
-  subProgram?: Array<SubProgram>;
+export interface Program extends FwNodeBean {
+  subProgram?: Array<FwNodeBean>;
 }
 
-export interface SubProgram {
-  name: string;
-  subProgramId: string;
-  uri: string;
-}
+export { FwNodeBean } from '../../api/cdgs-authorize-services/model/models';
 
 @Injectable()
 export class AdmsMenuService implements OnInit {
 
   private menuList: Array<FwNodeBean>;
 
-  constructor(private userApi: UserApi) {
+  constructor(private userApi: UserApi, private location: Location) {
   }
 
   ngOnInit() {
@@ -47,41 +42,50 @@ export class AdmsMenuService implements OnInit {
       .map((node: FwNodeBean) => { return { name: node.name, uri: node.uri } });
   }
 
-  getMenuListByParentId(parentName: string) {
-    let retList: Array<Program> = [];
-    let [parentId] = this.getSystemId(parentName);
-    return this.menuList
-      .filter((node: FwNodeBean) => node.parent.id === parentId)
-      .forEach((node: FwNodeBean) => {
-        if (node.type === 'f' && node.parent !== null) {
-          retList.push({ name: node.name, id: node.id, });
-        }
-      });
+
+  getProgramList(parentId: number): Program[] | FwNodeBean[] {
+    let menuListData: FwNodeBean[] = JSON.parse(localStorage.getItem('menuList'));
+    let programList: FwNodeBean[] = menuListData.filter((menuData: FwNodeBean) => {
+      if (menuData.parent) {
+        return menuData.type === 'f' && menuData.parent.id === parentId;
+      }
+    });
+    if (programList.length > 0) {
+      return this.getProgramListWithSubProgram(programList);
+    } else {
+      return this.getProgramWithoutSubProgram(menuListData, parentId);
+    }
   }
 
-  getProgramList(parentMenuList: Array<FwNodeBean>, parentId: number): Array<Program>{
-    return parentMenuList.filter((node: FwNodeBean) =>
-      node.type === 'f' &&
-      node.parent !== null &&
-      node.parent.id === parentId)
-      .map((node: FwNodeBean) => { return { name: node.name, id: node.id } });
+  private getProgramWithoutSubProgram(menuListData: FwNodeBean[], parentId: number): FwNodeBean[] {
+    return menuListData.filter((menuData: FwNodeBean) => {
+      if (menuData.parent) {
+        return menuData.type === 'p' && menuData.parent.id === parentId && menuData.uri !== 'type=t';
+      }
+    });
   }
 
-
-
-  getSubProgramList(parentMenuList: Array<FwNodeBean>, parentId: number): Array<SubProgram> {
-    return parentMenuList.filter((node: FwNodeBean) =>
-      node.type === 'p' &&
-      node.parent !== null &&
-      node.parent.id === parentId &&
-      node.uri !== 'type=t')
-      .map((node: FwNodeBean) => { return { name: node.name, subProgramId: node.program.programId, uri: `../${node.program.programId}` } });
+  private getProgramListWithSubProgram(programList: FwNodeBean[]): Program[] {
+    return programList.map((menuData: FwNodeBean) => {
+      return Object.assign({}, menuData, { subProgram: this.getSubProgramList(menuData.id) });
+    });
   }
 
-  getSystemId(parentName: string) {
-    return JSON.parse(localStorage.getItem('menuList'))
-      .filter((node: FwNodeBean) => parentName.indexOf(node.uri) >= 0)
-      .map((node: FwNodeBean) => node.id);
+  private getSubProgramList(programId: number): FwNodeBean[] {
+    let menuListData: FwNodeBean[] = JSON.parse(localStorage.getItem('menuList'));
+    return menuListData.filter((menuData: FwNodeBean) => {
+      if (menuData.parent) {
+        return menuData.type === 'p' && menuData.parent.id === programId;
+      }
+    });
+  }
+
+  getParentNodeId(): number {
+    let menuListData: FwNodeBean[] = JSON.parse(localStorage.getItem('menuList'));
+    let [parentNode]: FwNodeBean[] = menuListData.filter((menuData: FwNodeBean) => {
+      return this.location.path().includes(menuData.uri);
+    });
+    return parentNode ? parentNode.id : null;
   }
 
   private setHeaders() {

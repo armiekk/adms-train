@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MenuApi } from '../../api/cdgs-authorize-services/api/api';
-import { AdmsMenuService } from '../../services/adms-menu/adms-menu.service';
+import { AdmsMenuService, Program } from '../../services/adms-menu/adms-menu.service';
 import {
     FwMenuBean,
     FwIconBean,
