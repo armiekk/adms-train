@@ -46,10 +46,10 @@ export class Pri1i010DetailComponent implements OnInit {
       .subscribe((pritInformationDetail: PritInformation) => this.pritInformationDetail = pritInformationDetail);
   }
 
-  calculateProjDuration(projWarrantyStopDate: Date) {
+  calculateProjDuration(warrantyEndDate: Date) {
     if (this.pritInformationDetail.projStartDate) {
       this.pritInformationDetail.projDuration =
-        Math.round((projWarrantyStopDate.getTime() - this.pritInformationDetail.projStartDate.getTime()) / (1000 * 60 * 60 * 24));
+        Math.round((warrantyEndDate.getTime() - this.pritInformationDetail.projStartDate.getTime()) / (1000 * 60 * 60 * 24));
     }
   }
 

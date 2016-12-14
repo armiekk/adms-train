@@ -58,16 +58,15 @@
   <div class="ui-g-12" *ngIf="projScope.projScopeRef !== null">
     <div class="table-manager-panel">
       <button type="button" pButton label="แก้ไขข้อมูล" icon="fa-pencil" *ngIf="!projScope.edit" (click)="editProjScope()"></button>
-      <button type="button" pButton label="ลบข้อมูล" icon="fa-trash"></button>
     </div>
   </div>
   <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-lx-12">
-    <div class="ui-widget-content ui-corner-all" *ngIf="!projScope.edit && projScope.projScopeRef !== null" style="min-height: 200px; position: relative;">
+    <div class="ui-widget-content ui-corner-all" *ngIf="!projScope.edit && projScope.projScopeRef !== null && projScope.scoreDetail !== ''" style="min-height: 200px; position: relative;">
       <div class="text-editor-content">
         <span [innerHTML]="projScope.scoreDetail"></span>
       </div>
     </div>
-    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-lx-12" *ngIf="projScope.edit || projScope.projScopeRef === null">
+    <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-lx-12" *ngIf="projScope.edit || projScope.projScopeRef === null || projScope.scoreDetail === ''">
       <p-editor [(ngModel)]="projScope.scoreDetail" [style]="{'height':'200px'}"></p-editor>
     </div>
     <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-lx-12" *ngIf="projScope.edit || projScope.projScopeRef === null">

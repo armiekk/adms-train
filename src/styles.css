@@ -266,3 +266,11 @@ table {
 .text-editor-content {
     padding: 1em;
 }
+
+.ui-dialog {
+    overflow: visible; 
+}
+
+.ui-dialog .ui-dialog-content {
+    overflow: visible; 
+}

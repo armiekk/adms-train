@@ -22,13 +22,13 @@ export const initialPritInformaiton: PritInformation = {
 };
 
 export const initialPritInformaitonDetail: PritInformation = {
-  projContactNo: null,
+  contractNo: null,
   projYear: null,
   projOrgName: null,
   projStartDate: null,
   projStopDate: null,
-  projWarrantyStartDate: null,
-  projWarrantyStopDate: null,
+  warrantyStartDate: null,
+  warrantyEndDate: null,
   projDuration: null,
   projBudget: null,
   preSaleProjCode: null,

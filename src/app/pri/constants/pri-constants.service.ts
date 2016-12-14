@@ -31,7 +31,8 @@ export class PriConstantsService {
       { label: 'Pre Contact', value: 1 },
       { label: 'Contact', value: 2 },
       { label: 'Inhouse', value: 3 },
-      { label: 'ALL', value: 4 }
+      { label: 'MA', value: 4 },
+      { label: 'ALL', value: 5 }
     ];
 
     this._monitorType = [

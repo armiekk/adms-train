@@ -36,7 +36,7 @@ export class Pri1i010SaveComponent implements OnInit {
   private projectSeachCondition: SearchCondition = {start: 0, size: 15};
   private pritInformation: PritInformation = {};
   private projectListItem: SelectItem[] = [];
-  private selectedProject: PritInformation[] = [];
+  private selectedProject: PritInformation = { projCode: null, projName: null };
   private isShowSearchProject: boolean = false;
 
   constructor(
@@ -85,7 +85,7 @@ export class Pri1i010SaveComponent implements OnInit {
 
     switch (this.state.mode) {
       case 'ADD':
-        this.pritInformation = {};
+        this.pritInformation = { projCode: null, projName: null };
         break;
       case 'EDIT':
         if (this.state.projRef !== null) {
@@ -112,8 +112,9 @@ export class Pri1i010SaveComponent implements OnInit {
   editPritInformation() {
   }
 
-  onSelectProject(event){
-    this.selectedProject.push(event.value);
+  clearSelectProject(event){
+    event.preventDefault();
+    this.selectedProject = { projCode: null, projName: null };
   }
 
   getPritInformationDetail(projRef: number) {
