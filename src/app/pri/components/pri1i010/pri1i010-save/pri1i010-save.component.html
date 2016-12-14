@@ -5,9 +5,9 @@
 		<div class="ui-g">
 			<div class="ui-g-3">ประเภทโครงการ :</div>
 			<div class="ui-g-9 ui-g-nopad">
-				<div *ngFor="let projType of constant.projectType">
+				<div *ngFor="let projType of constant.projectType; let i = index">
 					<div class="ui-g-4">
-						<p-radioButton name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="projectSeachCondition.projType"></p-radioButton>
+						<p-radioButton *ngIf="i < 3" name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="projectSeachCondition.projType"></p-radioButton>
 					</div>
 				</div>
 			</div>
@@ -16,8 +16,10 @@
 		<div class="ui-g">
 			<div class="ui-g-3">รหัสโครงการ :</div>
 			<div class="ui-g-9">
-				<p-multiSelect [options]="projectListItem" defaultLabel="เลือกรหัสโครงการ" overlayVisible="true" [scrollHeight]="'150px'"
-					[(ngModel)]="selectedProject" [disabled]="projectSeachCondition.projType === undefined"></p-multiSelect>
+				<!--<p-multiSelect [options]="projectListItem" defaultLabel="เลือกรหัสโครงการ" overlayVisible="true" [scrollHeight]="'150px'"
+					[(ngModel)]="selectedProject" [disabled]="projectSeachCondition.projType === undefined"></p-multiSelect>-->
+				<p-dropdown [options]="projectListItem" [style]="{'width': '30%'}" [filter]="true" [disabled]="projectSeachCondition.projType === undefined"
+					(onChange)="onSelectProject($event)"></p-dropdown>
 			</div>
 		</div>
 
@@ -90,5 +92,3 @@
 		</div>
 	</div>
 </div>
-
-

@@ -32,16 +32,6 @@ export class Pri1i020Component implements OnInit {
 
   }
 
-  addRowData() {
-    let dummyRow: ProjScope = { edit: false };
-    this.projScopeList = [dummyRow, ...this.projScopeList];
-  }
-
-  addProjScope() {
-    this.projScope.edit = true;
-    this.projScope.scoreDetail = '';
-  }
-
   editProjScope() {
     this.projScope.edit = true;
   }
@@ -63,18 +53,14 @@ export class Pri1i020Component implements OnInit {
     this.projScope.edit = false;
     this.projScope.projScopeRef = 1;
   }
-
-  editRow(index: number) {
-    this.projScopeList[index].edit = true;
+  
+  clearProjScopeDetail() {
+    this.projScope.scoreDetail = '';
   }
 
-  saveEditedRow(projScope: any, index: number) {
-    this.projScopeList.splice(index, projScope);
-    this.projScopeList[index].edit = false;
-  }
-
-  cancelEditedRow(index: number) {
-    this.projScopeList[index].edit = false;
+  deleteProjScope() {
+    if (this.projScope.projScopeRef) {
+    }
   }
 
 }

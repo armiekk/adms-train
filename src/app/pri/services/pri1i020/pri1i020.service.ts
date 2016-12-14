@@ -21,8 +21,11 @@ export const initProjScope: ProjScope = {
 export class Pri1i020Service {
 
   constructor(private priScopeService: PritScopeApi, private http: Http) {
-    this.priScopeService.defaultHeaders.append('Content-Type', 'application/json');
-    this.priScopeService.defaultHeaders.append('Accept', 'application/json');
+    if (!this.priScopeService.defaultHeaders.get('Content-Type') ||
+        !this.priScopeService.defaultHeaders.get('Accept')) {
+      this.priScopeService.defaultHeaders.append('Content-Type', 'application/json');
+      this.priScopeService.defaultHeaders.append('Accept', 'application/json');
+    }
   }
 
 
@@ -49,6 +52,12 @@ export class Pri1i020Service {
         return this.getPritScopeListByProjCode(projCode);
       }
     });
+  }
+
+  deletePritScope(projScopeRef: number): Observable<string> {
+    // return this.priScopeService.removeProjScopeByRef(projScopeRef)
+    //   .map();
+    return;
   }
 
   getMockupPritScopeList(projCode: string): Observable<PritScope[]> {

@@ -19,7 +19,7 @@ import { MessageService } from '../../../../shared/services/message/message.serv
 })
 export class Pri1i010DetailComponent implements OnInit {
 
-  
+
   private pritInformationDetail: PritInformation = initialPritInformaitonDetail;
   private currentPermission: string;
 
@@ -44,6 +44,13 @@ export class Pri1i010DetailComponent implements OnInit {
   getPritInformationDetail(projRef: number) {
     this.priService.getPritInformationDetail(projRef)
       .subscribe((pritInformationDetail: PritInformation) => this.pritInformationDetail = pritInformationDetail);
+  }
+
+  calculateProjDuration(projWarrantyStopDate: Date) {
+    if (this.pritInformationDetail.projStartDate) {
+      this.pritInformationDetail.projDuration =
+        Math.round((projWarrantyStopDate.getTime() - this.pritInformationDetail.projStartDate.getTime()) / (1000 * 60 * 60 * 24));
+    }
   }
 
   savePritInformationDetail() {

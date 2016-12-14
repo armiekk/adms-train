@@ -108,7 +108,7 @@ export class Qad1q010Component implements OnInit {
             this.searchCondition.projName = '';
             this.selectProject = null;
             let site = this.searchCondition.projSiteCode;
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     let projects = projs.filter((proj) => proj.projSiteCode === site);
@@ -118,7 +118,7 @@ export class Qad1q010Component implements OnInit {
                     this.projects.unshift({ label: 'เลือกรหัสโครงการ', value: null });
                 });
         } else {
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     this.projects = projs.map((proj) => {
@@ -143,7 +143,7 @@ export class Qad1q010Component implements OnInit {
             this.isSelectedProject = true;
             if (!this.isSelectedSite) {
                 let projSiteCode = this.selectProject.projSiteCode;
-                this.http.get('app/qad/resources/data/sitesMockData.json')
+                this.http.get('../app/qad/resources/data/sitesMockData.json')
                     .map(res => res.json().data)
                     .subscribe((sites) => {
                         this.selectSites = sites.filter((site) => site.siteCode === projSiteCode);
@@ -177,7 +177,7 @@ export class Qad1q010Component implements OnInit {
     }
 
     searchSite() {
-        this.http.get('app/qad/resources/data/sitesMockData.json')
+        this.http.get('../app/qad/resources/data/sitesMockData.json')
             .map(res => res.json().data)
             .subscribe((sites) => {
                 this.sites = sites.map((site) => {
@@ -394,7 +394,7 @@ export class Qad1q010Component implements OnInit {
     }
 
     search() {
-        this.http.get('app/qad/resources/data/historysMockData.json')
+        this.http.get('../app/qad/resources/data/historysMockData.json')
             .map(res => res.json().data)
             .subscribe((historys: any[]) => {
                 this.historys = historys.filter((history) => history.projCode === this.searchCondition.projCode);
@@ -414,7 +414,7 @@ export class Qad1q010Component implements OnInit {
 
                 if (this.historys.length > 0) {
                     this.selectedTab = 'LOADING';
-                    this.http.get('app/qad/resources/data/qaSchedulesMockData.json')
+                    this.http.get('../app/qad/resources/data/qaSchedulesMockData.json')
                         .map(res => res.json().data)
                         .subscribe((qaSchedules: any[]) => {
                             this.qaSchedulesAll = qaSchedules.filter((qaSchedule) => qaSchedule.projCode === this.searchCondition.projCode);
@@ -433,13 +433,13 @@ export class Qad1q010Component implements OnInit {
                             }
                         });
 
-                    this.http.get('app/qad/resources/data/qaPlansMockData.json')
+                    this.http.get('../app/qad/resources/data/qaPlansMockData.json')
                         .map(res => res.json().data)
                         .subscribe((qaPlans: any[]) => {
                             this.qaPlansAll = qaPlans.filter((qaPlan) => qaPlan.projCode === this.searchCondition.projCode);
                             this.qaPlans = this.qaPlansAll.filter((qaPlan: any) => qaPlan.version === lastVersion);
                             if (this.qaPlans.length === 0) {
-                                this.http.get('app/qad/resources/data/qaActivitiesMockData.json')
+                                this.http.get('../app/qad/resources/data/qaActivitiesMockData.json')
                                     .map(res => res.json().data)
                                     .subscribe((qaActivities: any[]) => {
                                         for (let i = 0; i < qaActivities.length; i++) {

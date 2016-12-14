@@ -1,19 +1,35 @@
 <form #priForm="ngForm">
+
   <div class="ui-g">
     <div class="ui-g-12 ui-sm-12 ui-md-12 ui-lg-12 ui-xl-12">
       <h4><strong>รายละเอียดทั่วไปของโครงการ</strong></h4>
       <hr>
     </div>
+  </div>
+  
+  <div class="ui-g">
+    <div class="ui-g-1"></div>
+    <div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
+      <div class="ui-g-6 ui-md-5 ui-lg-6 ui-xl-6 ui-sm-12">
+        <app-label [value]="'เลขที่สัญญา'" [valid]="projContactNo.valid" [required]="true"></app-label>
+      </div>
+      <div class="ui-g-4 ui-md-12 ui-lg-4 ui-xl-4 ui-sm-12">
+        <input [disabled]="true" type="text" id="projContactNo" pInputText [(ngModel)]="pritInformationDetail.projContactNo" style="width: 100%"
+          maxlength="4" name="projContactNo" #projContactNo="ngModel" placeholder="เลขที่สัญญา" required />
+      </div>
+    </div>
+    <div class="ui-g-1"></div>
+  </div>
+
+  <div class="ui-g">
     <div class="ui-g-1"></div>
     <div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
       <div class="ui-g-6 ui-md-5 ui-lg-6 ui-xl-6 ui-sm-12">
         <app-label [value]="'ปี'" [valid]="projYear.valid" [required]="true"></app-label>
       </div>
       <div class="ui-g-3 ui-md-2 ui-lg-3 ui-xl-3 ui-sm-2">
-        <input [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          type="text" id="projYear" pInputText [(ngModel)]="pritInformationDetail.projYear" style="width: 100%" maxlength="4"
-          name="projYear" #projYear="ngModel" pTooltip="ปี พ.ศ. ต้องเป็นตัวเลข 4 หลัก" placeholder="ปี พ.ศ." tooltipEvent="focus"
-          tooltipPosition="top" required />
+        <input [disabled]="true" type="text" id="projYear" pInputText [(ngModel)]="pritInformationDetail.projYear" style="width: 100%"
+          maxlength="4" name="projYear" #projYear="ngModel" placeholder="ปีโครงการ" required />
       </div>
     </div>
     <div class="ui-g-7 ui-md-12 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
@@ -21,10 +37,8 @@
         <app-label [value]="'หน่วยงานเจ้าของโครงการ'" [valid]="projOrgName.valid" [required]="true"></app-label>
       </div>
       <div class="ui-g-8 ui-md-7 ui-lg-8 ui-xl-8 ui-sm-12">
-        <input [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          type="text" id="projOrgName" pInputText [(ngModel)]="pritInformationDetail.projOrgName" name="projOrgName" style="width: 100%"
-          #projOrgName="ngModel" pTooltip="ระบุหน่วยงานเจ้าของโครงการ" placeholder="หน่วยงานเจ้าของโครงการ" tooltipEvent="focus"
-          required />
+        <input [disabled]="true" type="text" id="projOrgName" pInputText [(ngModel)]="pritInformationDetail.projOrgName" name="projOrgName"
+          style="width: 100%" #projOrgName="ngModel" placeholder="หน่วยงานเจ้าของโครงการ" required />
       </div>
     </div>
     <div class="ui-g-1"></div>
@@ -37,10 +51,9 @@
         <app-label [value]="'วันที่เริ่มสัญญา'" [valid]="projStartDate.valid" [required]="true"></app-label>
       </div>
       <div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-12">
-        <p-calendar [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          [(ngModel)]="pritInformationDetail.projStartDate" name="projStartDate" [inputStyle]="{'width': '80%'}" [locale]="locale.th"
-          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStartDate="ngModel" pTooltip="ระบุวันที่เริ่มสัญญา"
-          placeholder="วันที่เริ่มสัญญา" tooltipPosition="top" dateFormat="dd/mm/yy" [showIcon]="true" required>
+        <p-calendar [disabled]="true" [(ngModel)]="pritInformationDetail.projStartDate" name="projStartDate" [inputStyle]="{'width': '80%'}"
+          [locale]="locale.th" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStartDate="ngModel"
+          placeholder="วันที่เริ่มสัญญา" dateFormat="dd/mm/yy" [showIcon]="true" required>
         </p-calendar>
       </div>
     </div>
@@ -49,25 +62,40 @@
         <app-label [value]="'วันที่สัญญาสิ้นสุด'" [valid]="projStopDate.valid" [required]="true"></app-label>
       </div>
       <div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
-        <p-calendar [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          [(ngModel)]="pritInformationDetail.projStopDate" name="projStopDate" [inputStyle]="{'width': '80%'}" [locale]="locale.th"
-          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStopDate="ngModel" pTooltip="ระบุวันที่สัญญาสิ้นสุด"
+        <p-calendar [disabled]="true" [(ngModel)]="pritInformationDetail.projStopDate" name="projStopDate" [inputStyle]="{'width': '80%'}"
+          [locale]="locale.th" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2016" #projStopDate="ngModel"
           placeholder="วันที่สัญญาสิ้นสุด" dateFormat="dd/mm/yy" [showIcon]="true" required>
         </p-calendar>
       </div>
     </div>
+    <div class="ui-g-1"></div>
+  </div>
+
+  <div class="ui-g">
+    <div class="ui-g-1"></div>
     <div class="ui-g-3 ui-md-12 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
-      <div class="ui-g-8 ui-md-5 ui-lg-8 ui-xl-8 ui-sm-12">
-        <app-label [value]="'ระยะเวลาดำเนินงาน'" [valid]="projDuration.valid" [required]="true"></app-label>
+      <div class="ui-g-6 ui-md-5 ui-lg-6 ui-xl-6 ui-sm-12">
+        <app-label [value]="'วันที่เริ่มต้นประกันโครงการ'" [valid]="projWarrantyStartDate.valid" [required]="true"></app-label>
       </div>
-      <div class="ui-g-3 ui-md-3 ui-lg-3 ui-xl-3 ui-sm-3">
-        <input [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          type="text" id="projDuration" pInputText [(ngModel)]="pritInformationDetail.projDuration" name="projDuration" style="width: 100%"
-          #projDuration="ngModel" pTooltip="ระบุระยะเวลาดำเนินงาน" placeholder="ระยะเวลาดำเนินงาน" tooltipEvent="focus" required
-        />
+      <div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-12">
+        <p-calendar [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
+          [(ngModel)]="pritInformationDetail.projWarrantyStartDate" name="projWarrantyStartDate" [inputStyle]="{'width': '80%'}"
+          [locale]="locale.th" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017" #projWarrantyStartDate="ngModel"
+           placeholder="วันที่เริ่มต้นประกันโครงการ" tooltipPosition="top" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
+        </p-calendar>
       </div>
-      <div class="ui-g-1 ui-md-1 ui-lg-1 ui-xl-1  ui-sm-1">
-        วัน
+    </div>
+    <div class="ui-g-4 ui-md-12 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
+      <div class="ui-g-7 ui-md-5 ui-lg-7 ui-xl-7 ui-sm-12">
+        <app-label [value]="'วันที่สิ้นสุดประกันโครงการ'" [valid]="projWarrantyStopDate.valid" [required]="true"></app-label>
+      </div>
+      <div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12">
+        <p-calendar [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
+          [(ngModel)]="pritInformationDetail.projWarrantyStopDate" name="projWarrantyStopDate" [inputStyle]="{'width': '80%'}"
+          [locale]="locale.th" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2017" #projWarrantyStopDate="ngModel"
+           placeholder="วันที่สิ้นสุดประกันโครงการ" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput"
+          (onSelect)="calculateProjDuration(pritInformationDetail.projWarrantyStopDate)" required>
+        </p-calendar>
       </div>
     </div>
     <div class="ui-g-1"></div>
@@ -77,13 +105,11 @@
     <div class="ui-g-1"></div>
     <div class="ui-g-3 ui-md-3 ui-lg-3 ui-xl-3 ui-sm-12 ui-g-nopad">
       <div class="ui-g-6 ui-md-6 ui-lg-6 ui-xl-6 ui-sm-12">
-        <app-label [value]="'มูลค่าโครงการ'" [valid]="projBudget.valid" [required]="true"></app-label>
+        <app-label [value]="'ระยะเวลาดำเนินงาน'" [valid]="projDuration.valid" [required]="true"></app-label>
       </div>
       <div class="ui-g-5 ui-md-5 ui-lg-5 ui-xl-5 ui-sm-5">
-        <input [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
-          type="text" id="projBudget" pInputText [(ngModel)]="pritInformationDetail.projBudget" style="width: 100%" name="projBudget"
-          #projBudget="ngModel" pTooltip="ระบุมูลค่าโครงการ" placeholder="มูลค่าโครงการ" tooltipEvent="focus" tooltipPosition="top"
-          required />
+        <input [disabled]="true" type="text" id="projDuration" pInputText [(ngModel)]="pritInformationDetail.projDuration" name="projDuration"
+          style="width: 75%" #projDuration="ngModel" placeholder="ระยะเวลาดำเนินงาน" required /> &nbsp;วัน
       </div>
     </div>
     <div class="ui-g-7 ui-md-7 ui-lg-7 ui-xl-7 ui-sm-12 ui-g-nopad">
@@ -109,7 +135,7 @@
       <div class="ui-g-10 ui-g-nopad">
         <div class="ui-g-4 ui-md-4 ui-lg-4 ui-xl-4 ui-sm-12" *ngFor="let status of constant.editProjectStatus">
           <p-radioButton name="projStatus" [value]="status.value" [label]="status.label" [(ngModel)]="pritInformationDetail.projStatus"
-            [disabled]="currentPermission === roleManagement.PG_PERMISSION || currentPermission === roleManagement.PA_PERMISSION"
+            [disabled]="true"
             required>
           </p-radioButton>
         </div>

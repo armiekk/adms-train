@@ -9,6 +9,7 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "app/qad/resources/data",
         "favicon.ico"
       ],
       "index": "index.html",

@@ -36,7 +36,7 @@ export class Pri1i010SaveComponent implements OnInit {
   private projectSeachCondition: SearchCondition = {start: 0, size: 15};
   private pritInformation: PritInformation = {};
   private projectListItem: SelectItem[] = [];
-  private selectedProject: PritInformation;
+  private selectedProject: PritInformation[] = [];
   private isShowSearchProject: boolean = false;
 
   constructor(
@@ -112,6 +112,10 @@ export class Pri1i010SaveComponent implements OnInit {
   editPritInformation() {
   }
 
+  onSelectProject(event){
+    this.selectedProject.push(event.value);
+  }
+
   getPritInformationDetail(projRef: number) {
     this.priService.getPritInformationDetail(projRef)
       .subscribe((pritInformation: PritInformation) => this.pritInformation = pritInformation);
@@ -174,11 +178,15 @@ export class Pri1i010SaveComponent implements OnInit {
   }
 
   submitSelectProject(){
-    
+    this.pritInformation.projCode = this.selectedProject[0].projCode;
+    this.pritInformation.projName = this.selectedProject[0].projName;
+    this.isShowSearchProject = !this.isShowSearchProject;
   }
 
   cancelSelectProject(){
-    
+    this.pritInformation.projCode = null;
+    this.pritInformation.projName = null;
+    this.isShowSearchProject = !this.isShowSearchProject;
   }
 
   private get selectedTab() {

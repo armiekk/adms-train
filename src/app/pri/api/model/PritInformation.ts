@@ -27,6 +27,7 @@ import * as models from './models';
 
 export interface PritInformation {
     
+    projContactNo?: string;
 
     createBy?: string;
 
@@ -51,6 +52,10 @@ export interface PritInformation {
     projStartDate?: Date;
 
     projStopDate?: Date;
+
+    projWarrantyStartDate?: Date;
+
+    projWarrantyStopDate?: Date;
 
     projBudget?: number;
 

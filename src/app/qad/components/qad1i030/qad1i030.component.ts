@@ -117,7 +117,7 @@ export class Qad1i030Component implements OnInit {
             this.searchCondition.projName = '';
             this.selectProject = null;
             let site = this.searchCondition.projSiteCode;
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     let projects = projs.filter((proj) => proj.projSiteCode === site);
@@ -127,7 +127,7 @@ export class Qad1i030Component implements OnInit {
                     this.projects.unshift({ label: 'เลือกรหัสโครงการ', value: null });
                 });
         } else {
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     this.projects = projs.map((proj) => {
@@ -152,7 +152,7 @@ export class Qad1i030Component implements OnInit {
             this.isSelectedProject = true;
             if (!this.isSelectedSite) {
                 let projSiteCode = this.selectProject.projSiteCode;
-                this.http.get('app/qad/resources/data/sitesMockData.json')
+                this.http.get('../app/qad/resources/data/sitesMockData.json')
                     .map(res => res.json().data)
                     .subscribe((sites) => {
                         this.selectSites = sites.filter((site) => site.siteCode === projSiteCode);
@@ -187,7 +187,7 @@ export class Qad1i030Component implements OnInit {
     }
 
     searchSite() {
-        this.http.get('app/qad/resources/data/sitesMockData.json')
+        this.http.get('../app/qad/resources/data/sitesMockData.json')
             .map(res => res.json().data)
             .subscribe((sites) => {
                 this.sites = sites.map((site) => {
@@ -236,7 +236,7 @@ export class Qad1i030Component implements OnInit {
         this.isSelectedAdditionProject = false;
         if (this.isSelectedAdditionSite) {
             let site = this.searchAdditionCondition.projSiteCode;
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     let projects = projs.filter((proj) => proj.projSiteCode === site);
@@ -245,7 +245,7 @@ export class Qad1i030Component implements OnInit {
                     })
                 });
         } else {
-            this.http.get('app/qad/resources/data/projectsMockData.json')
+            this.http.get('../app/qad/resources/data/projectsMockData.json')
                 .map(res => res.json().data)
                 .subscribe((projs) => {
                     this.additionProjects = projs.map((proj) => {
@@ -290,7 +290,7 @@ export class Qad1i030Component implements OnInit {
     }
 
     searchAdditionSite() {
-        this.http.get('app/qad/resources/data/sitesMockData.json')
+        this.http.get('../app/qad/resources/data/sitesMockData.json')
             .map(res => res.json().data)
             .subscribe((sites) => {
                 this.additionSites = sites.map((site) => {
@@ -505,7 +505,7 @@ export class Qad1i030Component implements OnInit {
 
     search() {
         if (this.isSelectedProject) {
-            this.http.get('app/qad/resources/data/assignQasMockData.json')
+            this.http.get('../app/qad/resources/data/assignQasMockData.json')
                 .map(res => res.json().data)
                 .subscribe((assignQas: any[]) => {
                     let projCode = this.searchCondition.projCode;
@@ -550,7 +550,7 @@ export class Qad1i030Component implements OnInit {
     searchAddition() {
         if (this.isSelectedAdditionProject) {
             let findAssignQas: any[] = [];
-            this.http.get('app/qad/resources/data/assignQasMockData.json')
+            this.http.get('../app/qad/resources/data/assignQasMockData.json')
                 .map(res => res.json().data)
                 .subscribe((assignQas: any[]) => {
                     let orderSeq = 1;
