@@ -85,7 +85,7 @@
                                 Document Type :
                             </div>
                             <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-12">
-                                <p-dropdown [options]="qadConstant.documentCMMIType" id="documentType" [(ngModel)]="searchCondition.documentType" [style]="{'width': '30%'}"></p-dropdown>
+                                <p-dropdown [options]="qadConstant.documentCMMIType" id="documentType" [(ngModel)]="checklistDetail.documentType" [style]="{'width': '30%'}"></p-dropdown>
                             </div>
                         </div>
                     </div>
@@ -96,13 +96,13 @@
                                 System Code :
                             </div>
                             <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
-                                <p-dropdown [options]="systemCodeListItem" [style]="{'width': '90%'}" [filter]="true" [disabled]="pritInformation.projCode === undefined" [(ngModel)]="searchCondition.systemCode">
+                                <p-dropdown [options]="systemCodeListItem" [style]="{'width': '90%'}" [filter]="true" [disabled]="pritInformation.projCode === undefined" [(ngModel)]="checklistDetail.systemCode">
                                     <template let-system>
                                         <div class="ui-g">
-                                            <div class="ui-g-6">
+                                            <div class="ui-g-4">
                                                 <p>{{ system.label }}</p>
                                             </div>
-                                            <div class="ui-g-6">
+                                            <div class="ui-g-8">
                                                 <p>{{ system.value.systemName }}</p>
                                             </div>
                                         </div>
@@ -118,7 +118,7 @@
                                 Audit Date :
                             </div>
                             <div class="ui-g-3 ui-lg-3 ui-xl-2 ui-sm-12">
-                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
+                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" [(ngModel)]="checklistDetail.auditStartDate" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
                                 </p-calendar>
                             </div>
                             <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
@@ -126,12 +126,12 @@
                                     <span style="float: right">Audit Type :</span>
                                 </div>
                                 <div class="ui-g-7 ui-lg-7 ui-xl-7">
-                                    <p-dropdown [options]="" [style]="{'width': '70%'}"></p-dropdown>
+                                    <p-dropdown [options]="qadConstant.workCategory" [(ngModel)]="checklistDetail.auditType" [style]="{'width': '70%'}"></p-dropdown>
                                 </div>
                             </div>
                             <div class="ui-g-2 ui-lg-2 ui-xl-2">
                                 Round :
-                                <input type="text" pInputText id="round" style="width: 25px">
+                                <input type="text" pInputText id="round" [(ngModel)]="checklistDetail.auditRound" style="width: 25px">
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                                 Audit End Date :
                             </div>
                             <div class="ui-g-3 ui-lg-3 ui-xl-2 ui-sm-12">
-                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
+                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" [(ngModel)]="checklistDetail.auditEndDate" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
                                 </p-calendar>
                             </div>
                         </div>

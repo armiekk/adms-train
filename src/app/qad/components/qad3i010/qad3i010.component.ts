@@ -7,7 +7,7 @@ import {
   ProjInfomation,
   SystemCode,
   AuditDetail,
-  ChecklistSearchCondition,
+  ChecklistDetail,
 } from '../../services/qad3i010/qad3i010.service';
 
 import {
@@ -40,7 +40,7 @@ export class Qad3i010Component implements OnInit {
 
   private systemCodeListItem: SelectItem[] = [];
 
-  private searchCondition: ChecklistSearchCondition = {};
+  private checklistDetail: ChecklistDetail = {};
   private auditDetail: AuditDetail[] = [];
 
   constructor(
@@ -55,8 +55,8 @@ export class Qad3i010Component implements OnInit {
   ngOnInit() {
     this.selectedTabProgram = this.router.url;
     this.programTab = [
-      { label: 'Checklist Search', value: '/qad/Qad3i010' },
-      { label: 'QA Checklist', value: '' },
+      { label: 'Checklist Search', value: '' },
+      { label: 'QA Checklist', value: '/qad/Qad3i010' },
     ];
 
     this.auditDetail = [
@@ -99,7 +99,7 @@ export class Qad3i010Component implements OnInit {
     this.qad3i010Service.getSystemCode(this.state.projCode)
       .subscribe((response: SystemCode[]) => {
         let systemList = response.map((systemCode: SystemCode) => {
-          return { label: systemCode.systemName, value: systemCode };
+          return { label: systemCode.systemAbbr, value: systemCode };
         });
         this.systemCodeListItem = [{ label: '', value: {} }, ...systemList];
       });

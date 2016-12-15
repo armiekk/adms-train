@@ -8,7 +8,7 @@ export interface AuditDetail {
   auditStatus?: string;
 }
 
-export interface ChecklistSearchCondition {
+export interface ChecklistDetail {
   documentType?: string;
   systemCode?: string;
   auditStartDate?: Date;
@@ -30,6 +30,15 @@ export interface SystemCode {
   systemName: string;
 }
 
+export interface QaName {
+  thainame: string;
+  depcde: string;
+  jobbandid: string;
+  jobbandname: string;
+  emplev: string;
+  jobgrade: number;
+}
+
 @Injectable()
 export class Qad3i010Service {
 
@@ -46,6 +55,11 @@ export class Qad3i010Service {
       .map((systemCodeList: SystemCode[]) => 
         systemCodeList.filter((systemCode: SystemCode) => systemCode.projCode === projCode)
       );
+  }
+
+  getQaName(): Observable<QaName[]> {
+    return this.http.get('../app/qad/resources/data/qad3i010/qa_name.json')
+      .map((response: Response) => response.json());
   }
 
 }
