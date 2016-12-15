@@ -1,0 +1,56 @@
+[{
+        "systemAbbr": "QAD1",
+        "systemName": "QA PLAN",
+        "projCode": "D14-5026"
+    },
+    {
+        "systemAbbr": "QAD2",
+        "systemName": "CMMI DOCUMENT",
+        "projCode": "D14-5026"
+    },
+    {
+        "systemAbbr": "QAD3",
+        "systemName": "QA CHECKLIST",
+        "projCode": "D14-5026"
+    },
+    {
+        "systemAbbr": "QAD4",
+        "systemName": "Audit PROGRAMS",
+        "projCode": "D14-5026"
+    },
+    {
+        "systemAbbr": "QAD5",
+        "systemName": "QA REPORT",
+        "projCode": "D14-5026"
+    },
+    {
+        "systemAbbr": "CER",
+        "systemName": "ด้านประกาศนียบัตร",
+        "projCode": "ID16-0007"
+    },
+    {
+        "systemAbbr": "MAR",
+        "systemName": "ด้านจดทะเบียนผู้ประกอบการพาณิชยนาวี",
+        "projCode": "ID16-0007"
+    },
+    {
+        "systemAbbr": "POS",
+        "systemName": "ด้านคนประจำเรือ",
+        "projCode": "ID16-0007"
+    },
+    {
+        "systemAbbr": "REG",
+        "systemName": "ด้านทะเบียนเรือ",
+        "projCode": "ID16-0007"
+    },
+    {
+        "systemAbbr": "RET",
+        "systemName": "ระบบการลงทะเบียน",
+        "projCode": "ID16-0007"
+    },
+    {
+        "systemAbbr": "SSD",
+        "systemName": "ด้านตรวจเรือ",
+        "projCode": "ID16-0007"
+    }
+]

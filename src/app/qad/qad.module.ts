@@ -19,6 +19,11 @@ import { Qad2q010Component } from './components/qad2q010/qad2q010.component';
 import { Qad0i030Component } from './components/qad0i030/qad0i030.component';
 import { Qad0i030SaveComponent } from './components/qad0i030-save/qad0i030-save.component';
 import { Qad0i030TableComponent } from './components/qad0i030-table/qad0i030-table.component';
+import { Qad3i010Component } from './components/qad3i010/qad3i010.component';
+
+// services
+import { QadConstantsService } from './constants/qad-constants.service';
+import { Qad3i010Service } from './services/qad3i010/qad3i010.service';
 
 @NgModule({
   imports: [
@@ -26,6 +31,7 @@ import { Qad0i030TableComponent } from './components/qad0i030-table/qad0i030-tab
     QadRoutingModule,
     AppSharedModule
   ],
-  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component, Qad2i010Component, Qad1TabContentComponent, HistoryStatusPipe, Qad2i010TableComponent, Qad2q010Component, Qad0i030Component, Qad0i030SaveComponent, Qad0i030TableComponent]
+  declarations: [QadComponent, QadDashboardContainerComponent, Qad1q010Component, Qad1i010Component, Qad1i020Component, Qad1i030Component, Qad2i010Component, Qad1TabContentComponent, HistoryStatusPipe, Qad2i010TableComponent, Qad2q010Component, Qad0i030Component, Qad0i030SaveComponent, Qad0i030TableComponent, Qad3i010Component],
+  providers: [QadConstantsService, Qad3i010Service]
 })
 export class QadModule { }

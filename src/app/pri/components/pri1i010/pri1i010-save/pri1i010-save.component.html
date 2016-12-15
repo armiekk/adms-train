@@ -2,56 +2,49 @@
 <p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" responsive="true"
 	[modal]="true" [style]="{'overflow-y': 'visible'}">
 	<div class="ui-widget-content" style="width: 100%">
-		<div class="ui-g">
-			<div class="ui-g-3">ประเภทโครงการ :</div>
-			<div class="ui-g-9 ui-g-nopad">
-				<div *ngFor="let projType of constant.projectType; let i = index">
-					<div class="ui-g-4">
-						<p-radioButton *ngIf="i < 4" name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="projectSeachCondition.projType"></p-radioButton>
-					</div>
-				</div>
+<div class="ui-g">
+	<div class="ui-g-3">ประเภทโครงการ :</div>
+	<div class="ui-g-9 ui-g-nopad">
+		<div *ngFor="let projType of constant.projectType; let i = index">
+			<div class="ui-g-4">
+				<p-radioButton *ngIf="i < 4" name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="projectSeachCondition.projType"></p-radioButton>
 			</div>
 		</div>
-
-		<div class="ui-g">
-			<div class="ui-g-3">รหัสโครงการ :</div>
-			<div class="ui-g-9">
-				<p-dropdown [options]="projectListItem" [style]="{'width': '30%'}" [filter]="true" [disabled]="projectSeachCondition.projType === undefined"
-					[(ngModel)]="selectedProject" *ngIf="selectedProject.projCode === null"></p-dropdown>
-					<div *ngIf="selectedProject.projCode !== null">
-						<span>
-							{{ selectedProject.projCode + ' - ' + selectedProject.projName }}
-						</span>&nbsp;&nbsp;&nbsp;
-						<a (click)="clearSelectProject($event);">แก้ไข&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true"></i></a>
-					</div>
-			</div>
-		</div>
-
-		<!--<div class="ui-g">
-			<div class="ui-g-12">
-				<p-dataTable [value]="selectedProject" [rows]="5" [responsive]="true" scrollable="true" scrollHeight="150px" emptyMessage="ไม่ได้เลือกโครงการ"
-					[style]="{'height': '210px'}">
-					<header>
-						โครงการ
-					</header>
-					<p-column [style]="{'width': '20%'}" field="projCode" header="รหัสโครงการ"></p-column>
-					<p-column [style]="{'width': '80%'}" field="projName" header="ชื่อโครงการ"></p-column>
-				</p-dataTable>
-			</div>
-		</div>-->
 	</div>
-	<footer>
-		<div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
-			<button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSelectProject();"></button>
-			<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
-		</div>
-	</footer>
+</div>
+
+<div class="ui-g">
+	<div class="ui-g-3">รหัสโครงการ :</div>
+	<div class="ui-g-9">
+		<p-dropdown [options]="projectListItem" [style]="{'width': '90%'}" [filter]="true" [disabled]="projectSeachCondition.projType === undefined"
+			[(ngModel)]="selectedProject" *ngIf="selectedProject === null">
+			<template let-project>
+				<div class="ui-helper-clearfix" style="position: relative;height: 25px;">
+					<span>{{ project.label }}</span>-
+					<span>{{ project.value.projName }}</span>
+				</div>
+			</template>
+		</p-dropdown>
+		<div *ngIf="selectedProject !== null">
+			<span>
+				{{ selectedProject.projCode }}
+			</span>&nbsp;&nbsp;&nbsp;
+			<a (click)="clearSelectProject($event);">แก้ไข&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true"></i></a>
+     	</div>
+	</div>
+</div>
+</div>
+<footer>
+	<div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+<button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSelectProject();"></button>
+<button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
+</div>
+</footer>
 </p-dialog>
 
 <!--<app-breadcrumb></app-breadcrumb>-->
 <div class="content-container">
 	<p-fieldset legend="บันทึกข้อมูลรายละเอียดโครงการ">
-
 		<div class="ui-g">
 			<div class="ui-g-1"></div>
 			<div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-md-12 ui-g-nopad">
@@ -60,8 +53,7 @@
 				</div>
 				<div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-12 ui-g-nopad">
 					<div class="ui-g-7 ui-lg-7 ui-xl-5 ui-sm-6 ui-md-4">
-						<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true"
-						/>
+						<input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
 					</div>
 					<div class="ui-g-2 ui-lg-2 ui-xl-2 ui-sm-2">
 						<button type="button" pButton icon="fa fa-search" style="width: 100%" (click)="searchProject()" *ngIf="state.mode === 'ADD'"></button>
@@ -73,26 +65,24 @@
 					ชื่อโครงการ :
 				</div>
 				<div class="ui-g-8 ui-lg-8 ui-xl-10 ui-sm-12">
-					<input type="text" id="projName" pInputText [(ngModel)]="pritInformation.projName" name="projName" style="width: 100%" [readonly]="true"
-					/>
+					<input type="text" id="projName" pInputText [(ngModel)]="pritInformation.projName" name="projName" style="width: 100%" [readonly]="true" />
 				</div>
 			</div>
 			<div class="ui-g-1"></div>
 		</div>
-
 	</p-fieldset>
 
-	<br>
-	<div class="ui-g">
-		<div class="ui-g-12 ui-g-nopad">
-			<app-adms-tab-manager [menuData]="tabMenuItem"></app-adms-tab-manager>
-			<div class="ui-widget-content">
-				<div class="ui-g">
-					<div class="ui-g-12">
-						<app-pri-tab-content [componentData]="selectedTab"></app-pri-tab-content>
-					</div>
+<br>
+<div class="ui-g">
+	<div class="ui-g-12 ui-g-nopad">
+		<app-adms-tab-manager [menuData]="tabMenuItem"></app-adms-tab-manager>
+		<div class="ui-widget-content">
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<app-pri-tab-content [componentData]="selectedTab"></app-pri-tab-content>
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

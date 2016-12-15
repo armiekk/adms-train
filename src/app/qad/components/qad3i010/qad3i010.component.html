@@ -1,0 +1,242 @@
+<!--projCode lov-->
+<p-dialog header="ค้นหาโครงการ" [(visible)]="isShowSearchProject" [resizable]="false" dragable="false" width="700" responsive="true" [modal]="true" [style]="{'overflow-y': 'visible'}">
+    <div class="ui-widget-content" style="width: 100%">
+        <div class="ui-g">
+            <div class="ui-g-3">ประเภทโครงการ :</div>
+            <div class="ui-g-9 ui-g-nopad">
+                <div *ngFor="let projType of admsConstant.projectType; let i = index">
+                    <div class="ui-g-4">
+                        <p-radioButton *ngIf="i < 4" name="projType" [value]="projType.value" [label]="projType.label" [(ngModel)]="projectSeachCondition.projType"></p-radioButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-3">รหัสโครงการ :</div>
+            <div class="ui-g-9">
+                <p-dropdown [options]="projectListItem" [style]="{'width': '90%'}" [filter]="true" [disabled]="projectSeachCondition.projType === undefined" [(ngModel)]="selectedProject" *ngIf="selectedProject === null">
+                    <template let-project>
+				        <div class="ui-g">
+                            <div class="ui-g-3">
+                                <p>{{ project.label }}</p>
+                            </div>
+                            <div class="ui-g-9">
+                                <p>{{ project.value.projName }}</p>
+                            </div>
+                        </div>
+			        </template>
+                </p-dropdown>
+                <div *ngIf="selectedProject !== null">
+                    <span>
+				{{ selectedProject.projCode }}
+			</span>&nbsp;&nbsp;&nbsp;
+                    <a (click)="clearSelectProject($event)">แก้ไข&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSelectProject();"></button>
+            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
+        </div>
+    </footer>
+</p-dialog>
+
+<div class="content-container">
+
+    <!--select tab program-->
+    <div class="ui-g">
+        <div class="ui-g-12 ui-xl-12 ui-lg-12 ui-md-12 ui-sm-12 ui-g-nopad">
+            <div style="float: right;">
+                <p-selectButton [options]="programTab" [(ngModel)]="selectedTabProgram" (onChange)="onTabProgramChange()"></p-selectButton>
+            </div>
+        </div>
+    </div>
+
+    <!--QA checklist fieldset-->
+    <div class="ui-g">
+        <div class="ui-g-9 ui-lg-7">
+            <p-fieldset legend="QA Checklist">
+                <div style="min-height: 320px">
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                Project Code :
+                            </div>
+                            <div class="ui-g-3 ui-lg-3 ui-xl-2 ui-sm-12 ui-g-nopad">
+                                <div class="ui-g-8 ui-lg-8 ui-xl-8 ui-sm-6 ui-md-4">
+                                    <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
+                                </div>
+                                <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-2">
+                                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchProject()"></button>
+                                </div>
+                            </div>
+                            <div class="ui-g-6 ui-lg-6 ui-xl-7 ui-sm-12">
+                                <input type="text" id="projName" pInputText [(ngModel)]="pritInformation.projName" name="projName" style="width: 100%" [readonly]="true" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                Document Type :
+                            </div>
+                            <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-12">
+                                <p-dropdown [options]="qadConstant.documentCMMIType" id="documentType" [(ngModel)]="searchCondition.documentType" [style]="{'width': '30%'}"></p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                System Code :
+                            </div>
+                            <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12">
+                                <p-dropdown [options]="systemCodeListItem" [style]="{'width': '90%'}" [filter]="true" [disabled]="pritInformation.projCode === undefined" [(ngModel)]="searchCondition.systemCode">
+                                    <template let-system>
+                                        <div class="ui-g">
+                                            <div class="ui-g-6">
+                                                <p>{{ system.label }}</p>
+                                            </div>
+                                            <div class="ui-g-6">
+                                                <p>{{ system.value.systemName }}</p>
+                                            </div>
+                                        </div>
+			                        </template>
+                                </p-dropdown>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                Audit Date :
+                            </div>
+                            <div class="ui-g-3 ui-lg-3 ui-xl-2 ui-sm-12">
+                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
+                                </p-calendar>
+                            </div>
+                            <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
+                                <div class="ui-g-5 ui-lg-5 ui-xl-5">
+                                    <span style="float: right">Audit Type :</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-xl-7">
+                                    <p-dropdown [options]="" [style]="{'width': '70%'}"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="ui-g-2 ui-lg-2 ui-xl-2">
+                                Round :
+                                <input type="text" pInputText id="round" style="width: 25px">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                Audit End Date :
+                            </div>
+                            <div class="ui-g-3 ui-lg-3 ui-xl-2 ui-sm-12">
+                                <p-calendar [inputStyle]="{'width': '70%'}" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2026" placeholder="" dateFormat="dd/mm/yy" [showIcon]="true" readonlyInput="readonlyInput" required>
+                                </p-calendar>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-lg-12 ui-xl-12 ui-sm-12 ui-md-12 ui-g-nopad">
+                            <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-12">
+                                QA Name :
+                            </div>
+                            <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
+                                <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-6 ui-md-9">
+                                    <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
+                                </div>
+                                <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-3">
+                                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchProject()"></button>
+                                </div>
+                            </div>
+                            <div class="ui-g-5 ui-lg-5 ui-xl-5 ui-g-nopad">
+                                <div class="ui-g-5 ui-lg-5 ui-xl-4 ui-sm-12">
+                                    <span style="float: right">Responsible :</span>
+                                </div>
+                                <div class="ui-g-7 ui-lg-7 ui-xl-8 ui-sm-12 ui-g-nopad">
+                                    <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-6 ui-md-9">
+                                        <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
+                                    </div>
+                                    <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-3">
+                                        <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchProject()"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="ui-g">
+                        <div class="ui-g-12 ui-g-nopad">
+                            <div style="float: right">
+                                <button type="button" pButton label="Save Draft" icon="fa fa-clipboard"></button>
+                                <button type="button" pButton label="บันทึกข้อมูล" icon="fa fa-floppy-o"></button>
+                                <button type="button" pButton label="ยกเลิก" icon="fa fa-close"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </p-fieldset>
+        </div>
+        <div class="ui-g-3 ui-lg-5">
+            <p-fieldset legend="Audit Details">
+                <div style="min-height: 320px">
+                    <div class="ui-g">
+                        <div class="ui-g-12">
+                            <p-dataTable [value]="auditDetail" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                                <p-column header="Rd.">
+                                    <template pTemplate let-i="rowIndex" type="body">
+                            {{i+1}}
+                          </template>
+                                </p-column>
+                                <p-column header="Audit Date">
+                                    <template pTemplate let-data="rowData" type="body">
+                                    {{ data.auditDate | date }}
+                                  </template>
+                                </p-column>
+                                <p-column field="auditType" header="Type"></p-column>
+                                <p-column field="auditStatus" header="Status"></p-column>
+                            </p-dataTable>
+                        </div>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+    </div>
+
+    <div class="ui-g">
+        <div class="ui-g-12 ui-g-nopad">
+            <p-fieldset legend="Checklist Phase">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-fieldset legend="Requirement" toggleable="true"></p-fieldset>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-fieldset legend="System Design" toggleable="true"></p-fieldset>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p-fieldset legend="Coding & Testing" toggleable="true"></p-fieldset>
+                    </div>
+                </div>
+            </p-fieldset>
+        </div>
+    </div>
+
+</div>

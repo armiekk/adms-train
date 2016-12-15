@@ -8,6 +8,7 @@ import { Qad1i030Component } from './components/qad1i030/qad1i030.component';
 import { Qad2i010Component } from './components/qad2i010/qad2i010.component';
 import { Qad2q010Component } from './components/qad2q010/qad2q010.component';
 import { Qad0i030Component } from './components/qad0i030/qad0i030.component';
+import { Qad3i010Component } from './components/qad3i010/qad3i010.component';
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
             { path: 'Qad1i030', component: Qad1i030Component },
             { path: 'Qad2i010', component: Qad2i010Component },
             { path: 'Qad2q010', component: Qad2q010Component },
-            { path: 'QAD0I030', component: Qad0i030Component }
+            { path: 'QAD0I030', component: Qad0i030Component },
+            { path: 'Qad3i010', component: Qad3i010Component },
         ]
     },
 ];

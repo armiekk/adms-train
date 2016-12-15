@@ -9,8 +9,12 @@ import {
     TooltipModule, BreadcrumbModule, InplaceModule, InputTextareaModule, TreeTableModule, SplitButtonModule, 
     FileUploadModule, MultiSelectModule, TabMenuModule, EditorModule
 } from 'primeng/primeng';
+import { PritInformationApi } from '../pri/api/api/PritInformationApi';
 import { ThaiCalendarService } from './services/thai-calendar/thai-calendar.service';
 import { MessageService } from './services/message/message.service';
+import { AdmsConstantService } from './services/adms-constant/adms-constant.service';
+import { AdmsProjectService } from './services/adms-project/adms-project.service';
+
 import { TemplateComponent } from './components/template/template.component';
 import { UserContainerComponent } from './components/user-container/user-container.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -38,7 +42,7 @@ import { LoadingComponent } from './components/loading/loading.component';
         FieldsetModule, InputTextModule, PanelModule, AccordionModule, SharedModule, BreadcrumbModule,
         ButtonModule, TabMenuModule, DropdownModule
     ],
-    providers: [ThaiCalendarService, MessageService],
+    providers: [ThaiCalendarService, MessageService, PritInformationApi, AdmsConstantService, AdmsProjectService],
     exports: [
         CommonModule, FormsModule, 
         FieldsetModule, InputTextModule, RadioButtonModule, SelectButtonModule, ButtonModule, DataTableModule,

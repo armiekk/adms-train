@@ -33,10 +33,10 @@ export class Pri1i010SaveComponent implements OnInit {
 
   private _selectedTab: any = Pri1i010DetailComponent;
   private tabMenuItem: MenuItem[];
-  private projectSeachCondition: SearchCondition = {start: 0, size: 15};
+  private projectSeachCondition: SearchCondition = { start: 0, size: 15 };
   private pritInformation: PritInformation = {};
   private projectListItem: SelectItem[] = [];
-  private selectedProject: PritInformation = { projCode: null, projName: null };
+  private selectedProject: PritInformation = null;
   private isShowSearchProject: boolean = false;
 
   constructor(
@@ -49,6 +49,8 @@ export class Pri1i010SaveComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+
 
     switch (this.state.mode) {
       case 'ADD':
@@ -112,9 +114,9 @@ export class Pri1i010SaveComponent implements OnInit {
   editPritInformation() {
   }
 
-  clearSelectProject(event){
+  clearSelectProject(event) {
     event.preventDefault();
-    this.selectedProject = { projCode: null, projName: null };
+    this.selectedProject = null;
   }
 
   getPritInformationDetail(projRef: number) {
@@ -137,9 +139,10 @@ export class Pri1i010SaveComponent implements OnInit {
     this.isShowSearchProject = !this.isShowSearchProject;
     if (this.projectListItem.length === 0) {
       this.priService.getPritInformationByProjCode(this.projectSeachCondition).subscribe((response: PritInformation[]) => {
-        this.projectListItem = response.map((pritInformation: PritInformation) => {
+        let projList = response.map((pritInformation: PritInformation) => {
           return { label: pritInformation.projCode, value: pritInformation };
         });
+        this.projectListItem = [ { label: '', value: {} }, ...projList];
       });
     }
   }
@@ -175,16 +178,16 @@ export class Pri1i010SaveComponent implements OnInit {
       this._selectedTab = Pri1i140Component;
     } else if (tabLabel === 'Project Information Effort') {
       this._selectedTab = Pri1i050Component;
-    }  
+    }
   }
 
-  submitSelectProject(){
-    this.pritInformation.projCode = this.selectedProject[0].projCode;
-    this.pritInformation.projName = this.selectedProject[0].projName;
+  submitSelectProject() {
+    this.pritInformation.projCode = this.selectedProject.projCode;
+    this.pritInformation.projName = this.selectedProject.projName;
     this.isShowSearchProject = !this.isShowSearchProject;
   }
 
-  cancelSelectProject(){
+  cancelSelectProject() {
     this.pritInformation.projCode = null;
     this.pritInformation.projName = null;
     this.isShowSearchProject = !this.isShowSearchProject;
