@@ -8,6 +8,9 @@ import {
   SystemCode,
   AuditDetail,
   ChecklistDetail,
+  Employee,
+  QaNameCondition,
+  ResponsibleCondition
 } from '../../services/qad3i010/qad3i010.service';
 
 import {
@@ -32,16 +35,30 @@ export class Qad3i010Component implements OnInit {
   private programTab: SelectItem[] = [];
   private selectedTabProgram: string;
 
+  // Project Detail
   private pritInformation: PritInformation = {};
   private projectSeachCondition: SearchCondition = { start: 0, size: 15 };
   private projectListItem: SelectItem[] = [];
   private selectedProject: PritInformation = null;
   private isShowSearchProject: boolean = false;
 
-  private systemCodeListItem: SelectItem[] = [];
 
+  // Checklist Detail
+  private systemCodeListItem: SelectItem[] = [];
   private checklistDetail: ChecklistDetail = {};
   private auditDetail: AuditDetail[] = [];
+
+  // QA Name
+  private isShowSearchQaName: boolean = false;
+  private qaNameList: Employee[] = [];
+  private qaNameSearchCondition: QaNameCondition = {};
+  private selectedQaName: Employee;
+
+  // Responsible
+  private isShowSearchResponsible: boolean = false;
+  private responsibleList: Employee[] = [];
+  private responsibleSearchCondition: ResponsibleCondition = {};
+  private selectedResponsible: Employee;
 
   constructor(
     private router: Router,
@@ -92,7 +109,7 @@ export class Qad3i010Component implements OnInit {
       .subscribe((response: SystemCode[]) => console.log(response));
   }
 
-  submitSelectProject() {
+  submitSearchProject() {
     this.state.projCode = this.selectedProject.projCode;
     this.pritInformation.projCode = this.selectedProject.projCode;
     this.pritInformation.projName = this.selectedProject.projName;
@@ -106,15 +123,59 @@ export class Qad3i010Component implements OnInit {
     this.isShowSearchProject = !this.isShowSearchProject;
   }
 
-  cancelSelectProject() {
+  cancelSearchProject() {
     this.pritInformation.projCode = null;
     this.pritInformation.projName = null;
     this.isShowSearchProject = !this.isShowSearchProject;
   }
 
-  clearSelectProject(event) {
+  clearSearchProject(event) {
     event.preventDefault();
     this.selectedProject = null;
+  }
+
+  showSearchQaNameDialog(){
+    this.isShowSearchQaName = !this.isShowSearchQaName;
+    this.qaNameSearchCondition = {};
+    this.qaNameList = [];
+  }
+
+  searchQaName(){
+    this.qad3i010Service.getQaNameByCondition(this.qaNameSearchCondition)
+      .subscribe((response: Employee[]) => this.qaNameList = response);
+  }
+
+  submitSearchQaName(){
+    this.checklistDetail.qaName = this.selectedQaName.thainame;
+    this.isShowSearchQaName = !this.isShowSearchQaName;
+  }
+
+  cancelSearchQaName(){
+    this.selectedQaName = null;
+    this.qaNameList = [];
+    this.isShowSearchQaName = !this.isShowSearchQaName;
+  }
+
+  showSearchResponsibleDialog(){
+    this.isShowSearchResponsible = !this.isShowSearchResponsible;
+    this.responsibleSearchCondition = {};
+    this.responsibleList = [];
+  }
+
+  searchResponsible(){
+    this.qad3i010Service.getResponsibleByCondition(this.responsibleSearchCondition)
+      .subscribe((response: Employee[]) => this.responsibleList = response);
+  }
+
+  submitSearchResponsible(){
+    this.checklistDetail.responsible = this.selectedResponsible.thainame;
+    this.isShowSearchResponsible = !this.isShowSearchResponsible;
+  }
+
+  cancelSearchResponsible(){
+    this.selectedResponsible = null;
+    this.responsibleList = [];
+    this.isShowSearchResponsible = !this.isShowSearchResponsible;
   }
 
 }

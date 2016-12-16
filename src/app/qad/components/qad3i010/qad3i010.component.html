@@ -31,15 +31,94 @@
                     <span>
 				{{ selectedProject.projCode }}
 			</span>&nbsp;&nbsp;&nbsp;
-                    <a (click)="clearSelectProject($event)">แก้ไข&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a (click)="clearSearchProject($event)">แก้ไข&nbsp;&nbsp;<i class="fa fa-pencil" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </div>
     <footer>
         <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
-            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSelectProject();"></button>
-            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSelectProject();"></button>
+            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSearchProject();"></button>
+            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSearchProject();"></button>
+        </div>
+    </footer>
+</p-dialog>
+<!--QA Name lov-->
+<p-dialog header="ค้นหาชื่อ QA" [(visible)]="isShowSearchQaName" [resizable]="false" dragable="false" width="700" responsive="true" [modal]="true" [style]="{'overflow-y': 'visible'}">
+    <div class="ui-widget-content" style="width: 100%">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g-10">
+                    <input type="text" pInputText style="width: 100%" [(ngModel)]="qaNameSearchCondition.thainame" />
+                </div>
+                <div class="ui-g-2">
+                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchQaName()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <p-dataTable [value]="qaNameList" selectionMode="single" [(selection)]="selectedQaName" [rows]="5" [responsive]="true" [paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    <p-column [style]="{'width':'38px'}" selectionMode="single"></p-column>
+                    <p-column field="depcde" header="แผนก">
+                        <template let-qaName="rowData" pTemplate type="body">
+							{{ qaName.depcde }}
+						</template>
+                    </p-column>
+                    <p-column field="thainame" header="ชื่อ - นามสกุล">
+                        <template let-qaName="rowData" pTemplate type="body">
+							{{ qaName.thainame }}
+						</template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+        <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSearchQaName()"></button>
+            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSearchQaName()"></button>
+        </div>
+    </footer>
+</p-dialog>
+<!--Responsible lov-->
+<p-dialog header="ค้นหาชื่อผู้รับผิดชอบ" [(visible)]="isShowSearchResponsible" [resizable]="false" dragable="false" width="700" responsive="true" [modal]="true" [style]="{'overflow-y': 'visible'}">
+    <div class="ui-widget-content" style="width: 100%">
+        <div class="ui-g">
+            <div class="ui-g-12 ui-g-nopad">
+                <div class="ui-g-11">
+                    <input type="text" pInputText style="width: 100%" [(ngModel)]="responsibleSearchCondition.thainame" />
+                </div>
+                <div class="ui-g-1">
+                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchResponsible()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <p-dataTable [value]="responsibleList" selectionMode="single" [(selection)]="selectedResponsible" [rows]="5" [responsive]="true" [paginator]="true" emptyMessage="ไม่พบข้อมูลที่ค้นหา" paginatorPosition="top" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]">
+                    <p-column [style]="{'width':'38px'}" selectionMode="single"></p-column>
+                    <p-column field="depcde" header="แผนก">
+                        <template let-responsible="rowData" pTemplate type="body">
+							{{ responsible.depcde }}
+						</template>
+                    </p-column>
+                    <p-column field="thainame" header="ชื่อ - นามสกุล">
+                        <template let-responsible="rowData" pTemplate type="body">
+							{{ responsible.thainame }}
+						</template>
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div style="text-align: center; padding-top: 0.5em; padding-bottom: 0.5em;">
+            <button type="button" pButton label="ตกลง" icon="fa fa-check" (click)="submitSearchResponsible()"></button>
+            <button type="button" pButton label="ยกเลิก" icon="fa fa-close" (click)="cancelSearchResponsible()"></button>
         </div>
     </footer>
 </p-dialog>
@@ -155,10 +234,10 @@
                             </div>
                             <div class="ui-g-4 ui-lg-4 ui-xl-4 ui-sm-12 ui-g-nopad">
                                 <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-6 ui-md-9">
-                                    <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
+                                    <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="checklistDetail.qaName" name="projCode" [readonly]="true" />
                                 </div>
                                 <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-3">
-                                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchProject()"></button>
+                                    <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="showSearchQaNameDialog()"></button>
                                 </div>
                             </div>
                             <div class="ui-g-5 ui-lg-5 ui-xl-5 ui-g-nopad">
@@ -167,10 +246,10 @@
                                 </div>
                                 <div class="ui-g-7 ui-lg-7 ui-xl-8 ui-sm-12 ui-g-nopad">
                                     <div class="ui-g-9 ui-lg-9 ui-xl-9 ui-sm-6 ui-md-9">
-                                        <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="pritInformation.projCode" name="projCode" [readonly]="true" />
+                                        <input type="text" id="projCode" pInputText style="width: 100%" [(ngModel)]="checklistDetail.responsible" name="projCode" [readonly]="true" />
                                     </div>
                                     <div class="ui-g-3 ui-lg-3 ui-xl-3 ui-sm-3">
-                                        <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="searchProject()"></button>
+                                        <button type="button" pButton icon="fa fa-search" style="width: 30px" (click)="showSearchResponsibleDialog()"></button>
                                     </div>
                                 </div>
                             </div>
